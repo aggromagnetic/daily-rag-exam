@@ -8,7 +8,9 @@
  */
 export async function fetchExamsList() {
   try {
-    const res = await fetch('/daily_tests/tests_index.json');
+    const baseUrl = import.meta.env.BASE_URL || '/';
+    const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+    const res = await fetch(`${cleanBase}daily_tests/tests_index.json`);
     if (!res.ok) {
       throw new Error(`시험지 인덱스 파일을 찾을 수 없습니다 (상태코드: ${res.status})`);
     }
@@ -25,12 +27,15 @@ export async function fetchExamsList() {
  * 2. 📄 개별 정적 모의고사 마크다운 가져오기
  */
 export async function fetchExamContent(filename) {
-  const res = await fetch(`/daily_tests/${filename}`);
+  const baseUrl = import.meta.env.BASE_URL || '/';
+  const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+  const res = await fetch(`${cleanBase}daily_tests/${filename}`);
   if (!res.ok) {
     throw new Error(`모의고사 파일을 불러오는 데 실패했습니다 (파일명: ${filename})`);
   }
   return await res.text();
 }
+
 
 /**
  * 3. 🔑 수험생 비공개 Gist 데이터 로드
