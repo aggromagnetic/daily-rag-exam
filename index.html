@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22 width=%22100%22 height=%22100%22><text y=%220.9em%22 font-size=%2290%22>🎓</text></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>주택관리사보 2.0 지능형 RAG 학습관</title>
+    <!-- 구글 프리미엄 폰트 Outfit & Inter 임포트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- 명시적 스타일시트 로드 (FOUC 현상 방지) -->
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- 🌠 네온 백그라운드 블러 효과용 구체들 -->
+    <div class="bg-glow bg-glow-blue"></div>
+    <div class="bg-glow bg-glow-emerald"></div>
+
+    <div id="app">
+      <!-- 🪐 헤더 내비게이션 -->
+      <header class="app-header">
+        <div class="logo-area">
+          <span class="logo-icon">🎓</span>
+          <div class="logo-text">
+            <h1>주택관리사보 <span class="accent-text">2.0</span></h1>
+            <p>지능형 RAG 학습 포털 & OMR 시험관</p>
+          </div>
+        </div>
+        <nav class="app-nav">
+          <button class="nav-btn active" id="tab-dashboard" data-tab="dashboard">
+            <span class="btn-icon">📊</span> 학습 대시보드
+          </button>
+          <button class="nav-btn" id="tab-exams" data-tab="exams">
+            <span class="btn-icon">📝</span> 오늘의 모의고사
+          </button>
+          <button class="nav-btn" id="tab-incorrect" data-tab="incorrect">
+            <span class="btn-icon">📕</span> 오답 수첩
+          </button>
+          <button class="nav-btn" id="btn-github-lock" style="border: 1px dashed rgba(255, 107, 107, 0.3); margin-left: 0.75rem; color: #ff6b6b;">
+            <span class="btn-icon">🔒</span> 수험생 인증
+          </button>
+        </nav>
+      </header>
+
+      <!-- 🔮 메인 콘텐츠 컨테이너 -->
+      <main class="app-content">
+
+        <!-- 📊 탭 1: 학습 대시보드 -->
+        <section id="content-dashboard" class="tab-content active">
+          <div class="dashboard-grid">
+            <!-- 웰컴 보드 -->
+            <div class="glass-card welcome-card col-span-2">
+              <h2>반가워요, 수험생님! 👋</h2>
+              <p>주택관리사보 동차 합격을 위한 지능형 RAG 맞춤 모의고사가 매일 아침 준비됩니다.</p>
+              <div class="dashboard-stats-row">
+                <div class="stat-box">
+                  <span class="stat-val" id="stat-incorrect-count">0개</span>
+                  <span class="stat-lbl">누적 취약 오답 개념</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-val" id="stat-today-exam-status">대기 중</span>
+                  <span class="stat-lbl">오늘의 시험지 상태</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 과목별 취약분석 -->
+            <div class="glass-card stat-chart-card">
+              <h3>과목별 누적 오답 통계</h3>
+              <div class="chart-container">
+                <div class="bar-chart-row">
+                  <span class="subject-label">회계원리</span>
+                  <div class="bar-track">
+                    <div id="chart-accounting-bar" class="bar-fill blue" style="width: 0%;"></div>
+                  </div>
+                  <span id="chart-accounting-count" class="count-label">0개</span>
+                </div>
+                <div class="bar-chart-row">
+                  <span class="subject-label">시설개론</span>
+                  <div class="bar-track">
+                    <div id="chart-facility-bar" class="bar-fill emerald" style="width: 0%;"></div>
+                  </div>
+                  <span id="chart-facility-count" class="count-label">0개</span>
+                </div>
+                <div class="bar-chart-row">
+                  <span class="subject-label">민법</span>
+                  <div class="bar-track">
+                    <div id="chart-civil-bar" class="bar-fill purple" style="width: 0%;"></div>
+                  </div>
+                  <span id="chart-civil-count" class="count-label">0개</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 학습 가이드 -->
+            <div class="glass-card guide-card col-span-3">
+              <h3>💡 지능형 RAG 순환 학습 가이드</h3>
+              <div class="guide-steps">
+                <div class="step-item">
+                  <div class="step-num">1</div>
+                  <p><strong>아침 8시 자동 출제</strong>: 에이전트가 오답을 반영하여 새로운 문제를 생성합니다.</p>
+                </div>
+                <div class="step-item">
+                  <div class="step-num">2</div>
+                  <p><strong>인터랙티브 응시</strong>: 본 사이트의 시험장에서 마킹하며 모의고사를 풉니다.</p>
+                </div>
+                <div class="step-item">
+                  <div class="step-num">3</div>
+                  <p><strong>실시간 자동 피드백</strong>: 채점 후 틀린 개념이 오답노트에 자동 적재되어 다음 시험에 가중 반영됩니다.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 📝 탭 2: 오늘의 모의고사 (목록 및 시험장) -->
+        <section id="content-exams" class="tab-content">
+          <!-- 시험지 선택 목록 뷰 -->
+          <div id="exam-list-view" class="active-view">
+            <h2 class="section-title">📝 배달된 오늘의 시험지 목록</h2>
+            <p class="section-desc">매일 아침 8시 에이전트가 수험생님만을 위해 노트북 소스에서 추출한 전용 모의고사 리스트입니다.</p>
+            <div class="exam-list-grid" id="exam-list-container">
+              <!-- JS 동적 적재 영역 -->
+              <div class="loading-spinner">시험지를 로딩하는 중입니다...</div>
+            </div>
+          </div>
+
+          <!-- 실제 퀴즈 시험장 풀이 뷰 -->
+          <div id="exam-play-view" class="inactive-view">
+            <div class="exam-control-bar glass-card">
+              <button class="back-btn" id="btn-exit-exam">← 나가기</button>
+              <div class="exam-meta-info">
+                <h2 id="play-exam-title">회계원리 모의고사</h2>
+                <span class="badge" id="play-exam-date">2026-05-19</span>
+              </div>
+              <div class="timer-area">
+                <span class="timer-icon">⏱️</span>
+                <span id="exam-timer">00:00:00</span>
+              </div>
+            </div>
+
+            <div class="exam-workspace">
+              <!-- 문제 텍스트 뷰어 영역 -->
+              <div class="questions-container">
+                <div class="glass-card text-viewer-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; padding: 1.25rem;">
+                  <div>
+                    <h3 style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--neon-blue);">📄 RAG 시험지 지문 뷰어</h3>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">모의고사를 통째로 복사해서 외부 Gemini App에서 더 신속하게 풀이할 수 있습니다.</p>
+                  </div>
+                  <button class="submit-btn" id="btn-copy-exam" style="background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple)); border: none; box-shadow: 0 4px 15px var(--neon-purple-glow); padding: 0.7rem 1.25rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.5rem; border-radius: 10px;">
+                    📋 문제집 전체 복사하기
+                  </button>
+                </div>
+                <div class="glass-card text-preview-card" id="play-questions-container" style="line-height: 1.8; font-size: 0.95rem; max-height: 70vh; overflow-y: auto; padding: 1.75rem;">
+                  <!-- JS 동적 적재 영역 -->
+                </div>
+              </div>
+              
+              <!-- Gemini App 연동 및 가이드 패널 -->
+              <div class="omr-panel glass-card" style="position: sticky; top: 1.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">
+                <h3>🪐 Gemini App 풀이 가이드</h3>
+                <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.65rem; line-height: 1.5;">
+                  <p>1. 상단의 <strong>[문제집 전체 복사하기]</strong> 버튼을 클릭하여 클립보드에 담습니다.</p>
+                  <p>2. 아래 바로가기 버튼을 이용해 <strong>공식 Gemini App</strong>에 진입합니다.</p>
+                  <p>3. 텍스트 창에 붙여넣은 뒤, <strong>"각 문제의 정답과 상세 해설을 한국어로 깔끔하게 정리해줘"</strong>라고 지시합니다.</p>
+                  <p>4. 풀이를 완료한 후 오답이 있다면 메인 화면 하단의 <strong>[오답 수첩]</strong>에 직접 기입해 가중치를 가산하세요!</p>
+                </div>
+                
+                <a href="https://gemini.google.com/" target="_blank" class="action-btn" style="text-decoration: none; text-align: center; display: block; width: 100%; padding: 0.75rem; border-radius: 12px; margin-bottom: 0.25rem; font-weight: 600; background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)); border: 1px solid var(--border-glass); transition: var(--transition-smooth);">
+                  🪐 Gemini App 바로가기
+                </a>
+                
+                <button class="submit-btn" id="btn-finish-study" style="width: 100%; background: linear-gradient(135deg, var(--neon-emerald), var(--neon-blue)); border: none; box-shadow: 0 4px 15px var(--neon-emerald-glow); border-radius: 12px;">학습 완료 (오답 수첩으로)</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 채점 결과 및 오답 해설 뷰 -->
+          <div id="exam-result-view" class="inactive-view">
+            <div class="result-summary-card glass-card">
+              <div class="score-radial">
+                <span class="score-val" id="result-score">0점</span>
+                <span class="score-lbl">획득 점수</span>
+              </div>
+              <div class="result-meta">
+                <h2 id="result-exam-title">회계원리 채점 완료</h2>
+                <p id="result-stat-text">총 35문제 중 0문제를 맞추셨습니다.</p>
+                <div class="feedback-badge-container">
+                  <span class="badge badge-warning">❌ 오답 개념 2.0 RAG 자동 피드백 완료!</span>
+                </div>
+                <button class="action-btn" id="btn-result-to-list">시험 목록으로 돌아가기</button>
+              </div>
+            </div>
+
+            <h3 class="result-detail-title">✏️ 채점 결과 분석 및 상세 해설</h3>
+            <div class="result-details-list" id="result-details-container">
+              <!-- JS 동적 적재 영역 -->
+            </div>
+          </div>
+        </section>
+
+        <!-- 📕 탭 3: 오답 수첩 -->
+        <section id="content-incorrect" class="tab-content">
+          <h2 class="section-title">📕 오답 및 취약 개념 저장소</h2>
+          <p class="section-desc">모의고사에서 틀렸던 개념이나 수기 등록한 취약점들이 저장되어 있습니다. 다음 출제 시 RAG가 이 개념들을 최우선 반영합니다.</p>
+
+          <!-- Lock Screen (미인증용 화면) -->
+          <div id="incorrect-lock-screen" class="glass-card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; text-align: center; gap: 1.5rem; max-width: 600px; margin: 3rem auto; border: 1px solid rgba(255, 107, 107, 0.15);">
+            <span style="font-size: 4rem; filter: drop-shadow(0 0 12px rgba(255, 107, 107, 0.4));">🔒</span>
+            <h3 style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: #ff6b6b; letter-spacing: -0.02em;">비공개 수험생 전용 영역</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; max-width: 440px; margin: 0;">
+              오답 수첩 및 취약점 복리 가중치 분석기는 수험생 개인 비공개 영역입니다.<br>
+              GitHub 토큰(PAT)을 연동하시면 개인 비공개 클라우드(Gist)에 오답노트가 안전하게 평생 무료로 격리 보관됩니다.
+            </p>
+            <button id="btn-unlock-trigger" class="submit-btn" style="background: linear-gradient(135deg, #ff6b6b, var(--neon-purple)); border: none; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.35); border-radius: 12px; padding: 0.75rem 2rem; font-weight: 600; cursor: pointer; transition: var(--transition-smooth);">
+              🔓 인증 토큰 등록하고 해제하기
+            </button>
+          </div>
+
+          <!-- 실제 오답 수첩 작업 공간 (기본값 숨김) -->
+          <div class="incorrect-workspace" id="incorrect-secured-workspace" style="display: none;">
+            <!-- 수동 오답 등록 폼 -->
+            <div class="glass-card incorrect-form-card">
+              <h3>✏️ 취약 개념 수동 등록</h3>
+              <form id="form-add-incorrect">
+                <div class="form-group">
+                  <label for="select-incorrect-subject">대상 과목</label>
+                  <select id="select-incorrect-subject" required>
+                    <option value="facility">공동주택시설개론</option>
+                    <option value="accounting">회계원리</option>
+                    <option value="civil">민법</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="input-incorrect-concept">취약 핵심 개념</label>
+                  <textarea id="input-incorrect-concept" placeholder="예: 감가상각비 연수합계법 산출 공식 혼동" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">오답 수첩에 등록</button>
+              </form>
+            </div>
+
+            <!-- 오답 리스트 뷰 -->
+            <div class="incorrect-lists-container">
+              <!-- 회계원리 오답 카드 -->
+              <div class="glass-card incorrect-list-card">
+                <div class="card-header-row">
+                  <h3>📊 회계원리 취약점 목록</h3>
+                  <span class="badge badge-blue" id="lbl-accounting-count">0개</span>
+                </div>
+                <div class="incorrect-items" id="list-accounting-incorrect">
+                  <!-- JS 동적 적재 -->
+                </div>
+              </div>
+
+              <!-- 시설개론 오답 카드 -->
+              <div class="glass-card incorrect-list-card">
+                <div class="card-header-row">
+                  <h3>🌿 시설개론 취약점 목록</h3>
+                  <span class="badge badge-emerald" id="lbl-facility-count">0개</span>
+                </div>
+                <div class="incorrect-items" id="list-facility-incorrect">
+                  <!-- JS 동적 적재 -->
+                </div>
+              </div>
+
+              <!-- 민법 오답 카드 -->
+              <div class="glass-card incorrect-list-card">
+                <div class="card-header-row">
+                  <h3>⚖️ 민법 취약점 목록</h3>
+                  <span class="badge badge-purple" id="lbl-civil-count">0개</span>
+                </div>
+                <div class="incorrect-items" id="list-civil-incorrect">
+                  <!-- JS 동적 적재 -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- 🪐 푸터 정보 -->
+      <footer class="app-footer">
+        <p>© 2026 주택관리사보 2.0 지능형 RAG 학습 에이전트. Powered by NotebookLM MCP Server</p>
+      </footer>
+    </div>
+
+    <!-- GitHub 인증 설정 모달 -->
+    <div id="github-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); z-index: 1000; align-items: center; justify-content: center; padding: 1rem;">
+      <div class="glass-card modal-content" style="max-width: 480px; width: 100%; padding: 2rem; display: flex; flex-direction: column; gap: 1.25rem; border: 1px solid var(--border-glass); border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+          <h3 style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--neon-blue); margin: 0; display: flex; align-items: center; gap: 0.5rem;">🪐 수험생 관리자 인증</h3>
+          <button id="btn-close-modal" style="background: none; border: none; color: var(--text-muted); font-size: 1.75rem; cursor: pointer; line-height: 1; padding: 0;">&times;</button>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+          GitHub Gist 권한이 포함된 토큰(PAT)을 입력하여 비공개 클라우드로 오답노트를 연동합니다. 토큰은 수험생 본인의 브라우저 로컬 저장소(LocalStorage)에만 안전하게 보관됩니다.
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 0.4rem; width: 100%;">
+          <label for="github-token" style="font-size: 0.85rem; font-weight: 600; color: var(--text-main);">1. GitHub Personal Access Token (PAT)</label>
+          <input type="password" id="github-token" placeholder="ghp_..." style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-glass); color: var(--text-main); padding: 0.75rem; border-radius: 10px; font-size: 0.85rem; width: 100%; outline: none; box-sizing: border-box;">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.4rem; width: 100%;">
+          <label for="github-gist-id" style="font-size: 0.85rem; font-weight: 600; color: var(--text-main);">2. GitHub Gist ID (생략 가능)</label>
+          <input type="text" id="github-gist-id" placeholder="생략 시 첫 인증 시 비공개 Gist가 자동으로 생성됩니다" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-glass); color: var(--text-main); padding: 0.75rem; border-radius: 10px; font-size: 0.85rem; width: 100%; outline: none; box-sizing: border-box;">
+        </div>
+        <div style="display: flex; gap: 0.75rem; width: 100%; margin-top: 0.5rem;">
+          <button id="btn-save-github" class="submit-btn" style="flex: 1; background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple)); border: none; box-shadow: 0 4px 15px var(--neon-purple-glow); border-radius: 10px; padding: 0.75rem; font-weight: 600; cursor: pointer;">인증 및 연결</button>
+          <button id="btn-logout-github" style="background: rgba(255, 107, 107, 0.1); border: 1px solid rgba(255, 107, 107, 0.25); color: #ff6b6b; border-radius: 10px; padding: 0.75rem 1rem; font-weight: 600; cursor: pointer; transition: var(--transition-smooth);">인증 해제</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🔔 토스트 알림 컨테이너 -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- 메인 프론트엔드 모듈 스크립트 연동 -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
