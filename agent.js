@@ -20,6 +20,58 @@ function calculateWeight(count) {
   return parseFloat(weight.toFixed(2));
 }
 
+// 🎲 오답 노하우 가중치 기반 확률적 추첨 (Ebbinghaus spaced repetition 대비 추첨 기법)
+function selectIncorrectAnswersForToday(subjectIncorrect, maxSelect = 2) {
+  if (!subjectIncorrect || subjectIncorrect.length === 0) return [];
+  
+  const listWithWeights = subjectIncorrect.map(item => {
+    const cnt = item.count || 1;
+    const weight = calculateWeight(cnt);
+    return { ...item, calculatedWeight: weight };
+  });
+  
+  const scoredList = listWithWeights.map(item => {
+    const score = item.calculatedWeight * Math.random();
+    return { ...item, score };
+  });
+  
+  scoredList.sort((a, b) => b.score - a.score);
+  const selected = scoredList.slice(0, maxSelect);
+  
+  console.log(`🎲 [오답 추첨] 전체 ${subjectIncorrect.length}개 오답 중 ${selected.length}개 선별 완료 (추첨된 취약 개념: ${selected.map(s => s.concept).join(", ")})`);
+  return selected;
+}
+
+// 📝 생성된 문제지 마크다운에서 구체적인 문항 요약(Q1~QN)을 파싱하여 history.json 기입용
+function extractQuestionSummaries(markdown) {
+  const lines = markdown.split('\n');
+  const questions = [];
+  const questionRegex = /^\s*(\d+)[\.번]\s*(.+)$/;
+  
+  for (let line of lines) {
+    const trimmed = line.trim();
+    const match = trimmed.match(questionRegex);
+    if (match) {
+      const qNum = match[1];
+      let qText = match[2].trim();
+      const optionIndex = qText.search(/[①-⑤]/);
+      if (optionIndex !== -1) {
+        qText = qText.substring(0, optionIndex).trim();
+      }
+      if (qText.length > 80) {
+        qText = qText.substring(0, 80) + "...";
+      }
+      questions.push(`Q${qNum}: ${qText}`);
+    }
+  }
+  
+  if (questions.length === 0) {
+    return ["상세 문항 요약이 파싱되지 않았습니다. 전체 컨텐츠 중복 배제 적용 요망."];
+  }
+  return questions;
+}
+
+
 // 데이터 로드 유틸리티
 function loadJson(filePath, defaultValue) {
   if (fs.existsSync(filePath)) {
@@ -182,18 +234,22 @@ async function runQuizGeneration(client, notebookId, subjectKey, subjectName, do
   const subjectHistory = historyData[subjectKey] || [];
   const subjectIncorrect = incorrectData[subjectKey] || [];
 
-  // 프롬프트 가독성을 위한 문자열 가공
+  // 프롬프트 가독성을 위한 문자열 가공 (중복 방지 역사 메모리 강화)
+  // 너무 오래된 내역은 프롬프트 크기 절약을 위해 최근 15개 시험지로 제한하되, 구체적인 Q1~QN 요약을 참고하게 만듭니다.
   const historySnippet = subjectHistory.length > 0 
-    ? subjectHistory.slice(-50).map((h, idx) => `- ${h}`).join("\n") // 성능과 프롬프트 크기를 고려해 최근 50개 제한
+    ? subjectHistory.slice(-15).join("\n\n")
     : "없음 (최초 출제)";
 
-  const incorrectSnippet = subjectIncorrect.length > 0
-    ? subjectIncorrect.map((item, idx) => {
+  // 🎯 가중치 확률적 추첨 기법 적용: 전체 오답 중 오늘 시험지에 녹여낼 핵심 취약개념 2개 무작위 추첨
+  const selectedIncorrect = selectIncorrectAnswersForToday(subjectIncorrect, 2);
+
+  const incorrectSnippet = selectedIncorrect.length > 0
+    ? selectedIncorrect.map((item, idx) => {
         const cnt = item.count || 1;
         const weight = calculateWeight(cnt);
         return `- 취약점/개념: "${item.concept}" (누적 오답: ${cnt}회, 반영 비중 가중치: ${weight}%, 피드백 날짜: ${item.date})`;
       }).join("\n")
-    : "없음 (현재 오답 리스트가 비어있습니다)";
+    : "없음 (현재 추첨된 오답 개념이 없거나 오답 리스트가 비어있습니다. 일반 커리큘럼 기준 고르게 출제해 주세요.)";
 
   // 2. 고성능 출제 프롬프트 작성
   const prompt = `
@@ -204,16 +260,19 @@ async function runQuizGeneration(client, notebookId, subjectKey, subjectName, do
 1. **과목**: ${subjectName}
 2. **출제 문항 수**: ${count}문제
 3. **최우선 반영 사항 (오답 노트 및 누진 가중치)**:
-   다음 오답 목록은 수험생이 최근에 틀렸던 개념들과 틀린 횟수에 기초해 동적으로 계산된 개별 반영 가중치(%)입니다. 
-   각 오답 개념에 표기된 가중치(%) 비중에 걸맞게, 더 높은 가중치를 지닌 취약 개념들을 최우선순위로 삼아 이와 직간접적으로 연관된 변형 문제를 더 많이 안배(전체 출제 비중의 약 20%~35% 내외)하여 출제해 주십시오.
+   다음 오답 목록은 수험생이 그동안 틀렸던 전체 오답 중 가중치(틀린 횟수)에 비례한 확률적 추첨을 통해 **오늘 시험지에 특별 안배대상으로 선정된 취약 개념들**입니다.
+   선정된 각 개념에 대하여, 이와 직간접적으로 연관된 변형 문제(개념당 1~2문제 내외, 전체 출제 비중의 약 10%~20% 내외)를 우선적으로 구성하여 자연스럽게 복습을 유도해 주십시오. 
+   목록에 기재되지 않은 다른 영역은 기출 가이드라인에 따라 아주 고르게 분포되도록 출제해 주십시오.
    ---
-   [오답 목록]
+   [오늘 출제할 오답 목록]
    ${incorrectSnippet}
    ---
-4. **중복 배제 규칙**:
-   다음은 수험생이 이전에 이미 풀었던 문제의 정보(일부 본문 또는 식별 정보)입니다. 이 문제들과 완전히 동일하거나 거의 유사한 문제는 절대로 출제에서 제외해 주십시오.
+4. **중복 배제 규칙 (극도로 중요 - 절대 동일 문제 출제 금지)**:
+   다음은 수험생이 최근 치른 시험들에서 이미 출제되었던 실제 문제들의 상세 질문 또는 번호별 요약 리스트입니다.
+   아래의 리스트에 등장하는 질문, 보기 구조, 계산 조건 또는 정답 구도와 **완전히 동일하거나 극도로 유사한(숫자만 살짝 바꾼 수준 등) 문제는 절대로, 단 한 문제도 중복 출제해서는 안 됩니다.**
+   반드시 새로운 유형, 새로운 관점, 다른 계산 요소를 적용하여 '완전히 새로운 참신한 변형 문제'를 설계해 주십시오.
    ---
-   [이미 출제된 리스트]
+   [이미 출제되었던 리스트 (중복 배제 필수)]
    ${historySnippet}
    ---
 5. **문제집 서식 및 서식 준수 규칙 (매우 중요)**:
@@ -226,7 +285,7 @@ async function runQuizGeneration(client, notebookId, subjectKey, subjectName, do
    - 해설 작성 시 각 문항의 정답은 '정답: ①' 또는 '정답: ②' 형태로 명확하게 표기해 주십시오.
 `;
 
-  console.log(`ℹ️ RAG 질의 전송 중 (오답 반영 수: ${subjectIncorrect.length}개, 제외 기록 수: ${subjectHistory.length}개)...`);
+  console.log(`ℹ️ RAG 질의 전송 중 (추첨 오답 수: ${selectedIncorrect.length}개, 제외 기록 역사 수: ${subjectHistory.length}개)...`);
   
   // 3. MCP notebooklm-mcp `ask_question` 도구 호출
   const result = await client.callTool({
@@ -286,13 +345,22 @@ async function runQuizGeneration(client, notebookId, subjectKey, subjectName, do
   fs.writeFileSync(filePath, quizMarkdown, "utf8");
   console.log(`✅ [${subjectName}] 문제지 저장 완료: ${filePath}`);
 
-  // 5. history.json 업데이트
-  const historyStamp = `[출제일: ${today}] ${subjectName} ${count}개 문제 출제 완료`;
+  // 5. history.json 업데이트 (구체적인 문항 요약을 추출해 저장하여 실질적 중복 방지)
+  const todayQuestions = extractQuestionSummaries(quizMarkdown);
+  const historyStamp = `[출제일: ${today}] ${subjectName} ${count}문항 기출 내용:\n` + todayQuestions.map(q => `  - ${q}`).join("\n");
+  
   subjectHistory.push(historyStamp);
+  
+  // 무한 누적 방지를 위해 최근 20개 시험지 내용만 sliding window로 보존
+  if (subjectHistory.length > 20) {
+    subjectHistory.shift();
+  }
+  
   historyData[subjectKey] = subjectHistory;
   saveJson(HISTORY_PATH, historyData);
-  console.log(`💾 [${subjectName}] 출제 이력 업데이트 완료.`);
+  console.log(`💾 [${subjectName}] 구체적 문항 요약을 출제 이력에 저장 완료.`);
 }
+
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
