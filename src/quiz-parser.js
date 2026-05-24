@@ -218,7 +218,7 @@ export function parseMarkdownQuiz(rawContent, filename) {
     const qNum = parseInt(numMatch[1], 10);
 
     const options = [];
-    const optRegex = /([①-⑤]|\([1-5]\)|[1-5]\))/g;
+    const optRegex = /([①-⑤])/g;
     const pieces = cleanBlock.split(optRegex);
     
     let questionText = pieces[0].replace(/^Q?(\d+[\.번\s]*)/, '').trim();
