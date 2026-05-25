@@ -207,8 +207,155 @@ function autoGitPush() {
   }
 }
 
+// 🪐 과목별 단원 분할 구성 정보 (대용량 RAG 타임아웃 방지용)
+const SUBJECT_PARTITIONS = {
+  accounting: [
+    {
+      step: 1,
+      title: "재무회계 상편 1 (회계의 기초 원리, 개념체계 및 재무제표 표시)",
+      count: 6
+    },
+    {
+      step: 2,
+      title: "재무회계 상편 2 (자산론 1 - 현금및현금성자산, 매출채권 및 손실충당금)",
+      count: 6
+    },
+    {
+      step: 3,
+      title: "재무회계 상편 3 (자산론 2 - 재고자산, 유형자산, 무형자산 및 투자부동산)",
+      count: 6
+    },
+    {
+      step: 4,
+      title: "재무회계 하편 1 (금융부채, 충당부채, 우발부채 및 우발자산, 자본거래)",
+      count: 6
+    },
+    {
+      step: 5,
+      title: "재무회계 하편 2 (수익인식, 회계변경 및 오류수정, 현금흐름표 등)",
+      count: 6
+    },
+    {
+      step: 6,
+      title: "원가관리회계 (원가흐름, 부문별/개별/종합/결합원가계산, CVP분석, 단기의사결정 등)",
+      count: 5
+    }
+  ],
+  facility: [
+    {
+      step: 1,
+      title: "건축구조 및 시공 1 (토공사, 기초구조, 조적구조)",
+      count: 5
+    },
+    {
+      step: 2,
+      title: "건축구조 및 시공 2 (철근콘크리트구조, 철골구조, 지붕/방수/수장 등)",
+      count: 5
+    },
+    {
+      step: 3,
+      title: "건축설비 1 (급수설비, 급탕설비, 배수 및 통기설비)",
+      count: 5
+    },
+    {
+      step: 4,
+      title: "건축설비 2 (소방설비, 가스설비, 난방 및 환기설비)",
+      count: 5
+    },
+    {
+      step: 5,
+      title: "건축설비 3 (전기설비, 홈네트워크설비, 승강기설비 등)",
+      count: 5
+    }
+  ],
+  civil: [
+    {
+      step: 1,
+      title: "민법총칙 1 (권리변동의 기본원칙, 권리의 주체/객체)",
+      count: 5
+    },
+    {
+      step: 2,
+      title: "민법총칙 2 (법률행위 - 의사표시, 대리, 무효와 취소, 조건과 기한, 소멸시효)",
+      count: 5
+    },
+    {
+      step: 3,
+      title: "물권법 1 (물권법 총론, 점유권, 소유권)",
+      count: 5
+    },
+    {
+      step: 4,
+      title: "물권법 2 (용익물권, 담보물권 - 유치권/저당권 등)",
+      count: 5
+    },
+    {
+      step: 5,
+      title: "채권/계약법 (채권법 총론, 계약총론, 계약각론 등)",
+      count: 5
+    }
+  ]
+};
+
+// 🧩 마크다운 초안에서 문제지와 해설 파트를 분할 추출하는 헬퍼 함수
+function splitQuestionsAndExplanations(md) {
+  const headers = [
+    "## [정답 및 상세 해설]",
+    "### [정답 및 상세 해설]",
+    "[정답 및 상세 해설]",
+    "## 정답 및 상세 해설",
+    "정답 및 상세 해설",
+    "## 정답 및 해설",
+    "정답 및 해설",
+    "## [정답 및 해설]",
+    "## 해설",
+    "## 정답",
+    "정답과 해설",
+    "정답 및 풀이"
+  ];
+  
+  let headerIndex = -1;
+  let selectedHeader = "";
+  for (const header of headers) {
+    const idx = md.indexOf(header);
+    if (idx !== -1) {
+      headerIndex = idx;
+      selectedHeader = header;
+      break;
+    }
+  }
+  
+  let qPart = md;
+  let ePart = "";
+  
+  if (headerIndex !== -1) {
+    qPart = md.substring(0, headerIndex).trim();
+    ePart = md.substring(headerIndex + selectedHeader.length).trim();
+  }
+  
+  const qHeaders = [
+    "## [시험 문제지] (제2부: 21번부터)",
+    "## [시험 문제지] (제2부: 13번부터)",
+    "## [시험 문제지] (제3부: 25번부터)",
+    "## [시험 문제지]",
+    "### [시험 문제지]",
+    "## 시험 문제지",
+    "시험 문제지",
+    "## 문제지",
+    "문제지"
+  ];
+  for (const qH of qHeaders) {
+    if (qPart.startsWith(qH)) {
+      qPart = qPart.substring(qH.length).trim();
+      break;
+    }
+  }
+  
+  return { questions: qPart, explanations: ePart };
+}
+
 async function runQuizGeneration(client, notebookId, subjectKey, subjectName, docGuideName, count) {
-  console.log(`\n📚 [${subjectName}] 문제지 생성 프로세스 시작...`);
+  console.log(`\n📚 [${subjectName}] 문제지 생성 프로세스 시작... (총 ${count}문항 단원별 분할출제 기동)`);
 
   // 🎯 가상 로컬 ID가 문자열로 기입되더라도 숫자형으로 안전 변환하는 자가 치유 방어 로직
   let targetNotebookId = notebookId;
@@ -235,10 +382,14 @@ async function runQuizGeneration(client, notebookId, subjectKey, subjectName, do
   const subjectIncorrect = incorrectData[subjectKey] || [];
 
   // 프롬프트 가독성을 위한 문자열 가공 (중복 방지 역사 메모리 강화)
-  // 너무 오래된 내역은 프롬프트 크기 절약을 위해 최근 15개 시험지로 제한하되, 구체적인 Q1~QN 요약을 참고하게 만듭니다.
-  const historySnippet = subjectHistory.length > 0 
-    ? subjectHistory.slice(-15).join("\n\n")
+  // 너무 비대한 역사 정보로 인한 브라우저 다운 및 RAG 연산 타임아웃 방지를 위해 최대 400자 이내로 자동 생략 압축합니다.
+  let rawHistorySnippet = subjectHistory.length > 0 
+    ? subjectHistory.slice(-1).join("\n\n")
     : "없음 (최초 출제)";
+  if (rawHistorySnippet.length > 400) {
+    rawHistorySnippet = rawHistorySnippet.substring(0, 400) + "... [생략됨. 최근 출제 문제와 유사하지 않도록 고르게 참신하게 출제해 주세요]";
+  }
+  const historySnippet = rawHistorySnippet;
 
   // 🎯 가중치 확률적 추첨 기법 적용: 전체 오답 중 오늘 시험지에 녹여낼 핵심 취약개념 2개 무작위 추첨
   const selectedIncorrect = selectIncorrectAnswersForToday(subjectIncorrect, 2);
@@ -251,82 +402,140 @@ async function runQuizGeneration(client, notebookId, subjectKey, subjectName, do
       }).join("\n")
     : "없음 (현재 추첨된 오답 개념이 없거나 오답 리스트가 비어있습니다. 일반 커리큘럼 기준 고르게 출제해 주세요.)";
 
-  // 2. 고성능 출제 프롬프트 작성
-  const prompt = `
+  // 🚀 순차 분할 RAG 생성 루틴 작동
+  const partitions = SUBJECT_PARTITIONS[subjectKey] || [{ step: 1, title: "전체 범위", count: count }];
+  const questionsChunks = [];
+  const explanationsChunks = [];
+  let sessionId = undefined; // 동일한 브라우저 세션(대화 내용) 연속 유지를 위한 변수
+  let startQuestionNum = 1;
+
+  for (let i = 0; i < partitions.length; i++) {
+    const part = partitions[i];
+    const endQuestionNum = startQuestionNum + part.count - 1;
+    const isFirstStep = (i === 0);
+    const sessionStatus = sessionId ? "유지 중" : "최초 시작";
+
+    console.log(`\n⚡ [${subjectName}] [Step ${i + 1}/${partitions.length}] RAG 질의 수행 중... (단원: ${part.title}, 출제수: ${part.count}문제)`);
+    console.log(`ℹ️ [Step ${i + 1}] RAG 질의 전송 중... (세션 ID 보존 상태: ${sessionStatus})`);
+
+    const prompt = `
 당신은 대한민국 주택관리사보 자격시험의 최고 권위 출제위원입니다. 
-제공된 노트북 소스 중 **"${docGuideName}"** 문서를 반드시 집중 참조하여, 수험생을 위한 고품질 기출 변형 문제지(${count}문제)를 만들어 주십시오.
+제공된 노트북 소스 중 **"${docGuideName}"** 문서를 반드시 집중 참조하여, 수험생을 위한 고품질 기출 변형 문제지 중 **[제 ${i + 1}단계 분할 출제]** 파트를 작성해 주십시오.
 
 ### [출제 및 구성 조건]
-1. **과목**: ${subjectName}
-2. **출제 문항 수**: ${count}문제
-3. **최우선 반영 사항 (오답 노트 및 누진 가중치)**:
-   다음 오답 목록은 수험생이 그동안 틀렸던 전체 오답 중 가중치(틀린 횟수)에 비례한 확률적 추첨을 통해 **오늘 시험지에 특별 안배대상으로 선정된 취약 개념들**입니다.
-   선정된 각 개념에 대하여, 이와 직간접적으로 연관된 변형 문제(개념당 1~2문제 내외, 전체 출제 비중의 약 10%~20% 내외)를 우선적으로 구성하여 자연스럽게 복습을 유도해 주십시오. 
-   목록에 기재되지 않은 다른 영역은 기출 가이드라인에 따라 아주 고르게 분포되도록 출제해 주십시오.
+1. **과목**: ${subjectName} (총 ${count}문항 중 이번 단계에서는 **${part.count}문항** 출제)
+2. **범위/단원**: ${part.title}
+3. **문제 번호 시작**: 이 단계에서 출제할 문제 번호는 **${startQuestionNum}번부터 ${endQuestionNum}번까지**입니다. (각 문항의 번호는 반드시 '${startQuestionNum}. ', '${startQuestionNum + 1}. ' 와 같이 시작하여야 하며, 문제 번호를 생략하거나 다르게 매겨서는 절대로 안 됩니다!)
+${isFirstStep ? `
+4. **최우선 반영 사항 (오답 및 누진 가중치)**:
+   다음 오답 목록은 수험생이 그동안 틀렸던 전체 오답 중 특별히 안배대상으로 선정된 취약 개념입니다. 이와 관련된 변형 문제를 이번 범위 내에 자연스럽게 1~2문제 녹여 출제해 주십시오.
    ---
    [오늘 출제할 오답 목록]
    ${incorrectSnippet}
    ---
+` : ''}
 4. **중복 배제 규칙 (극도로 중요 - 절대 동일 문제 출제 금지)**:
-   다음은 수험생이 최근 치른 시험들에서 이미 출제되었던 실제 문제들의 상세 질문 또는 번호별 요약 리스트입니다.
-   아래의 리스트에 등장하는 질문, 보기 구조, 계산 조건 또는 정답 구도와 **완전히 동일하거나 극도로 유사한(숫자만 살짝 바꾼 수준 등) 문제는 절대로, 단 한 문제도 중복 출제해서는 안 됩니다.**
+   다음 리스트에 등장하는 질문, 보기 구조, 계산 조건 또는 정답 구도와 **완전히 동일하거나 극도로 유사한(숫자만 살짝 바꾼 수준 등) 문제는 절대로, 단 한 문제도 중복 출제해서는 안 됩니다.**
    반드시 새로운 유형, 새로운 관점, 다른 계산 요소를 적용하여 '완전히 새로운 참신한 변형 문제'를 설계해 주십시오.
    ---
    [이미 출제되었던 리스트 (중복 배제 필수)]
    ${historySnippet}
    ---
-5. **문제집 서식 및 서식 준수 규칙 (매우 중요)**:
-   - 인사말, 출제 경향 분석, 과목 소개, 수험생을 격려하는 글 등 문제와 해설 외의 사족(예: "안녕하십니까...", "Q1~Q2를 반영하여...")은 **절대로** 작성하지 마십시오.
+5. **문제집 서식 및 규칙 (매우 중요)**:
+   - 인사말, 출제 경향 분석, 수험생을 격려하는 글 등 문제와 해설 외의 사족(예: "안녕하십니까...", "Q1~Q2를 반영하여...")은 **절대로** 작성하지 마십시오.
    - 텍스트의 맨 처음은 아무런 잡설 없이 곧바로 '## [시험 문제지]' 헤더로 시작하십시오.
-   - 각 문항은 **반드시** '1. ', '2. ', '3. ' 와 같이 **아라비아 숫자와 마침표(온점) 및 공백**으로 시작하여야 합니다. 문제 번호를 생략하고 바로 문제 지문을 작성하는 것은 **절대로 금지**됩니다. (예: '1. ', '2. ' 등. 절대로 'Q1.', '문 1.', '[1]' 등으로 시작하지 마십시오.)
+   - 각 문항은 **반드시** '${startQuestionNum}. ', '${startQuestionNum + 1}. ' 와 같이 **아라비아 숫자와 마침표(온점) 및 공백**으로 시작하여야 합니다. 문제 번호를 생략하고 바로 문제 지문을 작성하는 것은 **절대로 금지**됩니다.
    - 보기는 반드시 '①', '②', '③', '④', '⑤' 기호만을 사용하고, 각 보기는 한 줄에 하나씩 줄바꿈하여 작성하십시오.
    - 문제 본문이나 보기 내용 중에 'Q1', 'Q2' 등 문제 번호와 혼동될 수 있는 표현은 포함하지 마십시오.
-   - **반드시** 문제지 맨 마지막 섹션에 모든 문항의 '## [정답 및 상세 해설]'을 작성해 주십시오.
-   - 해설 작성 시 각 문항의 정답은 '정답: ①' 또는 '정답: ②' 형태로 명확하게 표기해 주십시오.
+   - **반드시** 이 파트의 마지막 섹션에 이번에 출제한 문항들의 '## [정답 및 상세 해설]'을 작성해 주십시오.
+   - 해설 작성 시 각 문항의 정답은 '정답: ①' 형태로 명확하게 표기해 주십시오.
 `;
 
-  console.log(`ℹ️ RAG 질의 전송 중 (추첨 오답 수: ${selectedIncorrect.length}개, 제외 기록 역사 수: ${subjectHistory.length}개)...`);
-  
-  // 3. MCP notebooklm-mcp `ask_question` 도구 호출
-  const result = await client.callTool({
-    name: "ask_question",
-    arguments: {
+    const askArguments = {
       question: prompt,
       notebook_id: targetNotebookId,
       browser_options: {
-        timeout_ms: 900000 // 내부 브라우저 Puppeteer 타임아웃을 15분으로 세팅
+        timeout_ms: 900000, // 내부 브라우저 Puppeteer 타임아웃을 15분으로 세팅
+        stealth: {
+          human_typing: false // 초고속 붙여넣기(Paste) 모드를 활성화하여 타이핑 렉 원천 차단
+        }
       }
+    };
+
+    if (sessionId) {
+      askArguments.session_id = sessionId;
     }
-  }, undefined, {
-    timeout: 950000 // MCP 클라이언트 호출 타임아웃은 브라우저보다 더 넉넉하게 (15.8분)
-  });
 
-  // MCP 응답 텍스트 추출
-  const generatedText = result.content[0].text;
-  let quizMarkdown = generatedText;
+    const result = await client.callTool({
+      name: "ask_question",
+      arguments: askArguments
+    }, undefined, {
+      timeout: 950000 // MCP 클라이언트 호출 타임아웃은 브라우저보다 더 넉넉하게 (15.8분)
+    });
 
-  // 💡 [RAG 에러 차단막] MCP 응답이 RAG 에러를 리턴했거나 JSON 형식의 에러인지 철저히 검사
-  if (!generatedText || generatedText.includes('"success": false') || generatedText.includes('Could not find NotebookLM') || generatedText.includes('Failed to load')) {
-    throw new Error(`RAG 1차 추출 과정에서 오류가 발생했습니다: ${generatedText}`);
+    const generatedText = result.content[0].text;
+    let stepMarkdown = generatedText;
+
+    // 💡 [RAG 에러 차단막] MCP 응답이 RAG 에러를 리턴했거나 JSON 형식의 에러인지 철저히 검사
+    if (!generatedText || generatedText.includes('"success": false') || generatedText.includes('Could not find NotebookLM') || generatedText.includes('Failed to load')) {
+      throw new Error(`RAG [Step ${i + 1}] 추출 과정에서 오류가 발생했습니다: ${generatedText}`);
+    }
+
+    // 💡 notebooklm-mcp 응답이 JSON 오브젝트 스트링인 경우 진짜 마크다운 텍스트만 언패킹
+    try {
+      if (typeof generatedText === 'string' && (generatedText.trim().startsWith('{') || generatedText.trim().startsWith('['))) {
+        const parsedRes = JSON.parse(generatedText);
+        if (parsedRes && parsedRes.success === false) {
+          throw new Error(`RAG [Step ${i + 1}] 추출이 내부 실패했습니다: ${parsedRes.error || JSON.stringify(parsedRes)}`);
+        }
+        if (parsedRes && parsedRes.data && parsedRes.data.answer) {
+          stepMarkdown = parsedRes.data.answer;
+        } else if (parsedRes && parsedRes.answer) {
+          stepMarkdown = parsedRes.answer;
+        }
+      }
+    } catch (e) {
+      if (e.message.includes('RAG [Step')) throw e;
+    }
+
+    // 세션 ID 획득 및 갱신 보장
+    if (result.session_id) {
+      sessionId = result.session_id;
+    } else if (result.data && result.data.session_id) {
+      sessionId = result.data.session_id;
+    }
+
+    console.log(`✅ [Step ${i + 1}] 완료! (획득 세션 ID: ${sessionId || "없음"}, 크기: ${stepMarkdown.length}자)`);
+
+    // 초안 청크 분할 및 저장
+    const { questions, explanations } = splitQuestionsAndExplanations(stepMarkdown);
+    questionsChunks.push(questions);
+    explanationsChunks.push(explanations);
+
+    // 다음 분할 번호 갱신
+    startQuestionNum += part.count;
+
+    // 단계 간 대기 (브라우저 과부하 및 락 방지용)
+    if (i < partitions.length - 1) {
+      console.log("⏳ 브라우저 충돌 및 락(Lock) 방지를 위해 15초간 대기 중...");
+      await sleep(15000);
+    }
   }
 
-  // 💡 notebooklm-mcp 응답이 JSON 오브젝트 스트링인 경우 진짜 마크다운 텍스트만 언패킹
-  try {
-    if (typeof generatedText === 'string' && (generatedText.trim().startsWith('{') || generatedText.trim().startsWith('['))) {
-      const parsedRes = JSON.parse(generatedText);
-      if (parsedRes && parsedRes.success === false) {
-        throw new Error(`RAG 1차 추출이 내부 실패했습니다: ${parsedRes.error || JSON.stringify(parsedRes)}`);
-      }
-      if (parsedRes && parsedRes.data && parsedRes.data.answer) {
-        quizMarkdown = parsedRes.data.answer;
-      } else if (parsedRes && parsedRes.answer) {
-        quizMarkdown = parsedRes.answer;
-      }
-    }
-  } catch (e) {
-    if (e.message.includes('RAG 1차 추출')) throw e;
-    console.log("ℹ️ Response is a plain markdown string, saving as-is.");
-  }
+  // 🧩 지능형 청크 조립 및 자가 치유 파서 기동
+  console.log(`\n🧩 [${subjectName}] 지능형 청크 조립 및 자가 치유 파서 기동...`);
+  console.log(`🧩 [조립 파서] 총 ${questionsChunks.length}개의 마크다운 청크를 통합 조립하는 중...`);
+  
+  const mergedQuestions = questionsChunks.join("\n\n").trim();
+  const mergedExplanations = explanationsChunks.join("\n\n").trim();
+
+  let quizMarkdown = `## [시험 문제지]
+
+${mergedQuestions}
+
+## [정답 및 상세 해설]
+
+${mergedExplanations}`;
 
   // 3.5 구글 Gemini API (무료) 기반 2차 정밀 검증 및 철벽 교정 레이어 적용
   try {
@@ -343,7 +552,7 @@ async function runQuizGeneration(client, notebookId, subjectKey, subjectName, do
   const filePath = path.join(DAILY_TESTS_DIR, fileName);
 
   fs.writeFileSync(filePath, quizMarkdown, "utf8");
-  console.log(`✅ [${subjectName}] 문제지 저장 완료: ${filePath}`);
+  console.log(`✅ [${subjectName}] 최종 통합 문제지 저장 완료: ${filePath}`);
 
   // 5. history.json 업데이트 (구체적인 문항 요약을 추출해 저장하여 실질적 중복 방지)
   const todayQuestions = extractQuestionSummaries(quizMarkdown);
