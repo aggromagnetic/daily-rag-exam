@@ -458,17 +458,17 @@ async function loadExamList() {
 
 // 3-2. 시험 시작 및 파싱 데이터 렌더링
 async function startExam(filename, updateHash = true) {
+  if (updateHash) {
+    window.location.hash = `exams/play?file=${encodeURIComponent(filename)}`;
+    return;
+  }
+
   state.currentTestFilename = filename;
   state.userAnswers = {};
   state.examSeconds = 0;
 
   const playContainer = document.getElementById('play-questions-container');
   playContainer.innerHTML = '<div class="loading-spinner">RAG 모의고사를 해체 및 조립 중입니다...</div>';
-
-  if (updateHash) {
-    window.location.hash = `exams/play?file=${encodeURIComponent(filename)}`;
-    return;
-  }
 
   showSubView('exam-play-view');
 
