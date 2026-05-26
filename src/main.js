@@ -30,7 +30,11 @@ const state = {
 function init() {
   initNavigation();
   checkAuth();
-  loadDashboardData();
+  
+  // 🪐 해시 라우터 리스너 등록 및 초기 실행
+  window.addEventListener('hashchange', handleHashChange);
+  handleHashChange();
+  
   setupIncorrectForm();
 
   // 시험장 내부 제어 버튼 바인딩
@@ -45,8 +49,7 @@ function init() {
   if (btnFinish) {
     btnFinish.addEventListener('click', () => {
       stopTimer();
-      switchTab('incorrect');
-      showSubView('exam-list-view');
+      window.location.hash = 'incorrect';
       showToast('학습이 완료되었습니다! 아래 오답 수첩에서 오늘 틀린 문제의 개념들을 등록해 주세요.', 'success');
     });
   }
@@ -54,8 +57,7 @@ function init() {
   const btnResultToList = document.getElementById('btn-result-to-list');
   if (btnResultToList) {
     btnResultToList.addEventListener('click', () => {
-      switchTab('exams');
-      showSubView('exam-list-view');
+      window.location.hash = 'exams';
     });
   }
 
@@ -260,7 +262,7 @@ function initNavigation() {
 
     btn.addEventListener('click', (e) => {
       const tabId = btn.getAttribute('data-tab');
-      switchTab(tabId);
+      window.location.hash = tabId;
     });
   });
 }
@@ -286,6 +288,42 @@ function switchTab(tabId) {
     loadExamList();
   } else if (tabId === 'incorrect') {
     loadIncorrectList();
+  }
+}
+
+// 🪐 지능형 SPA 해시 라우터 핸들러
+function handleHashChange() {
+  const rawHash = window.location.hash || '#dashboard';
+  // '#' 문자 제거
+  const hash = rawHash.startsWith('#') ? rawHash.substring(1) : rawHash;
+
+  if (hash.startsWith('dashboard')) {
+    switchTab('dashboard');
+    showSubView('exam-list-view');
+  } else if (hash.startsWith('incorrect')) {
+    switchTab('incorrect');
+    showSubView('exam-list-view');
+  } else if (hash.startsWith('exams')) {
+    switchTab('exams');
+    
+    if (hash.startsWith('exams/play')) {
+      const match = hash.match(/file=([^&]+)/);
+      const filename = match ? decodeURIComponent(match[1]) : state.currentTestFilename;
+      if (filename) {
+        if (state.currentTestFilename !== filename) {
+          startExam(filename, false); // URL에서 직접 넘어왔으므로 해시 업데이트 없이 실행
+        } else {
+          showSubView('exam-play-view');
+        }
+      } else {
+        showSubView('exam-list-view');
+      }
+    } else {
+      showSubView('exam-list-view');
+    }
+  } else {
+    // 정의되지 않은 해시일 경우 대시보드로 리다이렉트
+    window.location.hash = 'dashboard';
   }
 }
 
@@ -398,7 +436,7 @@ async function loadExamList() {
 
         // 응시 시작 이벤트 바인딩
         card.querySelector('.exam-start-btn').addEventListener('click', () => {
-          startExam(test.filename);
+          startExam(test.filename, true);
         });
 
         container.appendChild(card);
@@ -419,13 +457,18 @@ async function loadExamList() {
 }
 
 // 3-2. 시험 시작 및 파싱 데이터 렌더링
-async function startExam(filename) {
+async function startExam(filename, updateHash = true) {
   state.currentTestFilename = filename;
   state.userAnswers = {};
   state.examSeconds = 0;
 
   const playContainer = document.getElementById('play-questions-container');
   playContainer.innerHTML = '<div class="loading-spinner">RAG 모의고사를 해체 및 조립 중입니다...</div>';
+
+  if (updateHash) {
+    window.location.hash = `exams/play?file=${encodeURIComponent(filename)}`;
+    return;
+  }
 
   showSubView('exam-play-view');
 
@@ -527,7 +570,7 @@ function stopTimer() {
 function exitExam() {
   if (confirm('시험 진행 정보가 삭제됩니다. 정말로 퇴장하시겠습니까?')) {
     stopTimer();
-    showSubView('exam-list-view');
+    window.location.hash = 'exams';
   }
 }
 
