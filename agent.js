@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
 import { verifyQuizWithGemini } from './lib/gemini.js';
+import { compileInteractiveHtmlViaBrowser } from './lib/gemini_browser.js';
 
 const CONFIG_PATH = path.resolve("data", "config.json");
 const HISTORY_PATH = path.resolve("data", "history.json");
@@ -160,10 +161,18 @@ function updateTestsIndex() {
     const tests = files.map(file => {
       const cleanName = file.replace('.md', '');
       const parts = cleanName.split('_');
+      const date = parts[0] || '오늘';
+      const subject = parts[1] || cleanName;
+
+      const htmlFilename = `${date}_${subject}_interactive.html`;
+      const hasInteractive = fs.existsSync(path.join(DAILY_TESTS_DIR, htmlFilename));
+
       return {
         filename: file,
-        date: parts[0] || '오늘',
-        subject: parts[1] || cleanName
+        date: date,
+        subject: subject,
+        interactive: hasInteractive,
+        htmlFilename: hasInteractive ? htmlFilename : null
       };
     });
 
@@ -600,7 +609,7 @@ ${mergedExplanations}`;
   const filePath = path.join(DAILY_TESTS_DIR, fileName);
 
   fs.writeFileSync(filePath, quizMarkdown, "utf8");
-  console.log(`✅ [${subjectName}] 최종 통합 문제지 저장 완료: ${filePath}`);
+  console.log(`✅ [${subjectName}] 최종 마크다운 통합 문제지 저장 완료: ${filePath}`);
 
   // 5. history.json 업데이트 (구체적인 문항 요약을 추출해 저장하여 실질적 중복 방지)
   const todayQuestions = extractQuestionSummaries(quizMarkdown);
@@ -726,6 +735,50 @@ async function main() {
 
     console.log("\n🎉 모든 과목의 오늘의 데일리 문제지 추출이 정상 완료되었습니다!");
 
+    // 💡 [크롬 프로필 락 해제 및 자원 반환]
+    // Browser Automation 수확기가 충돌 없이 정상 가동될 수 있도록 
+    // NotebookLM MCP 클라이언트 브라우저 인스턴스를 먼저 완전히 소멸시킵니다.
+    console.log("🧹 HTML 퀴즈 수확기 안전 기동을 위해 NotebookLM MCP 세션을 완전히 종료합니다...");
+    try {
+      await transport.close();
+    } catch (_) {}
+
+    // 💡 [Browser Automation] 마크다운 데이터를 토대로 프리미엄 인터랙티브 HTML 웹앱 순차 수확
+    const today = getTodayString();
+    const subjectsToCompile = [];
+    if (!targetSubject || targetSubject === 'accounting') {
+      subjectsToCompile.push({ key: 'accounting', name: '회계원리' });
+    }
+    if (!targetSubject || targetSubject === 'facility') {
+      subjectsToCompile.push({ key: 'facility', name: '시설개론' });
+    }
+    if (!targetSubject || targetSubject === 'civil') {
+      subjectsToCompile.push({ key: 'civil', name: '민법' });
+    }
+
+    console.log("\n⚡ [수확기 루프] 교정된 마크다운을 프리미엄 HTML로 즉석 수확 컴파일 시작...");
+    for (const sub of subjectsToCompile) {
+      const mdFileName = `${today}_${sub.name}.md`;
+      const mdFilePath = path.join(DAILY_TESTS_DIR, mdFileName);
+
+      if (fs.existsSync(mdFilePath)) {
+        try {
+          const mdContent = fs.readFileSync(mdFilePath, 'utf8');
+          const interactiveHtml = await compileInteractiveHtmlViaBrowser(mdContent, sub.name, sub.key);
+          if (interactiveHtml) {
+            const htmlFileName = `${today}_${sub.name}_interactive.html`;
+            const htmlFilePath = path.join(DAILY_TESTS_DIR, htmlFileName);
+            fs.writeFileSync(htmlFilePath, interactiveHtml, "utf8");
+            console.log(`✅ [${sub.name}] 프리미엄 퀴즈 HTML 최종 수확 및 저장 완료: ${htmlFilePath}`);
+          } else {
+            console.warn(`⚠️ [${sub.name}] HTML 수확 실패 (컴파일러 결과 빈 문자열)`);
+          }
+        } catch (htmlErr) {
+          console.error(`🚨 [${sub.name}] HTML 수확 도중 에러 발생:`, htmlErr.message);
+        }
+      }
+    }
+
     // 💡 갱신 및 배포
     updateTestsIndex();
     autoGitPush();
@@ -733,9 +786,6 @@ async function main() {
   } catch (error) {
     console.error("❌ 에러: 에이전트 실행 중 오류가 발생했습니다:", error);
   } finally {
-    try {
-      await transport.close();
-    } catch (_) {}
     console.log("👋 에이전트가 정상적으로 종료되었습니다.");
     process.exit(0);
   }

@@ -427,17 +427,37 @@ async function loadExamList() {
 
         const card = document.createElement('div');
         card.className = `glass-card exam-card ${subjectClass}`;
+        
+        // 1. HTML 버전 존재 여부에 따라 인터랙티브 버튼 마크업 분기
+        const isInteractive = test.interactive;
+        const interactiveBtnMarkup = isInteractive
+          ? `<button class="exam-play-btn active-btn" style="background: linear-gradient(135deg, var(--neon-emerald), var(--neon-blue)); border: none; box-shadow: 0 4px 10px rgba(0, 245, 160, 0.2); width: 100%; color: var(--text-main); font-weight: 700; padding: 0.7rem; border-radius: 10px; cursor: pointer; transition: all 0.2s;" data-html="${test.htmlFilename}">⚡ 모의고사 응시하기 (자동채점)</button>`
+          : `<button class="exam-play-btn disabled-btn" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); width: 100%; color: var(--text-muted); font-weight: 500; padding: 0.7rem; border-radius: 10px; cursor: not-allowed; opacity: 0.5;" disabled>⏱️ 모의고사 응시 (HTML 제작 중...)</button>`;
+
         card.innerHTML = `
           <span class="badge ${cardGlow}" style="margin-bottom: 0.75rem;">${test.subject}</span>
           <h3 class="exam-card-subject">${test.subject} 모의고사</h3>
           <span class="exam-card-date">📅 출제일: ${test.date}</span>
-          <button class="exam-start-btn" data-file="${test.filename}">모의고사 응시하기 →</button>
+          <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; width: 100%;">
+            <button class="exam-start-btn" style="width: 100%; background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); border: 1px solid var(--border-glass); padding: 0.7rem; border-radius: 10px; color: var(--text-main); font-weight: 600; cursor: pointer;" data-file="${test.filename}">📋 문제집 전체 복사하기 (수동)</button>
+            ${interactiveBtnMarkup}
+          </div>
         `;
 
-        // 응시 시작 이벤트 바인딩
+        // 1. 문제집 전체 복사하기 버튼 바인딩 (지문 뷰어로 이동)
         card.querySelector('.exam-start-btn').addEventListener('click', () => {
           startExam(test.filename, true);
         });
+
+        // 2. 모의고사 응시하기 버튼 바인딩 (인터랙티브 HTML 새 창 열기)
+        if (isInteractive) {
+          card.querySelector('.exam-play-btn').addEventListener('click', () => {
+            const baseUrl = import.meta.env.BASE_URL || '/';
+            const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+            const interactiveUrl = `${cleanBase}daily_tests/${test.htmlFilename}`;
+            window.open(interactiveUrl, '_blank');
+          });
+        }
 
         container.appendChild(card);
       });
