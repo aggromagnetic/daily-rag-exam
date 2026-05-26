@@ -451,58 +451,106 @@ ${isFirstStep ? `
    - 해설 작성 시 각 문항의 정답은 '정답: ①' 형태로 명확하게 표기해 주십시오.
 `;
 
-    const askArguments = {
-      question: prompt,
-      notebook_id: targetNotebookId,
-      browser_options: {
-        timeout_ms: 900000, // 내부 브라우저 Puppeteer 타임아웃을 15분으로 세팅
-        stealth: {
-          human_typing: false // 초고속 붙여넣기(Paste) 모드를 활성화하여 타이핑 렉 원천 차단
+    let stepMarkdown = "";
+    let retryCount = 0;
+    const maxRetries = 3;
+    let stepSuccess = false;
+
+    while (retryCount < maxRetries && !stepSuccess) {
+      try {
+        if (retryCount > 0) {
+          console.log(`⚠️ [${subjectName}] [Step ${i + 1}] [재시도 ${retryCount}/${maxRetries}] RAG 오류 혹은 답변 거절(Soft Refusal)이 감지되어 15초 후 재시도합니다...`);
+          await sleep(15000);
+        }
+
+        const askArguments = {
+          question: prompt,
+          notebook_id: targetNotebookId,
+          browser_options: {
+            timeout_ms: 900000,
+            stealth: {
+              human_typing: false
+            }
+          }
+        };
+
+        if (sessionId) {
+          askArguments.session_id = sessionId;
+        }
+
+        const result = await client.callTool({
+          name: "ask_question",
+          arguments: askArguments
+        }, undefined, {
+          timeout: 950000
+        });
+
+        const generatedText = result.content[0].text;
+        stepMarkdown = generatedText;
+
+        // 💡 [RAG 에러 차단막] MCP 응답이 RAG 에러를 리턴했거나 JSON 형식의 에러인지 철저히 검사
+        if (!generatedText || generatedText.includes('"success": false') || generatedText.includes('Could not find NotebookLM') || generatedText.includes('Failed to load') || generatedText.includes('Timeout waiting')) {
+          throw new Error(`RAG 오류 문자열 검출`);
+        }
+
+        // 💡 notebooklm-mcp 응답이 JSON 오브젝트 스트링인 경우 진짜 마크다운 텍스트만 언패킹
+        try {
+          if (typeof generatedText === 'string' && (generatedText.trim().startsWith('{') || generatedText.trim().startsWith('['))) {
+            const parsedRes = JSON.parse(generatedText);
+            if (parsedRes && parsedRes.success === false) {
+              throw new Error(`RAG 내부 실패`);
+            }
+            if (parsedRes && parsedRes.data && parsedRes.data.answer) {
+              stepMarkdown = parsedRes.data.answer;
+            } else if (parsedRes && parsedRes.answer) {
+              stepMarkdown = parsedRes.answer;
+            }
+          }
+        } catch (e) {
+          throw e;
+        }
+
+        // 💡 [Soft Refusal (친절한 거절) 및 과도하게 짧은 텍스트(300자 미만) 차단 필터]
+        const lowerText = stepMarkdown.toLowerCase();
+        const isRefusal = 
+          lowerText.includes("답변을 제공할") || 
+          lowerText.includes("찾을 수 없") || 
+          lowerText.includes("죄송합니다만") || 
+          lowerText.includes("답변하기 어렵") || 
+          lowerText.includes("i cannot") || 
+          lowerText.includes("i'm sorry") ||
+          stepMarkdown.length < 300;
+
+        if (isRefusal) {
+          throw new Error(`NotebookLM 답변 거절(Soft Refusal) 또는 텍스트 길이 미달 감지 (획득 크기: ${stepMarkdown.length}자)`);
+        }
+
+        // 💡 지능형 세션 ID 추출 및 갱신 보장
+        if (result.session_id) {
+          sessionId = result.session_id;
+        } else if (result.data && result.data.session_id) {
+          sessionId = result.data.session_id;
+        } else {
+          try {
+            if (typeof generatedText === 'string' && (generatedText.trim().startsWith('{') || generatedText.trim().startsWith('['))) {
+              const parsedRes = JSON.parse(generatedText);
+              if (parsedRes.session_id) {
+                sessionId = parsedRes.session_id;
+              } else if (parsedRes.data && parsedRes.data.session_id) {
+                sessionId = parsedRes.data.session_id;
+              }
+            }
+          } catch (_) {}
+        }
+
+        stepSuccess = true;
+      } catch (err) {
+        retryCount++;
+        console.warn(`⚠️ [${subjectName}] [Step ${i + 1}] 시도 ${retryCount}회 실패:`, err.message);
+        if (retryCount >= maxRetries) {
+          throw new Error(`RAG [Step ${i + 1}] 추출 최종 실패 (시도: ${retryCount}회): ${err.message}`);
         }
       }
-    };
-
-    if (sessionId) {
-      askArguments.session_id = sessionId;
-    }
-
-    const result = await client.callTool({
-      name: "ask_question",
-      arguments: askArguments
-    }, undefined, {
-      timeout: 950000 // MCP 클라이언트 호출 타임아웃은 브라우저보다 더 넉넉하게 (15.8분)
-    });
-
-    const generatedText = result.content[0].text;
-    let stepMarkdown = generatedText;
-
-    // 💡 [RAG 에러 차단막] MCP 응답이 RAG 에러를 리턴했거나 JSON 형식의 에러인지 철저히 검사
-    if (!generatedText || generatedText.includes('"success": false') || generatedText.includes('Could not find NotebookLM') || generatedText.includes('Failed to load')) {
-      throw new Error(`RAG [Step ${i + 1}] 추출 과정에서 오류가 발생했습니다: ${generatedText}`);
-    }
-
-    // 💡 notebooklm-mcp 응답이 JSON 오브젝트 스트링인 경우 진짜 마크다운 텍스트만 언패킹
-    try {
-      if (typeof generatedText === 'string' && (generatedText.trim().startsWith('{') || generatedText.trim().startsWith('['))) {
-        const parsedRes = JSON.parse(generatedText);
-        if (parsedRes && parsedRes.success === false) {
-          throw new Error(`RAG [Step ${i + 1}] 추출이 내부 실패했습니다: ${parsedRes.error || JSON.stringify(parsedRes)}`);
-        }
-        if (parsedRes && parsedRes.data && parsedRes.data.answer) {
-          stepMarkdown = parsedRes.data.answer;
-        } else if (parsedRes && parsedRes.answer) {
-          stepMarkdown = parsedRes.answer;
-        }
-      }
-    } catch (e) {
-      if (e.message.includes('RAG [Step')) throw e;
-    }
-
-    // 세션 ID 획득 및 갱신 보장
-    if (result.session_id) {
-      sessionId = result.session_id;
-    } else if (result.data && result.data.session_id) {
-      sessionId = result.data.session_id;
     }
 
     console.log(`✅ [Step ${i + 1}] 완료! (획득 세션 ID: ${sessionId || "없음"}, 크기: ${stepMarkdown.length}자)`);
