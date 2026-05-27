@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="ko" class="h-full bg-slate-950 text-slate-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주택관리사보 1차 회계원리 일타강사 마스터 퀴즈</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Pretendard', sans-serif;
+        }
+        /* Custom scrollbar for raw notes */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="h-full flex flex-col justify-between overflow-x-hidden">
+
+    <!-- Header -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50 px-4 py-3">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+                <div class="bg-gradient-to-tr from-emerald-500 to-green-400 p-2 rounded-xl shadow-lg shadow-emerald-500/10">
+                    <i data-lucide="graduation-cap" class="w-6 h-6 text-slate-950"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-base md:text-lg tracking-tight bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
+                        주택관리사보 1차 일타마스터
+                    </h1>
+                    <p class="text-[10px] md:text-xs text-slate-400 font-medium">회계원리 단기 합격 보증 트레이닝</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span id="score-badge" class="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-800 text-xs font-semibold text-emerald-400 border border-emerald-500/20">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    학습 진행 중
+                </span>
+                <button onclick="restartQuiz()" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg transition-all border border-slate-700">
+                    <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> 처음부터
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-1 flex items-center justify-center p-4 md:p-6">
+        <div class="w-full max-w-4xl">
+            
+            <!-- 1. Intro View -->
+            <div id="intro-card" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-10 shadow-2xl relative overflow-hidden transition-all duration-300 transform scale-100">
+                <div class="absolute top-0 right-0 -mt-12 -mr-12 w-48 h-48 bg-emerald-500/5 rounded-full blur-3xl"></div>
+                
+                <div class="text-center space-y-6 max-w-xl mx-auto">
+                    <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold tracking-wider uppercase border border-emerald-500/20">
+                        <i data-lucide="zap" class="w-3.5 h-3.5"></i> PASS MASTER
+                    </span>
+                    <h2 class="text-2xl md:text-4xl font-extrabold text-white leading-tight">
+                        불안한 기출 개념,<br class="hidden md:block"/>
+                        <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-green-400 bg-clip-text text-transparent">단 35문제</span>로 완벽히 제압합니다.
+                    </h2>
+                    <p class="text-slate-400 text-sm md:text-base leading-relaxed">
+                        실제 시험 출제 위원들의 논리와 함정을 일타강사 Gem의 프리미엄 해설과 함께 완벽하게 체득하십시오. 클릭 한 번으로 풀고 즉시 논리를 채워 넣는 최고의 학습 인터페이스를 제공합니다.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-4 text-left">
+                        <div class="p-4 rounded-xl bg-slate-950/50 border border-slate-800">
+                            <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm mb-1">
+                                <i data-lucide="check-circle" class="w-4 h-4"></i> 100% 무결성 보증
+                            </div>
+                            <p class="text-xs text-slate-400">오타와 계산 오류를 완벽 교정한 최고 품질의 문항</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-950/50 border border-slate-800">
+                            <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm mb-1">
+                                <i data-lucide="help-circle" class="w-4 h-4"></i> 즉각적 학습 피드백
+                            </div>
+                            <p class="text-xs text-slate-400">오답 클릭 시 왜 틀렸는지 논리적 오답 교정 제공</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-950/50 border border-slate-800">
+                            <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm mb-1">
+                                <i data-lucide="file-text" class="w-4 h-4"></i> 실시간 오답 노트
+                            </div>
+                            <p class="text-xs text-slate-400">종료 시 복습용 요약 및 클라우드 연동 자동 지원</p>
+                        </div>
+                    </div>
+
+                    <button onclick="startQuiz()" class="w-full md:w-auto px-10 py-4 bg-emerald-500 hover:bg-emerald-600 active:transform active:scale-95 text-slate-950 font-bold text-base rounded-xl transition-all shadow-lg shadow-emerald-500/20 inline-flex items-center justify-center gap-2">
+                        실전 트레이닝 시작하기 <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2. Quiz Practice View -->
+            <div id="quiz-card" class="hidden space-y-6 transition-all duration-300">
+                <!-- Navigation & Progress Tracker -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 md:p-6 shadow-xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs font-bold text-slate-400 flex items-center gap-1.5">
+                            <i data-lucide="layers" class="w-4 h-4 text-emerald-400"></i>
+                            PROGRESS: <span id="current-index" class="text-white text-sm">1</span> / 35 문항
+                        </span>
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs text-slate-400">정답: <strong id="stats-correct" class="text-emerald-400">0</strong></span>
+                            <span class="text-xs text-slate-400">오답: <strong id="stats-wrong" class="text-rose-400">0</strong></span>
+                        </div>
+                    </div>
+                    
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-slate-950 rounded-full h-2 overflow-hidden mb-5">
+                        <div id="progress-bar-fill" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+
+                    <!-- Jump-to Selector -->
+                    <div id="quest-dots" class="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto p-1 rounded">
+                        <!-- Generative Indicator Dots -->
+                    </div>
+                </div>
+
+                <!-- Main Question Sheet -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl relative">
+                    <!-- Target Header -->
+                    <div class="flex items-center justify-between mb-4 pb-4 border-b border-slate-800/60">
+                        <span class="px-3 py-1 rounded bg-slate-950 text-emerald-400 text-xs font-bold border border-emerald-500/10">
+                            단원: 주택관리사보 회계원리 실전
+                        </span>
+                    </div>
+
+                    <!-- Question Text -->
+                    <div class="space-y-4 mb-6">
+                        <h3 id="question-title" class="text-base md:text-lg font-bold leading-relaxed text-white whitespace-pre-wrap">
+                            질문 데이터 로딩 중...
+                        </h3>
+                    </div>
+
+                    <!-- Options Grid -->
+                    <div id="options-container" class="space-y-2.5">
+                        <!-- Choices will be rendered here dynamically -->
+                    </div>
+
+                    <!-- Feedback Box (Hidden initially) -->
+                    <div id="feedback-box" class="hidden mt-6 p-5 rounded-xl border transition-all duration-300">
+                        <div class="flex items-start gap-3">
+                            <div id="feedback-icon-container" class="p-1.5 rounded-lg">
+                                <!-- Dynamic Icon -->
+                            </div>
+                            <div class="space-y-2 flex-1">
+                                <h4 id="feedback-status" class="font-extrabold text-sm md:text-base">정답 및 해설</h4>
+                                <div id="feedback-explanation" class="text-xs md:text-sm text-slate-300 leading-relaxed space-y-1">
+                                    <!-- Explanation text -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Control Buttons -->
+                    <div class="flex items-center justify-between mt-8 pt-6 border-t border-slate-800">
+                        <button id="prev-btn" onclick="goToPrevQuestion()" class="px-4 py-2 text-xs md:text-sm text-slate-400 hover:text-white bg-slate-950 border border-slate-800 hover:bg-slate-800 rounded-xl transition-all flex items-center gap-1 disabled:opacity-30 disabled:pointer-events-none">
+                            <i data-lucide="chevron-left" class="w-4 h-4"></i> 이전 문제
+                        </button>
+                        <button id="next-btn" onclick="goToNextQuestion()" class="px-5 py-2.5 text-xs md:text-sm font-bold text-slate-950 bg-emerald-400 hover:bg-emerald-300 rounded-xl transition-all flex items-center gap-1">
+                            다음 문제 <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Final Report & Wrong Note View -->
+            <div id="result-card" class="hidden bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-10 shadow-2xl space-y-8">
+                <div class="text-center space-y-4 max-w-xl mx-auto">
+                    <div class="inline-flex p-4 rounded-full bg-emerald-500/10 text-emerald-400 mb-2">
+                        <i data-lucide="award" class="w-12 h-12"></i>
+                    </div>
+                    <h2 class="text-2xl md:text-4xl font-extrabold text-white">학습 분석 리포트 완료!</h2>
+                    <p class="text-slate-400 text-sm md:text-base">모든 퀴즈가 성공적으로 마무리되었습니다. 채점 결과 및 오답 정리를 즉석에서 전수 공개합니다.</p>
+                </div>
+
+                <!-- Statistics Summary -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 text-center">
+                        <span class="text-xs text-slate-400 block mb-1">최종 득점률</span>
+                        <span id="res-score-percent" class="text-2xl md:text-3xl font-extrabold text-emerald-400">0%</span>
+                    </div>
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 text-center">
+                        <span class="text-xs text-slate-400 block mb-1">정답 문항 수</span>
+                        <span id="res-correct" class="text-2xl md:text-3xl font-extrabold text-teal-400">0 / 35</span>
+                    </div>
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 text-center">
+                        <span class="text-xs text-slate-400 block mb-1">오답 문항 수</span>
+                        <span id="res-wrong" class="text-2xl md:text-3xl font-extrabold text-rose-400">0 / 35</span>
+                    </div>
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 text-center">
+                        <span class="text-xs text-slate-400 block mb-1">일타 강사 총평</span>
+                        <span id="res-grade-badge" class="text-xs md:text-sm font-bold text-white bg-slate-800 px-2 py-1 rounded inline-block mt-1">평가 대기 중</span>
+                    </div>
+                </div>
+
+                <!-- Sync status -->
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-850 flex items-center justify-between text-xs text-slate-400">
+                    <span class="flex items-center gap-1.5">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span>
+                        오답수첩 클라우드 자동 전송 활성화
+                    </span>
+                    <button onclick="manualSync()" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded border border-slate-700 transition-all flex items-center gap-1">
+                        <i data-lucide="refresh-cw" class="w-3 h-3"></i> 즉시 전송
+                    </button>
+                </div>
+
+                <!-- Wrong Answer Note Area -->
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-base md:text-lg font-bold text-white flex items-center gap-2">
+                            <i data-lucide="book-open" class="text-rose-400"></i> 집중 복습 오답노트
+                        </h3>
+                        <button onclick="copyWrongNotesText()" class="text-xs text-emerald-400 hover:text-emerald-300 flex items-center gap-1 px-2.5 py-1.5 rounded bg-emerald-500/5 border border-emerald-500/10 hover:border-emerald-500/30 transition-all">
+                            <i data-lucide="clipboard" class="w-3.5 h-3.5"></i> 오답노트 텍스트 복사
+                        </button>
+                    </div>
+
+                    <div id="wrong-answers-container" class="space-y-4 max-h-[400px] overflow-y-auto pr-2">
+                        <!-- Wrong Answer items rendered dynamically -->
+                    </div>
+                </div>
+
+                <!-- Bottom button -->
+                <div class="pt-6 border-t border-slate-800 text-center">
+                    <button onclick="restartQuiz()" class="px-8 py-3.5 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl border border-slate-700 transition-all shadow-md active:scale-95">
+                        전체 문제 다시 풀기
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-900 bg-slate-950 px-4 py-3 text-center text-slate-500 text-[10px] md:text-xs">
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
+            <span>본 인터랙티브 퀴즈는 한국채택국제회계기준(K-IFRS)의 최신 개정을 준수합니다.</span>
+            <span>&copy; 주택관리사보 1차 퀴즈 시스템. All Rights Reserved.</span>
+        </div>
+    </footer>
+
+    <!-- Script Block containing App Data and Logic -->
+    <script>
+        // Unique App ID for Local and Parent Synced Systems
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'housing-manager-quiz-v1';
+
+        // Core 35 Quiz Database (Corrected & Refined)
+        const quizData = [
+          {
+            id: 1,
+            question: "12월 결산법인인 (주)한국은 20×1년 8월 1일에 건물 1년분 임대료 ￦120,000을 현금으로 수취하면서 이를 전액 당기의 수익(임대료)으로 회계처리하였다. 결산일인 20×1년 12월 31일에 이와 관련된 기말 수정분개를 누락하였을 경우, 이 오류가 (주)한국의 20×1년도 재무제표에 미치는 전체적인 영향으로 옳은 것은? (단, 임대료는 월할 계산한다.)",
+            options: [
+              "자산이 ￦70,000 과대계상된다.",
+              "부채가 ￦70,000 과대계상된다.",
+              "당기순이익이 ￦70,000 과소계상된다.",
+              "자본이 ￦70,000 과대계상된다.",
+              "비용이 ￦70,000 과소계상된다."
+            ],
+            answer: 3, // index of ④
+            explanation: "8월 1일에 수취한 1년분 임대료 ￦120,000 중 결산일까지 미경과된 7개월분(￦70,000)은 선수수익(부채)으로 인식하고 당기 수익에서 차감해야 합니다. 이를 누락했으므로 수익이 ￦70,000 과대계상되어 당기순이익과 자본(이익잉여금)이 ￦70,000 과대계상됩니다. 부채(선수수익)는 ￦70,000 과소계상됩니다. 따라서 옳은 것은 ④번(자본 ￦70,000 과대계상)입니다."
+          },
+          {
+            id: 2,
+            question: "한국채택국제회계기준(K-IFRS)의 재무보고를 위한 개념체계에서 규정하는 '유용한 재무정보의 질적 특성'에 관한 설명으로 옳지 않은 것은?",
+            options: [
+              "적시성은 의사결정에 영향을 미칠 수 있도록 정보이용자가 정보를 제때에 이용할 수 있게 하는 것이다.",
+              "검증가능성은 합리적인 판단력이 있고 독립적인 서로 다른 관찰자가 어떤 서술이 표현충실성이라는 데 비록 완전히 일치하지는 못하더라도 대체로 합의에 이를 수 있다는 것을 의미한다.",
+              "일관성은 비교가능성과 동일한 개념이며, 한 기업 내에서 또는 기업 간에 동일한 항목에 대해 동일한 회계처리방법을 획일적으로 적용하는 것을 말한다.",
+              "정보가 누락되거나 잘못 기재된 경우 특정 보고기업의 재무정보에 근거한 정보이용자의 의사결정에 영향을 줄 수 있다면 그 정보는 중요한 것이다.",
+              "재무정보가 예측가치를 갖기 위해 그 정보 자체가 반드시 예측치나 예상치의 형태를 띠어야만 하는 것은 아니다."
+            ],
+            answer: 2, // index of ③
+            explanation: "일관성(Consistency)과 비교가능성(Comparability)은 관련은 있지만 동일한 개념이 아닙니다. 비교가능성은 목적(목표)이고, 일관성은 한 기업 내에서 기간 간 또는 동일 기간 동안 기업 간에 동일한 항목에 대해 동일한 방법을 적용하는 것으로서 비교가능성이라는 목표를 달성하는 데 도움을 주는 수단입니다."
+          },
+          {
+            id: 3,
+            question: "한국채택국제회계기준(K-IFRS)에 따른 재무제표의 작성과 표시에 관한 설명으로 옳지 않은 것은?",
+            options: [
+              "기업은 계속기업의 가정이 적절한지의 여부를 평가할 때 적어도 보고기간 말로부터 향후 12개월의 기간에 대하여 모든 이용 가능한 정보를 고려하여야 한다.",
+              "경영진이 기업을 청산하거나 경영활동을 중단할 의도가 있는 경우에는 계속기업의 가정을 적용하여 재무제표를 작성하여서는 아니 된다.",
+              "자산과 부채, 그리고 수익과 비용은 K-IFRS에서 요구하거나 허용하지 않는 한 상계하여 표시하지 아니한다.",
+              "재무상태표의 자산과 부채는 원칙적으로 유동과 비유동으로 구분하여 표시해야 하므로, 유동성 순서에 따른 표시방법(유동성 배열법)은 어떠한 경우에도 적용할 수 없다.",
+              "부적절한 회계정책은 이에 대하여 공시나 주석 또는 보충 자료를 통해 설명하더라도 정당화될 수 없다."
+            ],
+            answer: 3, // index of ④
+            explanation: "재무상태표의 자산과 부채는 원칙적으로 유동과 비유동으로 구분하여 표시합니다. 다만 유동성 순서에 따른 표시방법(유동성 배열법)이 신뢰성 있고 더욱 목적적합한 정보를 제공하는 경우(예: 금융회사)에는, 모든 자산과 부채를 유동성 순서에 따라 표시하는 것이 명백히 허용됩니다."
+          },
+          {
+            id: 4,
+            question: "(주)한국의 20×1년도 기초 자산총계는 ￦500,000, 기초 부채총계는 ￦200,000이다. 20×1년 말 기말 자산총계가 ￦900,000, 기말 부채총계가 ￦400,000일 때, 다음의 기중 자본 변동 내역을 모두 반영하여 산출한 20×1년도의 '당기순이익'은 얼마인가? (단, 제시된 자료 외의 자본 변동은 없다.)\n\n- 20×1년 중 유상증자: ￦100,000\n- 20×1년 중 현금배당 지급: ￦40,000\n- 20×1년 중 주식배당 지급: ￦30,000\n- 20×1년 중 기타포괄손실 발생: ￦20,000",
+            options: [
+              "￦130,000",
+              "￦140,000",
+              "￦160,000",
+              "￦180,000",
+              "￦190,000"
+            ],
+            answer: 2, // index of ③
+            explanation: "기초 자본 = 기초 자산(500,000) - 기초 부채(200,000) = ￦300,000.<br>기말 자본 = 기말 자산(900,000) - 기말 부채(400,000) = ￦500,000.<br>자본 변동 계산: 기말 자본(500,000) = 기초 자본(300,000) + 유상증자(100,000) - 현금배당(40,000) + 당기순이익(X) - 기타포괄손실(20,000).<br>※ 주식배당 ￦30,000은 이익잉여금의 자본금 대체일 뿐 자본총액에는 아무 변동이 없습니다. 따라서 500,000 = 340,000 + 당기순이익(X) 이므로, 당기순이익(X) = ￦160,000입니다."
+          },
+          {
+            id: 5,
+            question: "다음 중 한국채택국제회계기준(K-IFRS)에 따른 '금융부채'에 해당하지 않는 항목으로만 바르게 짝지어진 것은?\n\n- ㄱ. 거래처에 원재료 대금으로 지급할 매입채무\n- ㄴ. 세법 규정에 따라 과세관청에 납부해야 할 미지급법인세\n- ㄷ. 고객에게 재화나 용역을 미래에 제공하기로 약정하고 수취한 선수수익\n- ㄹ. 주주총회 결의를 통해 지급이 확정된 미지급배당금\n- ㅁ. 판매한 제품의 무상수리 의무로 인해 설정된 제품보증충당부채\n- ㅂ. 금융기관과 리스계약을 맺고 계상한 리스부채",
+            options: [
+              "ㄱ, ㄴ, ㄷ",
+              "ㄴ, ㄷ, ㅁ",
+              "ㄷ, ㄹ, ㅂ",
+              "ㄴ, ㅁ, ㅂ",
+              "ㄹ, ㅁ, ㅂ"
+            ],
+            answer: 1, // index of ②
+            explanation: "금융부채는 거래상대방에게 현금 등 금융자산을 인도하기로 한 '계약상 의무'입니다.<br>- 비금융부채: ㄴ. 미지급법인세(법률상 강제규정에 의한 의무), ㄷ. 선수수익(현금이 아닌 재화나 용역을 제공할 의무), ㅁ. 제품보증충당부채(수리 등 용역을 제공할 의무).<br>- 금융부채: ㄱ. 매입채무, ㄹ. 미지급배당금, ㅂ. 리스부채.<br>따라서 비금융부채만 모아놓은 것은 ②(ㄴ, ㄷ, ㅁ)입니다."
+          },
+          {
+            id: 6,
+            question: "(주)한국은 단일 제품을 생산하여 판매하고 있다. 단위당 판매가격은 ￦1,000, 단위당 변동원가는 ￦600이며, 연간 총고정원가는 ￦200,000이 발생한다. (주)한국이 당기에 '매출액의 15%에 해당하는 영업이익'을 획득한다고 가정할 때, 이 회사의 안전한계율(Margin of Safety Ratio)은 얼마인가?",
+            options: [
+              "25.0%",
+              "30.0%",
+              "37.5%",
+              "40.0%",
+              "62.5%"
+            ],
+            answer: 2, // index of ③
+            explanation: "1) 단위당 공헌이익 = 1,000 - 600 = ￦400. / 공헌이익률 = 40% (0.4)<br>2) 손익분기점(BEP) 매출액 = 고정원가(200,000) / 공헌이익률(0.4) = ￦500,000.<br>3) 목표 매출액(S) 산출: 공헌이익 - 고정원가 = 영업이익 => (S × 0.4) - 200,000 = S × 0.15 => 0.25S = 200,000 => 목표 매출액(S) = ￦800,000.<br>4) 안전한계 = 800,000 - 500,000 = ￦300,000.<br>5) 안전한계율 = 안전한계(300,000) / 목표 매출액(800,000) = 37.5%."
+          },
+          {
+            id: 7,
+            question: "(주)한국의 20×1년 말 보유 자산 및 관련 내역이 다음과 같다. 이 중 재무상태표상 '현금및현금성자산'에 포함되지 않는 항목들의 합계액은 얼마인가?\n\n- 지폐 및 주화: ￦50,000\n- 배당금지급통지표: ￦20,000\n- 당좌개설보증금: ￦40,000\n- 취득일로부터 만기가 120일 남은 양도성예금증서(CD): ￦60,000\n- 종업원 가불증서: ￦10,000\n- 타인발행 당좌수표: ￦25,000\n- 타인발행 선일자수표: ￦15,000",
+            options: [
+              "￦100,000",
+              "￦110,000",
+              "￦115,000",
+              "￦125,000",
+              "￦135,000"
+            ],
+            answer: 3, // index of ④
+            explanation: "현금및현금성자산에 포함되지 않는 비현금 항목들을 분류합니다.<br>- 당좌개설보증금(40,000): 사용이 제한된 장기 보증금형 예금.<br>- 취득일 만기 120일 CD(60,000): 90일(3개월) 초과 단기금융상품.<br>- 종업원 가불증서(10,000): 수취채권(단기대여금).<br>- 타인발행 선일자수표(15,000): 매출채권/어음 성격.<br>비포함 합계: 40,000 + 60,000 + 10,000 + 15,000 = ￦125,000.<br>(※ 지폐 및 주화, 배당금통지표, 타인발행 당좌수표는 모두 현금에 해당합니다.)"
+          },
+          {
+            id: 8,
+            question: "(주)대한은 20×1년 12월 31일 은행계정조정표를 작성하고 있다. 양측의 불일치 원인을 모두 반영하여 조정한 후의 정확한 당좌예금 잔액이 ￦450,000일 때, 다음 자료를 바탕으로 추정한 (주)대한의 수정 전 회사 측 장부상 당좌예금 잔액은 얼마인가?\n\n- 은행 측 마감 후 입금(미기입예금): ￦50,000\n- 회사가 기발행하였으나 미인출된 수표: ￦30,000\n- 은행이 회사 대신 추심한 받을어음 대금: ￦70,000 (회사 미통보)\n- 거래처로부터 받아 예입한 수표의 부도 처리: ￦20,000 (회사 미통보)\n- 당좌예금 계좌 유지수수료: ￦5,000 (회사 미통보)\n- 회사가 외상매출금 회수액 ￦40,000을 장부에 ￦10,000으로 과소 기입한 오류 확인",
+            options: [
+              "￦355,000",
+              "￦375,000",
+              "￦405,000",
+              "￦430,000",
+              "￦525,000"
+            ],
+            answer: 1, // index of ②
+            explanation: "은행 조정액(미기입예금, 기발행미인출수표)은 회사 잔액 수정 시에는 고려하지 않습니다.<br>회사 장부 수정 공식:<br>수정 전 회사 잔액(X) + 추심어음(+70,000) - 부도수표(-20,000) - 수수료(-5,000) + 기장오류 가산(+30,000) = 조정 후 잔액(450,000).<br>※ 기장오류: 회수액 40,000을 10,000으로 적었으므로 장부에 30,000을 추가해 주어야 합니다.<br>X + 75,000 = 450,000 => X = ￦375,000."
+          },
+          {
+            id: 9,
+            question: "(주)민국의 20×1년 초 매출채권 손실충당금 잔액은 ￦40,000이었다. 20×1년 말 매출채권 잔액 ￦1,000,000에 대하여 5%의 손실추정률을 적용하여 기말 손실충당금을 설정하였다. 20×1년도 포괄손익계산서에 대손상각비(손상차손)로 ￦35,000이 인식되었고, 당기 중 전기 이전에 대손처리했던 매출채권 ￦15,000을 현금으로 회수하였다고 할 때, 20×1년 중 회수불능으로 확정되어 장부에서 대손처리(제각)된 매출채권 금액은 얼마인가?",
+            options: [
+              "￦20,000",
+              "￦25,000",
+              "￦30,000",
+              "￦40,000",
+              "￦50,000"
+            ],
+            answer: 3, // index of ④
+            explanation: "손실충당금 T계정의 공식 흐름:<br>기말 목표 잔액 = 1,000,000 × 5% = ￦50,000.<br>충당금 증감 방정식: 기초잔액(40,000) + 대손회수액(15,000) - 당기제각액(X) + 대손상각비 설정액(35,000) = 기말잔액(50,000).<br>90,000 - X = 50,000 => X = ￦40,000."
+          },
+          {
+            id: 10,
+            question: "(주)한국은 20×1년 4월 1일에 제품을 판매하고 거래처로부터 액면금액 ￦3,000,000, 표시이자율 연 8%, 만기가 9개월(20×1년 12월 31일)인 이자부 약속어음을 수취하였다. (주)한국은 자금이 필요하여 20×1년 8월 1일에 이 어음을 거래은행에서 연 12%의 할인율로 할인하였다. 이 거래가 금융자산의 제거 조건을 충족하는 매각거래일 경우, 어음 할인 시 (주)한국이 은행으로부터 수령한 현금수취액은 얼마인가? (단, 이자는 월할 계산한다.)",
+            options: [
+              "￦2,985,000",
+              "￦3,021,000",
+              "￦3,060,000",
+              "￦3,141,000",
+              "￦3,180,000"
+            ],
+            answer: 1, // index of ②
+            explanation: "1) 만기수령액 = 액면가(3,000,000) + 만기이자(3,000,000 × 8% × 9/12 = 180,000) = ￦3,180,000.<br>2) 할인기간 = 8월 1일부터 만기 12월 31일까지 5개월.<br>3) 은행 할인료 = 만기금액(3,180,000) × 할인율(12%) × 할인기간(5/12) = ￦159,000.<br>4) 현금수취액 = 만기수령액(3,180,000) - 할인료(159,000) = ￦3,021,000."
+          },
+          {
+            id: 11,
+            question: "(주)대한은 20×1년 11월 1일 자금 조달을 위해 보유 중인 외상매출금 ￦1,000,000을 K-은행에 팩토링(양도)하였다. 은행은 팩토링 수수료로 외상매출금의 5%를 차감하고, 향후 발생할 수 있는 반품 및 에누리에 대비하여 외상매출금의 10%를 유보한 후 나머지 금액만을 (주)대한의 당좌예금 계좌에 입금하였다. 동 팩토링 거래가 소구권이 없는 등 금융자산의 제거 조건을 충족하는 매각거래로 분류될 경우, 이 거래가 20×1년도 포괄손익계산서상 당기순이익에 미치는 영향으로 옳은 것은? (단, 유보액과 관련된 실제 반품이나 대손은 발생하지 않았다고 가정한다.)",
+            options: [
+              "￦50,000 감소",
+              "￦100,000 감소",
+              "￦150,000 감소",
+              "￦850,000 증가",
+              "￦950,000 증가"
+            ],
+            answer: 0, // index of ①
+            explanation: "매각거래 조건 충족 시 실제 거래 수수료만 매출채권처분손실(비용)로 인식합니다.<br>처분손실(비용) = 1,000,000 × 5% = 50,000.<br>유보액 10%(100,000)는 임시 자산(미수금)으로 설정될 뿐 당기 손익에 영향을 주지 않습니다. 따라서 수수료 비용으로 인해 당기순이익은 ￦50,000 감소합니다."
+          },
+          {
+            id: 12,
+            question: "한국채택국제회계기준(K-IFRS)에 따른 현금및현금성자산과 수취채권에 관한 설명으로 옳지 않은 것은?",
+            options: [
+              "유의적인 금융요소가 포함되지 않은 단기 매출채권은 항상 전체 기간 기대신용손실에 해당하는 금액으로 손실충당금을 측정하여야 한다.",
+              "당좌차월은 원칙적으로 단기차입금(부채)으로 분류되나, 금융회사의 요구불예금 잔액이 변동하는 현금관리의 일부인 경우에 한하여 예외적으로 현금및현금성자산의 구성요소에 포함할 수 있다.",
+              "상환우선주는 주식(지분상품)이므로, 발행일이나 취득일로부터 만기일이 3개월 이내에 도래하더라도 현금성자산으로 절대 분류할 수 없다.",
+              "손실충당금을 설정하여 장부금액을 줄여오던 매출채권이 최종적으로 회수불가능하다고 판단되어 제각(Write-off)하는 경우, 제각하는 시점에는 당기순이익(대손상각비)이 추가로 감소하지 않는다.",
+              "매출채권 양도 시 소유에 따른 위험과 보상의 대부분을 이전하지도 않고 유지하지도 않으면서 통제권을 계속 보유하는 경우에는 회사의 지속적 관여 정도까지만 자산을 인식한다."
+            ],
+            answer: 2, // index of ③
+            explanation: "상환우선주는 실질이 금융부채 성격을 가집니다. 따라서 취득일로부터 상환일까지의 잔여 만기가 3개월 이내인 경우처럼 요건을 갖춘 경우 현금성자산으로 분류하는 것이 가능합니다. '절대 불가하다'는 틀렸습니다."
+          },
+          {
+            id: 13,
+            question: "(주)대한은 재고자산의 기말재고 원가를 추정하기 위해 선입선출 소매재고법을 적용하고 있다. 20×1년도 관련 자료가 다음과 같을 때, 기말재고자산의 '원가'는 얼마인가?\n\n- 기초재고: 원가 ￦800,000 / 매가 ￦1,000,000\n- 당기매입: 원가 ￦3,300,000 / 매가 ￦4,000,000\n- 순인상액: ￦700,000\n- 순인하액: ￦300,000\n- 당기매출액: ￦4,000,000\n- 종업원할인액: ￦200,000",
+            options: [
+              "￦800,000",
+              "￦825,000",
+              "￦900,000",
+              "￦920,000",
+              "￦950,000"
+            ],
+            answer: 2, // index of ③
+            explanation: "1) 선입선출 매입 원가율 = 당기매입원가(3,300,000) / [당기매가(4,000,000) + 인상(700,000) - 인하(300,000)] = 3,300,000 / 4,400,000 = 75%.<br>2) 기말 매가 = [기초매가(1,000,000) + 당기 매가증감액(4,400,000)] - 매출액(4,000,000) - 종업원할인(200,000) = ￦1,200,000.<br>3) 기말재고 원가 = 기말 매가(1,200,000) × 당기 원가율(75%) = ￦900,000."
+          },
+          {
+            id: 14,
+            question: "(주)한국은 20×1년 1월 1일에 기계장치를 ￦10,000에 취득하였다. 내용연수는 5년, 잔존가치는 ￦0이며 정액법으로 감가상각한다. 기계장치에 대하여 매년 말 재평가모형을 적용하며, 20×1년 말과 20×2년 말 기계장치의 공정가치가 각각 ￦7,200, ￦6,600으로 평가되었다. (주)한국이 20×2년도 포괄손익계산서에 인식할 재평가이익(당기손익)과 기타포괄손익(재평가잉여금)은 각각 얼마인가?",
+            options: [
+              "당기손익 ￦600 / 기타포괄손익 ￦600",
+              "당기손익 ￦600 / 기타포괄손익 ￦1,200",
+              "당기손익 ￦1,200 / 기타포괄손익 ￦0",
+              "당기손익 ￦0 / 기타포괄손익 ￦600",
+              "당기손익 ￦0 / 기타포괄손익 ￦1,200"
+            ],
+            answer: 0, // index of ①
+            explanation: "1) 20×1년 감가상각 = 2,000, 20×1년 말 장부액 = 8,000. 공정가치 7,200으로 감액되므로 800 재평가손실(당기손실) 인식.<br>2) 20×2년 상각 = 7,200 / 4년 = 1,800, 상각 전 장부액 = 5,400.<br>3) 20×2년 말 공정가치 6,600으로 증가. 총 증가폭 = 6,600 - 5,400 = 1,200.<br>4) 취득원가 모형 적용 시 20×2년 말 장부액 한도 = 10,000 - 4,000 = 6,000. 역사적 장부액 한도까지의 증가분(6,000 - 5,400 = 600)은 당기 재평가이익(당기손익)으로 잡고, 역사적 원가를 초과하는 부분(6,600 - 6,000 = 600)은 기타포괄손익(재평가잉여금)으로 인식합니다. 따라서 당기손익 600 / 기타포괄손익 600입니다."
+          },
+          {
+            id: 15,
+            question: "(주)민국은 20×1년 1월 1일 공장용 건물을 ￦2,000,000(내용연수 5년, 잔존가치 ￦200,000, 정액법 상각)에 취득하여 사용해왔다. 20×3년 1월 1일에 건물의 가치를 증대시키는 자본적 지출 ￦300,000이 발생하였다. 동시에 해당 시점부터 건물의 남은 잔여 내용연수를 4년으로 연장하고 잔존가치를 ￦100,000으로 변경하였으며, 감가상각방법을 연수합계법으로 변경하였다. 이러한 변경이 정당한 회계추정의 변경인 경우, (주)민국이 20×3년도에 인식할 감가상각비는 얼마인가?",
+            options: [
+              "￦480,000",
+              "￦520,000",
+              "￦592,000",
+              "￦632,000",
+              "￦740,000"
+            ],
+            answer: 2, // index of ③
+            explanation: "1) 20×1~20×2 누적 감가상각액 = [(2,000,000 - 200,000) / 5] × 2년 = 720,000. 20×2년 말 장부액 = 1,280,000.<br>2) 자본적지출 합산 = 1,280,000 + 300,000 = 1,580,000.<br>3) 변경 후 감가상각대상금액 = 1,580,000 - 100,000(신 잔존가치) = 1,480,000.<br>4) 연수합계법 상각율 = 4년 / (1+2+3+4) = 4/10.<br>5) 20×3년 상각액 = 1,480,000 × 4/10 = ￦592,000."
+          },
+          {
+            id: 16,
+            question: "(주)대한은 새로운 신약 개발 프로젝트를 진행하면서 20×1년 중 다음과 같이 지출하였다. 프로젝트는 20×2년 1월 1일에 완료되어 특허권을 취득하고 상용화되었다. 취득한 무형자산의 내용연수는 5년이고 잔존가치는 없으며 정액법으로 상각할 때, 20×2년 12월 31일 재무상태표에 표시될 무형자산의 장부금액은 얼마인가?\n\n- 1월 1일 ~ 6월 30일 (연구단계 지출): ￦500,000\n- 7월 1일 ~ 9월 30일 (개발단계 지출, 무형자산 인식요건 미충족): ￦300,000\n- 10월 1일 ~ 12월 31일 (개발단계 지출, 무형자산 인식요건 충족): ￦600,000\n- 20×2년 1월 1일 특허권 등록을 위한 법률비용: ￦100,000",
+            options: [
+              "￦480,000",
+              "￦560,000",
+              "￦640,000",
+              "￦720,000",
+              "￦800,000"
+            ],
+            answer: 1, // index of ②
+            explanation: "1) 무형자산 취득원가로 인식할 금액: 인식조건 충족한 지출(600,000) + 등록 직접 법률비용(100,000) = ￦700,000. (이전 지출은 즉시 당기 비용)<br>2) 20×2년 감가상각액 = 700,000 / 5년 = 140,000.<br>3) 20×2년 말 무형자산 장부금액 = 700,000 - 140,000 = ￦560,000."
+          },
+          {
+            id: 17,
+            question: "(주)한국은 20×1년 1월 1일 본사 사옥으로 사용할 건물(취득원가 ￦1,000,000, 잔존가치 ￦0, 내용연수 10년, 정액법 상각, 원가모형 적용)을 취득하였다. 이후 20×3년 1월 1일에 해당 건물을 임대 목적으로 전환하여 투자부동산으로 대체하였으며, 투자부동산에 대하여 공정가치모형을 적용하기로 하였다. 20×3년 1월 1일 대체 시점의 건물 공정가치는 ￦900,000이었고, 20×3년 12월 31일의 공정가치는 ￦950,000이었다. 이 건물의 회계처리가 20×3년도 당기순이익에 미치는 영향으로 옳은 것은?",
+            options: [
+              "￦50,000 증가",
+              "￦100,000 증가",
+              "￦150,000 증가",
+              "￦50,000 감소",
+              "￦100,000 감소"
+            ],
+            answer: 0, // index of ①
+            explanation: "1) 대체 시점 건물 장부금액 = 1,000,000 - 200,000 = 800,000.<br>2) 20×3.1.1 대체당일 공정가치는 900,000으로, 차액 100,000은 재평가잉여금(기타포괄손익)으로 분류되므로 당기순이익에 영향이 없습니다.<br>3) 투자부동산 분류 후 20×3년 말 공정가치 950,000이 되었으므로 공정가치 변동액인 ￦50,000(950,000 - 900,000)은 투자부동산평가이익(당기순이익)으로 들어옵니다. 따라서 당기순이익은 ￦50,000 증가합니다."
+          },
+          {
+            id: 18,
+            question: "(주)민국은 20×1년 1월 1일에 사옥 건설 공사를 착공하여 20×1년 12월 31일에 완공하였다. 20×1년 중 공사를 위해 지출된 금액은 1월 1일에 ￦1,200,000, 7월 1일에 ￦800,000이다. 해당 사옥 건설과 관련하여 20×1년도에 발생한 차입금 내역이 다음과 같을 때, (주)민국이 사옥의 취득원가에 포함(자본화)할 '차입원가' 총액은 얼마인가? (단, 지출액 및 차입금은 연중 균등하게 사용되었으며 이자는 월할 계산한다.)\n\n- 특정차입금: 20×1년 1월 1일 차입 ￦1,000,000 (이자율 연 5%, 당기 중 일시 투자수익 ￦10,000 발생)\n- 일반차입금: 20×1년 1월 1일 차입 ￦2,000,000 (이자율 연 8%)",
+            options: [
+              "￦40,000",
+              "￦64,000",
+              "￦76,000",
+              "￦88,000",
+              "￦160,000"
+            ],
+            answer: 3, // index of ④
+            explanation: "1) 연평균지출액: (1,200,000 × 12/12) + (800,000 × 6/12) = ￦1,600,000.<br>2) 특정차입금 자본화: 실제 발생이자(1,000,000 × 5% = 50,000) - 일시 투자수익(10,000) = ￦40,000.<br>3) 일반차입금 연평균 지출액 = 1,600,000 - 1,000,000 = ￦600,000.<br>4) 일반차입금 자본화이율 = 8%, 자본화액 = 600,000 × 8% = ￦48,000. (한도 160,000 이내이므로 충족)<br>5) 총 차입원가 자본화액 = 특정차입금(40,000) + 일반차입금(48,000) = ￦88,000."
+          },
+          {
+            id: 19,
+            question: "12월 결산법인인 (주)한국은 20×1년 1월 1일에 사채(액면금액 ￦2,000,000, 표시이자율 연 6%, 이자는 매년 말 후급, 만기 3년)를 ￦1,801,028에 할인 발행하였다. 발행 당시의 유효이자율은 연 10%이다. 유효이자율법을 적용하여 사채할인발행차금을 상각할 때, (주)한국이 20×2년도 포괄손익계산서에 인식할 이 사채와 관련된 '이자비용'은 얼마인가? (단, 계산 시 소수점 첫째 자리에서 반올림한다.)",
+            options: [
+              "￦120,000",
+              "￦180,103",
+              "￦186,113",
+              "￦192,724",
+              "￦198,000"
+            ],
+            answer: 2, // index of ③
+            explanation: "1) 20×1년 이자비용 = 1,801,028 × 10% = 180,103.<br>2) 20×1년 현금이자 = 120,000. 사채할인발행차금 상각액 = 180,103 - 120,000 = 60,103.<br>3) 20×1년 말 장부액 = 1,801,028 + 60,103 = 1,861,131.<br>4) 20×2년 이자비용 = 1,861,131 × 10% = ￦186,113."
+          },
+          {
+            id: 20,
+            question: "(주)한국은 20×1년부터 신제품을 판매하기 시작하였으며, 판매 후 2년간 무상수리를 보증하고 있다. 과거 경험상 제품보증비용은 각 연도 매출액의 3%가 발생할 것으로 추정된다. (주)한국의 20×1년과 20×2년의 매출액 및 실제 발생한 제품보증비용 지출액이 다음과 같을 때, 20×2년 말 재무상태표에 인식할 '제품보증충당부채' 잔액은 얼마인가?\n\n- 20×1년 매출액: ￦2,000,000 / 20×1년 실제 제품보증 지출액: ￦40,000\n- 20×2년 매출액: ￦3,000,000 / 20×2년 실제 제품보증 지출액: ￦60,000",
+            options: [
+              "￦20,000",
+              "￦30,000",
+              "￦40,000",
+              "￦50,000",
+              "￦90,000"
+            ],
+            answer: 3, // index of ④
+            explanation: "충당부채 잔액 = 누적 설정액 - 누적 지출액.<br>누적 보증비용 설정 = (2,000,000 + 3,000,000) × 3% = 150,000.<br>누적 실제 수리 지출 = 40,000 + 60,000 = 100,000.<br>20×2년 말 기말잔액 = 150,000 - 100,000 = ￦50,000."
+          },
+          {
+            id: 21,
+            question: "충당부채 및 우발부채, 우발자산(K-IFRS 제1037호)에 관한 설명으로 옳지 않은 것은?",
+            options: [
+              "미래의 예상 영업손실은 과거 사건의 결과로 발생한 현재의 의무가 아니므로 충당부채로 인식하지 아니한다.",
+              "충당부채의 명목금액과 현재가치의 차이가 중요한 경우, 부채 특유의 위험과 화폐의 시간가치에 대한 현행 시장의 평가를 반영한 세전 이자율로 할인한 현재가치로 평가한다.",
+              "기업이 구조조정의 구체적이고 공식적인 계획을 수립하기만 하면, 아직 실행에 착수하지 않았거나 주요 특징을 공표하지 않았더라도 즉시 구조조정 충당부채를 인식하여야 한다.",
+              "충당부채를 결제하기 위해 필요한 지출액의 일부 또는 전부를 제3자가 변제할 것이 예상되는 경우, 기업이 의무를 이행한다면 변제를 받을 것이 거의 확실하게 되는 때에 한하여 그 변제금액을 별도의 자산으로 인식한다.",
+              "우발부채는 경제적 효익을 갖는 자원의 유출 가능성이 아주 낮지 않다면 주석으로 공시한다."
+            ],
+            answer: 2, // index of ③
+            explanation: "단순한 구체적이고 공식적인 내부 계획의 수립만으로는 충당부채를 잡을 수 없고, '실행에 착수했거나 영향을 받을 이해관계자들에게 계획의 주요 특징을 공표하여 구체적인 신뢰를 주었을 경우'에만 충당부채를 인식합니다."
+          },
+          {
+            id: 22,
+            question: "(주)대한의 20×1년 초 자본 내역은 자본금 ￦1,000,000(발행주식수 1,000주, 1주당 액면금액 ￦1,000), 주식발행초과금 ￦200,000, 감자차익 ￦30,000, 이익잉여금 ￦500,000이다. 20×1년 5월 1일에 회사는 사업 축소를 위해 기발행된 주식 중 200주를 1주당 ￦1,500에 현금으로 매입하여 즉시 소각(유상감자)하였다. 이 거래 직후 재무상태표에 표시될 '감자차익'과 '감자차손'의 잔액은 각각 얼마인가? (단, 이전에 계상된 감자차손 잔액은 없다.)",
+            options: [
+              "감자차익 ￦0 / 감자차손 ￦70,000",
+              "감자차익 ￦0 / 감자차손 ￦100,000",
+              "감자차익 ￦30,000 / 감자차손 ￦0",
+              "감자차익 ￦30,000 / 감자차손 ￦100,000",
+              "감자차익 ￦130,000 / 감자차손 ￦0"
+            ],
+            answer: 0, // index of ①
+            explanation: "1) 소각된 자본금 액면액 = 200주 × 1,000원 = 200,000.<br>2) 현금 지급 감자대가 = 200주 × 1,500원 = 300,000.<br>3) 차액인 감자차손 발생액 = 300,000 - 200,000 = 100,000.<br>4) 기존 감자차익 30,000과 우선적 상계 상쇄 => 감자차익 잔액 0원, 남은 감자차손 70,000원을 기록합니다."
+          },
+          {
+            id: 23,
+            question: "(주)민국은 12월 결산법인으로 20×1년도 포괄손익계산서상 당기순이익은 ￦560,000이며, 당기에 결의된 우선주 배당금(비참가적, 비누적적)은 ￦100,000이다. 20×1년 중 보통주의 변동 내역이 다음과 같을 때, 20×1년도의 '기본주당순이익(EPS)'은 얼마인가? (단, 가중평균 유통보통주식수는 월할 계산한다.)\n\n- 20×1년 1월 1일: 기초 유통보통주식수 10,000주\n- 20×1년 7월 1일: 보통주 4,000주 유상증자 (공정가치로 발행)\n- 20×1년 10월 1일: 자기주식 2,000주 현금 취득",
+            options: [
+              "￦35",
+              "￦40",
+              "￦45",
+              "￦50",
+              "￦56"
+            ],
+            answer: 1, // index of ②
+            explanation: "1) 보통주 귀속 당기순이익 = 560,000 - 우선주배당금(100,000) = 460,000.<br>2) 가중평균 유통보통주식수 = 기초(10,000 × 12/12) + 증자(4,000 × 6/12) - 자기주식(2,000 × 3/12) = 10,000 + 2,000 - 500 = 11,500주.<br>3) EPS = 460,000 / 11,500주 = ￦40."
+          },
+          {
+            id: 24,
+            question: "자본의 분류 및 성격에 관한 설명으로 옳지 않은 것은?",
+            options: [
+              "자본금은 발행된 주식의 액면금액 총액을 의미하며, 일반적으로 보통주자본금과 우선주자본금으로 구분된다.",
+              "자본잉여금은 증자나 감자 등 주주와의 자본거래에서 발생한 잉여금으로, 주식발행초과금, 감자차익, 자기주식처분이익 등이 포함된다.",
+              "이익잉여금은 기업의 영업활동 결과로 창출된 순이익 중 사외로 유출되지 않고 사내에 유보된 금액으로, 법정적립금, 임의적립금, 미처분이익잉여금으로 구성된다.",
+              "자본조정은 당해 항목의 성격상 자본에 가감되어야 하나 자본금, 자본잉여금, 이익잉여금으로 분류하기 어려운 항목들로, 자기주식, 주식할인발행차금과 같은 자본의 차감 항목으로만 구성되어 있다.",
+              "기타포괄손익누계액은 당기손익에 포함되지 않는 미실현 평가손익의 누적액으로, 재평가잉여금, 공정가치측정 금융자산(FVOCI) 평가손익 등이 이에 해당한다."
+            ],
+            answer: 3, // index of ④
+            explanation: "자본조정은 자본에서 차감되는 항목(자기주식, 주식할인발행차금 등)도 포함되지만, 임시로 가산 성격이 되는 항목(미교부주식배당금 등)도 존재합니다. 따라서 '차감 항목으로만 구성되어 있다'는 옳지 않습니다."
+          },
+          {
+            id: 25,
+            question: "고객과의 계약에서 생기는 수익(K-IFRS 제1115호)의 거래가격 배분에 관한 설명과 계산으로 옳은 것은? (주)한국은 고객에게 제품 A, 제품 B, 제품 C를 결합하여 총 ￦70,000에 판매하는 계약을 체결하였다. 각 제품의 개별 판매가격은 제품 A ￦50,000, 제품 B ￦30,000, 제품 C ￦20,000으로 확인되었다. 전체 계약의 거래가격을 각 제품의 상대적 개별 판매가격 비율에 따라 배분할 때, 제품 B의 수행의무에 배분될 거래가격은 얼마인가?",
+            options: [
+              "￦14,000",
+              "￦20,000",
+              "￦21,000",
+              "￦30,000",
+              "￦35,000"
+            ],
+            answer: 2, // index of ③
+            explanation: "1) 제품의 총합 개별판매가 = 50,000 + 30,000 + 20,000 = 100,000.<br>2) 제품 B의 상대 비율 = 30,000 / 100,000 = 30%.<br>3) 배분될 가격 = 계약금액(70,000) × 30% = ￦21,000."
+          },
+          {
+            id: 26,
+            question: "(주)대한은 20×1년 초에 고객과 총계약금액 ￦1,000,000인 상가 건설 계약을 체결하였다. 공사는 20×1년부터 20×3년까지 진행될 예정이며, 발생원가에 기초한 진행기준을 적용하여 수익을 인식한다. 다음의 연도별 원가 발생 자료를 바탕으로 산출할 때, (주)대한이 20×2년도 포괄손익계산서에 인식해야 할 '당기 계약손익'은 얼마인가?\n\n- 20×1년 당기발생원가: ￦300,000 / 20×1년 말 추가소요추정원가: ￦500,000\n- 20×2년 당기발생원가: ￦400,000 / 20×2년 말 추가소요추정원가: ￦500,000",
+            options: [
+              "계약손실 ￦200,000",
+              "계약손실 ￦275,000",
+              "계약이익 ￦75,000",
+              "계약손실 ￦75,000",
+              "계약손실 ￦375,000"
+            ],
+            answer: 1, // index of ②
+            explanation: "1) 20×1년: 총 예상원가 800,000, 진행률 = 300,000 / 800,000 = 37.5%. 20×1년 이익 = (1,000,000 - 800,000) × 37.5% = +￦75,000.<br>2) 20×2년: 누적 발생원가 = 700,000, 총 예상원가 = 700,000 + 500,000 = 1,200,000. 총계약금액 1,000,000을 200,000 초과하여 예상되므로, 누적 예상손실 200,000을 즉각 인식하여야 합니다.<br>3) 20×2년 당기 손익 = 20×2년 누적손실(-200,000) - 20×1년 인식했던 이익(+75,000) = -￦275,000 (계약손실 ￦275,000)."
+          },
+          {
+            id: 27,
+            question: "실지재고조사법을 적용하고 있는 (주)민국은 20×3년 초에 과거 장부를 검토하던 중, 20×1년과 20×2년의 기말재고자산 실사 과정에서 다음과 같은 오류가 발생했음을 발견하였다. 이러한 오류가 수정되지 않았을 경우, 이 오류들이 20×2년도 포괄손익계산서의 '당기순이익'과 20×2년 말 재무상태표의 '이익잉여금'에 미치는 영향으로 옳은 것은? (단, 법인세 효과는 무시한다.)\n\n- 20×1년 말 기말재고자산 ￦20,000 과대계상\n- 20×2년 말 기말재고자산 ￦15,000 과소계상",
+            options: [
+              "20×2년 당기순이익 ￦35,000 과소계상 / 20×2년 말 이익잉여금 ￦15,000 과소계상",
+              "20×2년 당기순이익 ￦35,000 과소계상 / 20×2년 말 이익잉여금 ￦5,000 과대계상",
+              "20×2년 당기순이익 ￦5,000 과대계상 / 20×2년 말 이익잉여금 ￦15,000 과소계상",
+              "20×2년 당기순이익 ￦5,000 과소계상 / 20×2년 말 이익잉여금 ￦15,000 과대계상",
+              "20×2년 당기순이익 ￦35,000 과대계상 / 20×2년 말 이익잉여금 ￦15,000 과대계상"
+            ],
+            answer: 0, // index of ①
+            explanation: "1) 20×1년 기말 과대(20,000) => 20×2년 매출원가 과대 => 20×2년 당기순이익 20,000 과소계상.<br>2) 20×2년 기말 과소(15,000) => 20×2년 매출원가 과대 => 20×2년 당기순이익 15,000 과소계상.<br>합산: 20×2년 당기순이익 총 ￦35,000 과소계상.<br>3) 이익잉여금: 20×1년 오류는 자동 조정(상쇄)되어 20×2년 말에는 누적 영향이 소멸됩니다. 오직 20×2년 말 기말과소 오류만 이익잉여금에 영향을 주므로 ￦15,000 과소계상됩니다."
+          },
+          {
+            id: 28,
+            question: "한국채택국제회계기준(K-IFRS)에 따른 현금흐름표의 활동별 분류에 관한 설명으로 옳지 않은 것은?",
+            options: [
+              "이자지급은 매기 일관성 있게 영업활동이나 재무활동 현금흐름 중 하나로 분류하여야 한다.",
+              "배당금수취는 기업의 선택에 따라 매기 일관성 있게 영업활동 현금흐름 또는 투자활동 현금흐름으로 분류할 수 있다.",
+              "법인세로 인한 현금흐름은 명백하게 투자활동이나 재무활동과 개별적으로 관련되지 않는 한 항상 영업활동 현금흐름으로 분류한다.",
+              "금융회사의 경우, 이자수취와 이자지급 및 배당금수취는 통상적으로 영업활동 현금흐름으로 분류한다.",
+              "일반적인 비금융기업이 단기매매목적으로 당기손익-공정가치측정 금융자산을 취득하기 위하여 현금을 지급한 경우, 이는 투자활동 현금흐름으로 분류하여야 한다."
+            ],
+            answer: 4, // index of ⑤
+            explanation: "단기매매목적으로 취득하는 금융상품은 실질적으로 주요 영업 활동과 동일하게 취급하므로 이와 관련된 현금흐름은 '영업활동 현금흐름'으로 분류되어야 합니다."
+          },
+          {
+            id: 29,
+            question: "(주)한국의 20×1년도 포괄손익계산서상 당기 매출액은 ￦500,000이다. 재무상태표의 관련 계정 잔액 변동이 다음과 같을 때, 직접법을 적용하여 산출한 20×1년 중 '고객으로부터 유입된 현금액'은 얼마인가? (단, 당기 중 매출채권의 대손 발생 및 제각은 없었다고 가정한다.)\n\n- 매출채권의 증가액: ￦40,000\n- 선수금(고객으로부터 미리 받은 대금)의 감소액: ￦15,000",
+            options: [
+              "￦445,000",
+              "￦475,000",
+              "￦515,000",
+              "￦525,000",
+              "￦555,000"
+            ],
+            answer: 0, // index of ①
+            explanation: "고객 현금 유입액 = 매출액(500,000) - 매출채권의 증가(+40,000) - 선수금의 감소(-15,000) = ￦445,000."
+          },
+          {
+            id: 30,
+            question: "(주)대한의 20×1년도 포괄손익계산서상 당기순이익은 ￦300,000이다. 다음의 관련 자료를 바탕으로 간접법을 적용하여 산출한 20×1년도의 '영업활동 현금흐름(CFO)'은 얼마인가?\n\n- 감가상각비: ￦50,000\n- 무형자산상각비: ￦10,000\n- 유형자산처분이익: ￦25,000\n- 당기손익-공정가치측정 금융자산 평가이익: ￦15,000\n- 재고자산의 감소액: ￦40,000\n- 매입채무의 감소액: ￦35,000\n- 선급비용의 증가액: ￦20,000",
+            options: [
+              "￦265,000",
+              "￦305,000",
+              "￦345,000",
+              "￦385,000",
+              "￦415,000"
+            ],
+            answer: 1, // index of ②
+            explanation: "영업활동현금흐름 = 당기순이익(300,000) + 감가상각비(50,000) + 무형상각(10,000) - 유형자산처분이익(25,000) - 평가이익(15,000) + 재고감소(40,000) - 매입채무감소(35,000) - 선급비용증가(20,000) = ￦305,000."
+          },
+          {
+            id: 31,
+            question: "(주)한국의 20×1년도 원가 흐름과 관련된 자료가 다음과 같다. 이 자료를 바탕으로 산출한 20×1년도의 '당기 직접재료 매입액'은 얼마인가?\n\n- 당기제품제조원가: ￦1,350,000\n- 기초재공품: ￦150,000\n- 기말재공품: ￦200,000\n- 기초원재료: ￦50,000\n- 기말원재료: ￦30,000\n- 당기 발생 직접노무원가: ￦400,000\n- 당기 발생 제조간접원가는 직접노무원가의 150%이다.",
+            options: [
+              "￦350,000",
+              "￦380,000",
+              "￦400,000",
+              "￦420,000",
+              "￦450,000"
+            ],
+            answer: 1, // index of ②
+            explanation: "1) 제조간접원가 = 400,000 × 150% = 600,000.<br>2) 당기총제조원가 = 당기제품제조원가(1,350,000) + 기말재공품(200,000) - 기초재공품(150,000) = 1,400,000.<br>3) 직접재료원가 사용액 = 당기총제조원가(1,400,000) - 직접노무(400,000) - 제조간접(600,000) = 400,000.<br>4) 직접재료 매입액 = 사용액(400,000) + 기말원재료(30,000) - 기초원재료(50,000) = ￦380,000."
+          },
+          {
+            id: 32,
+            question: "(주)한국은 두 개의 보조부문(S1, S2)과 두 개의 제조부문(P1, P2)을 운영하고 있다. 부문별 발생 원가와 용역 수수 비율이 다음과 같을 때, 단계배부법을 적용하여 보조부문원가를 배부할 경우 제조부문 P1에 배부될 총 보조부문원가는 얼마인가? (단, 보조부문원가는 S1 부문부터 먼저 배부한다.)\n\n- 부문발생원가: S1부문 ￦300,000 / S2부문 ￦200,000\n- S1 제공: S2(20%), P1(50%), P2(30%)\n- S2 제공: S1(10%), P1(40%), P2(60%)",
+            options: [
+              "￦210,000",
+              "￦230,000",
+              "￦254,000",
+              "￦260,000",
+              "￦284,000"
+            ],
+            answer: 2, // index of ③
+            explanation: "S1 우선 배부:<br>- S2 배부 = 300,000 × 20% = 60,000.<br>- P1 배부 = 300,000 × 50% = 150,000.<br>- P2 배부 = 300,000 × 30% = 90,000.<br>S2의 총 배부대상원가 = 200,000 + 60,000 = 260,000.<br>S2 원가 배부 (S1 단계 배부 끝났으므로 P1과 P2로만 4:6 비율 배부):<br>- P1 배부액 = 260,000 × (40/100) = 104,000.<br>제조부문 P1에 가산된 총 배부액 = S1분(150,000) + S2분(104,000) = ￦254,000."
+          },
+          {
+            id: 33,
+            question: "단일 제품을 생산하는 (주)민국은 선입선출법(FIFO)에 의한 종합원가계산을 적용하고 있다. 직접재료원가는 공정 초기에 전량 투입되며, 가공원가(전환원가)는 공정 전반에 걸쳐 균등하게 발생한다. 다음 물량 흐름 자료를 이용하여 산출한 '가공원가'의 완성품환산량은 얼마인가? (단, 공손 및 감손은 발생하지 않았다.)\n\n- 기초재공품: 4,000단위 (가공원가 완성도 60%)\n- 당기착수량: 16,000단위\n- 당기완성품: 15,000단위\n- 기말재공품: 5,000단위 (가공원가 완성도 40%)",
+            options: [
+              "13,000단위",
+              "14,600단위",
+              "15,400단위",
+              "17,000단위",
+              "18,600단위"
+            ],
+            answer: 1, // index of ②
+            explanation: "가공원가 완성품 환산량 계산 (FIFO):<br>1. 기초재공품 당기 추가 가공분: 4,000 × (100% - 60%) = 1,600단위.<br>2. 당기 착수 완수분: 15,000 - 4,000 = 11,000단위.<br>3. 기말재공품 당기 가공분: 5,000 × 40% = 2,000단위.<br>총 완성품환산량 = 1,600 + 11,000 + 2,000 = 14,600단위."
+          },
+          {
+            id: 34,
+            question: "(주)대한은 단일 제품을 생산·판매하고 있으며 법인세율은 20%이다. (주)대한이 법인세 차감 후 목표 당기순이익으로 ￦160,000을 달성하기 위해 판매하여야 할 목표 판매량은 몇 단위인가?\n\n- 단위당 판매가격: ￦2,000\n- 단위당 변동원가: ￦1,200\n- 연간 총고정원가: ￦400,000",
+            options: [
+              "600단위",
+              "650단위",
+              "700단위",
+              "750단위",
+              "800단위"
+            ],
+            answer: 3, // index of ④
+            explanation: "1) 단위당 공헌이익 = 2,000 - 1,200 = ￦800.<br>2) 세전 목표영업이익 = 세후순이익(160,000) / (1 - 0.2) = ￦200,000.<br>3) 목표 판매량 = (연간 고정원가 400,000 + 세전 목표이익 200,000) / 단위당 공헌이익(800) = 750단위."
+          },
+          {
+            id: 35,
+            question: "(주)한국은 단일 제품을 생산·판매하며 연간 최대 생산능력은 5,000단위이다. 현재 4,000단위를 정상적으로 판매하고 있으며, 정상 판매 시의 단위당 원가 자료는 다음과 같다.\n\n- 단위당 판매가격: ￦1,000\n- 단위당 변동제조원가: ￦500\n- 단위당 변동판매비: ￦100\n\n최근 한 외부 고객으로부터 단위당 ￦700에 2,000단위를 구매하겠다는 특별주문을 받았다. 이 특별주문을 수락할 경우, 기존의 단위당 변동판매비(￦100)는 발생하지 않으나 추가적인 포장 및 운송비로 단위당 ￦50이 새롭게 발생한다. 만약 (주)한국이 이 특별주문을 수락한다면, 회사의 전체 영업이익에 미치는 영향은 무엇인가?",
+            options: [
+              "￦50,000 증가",
+              "￦50,000 감소",
+              "￦100,000 증가",
+              "￦100,000 감소",
+              "￦150,000 감소"
+            ],
+            answer: 3, // index of ④
+            explanation: "1) 증분 공헌이익: 특별주문 변동원가 = 변동제조(500) + 포장배송(50) = 550. 단위당 증분공헌 = 700 - 550 = 150. 총 증분공헌 = 2,000 × 150 = +￦300,000.<br>2) 정상 기회비용: 최대 용량 5,000에서 정상 4,000 판매 중이므로 유휴능력은 1,000단위뿐입니다. 따라서 특별주문 2,000단위 수락 시 기존 정상판매 1,000단위를 포기해야 합니다.<br>3) 정상판매 단위당 공헌이익 = 1,000 - 600 = 400. 기회비용 = 1,000단위 × 400 = -￦400,000.<br>4) 순 손익 영향 = 300,000 - 400,000 = -￦100,000 (즉, 전체 영업이익 ￦100,000 감소)."
+          }
+        ];
+
+        // State variables
+        let currentQuestionIndex = 0;
+        let userSelections = Array(quizData.length).fill(null); // stores user's answer index
+        let lockedState = Array(quizData.length).fill(false); // once clicked, locks choice selection
+
+        // Sync with parent system (via postMessage)
+        function syncToParentGist() {
+            const wrongNotes = [];
+            quizData.forEach((q, idx) => {
+                const userSel = userSelections[idx];
+                if (userSel !== null && userSel !== q.answer) {
+                    wrongNotes.push({
+                        qNum: q.id,
+                        questionSnippet: q.question.substring(0, 80) + "...",
+                        selected: q.options[userSel],
+                        correct: q.options[q.answer],
+                        keyword: "회계원리 오답 복습"
+                    });
+                }
+            });
+
+            const score = userSelections.reduce((acc, sel, idx) => {
+                return acc + (sel === quizData[idx].answer ? 1 : 0);
+            }, 0);
+
+            if (window.parent) {
+                window.parent.postMessage({
+                    type: 'quiz_sync',
+                    appId: appId,
+                    score: score,
+                    total: quizData.length,
+                    wrongNotes: wrongNotes
+                }, '*');
+                console.log("Synced to parent gist with score:", score);
+            }
+        }
+
+        function manualSync() {
+            syncToParentGist();
+            const notification = document.createElement('div');
+            notification.className = "fixed bottom-5 right-5 bg-emerald-500 text-slate-950 px-4 py-2.5 rounded-lg shadow-xl text-xs font-bold transition-all z-[100] flex items-center gap-1";
+            notification.innerHTML = `<i data-lucide='check'></i> 성공적으로 부모 학습관리 도구에 연동했습니다!`;
+            document.body.appendChild(notification);
+            lucide.createIcons();
+            setTimeout(() => { notification.remove(); }, 3000);
+        }
+
+        // Initialize UI Elements
+        function startQuiz() {
+            document.getElementById('intro-card').classList.add('hidden');
+            document.getElementById('quiz-card').classList.remove('hidden');
+            document.getElementById('score-badge').classList.remove('hidden');
+            renderDotNavigator();
+            showQuestion(0);
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            userSelections = Array(quizData.length).fill(null);
+            lockedState = Array(quizData.length).fill(false);
+            
+            document.getElementById('result-card').classList.add('hidden');
+            document.getElementById('intro-card').classList.remove('hidden');
+            document.getElementById('quiz-card').classList.add('hidden');
+            document.getElementById('score-badge').classList.add('hidden');
+        }
+
+        // Render dot indicator panel
+        function renderDotNavigator() {
+            const container = document.getElementById('quest-dots');
+            container.innerHTML = '';
+            quizData.forEach((q, idx) => {
+                const dot = document.createElement('button');
+                dot.type = "button";
+                dot.id = `dot-${idx}`;
+                dot.className = "w-7 h-7 text-xs font-bold rounded-lg transition-all border flex items-center justify-center " + getDotStyle(idx);
+                dot.innerText = q.id;
+                dot.onclick = () => {
+                    showQuestion(idx);
+                };
+                container.appendChild(dot);
+            });
+        }
+
+        function getDotStyle(idx) {
+            if (idx === currentQuestionIndex) {
+                return "bg-slate-700 text-white border-emerald-400";
+            }
+            if (userSelections[idx] === null) {
+                return "bg-slate-950 text-slate-500 border-slate-800 hover:border-slate-700";
+            }
+            if (userSelections[idx] === quizData[idx].answer) {
+                return "bg-emerald-500/10 text-emerald-400 border-emerald-500/30";
+            } else {
+                return "bg-rose-500/10 text-rose-400 border-rose-500/30";
+            }
+        }
+
+        // Dynamic State UI updates
+        function updateStats() {
+            let correct = 0;
+            let wrong = 0;
+            userSelections.forEach((sel, idx) => {
+                if (sel !== null) {
+                    if (sel === quizData[idx].answer) correct++;
+                    else wrong++;
+                }
+            });
+            document.getElementById('stats-correct').innerText = correct;
+            document.getElementById('stats-wrong').innerText = wrong;
+            
+            // update progress bar width
+            const percent = ((userSelections.filter(s => s !== null).length) / quizData.length) * 100;
+            document.getElementById('progress-bar-fill').style.width = percent + '%';
+        }
+
+        // Render a single question
+        function showQuestion(index) {
+            currentQuestionIndex = index;
+            const item = quizData[index];
+            
+            // Set nav
+            document.getElementById('current-index').innerText = index + 1;
+            renderDotNavigator();
+            updateStats();
+
+            // Set Title & options
+            document.getElementById('question-title').innerHTML = `<span class="text-emerald-400">Q${item.id}.</span> ${item.question}`;
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            const isLocked = lockedState[index];
+            const currentSelection = userSelections[index];
+
+            item.options.forEach((opt, oIdx) => {
+                const btn = document.createElement('button');
+                btn.type = "button";
+                btn.className = "w-full text-left p-4 rounded-xl border transition-all text-xs md:text-sm flex items-start gap-3.5 ";
+                
+                // Set default styles
+                if (!isLocked) {
+                    btn.className += "bg-slate-950 border-slate-800 text-slate-300 hover:bg-slate-800 hover:border-slate-600 hover:text-white";
+                } else {
+                    // Locked States colors
+                    if (oIdx === item.answer) {
+                        btn.className += "bg-emerald-500/15 border-emerald-500 text-emerald-300 font-medium";
+                    } else if (oIdx === currentSelection) {
+                        btn.className += "bg-rose-500/15 border-rose-500 text-rose-300";
+                    } else {
+                        btn.className += "bg-slate-950/60 border-slate-900 text-slate-500 pointer-events-none";
+                    }
+                }
+
+                // Inner numbering logic
+                const numberTags = ["①", "②", "③", "④", "⑤"];
+                btn.innerHTML = `
+                    <span class="text-emerald-400 font-bold shrink-0">${numberTags[oIdx]}</span>
+                    <span class="flex-1">${opt}</span>
+                `;
+                
+                if (!isLocked) {
+                    btn.onclick = () => selectOption(index, oIdx);
+                }
+                optionsContainer.appendChild(btn);
+            });
+
+            // Handle bottom feedback view state
+            const feedbackBox = document.getElementById('feedback-box');
+            if (isLocked) {
+                feedbackBox.classList.remove('hidden');
+                const isCorrect = currentSelection === item.answer;
+                
+                // Colorize feedback box border
+                if (isCorrect) {
+                    feedbackBox.className = "mt-6 p-5 rounded-xl border bg-emerald-500/5 border-emerald-500/30 text-emerald-400 transition-all";
+                    document.getElementById('feedback-icon-container').className = "p-2 rounded-lg bg-emerald-500/10 text-emerald-400 shrink-0";
+                    document.getElementById('feedback-icon-container').innerHTML = `<i data-lucide="check-circle" class="w-5 h-5"></i>`;
+                    document.getElementById('feedback-status').innerText = "탁월합니다! 정답입니다.";
+                } else {
+                    feedbackBox.className = "mt-6 p-5 rounded-xl border bg-rose-500/5 border-rose-500/30 text-rose-400 transition-all";
+                    document.getElementById('feedback-icon-container').className = "p-2 rounded-lg bg-rose-500/10 text-rose-400 shrink-0";
+                    document.getElementById('feedback-icon-container').innerHTML = `<i data-lucide="x-circle" class="w-5 h-5"></i>`;
+                    document.getElementById('feedback-status').innerText = "틀렸습니다. 일타강사 마스터 해설을 전수합니다!";
+                }
+                document.getElementById('feedback-explanation').innerHTML = item.explanation;
+            } else {
+                feedbackBox.classList.add('hidden');
+            }
+
+            // Prev button disabled on first
+            document.getElementById('prev-btn').disabled = index === 0;
+
+            // Next button text logic
+            const nextBtn = document.getElementById('next-btn');
+            if (index === quizData.length - 1) {
+                nextBtn.innerHTML = `최종 결과표 보기 <i data-lucide="award" class="w-4 h-4"></i>`;
+                nextBtn.onclick = showResults;
+            } else {
+                nextBtn.innerHTML = `다음 문제 <i data-lucide="chevron-right" class="w-4 h-4"></i>`;
+                nextBtn.onclick = () => showQuestion(index + 1);
+            }
+
+            lucide.createIcons();
+        }
+
+        // Action when user clicks choice
+        function selectOption(qIdx, optIdx) {
+            userSelections[qIdx] = optIdx;
+            lockedState[qIdx] = true;
+            showQuestion(qIdx);
+            
+            // trigger auto sync background
+            syncToParentGist();
+        }
+
+        function goToPrevQuestion() {
+            if (currentQuestionIndex > 0) {
+                showQuestion(currentQuestionIndex - 1);
+            }
+        }
+
+        // Final screen rendering
+        function showResults() {
+            document.getElementById('quiz-card').classList.add('hidden');
+            document.getElementById('score-badge').classList.add('hidden');
+            document.getElementById('result-card').classList.remove('hidden');
+
+            // score computation
+            let correctCount = 0;
+            quizData.forEach((q, idx) => {
+                if (userSelections[idx] === q.answer) correctCount++;
+            });
+
+            const scorePercent = Math.round((correctCount / quizData.length) * 100);
+            document.getElementById('res-score-percent').innerText = `${scorePercent}%`;
+            document.getElementById('res-correct').innerText = `${correctCount} / ${quizData.length}`;
+            document.getElementById('res-wrong').innerText = `${quizData.length - correctCount} / ${quizData.length}`;
+
+            // Rating
+            const badgeEl = document.getElementById('res-grade-badge');
+            if (scorePercent >= 85) {
+                badgeEl.innerText = "수석합격 보증 👑";
+                badgeEl.className = "text-xs md:text-sm font-bold text-slate-950 bg-emerald-400 px-3 py-1 rounded-full inline-block mt-1";
+            } else if (scorePercent >= 60) {
+                badgeEl.innerText = "합격 안정권 👍";
+                badgeEl.className = "text-xs md:text-sm font-bold text-slate-950 bg-teal-400 px-3 py-1 rounded-full inline-block mt-1";
+            } else {
+                badgeEl.innerText = "취약점 정복필요 🔍";
+                badgeEl.className = "text-xs md:text-sm font-bold text-slate-100 bg-rose-500 px-3 py-1 rounded-full inline-block mt-1";
+            }
+
+            // Render Wrong Answers
+            const wrongContainer = document.getElementById('wrong-answers-container');
+            wrongContainer.innerHTML = '';
+
+            const wrongList = quizData.filter((q, idx) => userSelections[idx] !== q.answer);
+            const numberTags = ["①", "②", "③", "④", "⑤"];
+
+            if (wrongList.length === 0) {
+                wrongContainer.innerHTML = `
+                    <div class="p-8 text-center bg-slate-950 border border-slate-800 rounded-2xl text-emerald-400 space-y-2">
+                        <i data-lucide="sparkles" class="w-8 h-8 mx-auto"></i>
+                        <h4 class="font-bold text-base">축하합니다! 무결점 만점 패스!</h4>
+                        <p class="text-xs text-slate-400">모든 문제의 논리를 훌륭하게 완성하셨습니다.</p>
+                    </div>
+                `;
+            } else {
+                wrongList.forEach((q) => {
+                    const userSelIndex = userSelections[q.id - 1];
+                    const selectedText = userSelIndex !== null ? q.options[userSelIndex] : "미응답";
+                    const correctText = q.options[q.answer];
+
+                    const card = document.createElement('div');
+                    card.className = "bg-slate-950 border border-slate-800 rounded-xl p-5 space-y-3.5 hover:border-slate-750 transition-all";
+                    card.innerHTML = `
+                        <div class="flex items-center justify-between border-b border-slate-900 pb-2">
+                            <span class="text-xs font-bold text-rose-400">문항 ${q.id}번 오답 수정</span>
+                            <button onclick="showQuestion(${q.id - 1})" class="text-slate-400 hover:text-white text-xs flex items-center gap-1 bg-slate-900 px-2 py-1 rounded border border-slate-800 transition-all">
+                                <i data-lucide="eye" class="w-3.5 h-3.5"></i> 다시풀기
+                            </button>
+                        </div>
+                        <h4 class="text-sm font-bold text-white whitespace-pre-wrap leading-relaxed">${q.question}</h4>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+                            <div class="p-2.5 rounded bg-rose-500/10 border border-rose-500/20 text-rose-400">
+                                <strong class="block text-[10px] uppercase text-slate-500 mb-0.5">내 선택지</strong>
+                                ${userSelIndex !== null ? numberTags[userSelIndex] + " " + selectedText : "선택하지 않음"}
+                            </div>
+                            <div class="p-2.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+                                <strong class="block text-[10px] uppercase text-slate-500 mb-0.5">정답지</strong>
+                                ${numberTags[q.answer] + " " + correctText}
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-slate-900 rounded-lg text-xs leading-relaxed text-slate-400 border border-slate-850">
+                            <span class="font-semibold text-slate-200 block mb-1">핵심 논리 근거:</span>
+                            ${q.explanation}
+                        </div>
+                    `;
+                    wrongContainer.appendChild(card);
+                });
+            }
+
+            // Sync
+            syncToParentGist();
+            lucide.createIcons();
+        }
+
+        // Copy Wrong Notes helper to clipboard
+        function copyWrongNotesText() {
+            let buffer = `[주택관리사보 1차 퀴즈 집중 복습 오답노트]\n\n`;
+            let index = 1;
+            quizData.forEach((q, idx) => {
+                const userSel = userSelections[idx];
+                if (userSel !== q.answer) {
+                    const numberTags = ["①", "②", "③", "④", "⑤"];
+                    buffer += `${index}. Q${q.id}. ${q.question.replace(/\n/g, " ")}\n`;
+                    buffer += `  - 선택오답: ${userSel !== null ? numberTags[userSel] + " " + q.options[userSel] : "선택 안 함"}\n`;
+                    buffer += `  - 올바른 정답: ${numberTags[q.answer] + " " + q.options[q.answer]}\n`;
+                    buffer += `  - 해설: ${q.explanation.replace(/<br>/g, " ").replace(/<[^>]*>/g, "")}\n\n`;
+                    index++;
+                }
+            });
+
+            if (index === 1) {
+                buffer += "틀린 오답 문항이 존재하지 않습니다! 완벽합니다.";
+            }
+
+            // Standard fallback copier
+            const textArea = document.createElement("textarea");
+            textArea.value = buffer;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                const notification = document.createElement('div');
+                notification.className = "fixed bottom-5 right-5 bg-emerald-500 text-slate-950 px-4 py-2.5 rounded-lg shadow-xl text-xs font-bold transition-all z-[100] flex items-center gap-1";
+                notification.innerHTML = `<i data-lucide='clipboard-check'></i> 오답노트 클립보드 복사 성공!`;
+                document.body.appendChild(notification);
+                lucide.createIcons();
+                setTimeout(() => { notification.remove(); }, 3000);
+            } catch (err) {
+                console.error("클립보드 복사 실패", err);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // Preload layout actions
+        window.addEventListener('load', () => {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
