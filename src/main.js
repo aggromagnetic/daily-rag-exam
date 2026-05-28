@@ -86,6 +86,9 @@ function init() {
   if (btnLogoutGithub) {
     btnLogoutGithub.addEventListener('click', handleLogoutGithub);
   }
+
+  // 🪐 [iframe 전송 수신기 기동]
+  initMessageListener();
 }
 
 // 🔑 GitHub 인증 상태 검사 및 UI 갱신
@@ -810,3 +813,98 @@ async function deleteIncorrect(subject, concept) {
     showToast(`완치 실패: ${error.message}`, 'error');
   }
 }
+
+// 🪐 5. [iframe 통신 연동] 퀴즈 모의고사 OMR 오답 자동 적재 수신기
+function initMessageListener() {
+  window.addEventListener('message', async (event) => {
+    const data = event.data;
+    if (!data || data.type !== 'SYNC_QUIZ_DATA') return;
+
+    const payload = data.payload;
+    if (!payload) return;
+
+    console.log("🪐 [부모 포털 수신기] 퀴즈 자동채점 결과 연동 수신:", payload);
+    await handleQuizDataSync(payload);
+  });
+}
+
+// 🪐 오답 수첩 비공개 Gist 실시간 누진 데이터 병합 처리
+async function handleQuizDataSync(payload) {
+  const pat = state.githubPat;
+  const gistId = state.githubGistId;
+
+  if (!pat || !gistId) {
+    showToast("🔒 수험생 인증(GitHub PAT)이 되어있지 않아 오답노트 자동 적재가 스킵되었습니다. 대시보드에서 인증해 주세요!", "warning");
+    return;
+  }
+
+  // 응시 중인 파일 이름을 기반으로 과목 분류 (accounting, facility, civil)
+  let subjectKey = 'civil'; 
+  const filename = state.currentTestFilename || '';
+  if (filename.includes('accounting') || filename.includes('회계')) {
+    subjectKey = 'accounting';
+  } else if (filename.includes('facility') || filename.includes('시설')) {
+    subjectKey = 'facility';
+  } else if (filename.includes('civil') || filename.includes('민법')) {
+    subjectKey = 'civil';
+  }
+
+  const wrongAnswers = payload.wrongAnswers || [];
+  if (wrongAnswers.length === 0) {
+    showToast("🏆 축하합니다! 전 문항 100% 정답으로 오답 수첩 기록을 스킵합니다. 합격 확신!", "success");
+    return;
+  }
+
+  try {
+    // Gist 기존 오답노트 로딩
+    const incorrectData = await fetchGistIncorrect(pat, gistId);
+    if (!incorrectData[subjectKey]) {
+      incorrectData[subjectKey] = [];
+    }
+
+    const today = new Date().toISOString().split('T')[0];
+    let addedCount = 0;
+    let upgradedCount = 0;
+
+    wrongAnswers.forEach(wrong => {
+      // 퀴즈 쟁점 키워드 파싱 (없을 시 문제 지문 앞단 압축)
+      const rawConcept = wrong.keyword || wrong.concept || `[지문] ${wrong.question.substring(0, 40)}`;
+      const concept = `[자동오답] ${rawConcept.trim()}`;
+
+      // 중복 체크 및 누진 가중치 누적
+      const existing = incorrectData[subjectKey].find(item => item.concept.trim() === concept);
+      if (existing) {
+        existing.count = (existing.count || 1) + 1;
+        existing.date = today;
+        upgradedCount++;
+      } else {
+        incorrectData[subjectKey].push({
+          concept: concept,
+          date: today,
+          count: 1
+        });
+        addedCount++;
+      }
+    });
+
+    // Gist에 업로드하여 최종 클라우드 저장
+    await updateGistIncorrect(pat, gistId, incorrectData);
+
+    const message = upgradedCount > 0
+      ? `🎯 오답 개념 ${wrongAnswers.length}문항 Gist 동기화 완료! (신규 ${addedCount}개, 가중치 누진 ${upgradedCount}개)`
+      : `🎯 신규 오답 개념 ${addedCount}개 Gist 오답 수첩에 실시간 자동 저장 완료!`;
+
+    showToast(message, "success");
+
+    // 대시보드 및 오답노트 화면 실시간 새로고침
+    if (state.activeTab === 'incorrect') {
+      loadIncorrectList();
+    } else if (state.activeTab === 'dashboard') {
+      loadDashboardData();
+    }
+  } catch (error) {
+    console.error("❌ 오답 실시간 동기화 에러:", error);
+    showToast(`❌ 오답 동기화 실패: ${error.message}`, "error");
+  }
+}
+
