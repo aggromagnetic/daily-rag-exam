@@ -254,54 +254,54 @@ const SUBJECT_PARTITIONS = {
     {
       step: 1,
       title: "건축구조 및 시공 1 (토공사, 기초구조, 조적구조)",
-      count: 5
+      count: 6
     },
     {
       step: 2,
       title: "건축구조 및 시공 2 (철근콘크리트구조, 철골구조, 지붕/방수/수장 등)",
-      count: 5
+      count: 6
     },
     {
       step: 3,
       title: "건축설비 1 (급수설비, 급탕설비, 배수 및 통기설비)",
-      count: 5
+      count: 6
     },
     {
       step: 4,
       title: "건축설비 2 (소방설비, 가스설비, 난방 및 환기설비)",
-      count: 5
+      count: 6
     },
     {
       step: 5,
       title: "건축설비 3 (전기설비, 홈네트워크설비, 승강기설비 등)",
-      count: 5
+      count: 6
     }
   ],
   civil: [
     {
       step: 1,
       title: "민법총칙 1 (권리변동의 기본원칙, 권리의 주체/객체)",
-      count: 5
+      count: 6
     },
     {
       step: 2,
       title: "민법총칙 2 (법률행위 - 의사표시, 대리, 무효와 취소, 조건과 기한, 소멸시효)",
-      count: 5
+      count: 6
     },
     {
       step: 3,
       title: "물권법 1 (물권법 총론, 점유권, 소유권)",
-      count: 5
+      count: 6
     },
     {
       step: 4,
       title: "물권법 2 (용익물권, 담보물권 - 유치권/저당권 등)",
-      count: 5
+      count: 6
     },
     {
       step: 5,
       title: "채권/계약법 (채권법 총론, 계약총론, 계약각론 등)",
-      count: 5
+      count: 6
     }
   ]
 };
@@ -698,14 +698,14 @@ async function main() {
     if (!targetSubject || targetSubject === 'facility') {
       try {
         const facNotebookId = notebooks.facility ? notebooks.facility.id : -1;
-        // 4-2. 시설개론 (25문제)
+        // 4-2. 시설개론 (30문제)
         await runQuizGeneration(
           client, 
           facNotebookId, 
           "facility", 
           "시설개론", 
           "공동주택시설개론 기출 분석 및 출제 비중 가이드", 
-          25
+          30
         );
       } catch (err) {
         console.error("❌ [시설개론] 생성 프로세스 최종 실패:", err.message);
@@ -719,14 +719,14 @@ async function main() {
     if (!targetSubject || targetSubject === 'civil') {
       try {
         const civilNotebookId = notebooks.civil ? notebooks.civil.id : -1;
-        // 4-3. 민법 (25문제)
+        // 4-3. 민법 (30문제)
         await runQuizGeneration(
           client, 
           civilNotebookId, 
           "civil", 
           "민법", 
           "주택관리사 민법 시험 출제 경향 및 핵심 분석", 
-          25
+          30
         );
       } catch (err) {
         console.error("❌ [민법] 생성 프로세스 최종 실패:", err.message);
