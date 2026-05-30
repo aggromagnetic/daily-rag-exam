@@ -11,6 +11,91 @@ const HISTORY_PATH = path.resolve("data", "history.json");
 const INCORRECT_PATH = path.resolve("data", "incorrect_answers.json");
 const DAILY_TESTS_DIR = path.resolve("public", "daily_tests");
 
+// 🧼 AI 시스템 사족 및 불필요한 태그/잡설을 완전히 세척하는 강력한 1차 세척기
+function cleanRawMarkdown(text) {
+  if (!text) return "";
+  let cleaned = text.trim();
+  
+  // 1. [AI-GENERATED ...] 또는 [AI-GENERATED via Gemini ...] 패턴 통째로 정규식 제거
+  cleaned = cleaned.replace(/\[AI-GENERATED[^\]]*\]/gi, '');
+  
+  // 2. "[시험 문제지]" 또는 "### [시험 문제지]" 등 불필요한 헤더의 중복 잔재 클리어
+  cleaned = cleaned.replace(/\[시험 문제지\]/g, '');
+  
+  // 3. 지문에 더럽게 얽혀 들어간 Q1., Q2., Q12. 등의 파싱 노이즈 정규식 제거
+  cleaned = cleaned.replace(/\s*Q\d+\.?\s*/g, ' ');
+  
+  return cleaned.trim();
+}
+
+/**
+ * 🛠️ [지능형 자가치유 인덱서]
+ * 문제와 보기가 다닥다닥 붙어있고 번호가 파괴된 마크다운을 분석하여,
+ * 강제로 정확한 순서대로 문제 번호(1. ~ N.)를 단정하게 달아주고 보기를 정렬해 줍니다.
+ */
+function autoHealQuizIndex(questionsText) {
+  if (!questionsText) return "";
+  
+  const lines = questionsText.split('\n');
+  const questions = [];
+  let currentQ = null;
+  
+  for (let line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+    
+    // 이 라인이 보기 기호로 시작하는지 체크 (①, ②, ③, ④, ⑤)
+    const isOption = /^[①-⑤]/.test(trimmed);
+    
+    if (isOption) {
+      if (currentQ) {
+        currentQ.options.push(trimmed);
+      }
+    } else {
+      // 새로운 문제 질문으로 판별하는 조건
+      const isNewQuestionTrigger = trimmed.endsWith('?') || trimmed.endsWith('것은') || trimmed.endsWith('은?') || trimmed.endsWith('것은?') || trimmed.endsWith('따름)') || trimmed.endsWith('옳은가?') || trimmed.endsWith('하는가?') || (trimmed.length > 20 && !/^[ㄱ-ㅎ㉠-㉤\-]/.test(trimmed) && currentQ === null) || (currentQ && currentQ.options.length >= 5);
+      
+      if (isNewQuestionTrigger || !currentQ) {
+        if (currentQ) {
+          questions.push(currentQ);
+        }
+        
+        // 기존의 앞자리 숫자 기호 제거 (예: "1. ", "Q3.", "질문 5." 등 다 밀어버림)
+        let cleanedTitle = trimmed.replace(/^(\d+[\.\s번]|Q\d+[\.\s]?|문\s*\d+[\.\s]?)\s*/, '');
+        currentQ = {
+          title: cleanedTitle,
+          options: []
+        };
+      } else {
+        // 기존 질문의 조건 박스(ㄱ,ㄴ,ㄷ 등)이거나 연장 설명 단락이므로 질문 본문에 덧붙임
+        if (currentQ) {
+          currentQ.title += '\n' + trimmed;
+        }
+      }
+    }
+  }
+  
+  if (currentQ) {
+    questions.push(currentQ);
+  }
+  
+  // 🧩 단정하고 아름다운 복원 조립
+  const healedLines = [];
+  questions.forEach((q, idx) => {
+    // 문제 번호를 순차적으로 칼같이 부착
+    healedLines.push(`${idx + 1}. ${q.title}`);
+    
+    // 보기들을 1줄에 1개씩 단정하게 복원
+    q.options.forEach(opt => {
+      healedLines.push(opt);
+    });
+    
+    healedLines.push(""); // 문제 간 공백 단락
+  });
+  
+  return healedLines.join('\n').trim();
+}
+
 // 누진 복리 가중치 연산 헬퍼 (10% -> 12% -> 15.6% -> 21.84% ...)
 function calculateWeight(count) {
   if (!count || count <= 1) return 10;
@@ -583,11 +668,20 @@ ${isFirstStep ? `
   console.log(`\n🧩 [${subjectName}] 지능형 청크 조립 및 자가 치유 파서 기동...`);
   console.log(`🧩 [조립 파서] 총 ${questionsChunks.length}개의 마크다운 청크를 통합 조립하는 중...`);
   
-  const mergedQuestions = questionsChunks.join("\n\n").trim();
-  const mergedExplanations = explanationsChunks.join("\n\n").trim();
+  let mergedQuestions = questionsChunks.join("\n\n").trim();
+  
+  // 🛠️ 1차 세척 필터 기동 (AI 워닝 및 노이즈 제거)
+  mergedQuestions = cleanRawMarkdown(mergedQuestions);
+  
+  // 🛠️ 2차 자가치유 인덱서 기동 (번호 및 보기 줄바꿈 복원)
+  mergedQuestions = autoHealQuizIndex(mergedQuestions);
+  
+  // 🛠️ 해설 영역도 깨끗하게 AI 세척 처리
+  let mergedExplanations = explanationsChunks.join("\n\n").trim();
+  mergedExplanations = cleanRawMarkdown(mergedExplanations);
 
   let quizMarkdown = `## [시험 문제지]
-
+  
 ${mergedQuestions}
 
 ## [정답 및 상세 해설]
