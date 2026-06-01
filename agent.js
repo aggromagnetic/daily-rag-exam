@@ -529,8 +529,64 @@ async function runQuizGeneration(client, notebookId, subjectKey, subjectName, do
     const isFirstStep = (i === 0);
     const sessionStatus = sessionId ? "유지 중" : "최초 시작";
 
+    // 💡 [개선: 단원 맞춤형 핀포인트 기출 이력 필터링 (Curated Topic History)]
+    // 단원 제목에서 핵심 키워드 추출 (2글자 이상, 공통 메타어 제외)
+    const keywords = part.title
+      .split(/[,\s\(\)\/]+/)
+      .filter(w => w.length >= 2 && !['상편', '하편', '부문', '이론', '및', '등', '구조', '설비', '시공', '회계', '개론', '민법', '총칙', '물권법', '채권'].includes(w));
+    
+    const matchedHistoryItems = [];
+    for (const histText of subjectHistory) {
+      const histLines = histText.split('\n');
+      for (const line of histLines) {
+        const trimmedLine = line.trim();
+        if (!trimmedLine || !trimmedLine.includes('Q')) continue;
+        
+        // 키워드가 1개 이상 겹치면 기출 선별 수집
+        const hasKeyword = keywords.some(kw => trimmedLine.includes(kw));
+        if (hasKeyword) {
+          matchedHistoryItems.push(trimmedLine);
+        }
+      }
+    }
+    
+    // 최근 12개 문항 요약으로 슬라이딩 윈도우 구성 (글자수 제한 600자 마킹)
+    const uniqueMatched = Array.from(new Set(matchedHistoryItems)).reverse().slice(0, 12);
+    let partHistorySnippet = uniqueMatched.length > 0
+      ? uniqueMatched.join("\n")
+      : "없음 (해당 단원 최초 출제 혹은 관련 기출 요약 없음)";
+    if (partHistorySnippet.length > 600) {
+      partHistorySnippet = partHistorySnippet.substring(0, 600) + "... [일부 기출 생략]";
+    }
+
+    // 💡 [개선: 당일 실시간 출제 완료된 문제 누적 메모리 (Intra-day Cumulative Memory)]
+    const todayPrevQuestions = [];
+    questionsChunks.forEach((chunk, cIdx) => {
+      const chunkLines = chunk.split('\n');
+      for (const line of chunkLines) {
+        const trimmed = line.trim();
+        // "1. 흙의 성질..." 이나 "25. 채권의..." 같은 문제 질문 라인 정밀 추출
+        const match = trimmed.match(/^\s*(\d+)[\.번]\s*(.+)$/);
+        if (match) {
+          let qText = match[2].trim();
+          const optionIndex = qText.search(/[①-⑤]/);
+          if (optionIndex !== -1) {
+            qText = qText.substring(0, optionIndex).trim();
+          }
+          todayPrevQuestions.push(`[오늘의 Step ${cIdx + 1}] Q${match[1]}: ${qText.substring(0, 70)}`);
+        }
+      }
+    });
+
+    const todayPrevSnippet = todayPrevQuestions.length > 0
+      ? todayPrevQuestions.join("\n")
+      : "없음 (오늘 최초 단계 출제)";
+
     console.log(`\n⚡ [${subjectName}] [Step ${i + 1}/${partitions.length}] RAG 질의 수행 중... (단원: ${part.title}, 출제수: ${part.count}문제)`);
     console.log(`ℹ️ [Step ${i + 1}] RAG 질의 전송 중... (세션 ID 보존 상태: ${sessionStatus})`);
+    
+    // 💡 디버깅용 CLI 콘솔 출력
+    console.log(`🎯 [Step ${i + 1} 메모리] 과거 기출 필터링 ${uniqueMatched.length}개 확보, 당일 출제이력 ${todayPrevQuestions.length}개 기억 완료.`);
 
     const prompt = `
 당신은 대한민국 주택관리사보 자격시험의 최고 권위 출제위원입니다. 
@@ -552,8 +608,11 @@ ${isFirstStep ? `
    다음 리스트에 등장하는 질문, 보기 구조, 계산 조건 또는 정답 구도와 **완전히 동일하거나 극도로 유사한(숫자만 살짝 바꾼 수준 등) 문제는 절대로, 단 한 문제도 중복 출제해서는 안 됩니다.**
    반드시 새로운 유형, 새로운 관점, 다른 계산 요소를 적용하여 '완전히 새로운 참신한 변형 문제'를 설계해 주십시오.
    ---
-   [이미 출제되었던 리스트 (중복 배제 필수)]
-   ${historySnippet}
+   [과거에 출제되었던 해당 단원 기출 목록 (중복 배제 필수)]
+   ${partHistorySnippet}
+   
+   [오늘 앞 단계에서 방금 출제된 모의고사 목록 (중복 배제 필수)]
+   ${todayPrevSnippet}
    ---
 5. **문제집 서식 및 규칙 (매우 중요)**:
    - 인사말, 출제 경향 분석, 수험생을 격려하는 글 등 문제와 해설 외의 사족(예: "안녕하십니까...", "Q1~Q2를 반영하여...")은 **절대로** 작성하지 마십시오.
