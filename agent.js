@@ -178,6 +178,43 @@ function extractQuestionSummaries(markdown) {
 }
 
 
+// 🎲 결정론적 시드 기반 의사난수 생성기 (xorshift 기법으로 세션/날짜 불변 난수 보장)
+function createSeededRandom(seedStr) {
+  let h = 0;
+  for (let i = 0; i < seedStr.length; i++) {
+    h = (Math.imul(31, h) + seedStr.charCodeAt(i)) | 0;
+  }
+  return function() {
+    h = Math.sin(h++) * 10000;
+    return h - Math.floor(h);
+  };
+}
+
+// 🎯 출제비중 가중치 확률 추첨에 따라 오늘 출제할 세부단원 및 문항수를 수학적으로 분배
+function allocateQuestionsSeeded(subparts, totalCount, seedStr) {
+  const rng = createSeededRandom(seedStr);
+  const list = subparts.map(sp => ({
+    name: sp.name,
+    weight: sp.weight,
+    count: 0
+  }));
+  
+  for (let q = 0; q < totalCount; q++) {
+    const totalWeight = list.reduce((sum, item) => sum + item.weight, 0);
+    let r = rng() * totalWeight;
+    let accumulated = 0;
+    for (let i = 0; i < list.length; i++) {
+      accumulated += list[i].weight;
+      if (r <= accumulated) {
+        list[i].count++;
+        break;
+      }
+    }
+  }
+  
+  return list.filter(item => item.count > 0);
+}
+
 // 데이터 로드 유틸리티
 function loadJson(filePath, defaultValue) {
   if (fs.existsSync(filePath)) {
@@ -358,55 +395,121 @@ const SUBJECT_PARTITIONS = {
   facility: [
     {
       step: 1,
-      title: "건축구조 및 시공 1 (토공사, 기초구조, 조적구조)",
-      count: 6
+      title: "건축구조 1 (건축구조 총론, 토공사 및 기초구조, 조적구조, 적산 및 견적)",
+      count: 6,
+      subparts: [
+        { name: "건축구조 총론 (출제비중 4.5%)", weight: 4.5 },
+        { name: "토공사 및 기초구조 (출제비중 3.5%)", weight: 3.5 },
+        { name: "조적구조 (출제비중 3.5%)", weight: 3.5 },
+        { name: "적산 및 견적 (출제비중 5.0%)", weight: 5.0 }
+      ]
     },
     {
       step: 2,
-      title: "건축구조 및 시공 2 (철근콘크리트구조, 철골구조, 지붕/방수/수장 등)",
-      count: 6
+      title: "건축구조 2 (철근콘크리트구조, 강구조)",
+      count: 6,
+      subparts: [
+        { name: "철근콘크리트구조 (출제비중 8.0%)", weight: 8.0 },
+        { name: "강구조/철골구조 (출제비중 6.0%)", weight: 6.0 }
+      ]
     },
     {
       step: 3,
-      title: "건축설비 1 (급수설비, 급탕설비, 배수 및 통기설비)",
-      count: 6
+      title: "건축구조 3 (방수/방습, 지붕/홈통, 창호/유리, 미장/타일, 도장/수장)",
+      count: 6,
+      subparts: [
+        { name: "방수 및 방습공사 (출제비중 5.0%)", weight: 5.0 },
+        { name: "지붕 및 홈통공사 (출제비중 2.0%)", weight: 2.0 },
+        { name: "창호 및 유리공사 (출제비중 5.5%)", weight: 5.5 },
+        { name: "미장 및 타일공사 (출제비중 4.5%)", weight: 4.5 },
+        { name: "도장 및 수장공사 (출제비중 2.5%)", weight: 2.5 }
+      ]
     },
     {
       step: 4,
-      title: "건축설비 2 (소방설비, 가스설비, 난방 및 환기설비)",
-      count: 6
+      title: "건축설비 1 (건축설비총론, 급수설비, 오수정화설비, 가스설비, 소방설비)",
+      count: 6,
+      subparts: [
+        { name: "건축설비총론 (출제비중 7.0%)", weight: 7.0 },
+        { name: "급수설비 (출제비중 7.0%)", weight: 7.0 },
+        { name: "오수정화설비 (출제비중 2.0%)", weight: 2.0 },
+        { name: "가스설비 (출제비중 2.0%)", weight: 2.0 },
+        { name: "소방설비 (출제비중 5.5%)", weight: 5.5 }
+      ]
     },
     {
       step: 5,
-      title: "건축설비 3 (전기설비, 홈네트워크설비, 승강기설비 등)",
-      count: 6
+      title: "건축설비 2 (급탕, 배수통기/위생기구, 난방/냉동, 공기조화/환기, 전기/수송, 홈네트워크/에너지)",
+      count: 6,
+      subparts: [
+        { name: "급탕설비 (출제비중 4.5%)", weight: 4.5 },
+        { name: "배수 통기 및 위생기구설비 (출제비중 4.5%)", weight: 4.5 },
+        { name: "난방 및 냉동설비 (출제비중 5.0%)", weight: 5.0 },
+        { name: "공기조화 및 환기설비 (출제비중 1.5%)", weight: 1.5 },
+        { name: "전기 및 수송설비 (출제비중 7.0%)", weight: 7.0 },
+        { name: "홈네트워크 및 에너지절약설계 (출제비중 4.5%)", weight: 4.5 }
+      ]
     }
   ],
   civil: [
     {
       step: 1,
-      title: "민법총칙 1 (권리변동의 기본원칙, 권리의 주체/객체)",
-      count: 6
+      title: "민법총칙 상편 (민법서론, 권리와 의무, 자연인, 법인)",
+      count: 6,
+      subparts: [
+        { name: "민법서론 (출제비중 2.5%)", weight: 2.5 },
+        { name: "권리와 의무 (출제비중 4.5%)", weight: 4.5 },
+        { name: "자연인 (출제비중 8.0%)", weight: 8.0 },
+        { name: "법인 (출제비중 9.5%)", weight: 9.5 }
+      ]
     },
     {
       step: 2,
-      title: "민법총칙 2 (법률행위 - 의사표시, 대리, 무효와 취소, 조건과 기한, 소멸시효)",
-      count: 6
+      title: "민법총칙 중편 (권리의 객체, 권리변동 서설, 법률행위 일반, 의사표시)",
+      count: 6,
+      subparts: [
+        { name: "권리의 객체 (출제비중 4.0%)", weight: 4.0 },
+        { name: "권리변동 서설 (출제비중 1.5%)", weight: 1.5 },
+        { name: "법률행위 일반 (출제비중 6.0%)", weight: 6.0 },
+        { name: "의사표시 (출제비중 7.5%)", weight: 7.5 }
+      ]
     },
     {
       step: 3,
-      title: "물권법 1 (물권법 총론, 점유권, 소유권)",
-      count: 6
+      title: "민법총칙 하편 (법률행위의 대리, 무효와 취소, 조건과 기한, 기간과 소멸시효)",
+      count: 6,
+      subparts: [
+        { name: "법률행위의 대리 (출제비중 5.5%)", weight: 5.5 },
+        { name: "법률행위의 무효와 취소 (출제비중 3.0%)", weight: 3.0 },
+        { name: "조건과 기한 (출제비중 2.5%)", weight: 2.5 },
+        { name: "기간과 소멸시효 (출제비중 5.0%)", weight: 5.0 }
+      ]
     },
     {
       step: 4,
-      title: "물권법 2 (용익물권, 담보물권 - 유치권/저당권 등)",
-      count: 6
+      title: "물권법 (물권법 총론, 물권의 변동, 점유권, 소유권, 용익물권, 담보물권)",
+      count: 6,
+      subparts: [
+        { name: "물권법 총론 (출제비중 1.0%)", weight: 1.0 },
+        { name: "물권의 변동 (출제비중 4.0%)", weight: 4.0 },
+        { name: "점유권 (출제비중 1.5%)", weight: 1.5 },
+        { name: "소유권 (출제비중 5.5%)", weight: 5.5 },
+        { name: "용익물권 (출제비중 3.0%)", weight: 3.0 },
+        { name: "담보물권 (출제비중 6.0%)", weight: 6.0 }
+      ]
     },
     {
       step: 5,
-      title: "채권/계약법 (채권법 총론, 계약총론, 계약각론 등)",
-      count: 6
+      title: "채권법 (채권법 총론, 계약법 총론, 계약법 각론 - 매매/임대차, 도급과 위임, 부당이득과 불법행위)",
+      count: 6,
+      subparts: [
+        { name: "채권법 총론 (출제비중 4.5%)", weight: 4.5 },
+        { name: "계약법 총론 (출제비중 3.5%)", weight: 3.5 },
+        { name: "계약법 각론 - 매매 (출제비중 3.5%)", weight: 3.5 },
+        { name: "임대차 (출제비중 1.0%)", weight: 1.0 },
+        { name: "도급과 위임 (출제비중 2.5%)", weight: 2.5 },
+        { name: "부당이득과 불법행위 (출제비중 4.5%)", weight: 4.5 }
+      ]
     }
   ]
 };
@@ -588,13 +691,24 @@ async function runQuizGeneration(client, notebookId, subjectKey, subjectName, do
     // 💡 디버깅용 CLI 콘솔 출력
     console.log(`🎯 [Step ${i + 1} 메모리] 과거 기출 필터링 ${uniqueMatched.length}개 확보, 당일 출제이력 ${todayPrevQuestions.length}개 기억 완료.`);
 
+    let subpartInstructions = "";
+    if (part.subparts && part.subparts.length > 0) {
+      const todayStr = getTodayString();
+      const seedStr = `${todayStr}_${subjectKey}_step_${i + 1}`;
+      const allocated = allocateQuestionsSeeded(part.subparts, part.count, seedStr);
+      
+      subpartInstructions = `\n   * [세부 문항 배분 요구사항 (매일 가중치/날짜별 자동 로테이션 적용)]:\n` +
+        allocated.map(sp => `     - ${sp.name}: 정확히 ${sp.count}문항 출제`).join("\n") +
+        `\n     (주의: 위 문항 수 배분을 엄격히 준수하여 총 ${part.count}문항을 맞춰 주십시오!)`;
+    }
+
     const prompt = `
 당신은 대한민국 주택관리사보 자격시험의 최고 권위 출제위원입니다. 
 제공된 노트북 소스 중 **"${docGuideName}"** 문서를 반드시 집중 참조하여, 수험생을 위한 고품질 기출 변형 문제지 중 **[제 ${i + 1}단계 분할 출제]** 파트를 작성해 주십시오.
 
 ### [출제 및 구성 조건]
 1. **과목**: ${subjectName} (총 ${count}문항 중 이번 단계에서는 **${part.count}문항** 출제)
-2. **범위/단원**: ${part.title}
+2. **범위/단원**: ${part.title}${subpartInstructions}
 3. **문제 번호 시작**: 이 단계에서 출제할 문제 번호는 **${startQuestionNum}번부터 ${endQuestionNum}번까지**입니다. (각 문항의 번호는 반드시 '${startQuestionNum}. ', '${startQuestionNum + 1}. ' 와 같이 시작하여야 하며, 문제 번호를 생략하거나 다르게 매겨서는 절대로 안 됩니다!)
 ${isFirstStep ? `
 4. **최우선 반영 사항 (오답 및 누진 가중치)**:
