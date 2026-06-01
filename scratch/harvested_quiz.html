@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주택관리사보 1차 시험 - 일타강사 Gem의 합격 확신 퀴즈</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            900: '#064e3b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+        }
+        /* Custom Scrollbar for premium dark feel */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981;
+        }
+    </style>
+</head>
+<body class="text-slate-100 min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-slate-900">
+
+    <!-- 상단 헤더 영역 -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-brand-500 text-slate-950 font-black px-2.5 py-1 rounded-lg text-sm tracking-wider">
+                    일타강사 Gem
+                </div>
+                <h1 class="text-lg font-bold tracking-tight text-slate-200 hidden sm:block">
+                    주택관리사보 1차 합격 패스포트
+                </h1>
+            </div>
+            <div class="flex items-center space-x-2 text-xs sm:text-sm text-slate-400">
+                <span class="font-medium text-brand-400">학습 과목:</span>
+                <span class="bg-slate-800 px-2 py-1 rounded text-slate-300 font-semibold">민법 (핵심 5제)</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 컨텐츠 영역 -->
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-6 sm:py-10 flex flex-col justify-center">
+        
+        <!-- 인트로 화면 -->
+        <div id="intro-card" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-10 shadow-2xl relative overflow-hidden transition-all duration-300">
+            <div class="absolute -top-12 -right-12 w-48 h-48 bg-brand-500/10 rounded-full blur-3xl"></div>
+            
+            <div class="mb-6">
+                <span class="text-xs font-bold text-brand-400 uppercase tracking-widest bg-brand-500/10 px-3 py-1.5 rounded-full border border-brand-500/20">
+                    PASSION & PERFECT EXPLANATION
+                </span>
+            </div>
+            
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white leading-snug mb-4">
+                "이 5문제를 완전히 삼키면,<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-emerald-300">민법의 고득점 기둥</span>이 바로 세워집니다!"
+            </h2>
+            
+            <p class="text-slate-400 text-sm sm:text-base leading-relaxed mb-8">
+                안녕하세요, 주택관리사보 합격의 청사진을 그리는 일타강사 <span class="text-brand-400 font-bold">Gem</span>입니다. <br>
+                실제 출제위원의 매서운 시각으로 문제의 오타와 불명확한 오답 지문들을 완벽히 정정하여 <strong>초고품질 5문항 퀴즈</strong>를 완성했습니다. 
+                중도 이탈 없이 5문제를 푸는 것만으로도 민법 총칙과 물권법의 중추적 뼈대를 완벽히 체득하게 해드리겠습니다. 지금 당장 시작합시다!
+            </p>
+
+            <div class="bg-slate-800/50 rounded-xl p-5 border border-slate-700/50 mb-8">
+                <h3 class="font-bold text-slate-200 text-sm mb-3 flex items-center">
+                    <svg class="w-4 h-4 text-brand-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    시스템 학습 모듈 안내
+                </h3>
+                <ul class="space-y-2 text-xs sm:text-sm text-slate-400">
+                    <li>🎯 <strong class="text-slate-300">몰입식 1문항 제어:</strong> 한 번에 한 문제씩 풀며 실전 압박감을 훈련합니다.</li>
+                    <li>💡 <strong class="text-slate-300">즉시 피드백 아코디언:</strong> 답을 제출하는 순간 Gem의 지문별 정밀 과외가 열립니다.</li>
+                    <li>📋 <strong class="text-slate-300">오답 동기화 기능:</strong> 최종 취약 키워드 자동 분석 및 부모 창 자동 동기화 데이터 송신.</li>
+                </ul>
+            </div>
+
+            <button onclick="startQuiz()" class="w-full bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 hover:to-emerald-700 text-slate-950 font-black text-base sm:text-lg py-4 rounded-xl shadow-lg shadow-brand-500/20 active:scale-[0.98] transition-all duration-150 flex justify-center items-center space-x-2">
+                <span>합격 모의고사 시작하기</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </button>
+        </div>
+
+        <!-- 퀴즈 본문 화면 (기본 숨김) -->
+        <div id="quiz-card" class="hidden bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-8 shadow-2xl relative transition-all duration-300">
+            <!-- 프로그레스바 및 상단 정보 -->
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-xs font-bold text-slate-400" id="progress-text">문제 1 / 5</span>
+                <span class="text-xs font-bold text-brand-400 bg-brand-500/10 px-2 py-1 rounded" id="score-text">정답: 0개</span>
+            </div>
+            
+            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden mb-6">
+                <div id="progress-bar" class="bg-brand-500 h-full w-[20%] transition-all duration-300 rounded-full"></div>
+            </div>
+
+            <!-- 문제 지문 -->
+            <div class="mb-6">
+                <div id="question-text" class="text-base sm:text-lg font-bold text-slate-100 leading-relaxed whitespace-pre-line">
+                    <!-- 문제 데이터 동적 삽입 -->
+                </div>
+            </div>
+
+            <!-- 보기 리스트 -->
+            <div id="options-container" class="space-y-3 mb-6">
+                <!-- 보기 항목 동적 삽입 -->
+            </div>
+
+            <!-- 하단 액션 버튼 영역 -->
+            <div class="flex justify-between items-center gap-4">
+                <button id="submit-btn" onclick="submitAnswer()" disabled class="w-full bg-brand-500 disabled:bg-slate-800 disabled:text-slate-500 text-slate-950 font-black py-3.5 px-6 rounded-xl transition-all duration-200 shadow-lg enabled:hover:bg-brand-600 enabled:active:scale-[0.98] cursor-not-allowed">
+                    답안 제출 및 해설 확인
+                </button>
+                <button id="next-btn" onclick="nextQuestion()" class="hidden w-full bg-slate-800 hover:bg-slate-700 text-brand-400 font-bold py-3.5 px-6 rounded-xl transition-all duration-200 border border-brand-500/20 flex justify-center items-center space-x-2">
+                    <span>다음 문제로 이동</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+            </div>
+
+            <!-- 해설 카드 (답안 제출 전 숨김) -->
+            <div id="explanation-card" class="hidden mt-6 border-t border-slate-800 pt-6 transition-all duration-300">
+                <div id="result-badge" class="mb-4 inline-flex items-center px-4 py-2 rounded-xl text-sm font-black">
+                    <!-- 맞음 / 틀림 배지 -->
+                </div>
+
+                <!-- 아코디언 버튼 -->
+                <button onclick="toggleExplanation()" class="w-full flex justify-between items-center p-3 rounded-xl bg-slate-800 hover:bg-slate-700/80 transition-all text-sm font-bold text-slate-200 border border-slate-700/40">
+                    <span class="flex items-center text-brand-400">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        일타강사 Gem의 족집게 지문 해설
+                    </span>
+                    <svg id="arrow-icon" class="w-4 h-4 text-slate-400 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+
+                <!-- 아코디언 실 해설 본문 -->
+                <div id="explanation-content" class="mt-3 p-4 bg-slate-950/60 rounded-xl text-xs sm:text-sm leading-relaxed text-slate-300 border border-slate-800 space-y-3">
+                    <!-- 개별 해설 삽입 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 최종 성적 리포트 & 오답 노트 (기본 숨김) -->
+        <div id="result-card" class="hidden bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-10 shadow-2xl relative transition-all duration-300">
+            <div class="text-center mb-8">
+                <span class="text-3xl sm:text-4xl" id="result-emoji">🏆</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-3">최종 성적 리포트</h2>
+                <p class="text-slate-400 text-sm mt-1" id="result-comment">수험생님의 완성을 위해 고생 많으셨습니다.</p>
+            </div>
+
+            <!-- 스코어 박스 -->
+            <div class="grid grid-cols-2 gap-4 mb-8">
+                <div class="bg-slate-800/60 rounded-xl p-4 text-center border border-slate-700/50">
+                    <span class="text-xs text-slate-400 block font-semibold mb-1">맞춘 문제 / 총 문제</span>
+                    <span class="text-2xl sm:text-3xl font-black text-brand-400" id="final-score-text">0 / 5</span>
+                </div>
+                <div class="bg-slate-800/60 rounded-xl p-4 text-center border border-slate-700/50">
+                    <span class="text-xs text-slate-400 block font-semibold mb-1">득점 환산 백분율</span>
+                    <span class="text-2xl sm:text-3xl font-black text-yellow-400" id="final-percent-text">0%</span>
+                </div>
+            </div>
+
+            <!-- 오답 노트 영역 -->
+            <div class="mb-8">
+                <h3 class="text-base font-bold text-slate-200 mb-4 flex items-center">
+                    <span class="w-2 h-4 bg-brand-500 rounded mr-2 inline-block"></span>
+                    취약 영역 집중 분석 & 오답 수첩
+                </h3>
+                <div id="wrong-notes-container" class="space-y-4 max-h-80 overflow-y-auto pr-1">
+                    <!-- 오답 데이터 삽입 -->
+                </div>
+            </div>
+
+            <!-- AI 요약 전송용 클립보드 데이터 복사 -->
+            <div class="bg-slate-950/80 p-4 rounded-xl border border-slate-800 mb-6">
+                <p class="text-xs text-slate-400 mb-3 leading-relaxed">
+                    💡 <strong>합격 꿀팁!</strong> 오답 데이터를 아래 클립보드에 담아 주치의 Gemini에게 질문하면 맞춤형 학습 플랜을 추가로 제공받으실 수 있습니다.
+                </p>
+                <button onclick="copyIncorrectNotes()" class="w-full bg-slate-800 hover:bg-slate-700/80 text-brand-400 font-bold py-2.5 px-4 rounded-lg text-xs sm:text-sm border border-brand-500/20 flex justify-center items-center space-x-2 transition-all">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m-5 4h5m-5 4h5m-2 5h2"></path></svg>
+                    <span id="copy-btn-text">오답 수첩 마크다운으로 클립보드 복사</span>
+                </button>
+            </div>
+
+            <button onclick="restartQuiz()" class="w-full bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 hover:to-emerald-700 text-slate-950 font-black py-4 rounded-xl text-base transition-all duration-150 active:scale-[0.98] shadow-lg shadow-brand-500/10">
+                처음부터 다시 학습하기
+            </button>
+        </div>
+
+    </main>
+
+    <!-- 하단 카피라이트 영역 -->
+    <footer class="border-t border-slate-800 py-4 bg-slate-950/40 text-center text-xs text-slate-500">
+        <div class="max-w-4xl mx-auto px-4">
+            &copy; 2026 주택관리사보 1차 합격 서포터. Powered by 일타강사 Gem AI.
+        </div>
+    </footer>
+
+    <!-- 비디오/오디오 알림용 경고창 대체 모달 -->
+    <div id="custom-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 border border-brand-500 text-brand-400 font-bold px-6 py-3.5 rounded-xl shadow-2xl opacity-0 transform translate-y-4 pointer-events-none transition-all duration-300 z-50 flex items-center space-x-2 text-sm">
+        <svg class="w-4 h-4 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+        <span id="toast-message">클립보드에 복사되었습니다!</span>
+    </div>
+
+    <!-- 스크립트 로직 -->
+    <script>
+        // 1차 RAG 문제지 기반으로 교정된 명품 5문항 자료
+        const quizData = [
+            {
+                id: 1,
+                question: "1. 민법의 법원(法源)에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "헌법에 의하여 체결ㆍ공포된 조약이 민사에 관한 것이면 민법의 법원이 될 수 있다.",
+                    "대법원이 제정한 부동산등기규칙은 민법의 법원이 될 수 있다.",
+                    "관습법은 당사자의 주장ㆍ증명이 없으면 법원(法院)이 직권으로 이를 확정할 수 없다.",
+                    "종중 구성원의 자격을 성년남자만으로 제한하는 종래의 관습법은 법적 효력을 상실하였다.",
+                    "민사에 관하여 법률에 규정이 없으면 관습법에 의하고 관습법이 없으면 조리에 의한다."
+                ],
+                answer: 2, // ③번 (0-based index: 2)
+                explanations: {
+                    0: "성공 지문! 헌법에 의하여 체결·공포된 조약 중 민사에 관한 것은 당연히 국내법과 동일한 효력을 가지므로 민법의 법원이 됩니다.",
+                    1: "성공 지문! 대법원이 헌법 제108조에 근거하여 제정한 규칙(부동산등기규칙 등)도 성문법으로서 법원이 될 수 있습니다.",
+                    2: "★정답 지문 (오답 교정)! 관습법은 사회의 거듭된 관행에 따라 법적 확신을 얻어 '법'으로서의 효력을 갖는 것입니다. 법원이므로 당사자의 주장·증명이 없어도 법원(法院)이 직권으로 이를 확정하여 재판의 기준으로 삼아야 합니다. 반면 사실인 관습은 원칙적으로 당사자가 입증해야 하므로 극히 혼동하기 쉽습니다.",
+                    3: "성공 지문! 공동선조의 분묘수호와 제사를 목적으로 하는 종중의 구성원 자격을 성년 남자로만 한정하던 종래의 관습법은, 여성의 헌법상 평등권에 어긋나 법적 효력을 상실했다는 것이 대법원 전원합의체 판결의 입장입니다. 이제 성년 여성도 당연히 종원이 됩니다.",
+                    4: "성공 지문! 민법 제1조의 가장 기본적인 민법 법원의 순서 규칙입니다."
+                },
+                keyword: "관습법의 직권 확정 원칙"
+            },
+            {
+                id: 2,
+                question: "2. 권리에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "점유권은 절대권이다.",
+                    "저당권은 지배권이다.",
+                    "지상권자의 지상물매수청구권은 형성권이다.",
+                    "매매에서의 일방예약완결권은 형성권이다.",
+                    "상속회복청구권은 형성권이다."
+                ],
+                answer: 4, // ⑤번 (0-based index: 4)
+                explanations: {
+                    0: "성공 지문! 점유권은 물건에 대해 사실상 지배를 하는 자에게 주어지는 독점적인 절대권(대세권)입니다.",
+                    1: "성공 지문! 저당권은 물권의 일종이며, 물권은 목적물을 타인의 간섭 없이 직접 지배할 수 있는 지배권에 해당합니다.",
+                    2: "성공 지문! 명칭은 '청구권'으로 끝자락이 장식되어 있지만 지상권자의 일방적인 행사 의사표시에 따라 매매가 체결된 것과 같은 효력을 내므로 실질은 '형성권'입니다.",
+                    3: "성공 지문! 예약완결권 또한 권리자의 일방적인 예약완결의 의사표시를 통해 본계약을 바로 성립시키는 가장 강력한 형성권입니다.",
+                    4: "★정답 지문 (오답 교정)! 상속회복청구권은 자신의 상속권이 참칭상속인에 의해 침해되었을 때 그 회복을 구하는 '청구권'입니다. 형성권이 절대 아닙니다. 의사표시만으로 권리관계가 종결되는 것과 명확히 비교 정리해야 합니다."
+                },
+                keyword: "상속회복청구권의 성질(청구권)"
+            },
+            {
+                id: 3,
+                question: "3. 민법상 능력에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "태아는 법정대리인에 의한 수증행위를 할 수 없다.",
+                    "사산한 태아에게는 포태시 그에게 가해진 불법행위에 대한 손해배상청구권이 인정되지 않는다.",
+                    "법인의 권리능력은 정관에 명시된 목적 자체에 국한된다.",
+                    "동시사망의 추정은 사실상의 추정이 아니라 법률상의 추정이다.",
+                    "제한능력자의 반환범위를 현존이익으로 제한하는 민법의 규정은 의사무능력자의 법률행위에도 유추적용된다."
+                ],
+                answer: 2, // ③번 (0-based index: 2)
+                explanations: {
+                    0: "성공 지문! 대법원은 태아의 권리능력에 관해 정지조건설(살아서 태어나는 것을 조건으로 소급 인정)을 따르므로, 태아 상태에서는 법정대리인이 있을 수 없고, 태아 시점의 수증행위는 불가능하다고 봅니다.",
+                    1: "성공 지문! 태아가 불법행위 청구권을 얻더라도 최종적으로 살아서 출생하지 못하고 사산(死産)되었다면, 아예 소급하여 권리능력을 취득할 수 없게 되므로 손해배상청구권은 성립하지 않습니다.",
+                    2: "★정답 지문 (오답 교정)! 민법 제34조는 법인의 목적 범위 내에서 권리능력을 제한하지만, 판례는 '목적 범위 내'란 정관에 기재된 목적 자체뿐만 아니라 그 목적 달성에 직접·간접으로 필요하고 유익한 모든 행위를 포함한다고 넓게 해석합니다. '목적 자체에만 국한된다'는 설명은 지나치게 좁고 잘못된 해석입니다.",
+                    3: "성공 지문! 민법 제30조 동시사망의 추정은 법문 자체에서 사망으로 '추정한다'고 못박아 놓은 공식 법률상 추정입니다.",
+                    4: "성공 지문! 민법 제141조 단서(제한능력자의 이익 현존한도 반환주의)는 합리적 이익 분배와 능력자 보호를 위해 의사무능력으로 법률행위가 무효화된 상태에서도 유추적용된다는 대법원의 명쾌한 판결이 있습니다."
+                },
+                keyword: "법인의 권리능력 목적범위 해석"
+            },
+            {
+                id: 4,
+                question: "4. 권리능력 없는 사단에 관한 설명으로 옳은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "대표자가 있는 경우 그 사단의 부동산은 「부동산등기법」에 따라 대표자 명의로 등기할 수 있다.",
+                    "주택조합의 대표자가 외관상 직무에 관한 행위로 타인에게 손해를 가한 경우에 그것이 개인적 이익을 도모하기 위한 것이라면 주택조합이 손해배상책임을 부담하지 않는다.",
+                    "종중이 법인 아닌 사단이 되기 위해서는 특별한 조직행위와 이를 규율하는 성문의 규약이 있어야 한다.",
+                    "법인 아닌 사단인 교회가 총유재산에 대한 보존행위로서 소송을 하는 경우에도 교인 총회의 결의를 거치거나 정관이 정하는 바에 따른 절차를 거쳐야 한다.",
+                    "권리능력 없는 사단은 법인격을 전제하는 것을 포함하여 사단법인에 관한 민법의 규정이 유추·적용될 수 있다."
+                ],
+                answer: 3, // ④번 (0-based index: 3)
+                explanations: {
+                    0: "오답 교정! 부동산등기법에 따라 대표자가 있는 비법인사단(권리능력 없는 사단)은 '사단 그 자체의 명의'로 대표자가 신청하여 등기합니다. 대표자 개인 명의로 등기하는 것이 절대 아닙니다.",
+                    1: "오답 교정! 민법 제35조 제1항(법인의 불법행위책임)은 비법인사단에도 유추적용됩니다. 행위의 외관상 대표자의 직무수행으로 보인다면 개인적 배임 목적이 있더라도 주택조합의 불법행위 책임은 성립합니다.",
+                    2: "오답 교정! 종중은 공동선조의 후손으로 구성된 혈연에 의한 자연발생적 단체이므로 별도의 복잡한 성립 조직 행위나 서면으로 정한 성문의 규약이 없어도 성립합니다.",
+                    3: "★정답 지문! 비법인사단인 교회의 총유재산에 관한 소송은 그것이 보존행위라 하더라도 교인 개개인이 단독으로 소송을 할 수는 없으며, 반드시 사원총회(교인총회)의 결의를 거치거나 정관에 정해진 절차를 엄격하게 거쳐 교회 명의로써 제기해야 유효합니다. 시험 단골 지문입니다!",
+                    4: "오답 교정! 권리능력 없는 사단에는 성질상 사단법인 규정이 유추적용되지만, '등기'나 '법인격 성립'을 필수조건으로 요구하는 규정들은 성질상 배제됩니다. 일률적으로 다 적용될 수는 없습니다."
+                },
+                keyword: "총유재산의 소송 및 보존 절차"
+            },
+            {
+                id: 5,
+                question: "5. 물건에 관한 설명으로 옳은 것을 모두 고른 것은? (다툼이 있으면 판례에 따름)\n\n㉠ 저당권의 효력은 저당목적물의 종물에도 미친다.\n㉡ 집합물에 대해서도 양도담보권을 설정할 수 있다.\n㉢ 무주의 부동산에도 선점이 인정된다.\n㉣ 하천ㆍ공원은 공유물이다.\n㉤ 1필의 토지의 일부에 대하여는 저당권을 설정할 수 없다.",
+                options: [
+                    "㉠, ㉢",
+                    "㉢, ㉣",
+                    "㉣, ㉤",
+                    "㉠, ㉡, ㉤",
+                    "㉡, ㉣, ㉤"
+                ],
+                answer: 3, // ④번 (0-based index: 3 - ㉠, ㉡, ㉤)
+                explanations: {
+                    0: "오답 분석! ㉢ 무주의 부동산은 법률 규정에 따라 즉시 국유(국가소유)가 됩니다. 오직 무주의 '동산'만 선점의 객체가 될 수 있으므로 ㉢이 섞인 보기는 바로 제외하셔야 합니다.",
+                    1: "오답 분석! ㉢ 무주의 부동산은 국유이고, ㉣ 하천과 공원은 공익 목적의 공물이므로 사법상 공유관계의 공유물에 부합하지 않습니다.",
+                    2: "오답 분석! ㉣ 하천·공원은 일반 공유물이 아니기 때문에 틀린 지문입니다.",
+                    3: "★정답 지문! 정확한 삼위일체 결론입니다.\n- ㉠ 저당권의 효력은 저당부동산에 부합된 물건과 종물에 미칩니다(민법 제358조 본문).\n- ㉡ 여러 개의 뱀장어나 돼지 등과 같은 집합물도 장소와 종류를 지정하여 특정할 수 있다면 유효하게 하나의 양도담보 목적물로 삼을 수 있습니다.\n- ㉤ 일물일권주의상 1필의 토지 중 일부에는 지상권 등 용익물권은 설정할 수 있지만, 점유를 수반하지 않고 분필등기가 불가능한 저당권은 일부에 설정할 수 없습니다.",
+                    4: "오답 분석! ㉣ 하천·공원은 공물로서 배제되므로 탈락입니다."
+                },
+                keyword: "일물일권주의와 부합 및 종물"
+            }
+        ];
+
+        // 상태 관리 변수
+        let currentIdx = 0;
+        let score = 0;
+        let selectedIdx = null;
+        let isAnswered = false;
+        let wrongAnswers = [];
+
+        // App 전역 정보 (Firebase/Canvas 호환용 전역 변수 사전 확보)
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'housing-manager-quiz-01';
+
+        // 퀴즈 시작 함수
+        function startQuiz() {
+            document.getElementById('intro-card').classList.add('hidden');
+            document.getElementById('quiz-card').classList.remove('hidden');
+            loadQuestion();
+        }
+
+        // 문제 데이터 로드
+        function loadQuestion() {
+            isAnswered = false;
+            selectedIdx = null;
+            
+            // UI 초기화
+            document.getElementById('submit-btn').disabled = true;
+            document.getElementById('submit-btn').classList.remove('hidden');
+            document.getElementById('submit-btn').classList.add('cursor-not-allowed');
+            document.getElementById('next-btn').classList.add('hidden');
+            document.getElementById('explanation-card').classList.add('hidden');
+            document.getElementById('explanation-content').classList.add('hidden');
+            
+            const currentQ = quizData[currentIdx];
+            
+            // 번호 및 진행률 표시
+            document.getElementById('progress-text').innerText = `문제 ${currentIdx + 1} / ${quizData.length}`;
+            document.getElementById('score-text').innerText = `정답: ${score}개`;
+            
+            const progressPercent = ((currentIdx + 1) / quizData.length) * 100;
+            document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+
+            // 문제 질문 렌더링
+            document.getElementById('question-text').innerText = currentQ.question;
+
+            // 보기 렌더링
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            currentQ.options.forEach((opt, idx) => {
+                const optBtn = document.createElement('button');
+                optBtn.type = 'button';
+                optBtn.className = "w-full text-left p-4 rounded-xl border border-slate-800 bg-slate-900/40 hover:border-slate-700 hover:bg-slate-800/40 transition-all duration-150 flex items-start space-x-3 text-sm group";
+                optBtn.onclick = () => selectOption(idx);
+                optBtn.id = `opt-${idx}`;
+                
+                const numberSpan = document.createElement('span');
+                numberSpan.className = "flex-shrink-0 w-5 h-5 rounded-full bg-slate-800 text-slate-400 group-hover:bg-slate-700 text-xs font-bold flex items-center justify-center border border-slate-700/50 transition-colors";
+                numberSpan.innerText = idx + 1;
+                numberSpan.id = `num-${idx}`;
+
+                const textSpan = document.createElement('span');
+                textSpan.className = "text-slate-300 group-hover:text-white transition-colors leading-relaxed";
+                textSpan.innerText = opt;
+
+                optBtn.appendChild(numberSpan);
+                optBtn.appendChild(textSpan);
+                optionsContainer.appendChild(optBtn);
+            });
+        }
+
+        // 보기 선택 핸들러
+        function selectOption(idx) {
+            if (isAnswered) return;
+            
+            selectedIdx = idx;
+            
+            // 이전 선택 스타일 클리어
+            for(let i=0; i<5; i++) {
+                const btn = document.getElementById(`opt-${i}`);
+                if (btn) {
+                    btn.className = "w-full text-left p-4 rounded-xl border border-slate-800 bg-slate-900/40 hover:border-slate-700 hover:bg-slate-800/40 transition-all duration-150 flex items-start space-x-3 text-sm group";
+                    const num = document.getElementById(`num-${i}`);
+                    num.className = "flex-shrink-0 w-5 h-5 rounded-full bg-slate-800 text-slate-400 group-hover:bg-slate-700 text-xs font-bold flex items-center justify-center border border-slate-700/50 transition-colors";
+                }
+            }
+
+            // 활성화 선택 스타일 적용
+            const selectedBtn = document.getElementById(`opt-${idx}`);
+            selectedBtn.className = "w-full text-left p-4 rounded-xl border-2 border-brand-500 bg-brand-500/10 flex items-start space-x-3 text-sm";
+            const selectedNum = document.getElementById(`num-${idx}`);
+            selectedNum.className = "flex-shrink-0 w-5 h-5 rounded-full bg-brand-500 text-slate-950 text-xs font-black flex items-center justify-center";
+
+            // 제출 버튼 활성화
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('cursor-not-allowed');
+        }
+
+        // 답안 제출 검증
+        function submitAnswer() {
+            if (isAnswered || selectedIdx === null) return;
+            isAnswered = true;
+
+            const currentQ = quizData[currentIdx];
+            const isCorrect = (selectedIdx === currentQ.answer);
+
+            // 점수 카운트
+            if (isCorrect) {
+                score++;
+                showResultBadge(true);
+            } else {
+                // 오답 데이터 누적
+                wrongAnswers.push({
+                    qNo: currentQ.id,
+                    question: currentQ.question,
+                    correctAnswer: currentQ.options[currentQ.answer],
+                    userAnswer: currentQ.options[selectedIdx],
+                    keyword: currentQ.keyword
+                });
+                showResultBadge(false);
+            }
+
+            // 시각적 피드백 제공 (정답은 녹색, 오답은 빨간색)
+            for(let i=0; i<5; i++) {
+                const btn = document.getElementById(`opt-${i}`);
+                if (!btn) continue;
+                
+                if (i === currentQ.answer) {
+                    // 정답 지문은 항상 연두색 하이라이트
+                    btn.className = "w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-500/15 flex items-start space-x-3 text-sm transition-all";
+                    const num = document.getElementById(`num-${i}`);
+                    num.className = "flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500 text-slate-950 text-xs font-black flex items-center justify-center";
+                } else if (i === selectedIdx && !isCorrect) {
+                    // 유저가 고른 오답은 장미색 하이라이트
+                    btn.className = "w-full text-left p-4 rounded-xl border-2 border-rose-500 bg-rose-500/15 flex items-start space-x-3 text-sm transition-all";
+                    const num = document.getElementById(`num-${i}`);
+                    num.className = "flex-shrink-0 w-5 h-5 rounded-full bg-rose-500 text-slate-100 text-xs font-black flex items-center justify-center";
+                } else {
+                    // 나머지 지문들 비활성화
+                    btn.className = "w-full text-left p-4 rounded-xl border border-slate-800 bg-slate-950/20 opacity-50 flex items-start space-x-3 text-sm";
+                }
+            }
+
+            // Gem의 지문별 정밀 과외 해설 데이터 가공
+            const expContentContainer = document.getElementById('explanation-content');
+            expContentContainer.innerHTML = '';
+            
+            // 선택형 아코디언 본문 내부 조립
+            Object.keys(currentQ.explanations).forEach((key) => {
+                const isCorrectIndex = (parseInt(key) === currentQ.answer);
+                const descBox = document.createElement('div');
+                descBox.className = isCorrectIndex ? "bg-emerald-500/5 border-l-4 border-emerald-500 p-3.5 rounded-r-lg" : "bg-slate-900/50 p-3 rounded-lg border border-slate-800/40";
+                
+                const indexTitle = document.createElement('strong');
+                indexTitle.className = isCorrectIndex ? "text-emerald-400 block mb-1 text-xs" : "text-slate-400 block mb-1 text-xs";
+                indexTitle.innerText = `지문 0${parseInt(key) + 1}번 분석:`;
+
+                const descText = document.createElement('p');
+                descText.className = "text-slate-300 leading-relaxed";
+                descText.innerText = currentQ.explanations[key];
+
+                descBox.appendChild(indexTitle);
+                descBox.appendChild(descText);
+                expContentContainer.appendChild(descBox);
+            });
+
+            // 해설 아코디언 영역 활성화 노출
+            document.getElementById('explanation-card').classList.remove('hidden');
+            
+            // 즉시 해설을 보도록 유도하는 의미로 자동 오픈 처리
+            document.getElementById('explanation-content').classList.remove('hidden');
+            document.getElementById('arrow-icon').classList.add('rotate-180');
+
+            // 버튼 스위칭
+            document.getElementById('submit-btn').classList.add('hidden');
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        // 맞음 / 틀림 상단 배지 노출 처리
+        function showResultBadge(isCorrect) {
+            const badge = document.getElementById('result-badge');
+            if (isCorrect) {
+                badge.className = "mb-4 inline-flex items-center px-4 py-2 rounded-xl text-sm font-black bg-emerald-500/10 text-emerald-400 border border-emerald-500/20";
+                badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-500 mr-2 animate-ping"></span>정답입니다! 완벽한 판단력입니다.`;
+            } else {
+                badge.className = "mb-4 inline-flex items-center px-4 py-2 rounded-xl text-sm font-black bg-rose-500/10 text-rose-400 border border-rose-500/20";
+                badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-rose-500 mr-2"></span>아깝습니다! 오답을 통해 단단해질 시간입니다.`;
+            }
+        }
+
+        // 해설 펼치기/접기 토글
+        function toggleExplanation() {
+            const content = document.getElementById('explanation-content');
+            const arrow = document.getElementById('arrow-icon');
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                arrow.classList.add('rotate-180');
+            } else {
+                content.classList.add('hidden');
+                arrow.classList.remove('rotate-180');
+            }
+        }
+
+        // 다음 문제 이동 제어
+        function nextQuestion() {
+            currentIdx++;
+            if (currentIdx < quizData.length) {
+                loadQuestion();
+            } else {
+                showFinalResults();
+            }
+        }
+
+        // 최종 성적표 출력
+        function showFinalResults() {
+            document.getElementById('quiz-card').classList.add('hidden');
+            document.getElementById('result-card').classList.remove('hidden');
+
+            const scorePercent = Math.round((score / quizData.length) * 100);
+            
+            document.getElementById('final-score-text').innerText = `${score} / ${quizData.length}`;
+            document.getElementById('final-percent-text').innerText = `${scorePercent}%`;
+
+            // 맞춤 격려 피드백 문구 처리
+            const emojiEl = document.getElementById('result-emoji');
+            const commentEl = document.getElementById('result-comment');
+            
+            if (score === 5) {
+                emojiEl.innerText = "👑";
+                commentEl.innerHTML = `<strong>합격 100% 확신!</strong> 전 문항 정답입니다. 현시점 민법 최상위 일타 등극!`;
+            } else if (score >= 3) {
+                emojiEl.innerText = "🎓";
+                commentEl.innerHTML = `<strong>안정적인 합격선 도달!</strong> 조금만 보완하면 민법 전략과목 실현 가능합니다.`;
+            } else {
+                emojiEl.innerText = "✍️";
+                commentEl.innerHTML = `<strong>기초 기둥 보강 요망!</strong> 오답 정리를 완벽히 내 것으로 만들면 즉시 반등합니다.`;
+            }
+
+            // 오답 리스트 렌더링
+            const wrongContainer = document.getElementById('wrong-notes-container');
+            wrongContainer.innerHTML = '';
+
+            if (wrongAnswers.length === 0) {
+                wrongContainer.innerHTML = `
+                    <div class="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-5 text-center text-emerald-400">
+                        🎉 틀린 문제가 단 하나도 없습니다! 시험장에 당장 입실하셔도 충분합니다!
+                    </div>
+                `;
+            } else {
+                wrongAnswers.forEach((item) => {
+                    const itemBox = document.createElement('div');
+                    itemBox.className = "bg-slate-800/40 border border-slate-800 p-4 rounded-xl space-y-2";
+                    
+                    itemBox.innerHTML = `
+                        <div class="flex justify-between items-start">
+                            <span class="bg-rose-500/10 border border-rose-500/20 text-rose-400 px-2 py-0.5 rounded text-xs font-bold">오답 분석 ${item.qNo}번</span>
+                            <span class="text-[11px] font-bold text-slate-400">주요 쟁점: ${item.keyword}</span>
+                        </div>
+                        <p class="text-xs text-slate-300 font-semibold line-clamp-2 mt-1">${item.question}</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2 pt-2 border-t border-slate-800/60 text-xs">
+                            <div class="bg-rose-500/5 px-2.5 py-1.5 rounded border border-rose-500/10">
+                                <span class="text-[10px] text-rose-400 block">수험생님 선택 오답:</span>
+                                <span class="text-slate-300 font-medium">${item.userAnswer}</span>
+                            </div>
+                            <div class="bg-emerald-500/5 px-2.5 py-1.5 rounded border border-emerald-500/10">
+                                <span class="text-[10px] text-emerald-400 block">시험 정답 지문:</span>
+                                <span class="text-slate-300 font-medium">${item.correctAnswer}</span>
+                            </div>
+                        </div>
+                    `;
+                    wrongContainer.appendChild(itemBox);
+                });
+            }
+
+            // 부모 Gist 동기화 트리거
+            syncToParentGist({
+                appId: appId,
+                score: score,
+                total: quizData.length,
+                percentage: scorePercent,
+                incorrectCount: wrongAnswers.length,
+                wrongAnswers: wrongAnswers,
+                completedAt: new Date().toISOString()
+            });
+        }
+
+        // 부모 창으로 데이터 쏘아주는 통신 스크립트 (동기화)
+        function syncToParentGist(quizResultData) {
+            console.log("Syncing quiz results to parent frame:", quizResultData);
+            if (window.parent) {
+                window.parent.postMessage({
+                    type: 'SYNC_QUIZ_DATA',
+                    payload: quizResultData
+                }, '*');
+            }
+        }
+
+        // 토스트 알림 함수 (alert() 대용)
+        function showToast(message) {
+            const toast = document.getElementById('custom-toast');
+            document.getElementById('toast-message').innerText = message;
+            toast.className = "fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 border border-brand-500 text-brand-400 font-bold px-6 py-3.5 rounded-xl shadow-2xl opacity-100 transform translate-y-0 transition-all duration-300 z-50 flex items-center space-x-2 text-sm";
+            
+            setTimeout(() => {
+                toast.className = "fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 border border-brand-500 text-brand-400 font-bold px-6 py-3.5 rounded-xl shadow-2xl opacity-0 transform translate-y-4 pointer-events-none transition-all duration-300 z-50 flex items-center space-x-2 text-sm";
+            }, 2500);
+        }
+
+        // 오답 노트 마크다운 클립보드 복사
+        function copyIncorrectNotes() {
+            let markdownText = `### 📚 주택관리사보 1차 민법 모의고사 오답 수첩\n`;
+            markdownText += `- **일시:** ${new Date().toLocaleString()}\n`;
+            markdownText += `- **종합 점수:** ${score} / ${quizData.length} (정답률 ${Math.round((score/quizData.length)*100)}%)\n\n`;
+            
+            if (wrongAnswers.length === 0) {
+                markdownText += `🎉 **오답이 없습니다! 전 문항을 완벽히 마스터했습니다.**\n`;
+            } else {
+                markdownText += `#### 🚨 틀린 문제 요약 분석:\n`;
+                wrongAnswers.forEach((item, index) => {
+                    markdownText += `${index + 1}. **문제 ${item.qNo}:** ${item.question}\n`;
+                    markdownText += `   - **취약점 핵심 키워드:** \`${item.keyword}\`\n`;
+                    markdownText += `   - **내가 적은 오답 지문:** _${item.userAnswer}_\n`;
+                    markdownText += `   - **실제 정답 지문:** **${item.correctAnswer}**\n\n`;
+                });
+                markdownText += `---\n`;
+                markdownText += `💡 **Gemini 가이드 요청:** "위 취약점 키워드인 [ ${wrongAnswers.map(w => w.keyword).join(', ')} ]에 대한 기출 핵심 원칙과 함정 방지 요령을 표로 일목요연하게 요약 정리해 주세요!"`;
+            }
+
+            // 폴백 클립보드 복사 로직 (execCommand 사용)
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = markdownText;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    document.getElementById('copy-btn-text').innerText = "복사 완료! 제미나이에 붙여넣으세요 📋";
+                    showToast("오답노트 마크다운이 클립보드에 복사되었습니다!");
+                    setTimeout(() => {
+                        document.getElementById('copy-btn-text').innerText = "오답 수첩 마크다운으로 클립보드 복사";
+                    }, 3000);
+                } else {
+                    showToast("복사에 실패했습니다. 수동으로 복사해주세요.");
+                }
+            } catch (err) {
+                showToast("오류가 발생하여 복사하지 못했습니다.");
+            }
+            document.body.removeChild(tempTextArea);
+        }
+
+        // 처음부터 다시 풀기
+        function restartQuiz() {
+            currentIdx = 0;
+            score = 0;
+            wrongAnswers = [];
+            
+            document.getElementById('result-card').classList.add('hidden');
+            document.getElementById('quiz-card').classList.remove('hidden');
+            loadQuestion();
+        }
+    </script>
+</body>
+</html>

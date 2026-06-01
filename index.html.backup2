@@ -99,7 +99,7 @@
               <div class="guide-steps">
                 <div class="step-item">
                   <div class="step-num">1</div>
-                  <p><strong>아침 6시 자동 출제</strong>: 에이전트가 오답을 반영하여 새로운 문제를 생성합니다.</p>
+                  <p><strong>아침 8시 자동 출제</strong>: 에이전트가 오답을 반영하여 새로운 문제를 생성합니다.</p>
                 </div>
                 <div class="step-item">
                   <div class="step-num">2</div>
@@ -119,7 +119,7 @@
           <!-- 시험지 선택 목록 뷰 -->
           <div id="exam-list-view" class="active-view">
             <h2 class="section-title">📝 배달된 오늘의 시험지 목록</h2>
-            <p class="section-desc">매일 아침 6시 에이전트가 수험생님만을 위해 노트북 소스에서 추출한 전용 모의고사 리스트입니다.</p>
+            <p class="section-desc">매일 아침 8시 에이전트가 수험생님만을 위해 노트북 소스에서 추출한 전용 모의고사 리스트입니다.</p>
             <div class="exam-list-grid" id="exam-list-container">
               <!-- JS 동적 적재 영역 -->
               <div class="loading-spinner">시험지를 로딩하는 중입니다...</div>

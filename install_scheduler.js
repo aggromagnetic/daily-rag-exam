@@ -42,7 +42,7 @@ async function main() {
     <key>StartCalendarInterval</key>
     <dict>
         <key>Hour</key>
-        <integer>8</integer>
+        <integer>6</integer>
         <key>Minute</key>
         <integer>0</integer>
     </dict>
@@ -83,7 +83,7 @@ async function main() {
     // 새 에이전트 load
     execSync(`launchctl load "${TARGET_PLIST_PATH}"`);
     console.log("✅ launchd 스케줄러 등록이 완료되었습니다!");
-    console.log("⏰ 매일 아침 08:00에 백그라운드에서 에이전트가 자동 작동하여 오늘 자 문제집을 생성합니다.");
+    console.log("⏰ 매일 아침 06:00에 백그라운드에서 에이전트가 자동 작동하여 오늘 자 문제집을 생성합니다.");
     console.log(`📈 실행 기록은 아래 로그에서 확인할 수 있습니다:\n   - 출력 로그: ${stdoutLog}\n   - 에러 로그: ${stderrLog}`);
     console.log("==================================================");
 

@@ -86,9 +86,6 @@ function init() {
   if (btnLogoutGithub) {
     btnLogoutGithub.addEventListener('click', handleLogoutGithub);
   }
-
-  // 🪐 [iframe 전송 수신기 기동]
-  initMessageListener();
 }
 
 // 🔑 GitHub 인증 상태 검사 및 UI 갱신
@@ -346,52 +343,15 @@ function showSubView(viewId) {
 // 2. 📊 학습 대시보드 데이터 바인딩
 // -------------------------------------------------------------
 async function loadDashboardData() {
-  // 1. 오늘의 시험지 상태 (KST 기준 실시간 동적 판별)
+  // 1. 오늘의 시험지 상태 (static fetch)
   try {
     const tests = await fetchExamsList();
-    
-    // KSTOffset 보정을 통해 수험생 로컬 접속 기기 시간대 무관 KST 기준으로 날짜를 엄격히 동기화
-    const kstOffset = 9 * 60 * 60 * 1000;
-    const todayKst = new Date(Date.now() + kstOffset);
-    const yyyy = todayKst.getUTCFullYear();
-    const mm = String(todayKst.getUTCMonth() + 1).padStart(2, '0');
-    const dd = String(todayKst.getUTCDate()).padStart(2, '0');
-    const todayStr = `${yyyy}-${mm}-${dd}`;
-
-    const curHour = todayKst.getUTCHours(); // KST 시간 (UTC+9의 시각이 getUTCHours로 바로 추출됨)
-
-    const todayTests = tests.filter(t => t.date === todayStr);
-    const hasAcc = todayTests.some(t => t.subject === '회계원리' && t.interactive);
-    const hasFac = todayTests.some(t => t.subject === '시설개론' && t.interactive);
-    const hasCiv = todayTests.some(t => t.subject === '민법' && t.interactive);
-
-    const completedCount = [hasAcc, hasFac, hasCiv].filter(Boolean).length;
-    const statusEl = document.getElementById('stat-today-exam-status');
-
-    if (completedCount === 3) {
-      statusEl.innerText = '출제 완료 🎉';
-      statusEl.style.color = '#00f5a0';
-    } else if (curHour < 6) {
-      // 06시 이전: 추출 대기 상태
-      statusEl.innerText = '추출 대기 중 ⏳ (06시 출제 시작)';
-      statusEl.style.color = '#94a3b8';
-    } else if (curHour >= 6 && curHour < 8) {
-      // 06시~08시 사이: 추출 컴파일 기동 상태
-      statusEl.innerText = `추출 중 ⚙️ (${completedCount}/3 완료)`;
-      statusEl.style.color = '#3b82f6';
+    if (tests && tests.length > 0) {
+      document.getElementById('stat-today-exam-status').innerText = '출제 완료 📝';
+      document.getElementById('stat-today-exam-status').style.color = '#00f5a0';
     } else {
-      // 08시 이후인데 3개가 다 채워지지 못한 비정상 상태
-      if (completedCount === 0) {
-        statusEl.innerText = '출제 실패 ❌ (스케줄러 점검 요망)';
-        statusEl.style.color = '#ff6b6b';
-      } else {
-        const failures = [];
-        if (!hasAcc) failures.push('회계원리');
-        if (!hasFac) failures.push('시설개론');
-        if (!hasCiv) failures.push('민법');
-        statusEl.innerText = `출제 완료 (일부 과목 실패: ${failures.join(', ')} 실패) ⚠️`;
-        statusEl.style.color = '#f59e0b';
-      }
+      document.getElementById('stat-today-exam-status').innerText = '출제 대기 ☕';
+      document.getElementById('stat-today-exam-status').style.color = '#94a3b8';
     }
   } catch (error) {
     console.warn('시험지 상태 로드 실패:', error);
@@ -467,37 +427,17 @@ async function loadExamList() {
 
         const card = document.createElement('div');
         card.className = `glass-card exam-card ${subjectClass}`;
-        
-        // 1. HTML 버전 존재 여부에 따라 인터랙티브 버튼 마크업 분기
-        const isInteractive = test.interactive;
-        const interactiveBtnMarkup = isInteractive
-          ? `<button class="exam-play-btn active-btn" style="background: linear-gradient(135deg, var(--neon-emerald), var(--neon-blue)); border: none; box-shadow: 0 4px 10px rgba(0, 245, 160, 0.2); width: 100%; color: var(--text-main); font-weight: 700; padding: 0.7rem; border-radius: 10px; cursor: pointer; transition: all 0.2s;" data-html="${test.htmlFilename}">⚡ 모의고사 응시하기 (자동채점)</button>`
-          : `<button class="exam-play-btn disabled-btn" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); width: 100%; color: var(--text-muted); font-weight: 500; padding: 0.7rem; border-radius: 10px; cursor: not-allowed; opacity: 0.5;" disabled>⏱️ 모의고사 응시 (HTML 제작 중...)</button>`;
-
         card.innerHTML = `
           <span class="badge ${cardGlow}" style="margin-bottom: 0.75rem;">${test.subject}</span>
           <h3 class="exam-card-subject">${test.subject} 모의고사</h3>
           <span class="exam-card-date">📅 출제일: ${test.date}</span>
-          <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; width: 100%;">
-            <button class="exam-start-btn" style="width: 100%; background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); border: 1px solid var(--border-glass); padding: 0.7rem; border-radius: 10px; color: var(--text-main); font-weight: 600; cursor: pointer;" data-file="${test.filename}">📋 문제집 전체 복사하기 (수동)</button>
-            ${interactiveBtnMarkup}
-          </div>
+          <button class="exam-start-btn" data-file="${test.filename}">모의고사 응시하기 →</button>
         `;
 
-        // 1. 문제집 전체 복사하기 버튼 바인딩 (지문 뷰어로 이동)
+        // 응시 시작 이벤트 바인딩
         card.querySelector('.exam-start-btn').addEventListener('click', () => {
           startExam(test.filename, true);
         });
-
-        // 2. 모의고사 응시하기 버튼 바인딩 (인터랙티브 HTML 새 창 열기)
-        if (isInteractive) {
-          card.querySelector('.exam-play-btn').addEventListener('click', () => {
-            const baseUrl = import.meta.env.BASE_URL || '/';
-            const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
-            const interactiveUrl = `${cleanBase}daily_tests/${test.htmlFilename}`;
-            window.open(interactiveUrl, '_blank');
-          });
-        }
 
         container.appendChild(card);
       });
@@ -506,7 +446,7 @@ async function loadExamList() {
         <div class="empty-placeholder col-span-3">
           <p>📭 아직 배달된 오늘의 시험지가 없습니다.</p>
           <p style="font-size: 0.75rem; margin-top: 0.5rem; color: var(--text-muted);">
-            'npm run generate' 명령을 돌려 오늘의 모의고사를 즉시 출제받으시거나 아침 6시 자동 스케줄러를 가동해 주세요.
+            'npm run generate' 명령을 돌려 오늘의 모의고사를 즉시 출제받으시거나 아침 8시 자동 스케줄러를 가동해 주세요.
           </p>
         </div>
       `;
@@ -850,98 +790,3 @@ async function deleteIncorrect(subject, concept) {
     showToast(`완치 실패: ${error.message}`, 'error');
   }
 }
-
-// 🪐 5. [iframe 통신 연동] 퀴즈 모의고사 OMR 오답 자동 적재 수신기
-function initMessageListener() {
-  window.addEventListener('message', async (event) => {
-    const data = event.data;
-    if (!data || data.type !== 'SYNC_QUIZ_DATA') return;
-
-    const payload = data.payload;
-    if (!payload) return;
-
-    console.log("🪐 [부모 포털 수신기] 퀴즈 자동채점 결과 연동 수신:", payload);
-    await handleQuizDataSync(payload);
-  });
-}
-
-// 🪐 오답 수첩 비공개 Gist 실시간 누진 데이터 병합 처리
-async function handleQuizDataSync(payload) {
-  const pat = state.githubPat;
-  const gistId = state.githubGistId;
-
-  if (!pat || !gistId) {
-    showToast("🔒 수험생 인증(GitHub PAT)이 되어있지 않아 오답노트 자동 적재가 스킵되었습니다. 대시보드에서 인증해 주세요!", "warning");
-    return;
-  }
-
-  // 응시 중인 파일 이름을 기반으로 과목 분류 (accounting, facility, civil)
-  let subjectKey = 'civil'; 
-  const filename = state.currentTestFilename || '';
-  if (filename.includes('accounting') || filename.includes('회계')) {
-    subjectKey = 'accounting';
-  } else if (filename.includes('facility') || filename.includes('시설')) {
-    subjectKey = 'facility';
-  } else if (filename.includes('civil') || filename.includes('민법')) {
-    subjectKey = 'civil';
-  }
-
-  const wrongAnswers = payload.wrongAnswers || [];
-  if (wrongAnswers.length === 0) {
-    showToast("🏆 축하합니다! 전 문항 100% 정답으로 오답 수첩 기록을 스킵합니다. 합격 확신!", "success");
-    return;
-  }
-
-  try {
-    // Gist 기존 오답노트 로딩
-    const incorrectData = await fetchGistIncorrect(pat, gistId);
-    if (!incorrectData[subjectKey]) {
-      incorrectData[subjectKey] = [];
-    }
-
-    const today = new Date().toISOString().split('T')[0];
-    let addedCount = 0;
-    let upgradedCount = 0;
-
-    wrongAnswers.forEach(wrong => {
-      // 퀴즈 쟁점 키워드 파싱 (없을 시 문제 지문 앞단 압축)
-      const rawConcept = wrong.keyword || wrong.concept || `[지문] ${wrong.question.substring(0, 40)}`;
-      const concept = `[자동오답] ${rawConcept.trim()}`;
-
-      // 중복 체크 및 누진 가중치 누적
-      const existing = incorrectData[subjectKey].find(item => item.concept.trim() === concept);
-      if (existing) {
-        existing.count = (existing.count || 1) + 1;
-        existing.date = today;
-        upgradedCount++;
-      } else {
-        incorrectData[subjectKey].push({
-          concept: concept,
-          date: today,
-          count: 1
-        });
-        addedCount++;
-      }
-    });
-
-    // Gist에 업로드하여 최종 클라우드 저장
-    await updateGistIncorrect(pat, gistId, incorrectData);
-
-    const message = upgradedCount > 0
-      ? `🎯 오답 개념 ${wrongAnswers.length}문항 Gist 동기화 완료! (신규 ${addedCount}개, 가중치 누진 ${upgradedCount}개)`
-      : `🎯 신규 오답 개념 ${addedCount}개 Gist 오답 수첩에 실시간 자동 저장 완료!`;
-
-    showToast(message, "success");
-
-    // 대시보드 및 오답노트 화면 실시간 새로고침
-    if (state.activeTab === 'incorrect') {
-      loadIncorrectList();
-    } else if (state.activeTab === 'dashboard') {
-      loadDashboardData();
-    }
-  } catch (error) {
-    console.error("❌ 오답 실시간 동기화 에러:", error);
-    showToast(`❌ 오답 동기화 실패: ${error.message}`, "error");
-  }
-}
-
