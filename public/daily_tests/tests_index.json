@@ -1,6 +1,13 @@
 {
   "tests": [
     {
+      "filename": "2026-06-03_회계원리.md",
+      "date": "2026-06-03",
+      "subject": "회계원리",
+      "interactive": false,
+      "htmlFilename": null
+    },
+    {
       "filename": "2026-06-03_민법.md",
       "date": "2026-06-03",
       "subject": "민법",
