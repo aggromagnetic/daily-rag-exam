@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "concurrently": "^9.1.2",
+    "notebooklm-mcp": "^2.0.0",
     "vite": "^8.0.12"
   }
 }

@@ -52,6 +52,12 @@ async function main() {
         <string>/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:${path.dirname(nodePath)}</string>
         <key>npm_config_cache</key>
         <string>/tmp/npm_cache</string>
+        <key>STEALTH_HUMAN_TYPING</key>
+        <string>false</string>
+        <key>STEALTH_RANDOM_DELAYS</key>
+        <string>false</string>
+        <key>NOTEBOOK_CLONE_PROFILE</key>
+        <string>true</string>
     </dict>
     <key>StandardOutPath</key>
     <string>${stdoutLog}</string>

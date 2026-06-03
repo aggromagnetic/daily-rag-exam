@@ -786,7 +786,7 @@ ${isFirstStep ? `
           question: prompt,
           notebook_id: targetNotebookId,
           browser_options: {
-            timeout_ms: 900000,
+            timeout_ms: 180000,
             stealth: {
               human_typing: false
             }
@@ -801,7 +801,7 @@ ${isFirstStep ? `
           name: "ask_question",
           arguments: askArguments
         }, undefined, {
-          timeout: 950000
+          timeout: 210000
         });
 
         const generatedText = result.content[0].text;
@@ -949,10 +949,41 @@ ${mergedExplanations}`;
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+// 🌐 인터넷 연결 여부를 확인하는 헬퍼 함수 (Mac 수면 모드 해제 후 Wi-Fi 지연 시간 보정용)
+async function waitForInternetConnection(maxRetries = 12, delayMs = 5000) {
+  console.log("🌐 인터넷 연결 확인 중...");
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 4000);
+      const res = await fetch("https://www.google.com", { signal: controller.signal });
+      clearTimeout(timeoutId);
+      if (res.ok) {
+        console.log("✅ 인터넷 연결이 감지되었습니다!");
+        return true;
+      }
+    } catch (e) {
+      console.log(`⏳ [연결 대기] Wi-Fi 및 네트워크 활성화 대기 중... (${i + 1}/${maxRetries}회 시도 실패)`);
+    }
+    await sleep(delayMs);
+  }
+  throw new Error("인터넷 연결이 제한되었거나 불가능합니다. 네트워크를 확인해 주세요.");
+}
+
 async function main() {
   console.log("==================================================");
   console.log("     주택관리사보 데일리 문제 추출 에이전트      ");
   console.log("==================================================");
+
+  // 0. 인터넷 대기 검사 (수면 대기 보정)
+  try {
+    await waitForInternetConnection();
+    console.log("⏳ 네트워크 및 DNS 안정화를 위해 20초간 추가 대기합니다...");
+    await sleep(20000);
+  } catch (err) {
+    console.error("❌ 에러: " + err.message);
+    process.exit(1);
+  }
 
   // 1. 설정 확인
   if (!fs.existsSync(CONFIG_PATH)) {
@@ -968,12 +999,19 @@ async function main() {
     fs.mkdirSync(DAILY_TESTS_DIR, { recursive: true });
   }
 
-  // 2. MCP 연결
+  // 2. MCP 연결 (로컬 node_modules 내의 패키지를 직접 가동하여 npx 다운로드 및 버전 체크 타임아웃 방지)
   console.log("🔄 NotebookLM MCP 서버에 연결하는 중...");
+  const mcpScriptPath = path.resolve("node_modules", "notebooklm-mcp", "dist", "index.js");
   const transport = new StdioClientTransport({
-    command: "npx",
-    args: ["-y", "notebooklm-mcp@latest"],
-    env: { ...process.env, npm_config_cache: "/tmp/npm_cache" }
+    command: "node",
+    args: [mcpScriptPath],
+    env: { 
+      ...process.env, 
+      npm_config_cache: "/tmp/npm_cache",
+      STEALTH_HUMAN_TYPING: "false",
+      STEALTH_RANDOM_DELAYS: "false",
+      NOTEBOOK_CLONE_PROFILE: "true"
+    }
   });
 
   const client = new Client({
