@@ -33,7 +33,9 @@ async function main() {
     <key>ProgramArguments</key>
     <array>
         <string>/usr/bin/caffeinate</string>
-        <string>-i</string>
+        <string>-s</string>
+        <string>-u</string>
+        <string>-d</string>
         <string>${nodePath}</string>
         <string>${scriptPath}</string>
     </array>
