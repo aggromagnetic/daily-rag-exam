@@ -10,14 +10,14 @@ const CONFIG_PATH = path.resolve("data", "config.json");
 const SUBJECT_NOTEBOOKS = {
   accounting: {
     name: "회계원리 시험 기출 분석",
-    url: "https://notebooklm.google.com/notebook/7c698308-fc7b-4223-a05c-b5c33cfbd70b?authuser=1",
-    shortId: "7c698308-fc7b-4223-a05c-b5c33cfbd70b",
+    url: "https://notebooklm.google.com/notebook/044421a8-0c54-4bbc-a444-283f9adfede2?authuser=1",
+    shortId: "044421a8-0c54-4bbc-a444-283f9adfede2",
     topics: ["회계원리", "주택관리사보"]
   },
   facility: {
     name: "시설개론 시험 기출 분석",
-    url: "https://notebooklm.google.com/notebook/7c698308-fc7b-4223-a05c-b5c33cfbd70b?authuser=1",
-    shortId: "7c698308-fc7b-4223-a05c-b5c33cfbd70b",
+    url: "https://notebooklm.google.com/notebook/ceb768bf-29fd-4b79-a784-003c8508fe9f?authuser=1",
+    shortId: "ceb768bf-29fd-4b79-a784-003c8508fe9f",
     topics: ["시설개론", "주택관리사보"]
   },
   civil: {
