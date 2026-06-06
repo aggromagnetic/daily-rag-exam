@@ -977,7 +977,7 @@ async function main() {
 
   // 0. 인터넷 대기 검사 (수면 대기 보정)
   try {
-    await waitForInternetConnection();
+    await waitForInternetConnection(36, 5000);
     console.log("⏳ 네트워크 및 DNS 안정화를 위해 20초간 추가 대기합니다...");
     await sleep(20000);
   } catch (err) {
