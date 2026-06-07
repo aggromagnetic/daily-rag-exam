@@ -866,8 +866,21 @@ ${isFirstStep ? `
       } catch (err) {
         retryCount++;
         console.warn(`⚠️ [${subjectName}] [Step ${i + 1}] 시도 ${retryCount}회 실패:`, err.message);
+        
+        // 💡 [네트워크 오류 자가치유] 인터넷 순단/지연 대응을 위해 
+        // 실패 시 세션 ID를 리셋하여 다음 재시도 시 깨끗한 새 브라우저 페이지로 기동하도록 유도합니다.
+        sessionId = null;
+
         if (retryCount >= maxRetries) {
           throw new Error(`RAG [Step ${i + 1}] 추출 최종 실패 (시도: ${retryCount}회): ${err.message}`);
+        }
+
+        // 💡 재시도 전 인터넷 연결이 원활히 회복되었는지 12회(총 1분) 동안 점검합니다.
+        try {
+          console.log(`📡 [자가치유] 네트워크 연결 상태 재확인 중...`);
+          await waitForInternetConnection(12, 5000);
+        } catch (netErr) {
+          console.warn(`⚠️ [자가치유] 네트워크 재연결 지연 경고:`, netErr.message);
         }
       }
     }
