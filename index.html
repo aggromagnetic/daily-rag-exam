@@ -62,6 +62,20 @@
                   <span class="stat-val" id="stat-today-exam-status">대기 중</span>
                   <span class="stat-lbl">오늘의 시험지 상태</span>
                 </div>
+                <div class="stat-box">
+                  <div style="display: flex; align-items: baseline; gap: 0.35rem;">
+                    <span class="stat-val" id="stat-today-cost">0원</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);" id="stat-today-cost-usd">($0.0000)</span>
+                  </div>
+                  <span class="stat-lbl">오늘 API 요금</span>
+                </div>
+                <div class="stat-box">
+                  <div style="display: flex; align-items: baseline; gap: 0.35rem;">
+                    <span class="stat-val" id="stat-accumulated-cost" style="color: var(--neon-emerald); text-shadow: 0 0 10px var(--neon-emerald-glow);">0원</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);" id="stat-accumulated-cost-usd">($0.0000)</span>
+                  </div>
+                  <span class="stat-lbl">누적 API 요금</span>
+                </div>
               </div>
             </div>
 
@@ -247,12 +261,22 @@
                   📊 Gemini API 사용 비용 추정
                 </h3>
                 <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
-                  정밀 교정용 <strong style="color: var(--text-main);">gemini-2.5-pro</strong> 모델의 누적 사용량 추정치입니다.
+                  정밀 교정용 <strong style="color: var(--text-main);">gemini-3.1-pro</strong> 모델의 사용량 추정치입니다.
                 </div>
                 <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-glass); border-radius: 12px; padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem;">
+                  <!-- 오늘 요금 -->
                   <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">오늘 요금 (KRW)</span>
+                    <span style="font-size: 1.15rem; font-weight: 700; color: var(--neon-blue);" id="cost-today-krw">0원</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed var(--border-glass); padding-top: 0.5rem; margin-bottom: 0.25rem;">
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">오늘 요금 (USD)</span>
+                    <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-main);" id="cost-today-usd">$0.0000</span>
+                  </div>
+                  <!-- 누적 요금 -->
+                  <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-glass); padding-top: 0.75rem;">
                     <span style="font-size: 0.8rem; color: var(--text-muted);">누적 요금 (KRW)</span>
-                    <span style="font-size: 1.15rem; font-weight: 700; color: var(--neon-emerald);" id="cost-accumulated-krw">0원</span>
+                    <span style="font-size: 1.1rem; font-weight: 700; color: var(--neon-emerald);" id="cost-accumulated-krw">0원</span>
                   </div>
                   <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed var(--border-glass); padding-top: 0.5rem;">
                     <span style="font-size: 0.8rem; color: var(--text-muted);">누적 요금 (USD)</span>

@@ -230,7 +230,8 @@ body {
 
 .dashboard-stats-row {
   display: flex;
-  gap: 2rem;
+  flex-wrap: wrap;
+  gap: 1.25rem;
   margin-top: 1.5rem;
 }
 
