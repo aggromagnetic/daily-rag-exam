@@ -8,7 +8,8 @@ import {
   fetchExamContent,
   fetchGistIncorrect,
   updateGistIncorrect,
-  createGistIncorrect
+  createGistIncorrect,
+  fetchApiUsage
 } from './github-service.js';
 import { parseMarkdownQuiz } from './quiz-parser.js';
 
@@ -648,6 +649,9 @@ async function loadIncorrectList() {
     return;
   }
 
+  // API 비용 추정 정보 로드 호출
+  loadApiUsageData();
+
   const accList = document.getElementById('list-accounting-incorrect');
   const facList = document.getElementById('list-facility-incorrect');
   const civList = document.getElementById('list-civil-incorrect');
@@ -679,6 +683,38 @@ async function loadIncorrectList() {
     accList.innerHTML = `<div class="empty-placeholder error">연동 실패: ${error.message}</div>`;
     facList.innerHTML = `<div class="empty-placeholder error">연동 실패: ${error.message}</div>`;
     if (civList) civList.innerHTML = `<div class="empty-placeholder error">연동 실패: ${error.message}</div>`;
+  }
+}
+
+// 4-1-2. Gemini API 비용 추정 정보 로딩 및 UI 갱신
+async function loadApiUsageData() {
+  const krwEl = document.getElementById('cost-accumulated-krw');
+  const usdEl = document.getElementById('cost-accumulated-usd');
+  const alertEl = document.getElementById('lbl-cost-alert');
+
+  if (!krwEl || !usdEl) return;
+
+  try {
+    const data = await fetchApiUsage();
+    const usd = data.total_cost_usd || 0.0;
+    const krw = data.total_cost_krw || 0;
+
+    krwEl.innerText = `${krw.toLocaleString()}원`;
+    usdEl.innerText = `$${usd.toFixed(4)}`;
+
+    if (alertEl) {
+      if (krw > 5000) {
+        alertEl.innerHTML = `⚠️ 누적액 5,000원 초과! (비용 과다 주의)`;
+        alertEl.style.color = '#ff6b6b';
+        alertEl.style.fontWeight = 'bold';
+      } else {
+        alertEl.innerHTML = `• 누적액 5,000원 초과 시 경고가 표시됩니다.`;
+        alertEl.style.color = 'var(--text-muted)';
+        alertEl.style.fontWeight = 'normal';
+      }
+    }
+  } catch (e) {
+    console.warn("⚠️ API 요금 데이터 로딩 실패:", e);
   }
 }
 

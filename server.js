@@ -482,6 +482,23 @@ app.post('/api/submit-test', (req, res) => {
   }
 });
 
+// 7. API 사용 비용 추정 정보 조회
+app.get('/api/api-usage', (req, res) => {
+  try {
+    const USAGE_PATH = path.resolve('public', 'daily_tests', 'api_usage.json');
+    const defaultUsage = {
+      total_cost_usd: 0.0,
+      total_cost_krw: 0,
+      last_updated: new Date().toISOString(),
+      history: []
+    };
+    const usageData = loadJson(USAGE_PATH, defaultUsage);
+    res.json({ success: true, usage: usageData });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 // 서버 기동
 app.listen(PORT, () => {
   console.log(`🚀 [API Server] Express가 포트 ${PORT}에서 정상 작동 중입니다!`);

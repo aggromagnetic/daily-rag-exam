@@ -138,3 +138,22 @@ export async function createGistIncorrect(token) {
   const gist = await res.json();
   return gist.id; // 신규 생성된 Gist ID 반환
 }
+
+/**
+ * 6. 📊 Gemini API 사용 비용 조회 (정적 api_usage.json 조회)
+ */
+export async function fetchApiUsage() {
+  try {
+    const baseUrl = import.meta.env.BASE_URL || '/';
+    const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+    const res = await fetch(`${cleanBase}daily_tests/api_usage.json`);
+    if (!res.ok) {
+      return { total_cost_usd: 0.0, total_cost_krw: 0 };
+    }
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.warn('⚠️ api_usage.json 조회 실패', error);
+    return { total_cost_usd: 0.0, total_cost_krw: 0 };
+  }
+}
