@@ -347,9 +347,6 @@ function showSubView(viewId) {
 // 2. 📊 학습 대시보드 데이터 바인딩
 // -------------------------------------------------------------
 async function loadDashboardData() {
-  // API 비용 추정 정보 로딩
-  loadApiUsageData();
-
   // 1. 오늘의 시험지 상태 (KST 기준 실시간 동적 판별)
   try {
     const tests = await fetchExamsList();
@@ -691,21 +688,13 @@ async function loadIncorrectList() {
 
 // 4-1-2. Gemini API 비용 추정 정보 로딩 및 UI 갱신
 async function loadApiUsageData() {
-  // 오답 수첩 사이드바 영역 엘리먼트
   const krwEl = document.getElementById('cost-accumulated-krw');
   const usdEl = document.getElementById('cost-accumulated-usd');
   const todayKrwEl = document.getElementById('cost-today-krw');
   const todayUsdEl = document.getElementById('cost-today-usd');
   const alertEl = document.getElementById('lbl-cost-alert');
 
-  // 홈페이지 메인 대시보드 영역 엘리먼트
-  const dbTodayKrwEl = document.getElementById('stat-today-cost');
-  const dbTodayUsdEl = document.getElementById('stat-today-cost-usd');
-  const dbAccumKrwEl = document.getElementById('stat-accumulated-cost');
-  const dbAccumUsdEl = document.getElementById('stat-accumulated-cost-usd');
-
-  // 어느 한 곳이라도 업데이트 대상이 있으면 데이터 로드 진행
-  if (!krwEl && !dbTodayKrwEl && !dbAccumKrwEl) return;
+  if (!krwEl || !usdEl) return;
 
   try {
     const data = await fetchApiUsage();
@@ -726,17 +715,12 @@ async function loadApiUsageData() {
       }
     }
 
-    // 1. 오답 수첩 사이드바 UI 반영
-    if (krwEl) krwEl.innerText = `${krw.toLocaleString()}원`;
-    if (usdEl) usdEl.innerText = `$${usd.toFixed(4)}`;
+    // UI 반영 (오답 수첩 사이드바)
+    krwEl.innerText = `${krw.toLocaleString()}원`;
+    usdEl.innerText = `$${usd.toFixed(4)}`;
+    
     if (todayKrwEl) todayKrwEl.innerText = `${todayKrw.toLocaleString()}원`;
     if (todayUsdEl) todayUsdEl.innerText = `$${todayUsd.toFixed(4)}`;
-
-    // 2. 홈페이지 메인 대시보드 UI 반영
-    if (dbTodayKrwEl) dbTodayKrwEl.innerText = `${todayKrw.toLocaleString()}원`;
-    if (dbTodayUsdEl) dbTodayUsdEl.innerText = `($${todayUsd.toFixed(4)})`;
-    if (dbAccumKrwEl) dbAccumKrwEl.innerText = `${krw.toLocaleString()}원`;
-    if (dbAccumUsdEl) dbAccumUsdEl.innerText = `($${usd.toFixed(4)})`;
 
     if (alertEl) {
       if (krw > 5000) {
