@@ -1,6 +1,124 @@
 {
-  "total_cost_usd": 0.0,
-  "total_cost_krw": 0,
-  "last_updated": "2026-06-07T08:33:00.000Z",
-  "history": []
+  "total_cost_usd": 0.8173100000000001,
+  "total_cost_krw": 1151,
+  "last_updated": "2026-06-08T01:46:05.077Z",
+  "history": [
+    {
+      "date": "2026-06-08",
+      "timestamp": "2026-06-08T01:01:15.039Z",
+      "subject": "회계원리",
+      "input_tokens": 6958,
+      "output_tokens": 4647,
+      "cost_usd": 0.0319325,
+      "cost_krw": 45
+    },
+    {
+      "date": "2026-06-08",
+      "timestamp": "2026-06-08T01:13:17.192Z",
+      "subject": "회계원리",
+      "input_tokens": 6958,
+      "output_tokens": 4675,
+      "cost_usd": 0.032072500000000004,
+      "cost_krw": 45
+    },
+    {
+      "date": "2026-06-08",
+      "timestamp": "2026-06-08T01:14:03.740Z",
+      "subject": "회계원리",
+      "input_tokens": 6575,
+      "output_tokens": 4362,
+      "cost_usd": 0.03002875,
+      "cost_krw": 43
+    },
+    {
+      "date": "2026-06-08",
+      "timestamp": "2026-06-08T01:14:56.548Z",
+      "subject": "회계원리",
+      "input_tokens": 7097,
+      "output_tokens": 4868,
+      "cost_usd": 0.03321125,
+      "cost_krw": 47
+    },
+    {
+      "date": "2026-06-08",
+      "timestamp": "2026-06-08T01:15:38.882Z",
+      "subject": "회계원리",
+      "input_tokens": 7830,
+      "output_tokens": 5611,
+      "cost_usd": 0.0378425,
+      "cost_krw": 53
+    },
+    {
+      "date": "2026-06-08",
+      "timestamp": "2026-06-08T01:16:20.717Z",
+      "subject": "회계원리",
+      "input_tokens": 7195,
+      "output_tokens": 4865,
+      "cost_usd": 0.03331875,
+      "cost_krw": 47
+    },
+    {
+      "date": "2026-06-08",
+      "timestamp": "2026-06-08T01:17:06.759Z",
+      "subject": "회계원리",
+      "input_tokens": 7219,
+      "output_tokens": 5009,
+      "cost_usd": 0.03406875,
+      "cost_krw": 48
+    },
+    {
+      "date": "2026-06-08",
+      "timestamp": "2026-06-08T01:20:15.516Z",
+      "subject": "시설개론",
+      "input_tokens": 6354,
+      "output_tokens": 4023,
+      "cost_usd": 0.0280575,
+      "cost_krw": 40
+    },
+    {
+      "date": "2026-06-08",
+      "timestamp": "2026-06-08T01:23:09.108Z",
+      "subject": "시설개론",
+      "input_tokens": 7063,
+      "output_tokens": 4710,
+      "cost_usd": 0.03237875,
+      "cost_krw": 46
+    },
+    {
+      "date": "2026-06-08",
+      "timestamp": "2026-06-08T01:23:49.794Z",
+      "subject": "시설개론",
+      "input_tokens": 6504,
+      "output_tokens": 3406,
+      "cost_usd": 0.025160000000000002,
+      "cost_krw": 36
+    },
+    {
+      "date": "2026-06-08",
+      "timestamp": "2026-06-08T01:33:17.423Z",
+      "subject": "회계원리",
+      "input_tokens": 37450,
+      "output_tokens": 34794,
+      "cost_usd": 0.22078250000000002,
+      "cost_krw": 310
+    },
+    {
+      "date": "2026-06-08",
+      "timestamp": "2026-06-08T01:42:27.444Z",
+      "subject": "시설개론",
+      "input_tokens": 25972,
+      "output_tokens": 23904,
+      "cost_usd": 0.151985,
+      "cost_krw": 213
+    },
+    {
+      "date": "2026-06-08",
+      "timestamp": "2026-06-08T01:46:05.077Z",
+      "subject": "민법",
+      "input_tokens": 21933,
+      "output_tokens": 19811,
+      "cost_usd": 0.12647125,
+      "cost_krw": 178
+    }
+  ]
 }
