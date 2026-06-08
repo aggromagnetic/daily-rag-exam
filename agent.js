@@ -1150,10 +1150,11 @@ async function main() {
             fs.writeFileSync(htmlFilePath, interactiveHtml, "utf8");
             console.log(`✅ [${sub.name}] 프리미엄 퀴즈 HTML 최종 수확 및 저장 완료: ${htmlFilePath}`);
           } else {
-            console.warn(`⚠️ [${sub.name}] HTML 수확 실패 (컴파일러 결과 빈 문자열)`);
+            throw new Error(`HTML 수확 실패 (결과 빈 문자열)`);
           }
         } catch (htmlErr) {
           console.error(`🚨 [${sub.name}] HTML 수확 도중 에러 발생:`, htmlErr.message);
+          throw htmlErr; // 🚨 상위 catch로 에러를 전파하여 인덱스 갱신 및 Git Push 자동 배포를 강제 중단
         }
       }
     }
