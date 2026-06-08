@@ -309,9 +309,18 @@ function updateTestsIndex() {
       const htmlFilename = `${date}_${subject}_interactive.html`;
       const hasInteractive = fs.existsSync(path.join(DAILY_TESTS_DIR, htmlFilename));
 
+      // 파일 수정 시각 기준으로 KST(UTC+9) 기준 HH:mm 추출
+      const filePath = path.join(DAILY_TESTS_DIR, file);
+      const stat = fs.statSync(filePath);
+      const kstDate = new Date(stat.mtime.getTime() + 9 * 60 * 60 * 1000);
+      const hours = String(kstDate.getUTCHours()).padStart(2, '0');
+      const minutes = String(kstDate.getUTCMinutes()).padStart(2, '0');
+      const timeStr = `${hours}:${minutes}`;
+
       return {
         filename: file,
         date: date,
+        time: timeStr,
         subject: subject,
         interactive: hasInteractive,
         htmlFilename: hasInteractive ? htmlFilename : null

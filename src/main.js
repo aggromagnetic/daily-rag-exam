@@ -478,7 +478,7 @@ async function loadExamList() {
         card.innerHTML = `
           <span class="badge ${cardGlow}" style="margin-bottom: 0.75rem;">${test.subject}</span>
           <h3 class="exam-card-subject">${test.subject} 모의고사</h3>
-          <span class="exam-card-date">📅 출제일: ${test.date}</span>
+          <span class="exam-card-date">📅 출제일: ${test.date}${test.time ? ' ' + test.time : ''}</span>
           <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; width: 100%;">
             <button class="exam-start-btn" style="width: 100%; background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); border: 1px solid var(--border-glass); padding: 0.7rem; border-radius: 10px; color: var(--text-main); font-weight: 600; cursor: pointer;" data-file="${test.filename}">📋 문제집 전체 복사하기 (수동)</button>
             ${interactiveBtnMarkup}
