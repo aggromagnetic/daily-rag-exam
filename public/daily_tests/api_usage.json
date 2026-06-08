@@ -1,7 +1,7 @@
 {
-  "total_cost_usd": 0.8173100000000001,
-  "total_cost_krw": 1151,
-  "last_updated": "2026-06-08T01:46:05.077Z",
+  "total_cost_usd": 1.17796375,
+  "total_cost_krw": 1657,
+  "last_updated": "2026-06-08T21:39:30.726Z",
   "history": [
     {
       "date": "2026-06-08",
@@ -119,6 +119,24 @@
       "output_tokens": 19811,
       "cost_usd": 0.12647125,
       "cost_krw": 178
+    },
+    {
+      "date": "2026-06-09",
+      "timestamp": "2026-06-08T21:15:05.895Z",
+      "subject": "회계원리",
+      "input_tokens": 42677,
+      "output_tokens": 39397,
+      "cost_usd": 0.25033125,
+      "cost_krw": 351
+    },
+    {
+      "date": "2026-06-09",
+      "timestamp": "2026-06-08T21:39:30.726Z",
+      "subject": "민법",
+      "input_tokens": 18822,
+      "output_tokens": 17359,
+      "cost_usd": 0.11032249999999999,
+      "cost_krw": 155
     }
   ]
 }
