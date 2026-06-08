@@ -643,9 +643,10 @@
         if(userAnswers[currentIdx] === num) btnClass += " selected";
       }
 
+      const numSymbol = "①②③④⑤"[oIdx] || "";
       html += `
         <button class="${btnClass}" onclick="selectOption(${num})" ${isSolved ? 'disabled' : ''}>
-          <span class="num-prefix">①②③④⑤`[num] + `</span>
+          <span class="num-prefix">${numSymbol}</span>
           <span>${opt}</span>
         </button>
       `;
@@ -654,10 +655,11 @@
 
     if(isSolved) {
       const isCorrect = userAnswers[currentIdx] === item.ans;
+      const ansSymbol = "①②③④⑤"[item.ans - 1] || "";
       html += `
         <div class="feedback-box">
           <span class="fb-badge ${isCorrect ? 'correct' : 'wrong'}">${isCorrect ? '정답입니다' : '오답입니다'}</span>
-          <div class="fb-text">정답: ①②③④⑤`[item.ans] + `</div>
+          <div class="fb-text">정답: ${ansSymbol}</div>
           <div class="fb-desc"><strong>해설:</strong> ${item.comment}</div>
         </div>
       `;
