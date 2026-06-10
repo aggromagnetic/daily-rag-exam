@@ -1,6 +1,22 @@
 {
   "tests": [
     {
+      "filename": "2026-06-11_회계원리.md",
+      "date": "2026-06-11",
+      "time": "06:10",
+      "subject": "회계원리",
+      "interactive": true,
+      "htmlFilename": "2026-06-11_회계원리_interactive.html"
+    },
+    {
+      "filename": "2026-06-11_시설개론.md",
+      "date": "2026-06-11",
+      "time": "06:17",
+      "subject": "시설개론",
+      "interactive": true,
+      "htmlFilename": "2026-06-11_시설개론_interactive.html"
+    },
+    {
       "filename": "2026-06-10_회계원리.md",
       "date": "2026-06-10",
       "time": "06:14",
