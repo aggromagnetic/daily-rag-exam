@@ -680,7 +680,8 @@ async function runQuizGeneration(client, notebookId, subjectKey, subjectName, do
       .filter(w => w.length >= 2 && !['상편', '하편', '부문', '이론', '및', '등', '구조', '설비', '시공', '회계', '개론', '민법', '총칙', '물권법', '채권'].includes(w));
     
     const matchedHistoryItems = [];
-    for (const histText of subjectHistory) {
+    const recentHistory = subjectHistory.slice(-10); // 💡 직전대화 10개에 포함됐던 문제만 중복 배제 대상
+    for (const histText of recentHistory) {
       const histLines = histText.split('\n');
       for (const line of histLines) {
         const trimmedLine = line.trim();
@@ -703,34 +704,11 @@ async function runQuizGeneration(client, notebookId, subjectKey, subjectName, do
       partHistorySnippet = partHistorySnippet.substring(0, 600) + "... [일부 기출 생략]";
     }
 
-    // 💡 [개선: 당일 실시간 출제 완료된 문제 누적 메모리 (Intra-day Cumulative Memory)]
-    const todayPrevQuestions = [];
-    questionsChunks.forEach((chunk, cIdx) => {
-      const chunkLines = chunk.split('\n');
-      for (const line of chunkLines) {
-        const trimmed = line.trim();
-        // "1. 흙의 성질..." 이나 "25. 채권의..." 같은 문제 질문 라인 정밀 추출
-        const match = trimmed.match(/^\s*(\d+)[\.번]\s*(.+)$/);
-        if (match) {
-          let qText = match[2].trim();
-          const optionIndex = qText.search(/[①-⑤]/);
-          if (optionIndex !== -1) {
-            qText = qText.substring(0, optionIndex).trim();
-          }
-          todayPrevQuestions.push(`[오늘의 Step ${cIdx + 1}] Q${match[1]}: ${qText.substring(0, 70)}`);
-        }
-      }
-    });
-
-    const todayPrevSnippet = todayPrevQuestions.length > 0
-      ? todayPrevQuestions.join("\n")
-      : "없음 (오늘 최초 단계 출제)";
-
     console.log(`\n⚡ [${subjectName}] [Step ${i + 1}/${partitions.length}] RAG 질의 수행 중... (단원: ${part.title}, 출제수: ${part.count}문제)`);
     console.log(`ℹ️ [Step ${i + 1}] RAG 질의 전송 중... (세션 ID 보존 상태: ${sessionStatus})`);
     
     // 💡 디버깅용 CLI 콘솔 출력
-    console.log(`🎯 [Step ${i + 1} 메모리] 과거 기출 필터링 ${uniqueMatched.length}개 확보, 당일 출제이력 ${todayPrevQuestions.length}개 기억 완료.`);
+    console.log(`🎯 [Step ${i + 1} 메모리] 과거 기출 필터링 ${uniqueMatched.length}개 확보.`);
 
     let subpartInstructions = "";
     if (part.subparts && part.subparts.length > 0) {
@@ -744,41 +722,17 @@ async function runQuizGeneration(client, notebookId, subjectKey, subjectName, do
     }
 
     const prompt = `
-당신은 대한민국 주택관리사보 자격시험의 문제 데이터베이스 검색기이자 추출기입니다.
-노트북에 업로드된 기출문제, 모의고사, 특강 교안, 출제가능문제집 등 모든 PDF 소스 문서들에서 실제 시험문제 및 연습문제들을 지문/보기 글자 하나 바꾸지 말고 그대로 추출하여 **[제 ${i + 1}단계 분할 출제]** 파트를 작성해 주십시오.
-절대로 새로운 변형 문제를 스스로 만들거나 지어내지 마십시오. 오직 소스 문서들에 이미 작성되어 있는 실제 문제를 원형 그대로 추출해야 합니다. 이 과정에서 "${docGuideName}" 문서에 정리된 단원별 출제 비율 및 세부 문항 배분 요구사항을 준수하여 적절한 범위의 문제를 찾아 추출하십시오.
+당신은 주택관리사보 시험 문제 추출기입니다.
+노트북 소스 PDF들에서 실제 문제를 지문/보기 변경 없이 원형 그대로 ${part.count}문항 추출하십시오. (변형/창작 절대 금지, "${docGuideName}" 비중 준수)
 
-### [출제 및 구성 조건]
-1. **과목**: ${subjectName} (총 ${count}문항 중 이번 단계에서는 **${part.count}문항** 출제)
-2. **범위/단원**: ${part.title}${subpartInstructions}
-3. **문제 번호 시작**: 이 단계에서 출제할 문제 번호는 **${startQuestionNum}번부터 ${endQuestionNum}번까지**입니다. (각 문항의 번호는 반드시 '${startQuestionNum}. ', '${startQuestionNum + 1}. ' 와 같이 시작하여야 하며, 문제 번호를 생략하거나 다르게 매겨서는 절대로 안 됩니다!)
-${isFirstStep ? `
-4. **최우선 반영 사항 (오답 취약 개념 연계 추출)**:
-   다음 목록은 수험생이 최근에 틀린 오답 취약 개념입니다. 이 개념들과 관련성이 가장 높은 실제 문제를 소스 문서에서 우선적으로 검색하여 1~2문제 포함해 주십시오. (소스에 해당 개념의 문제가 있다면 우선 배치하되, 만약 소스에서 찾기 어렵다면 일반 단원 범위 기준 문제를 가져오십시오.)
-   ---
-   [오답 취약 개념 목록]
-   ${incorrectSnippet}
-   ---
-` : ''}
-4. **중복 배제 규칙 (극도로 중요 - 절대 동일 문제 출제 금지)**:
-   다음 리스트에 등장하는 질문, 보기 구조와 **완전히 동일하거나 극도로 유사한 문제는 절대로, 단 한 문제도 중복 추출해서는 안 됩니다.**
-   반드시 해당 단원 내에서 중복되지 않는 다른 문제를 선택하여 추출해 주십시오.
-   ---
-   [과거에 출제되었던 해당 단원 문제 목록 (중복 배제 필수)]
-   ${partHistorySnippet}
-   
-   [오늘 앞 단계에서 방금 출제된 문제 목록 (중복 배제 필수)]
-   ${todayPrevSnippet}
-   ---
-5. **문제집 서식 및 규칙 (매우 중요)**:
-   - 인사말, 출제 경향 분석, 요약 등 문제와 해설 외의 사족은 **절대로** 작성하지 마십시오.
-   - 텍스트의 맨 처음은 아무런 잡설 없이 곧바로 '## [시험 문제지]' 헤더로 시작하십시오.
-   - 각 문항은 **반드시** '${startQuestionNum}. ', '${startQuestionNum + 1}. ' 와 같이 **아라비아 숫자와 마침표(온점) 및 공백**으로 시작하여야 합니다. 문제 번호를 생략하고 바로 문제 지문을 작성하는 것은 **절대로 금지**됩니다.
-   - 보기는 반드시 '①', '②', '③', '④', '⑤' 기호만을 사용하고, 각 보기는 한 줄에 하나씩 줄바꿈하여 작성하십시오.
-   - 문제 본문에 박스 조건(ㄱ, ㄴ, ㄷ, ㄹ / ㉠, ㉡, ㉢)이 있다면 절대 한 줄로 붙이지 말고 줄바꿈을 넣어 렌더링하십시오.
-   - **반드시** 이 파트의 마지막 섹션에 이번에 추출한 문항들의 '## [정답 및 상세 해설]'을 작성해 주십시오.
-   - 각 문항의 정답 마커는 반드시 '정답: ①' 형태로 명확하게 표기하십시오.
-   - 해설은 소스 문서에 존재한다면 그대로 첨부하고, 만약 소스 문서에 해설이 없고 정답만 기록되어 있다면 억지로 창작하지 말고 해설을 생략하거나 정답만 표기해 주십시오.
+1. 범위/단원: ${part.title}${subpartInstructions}
+2. 번호 시작: ${startQuestionNum}번 ~ ${endQuestionNum}번 ('${startQuestionNum}. ' 형식 준수)
+3. 보기 기호: ①~⑤ 사용 (한 줄에 하나씩), 박스 조건(ㄱ, ㄴ, ㄷ / ㉠, ㉡, ㉢)은 개별 줄바꿈 필수.
+4. 오답 반영: 아래 오답 취약 개념 관련 실제 문제를 우선적으로 1~2문제 포함 (전체 ${part.count}문항수 유지).
+   - [오답 개념]: ${selectedIncorrect.map(item => item.concept).join(", ") || "없음"}
+5. 중복 금지: 다음 문제들과 중복/유사한 문제는 철저히 제외.
+   - [과거 출제]: ${partHistorySnippet}
+6. 정답/해설: 문제 뒤 '## [정답 및 상세 해설]' 추가, '정답: ①' 형식 표기. 소스 해설을 그대로 기재 (해설 창작 금지, 소스에 없으면 생략). 사족 절대 금지.
 `;
 
     let stepMarkdown = "";
