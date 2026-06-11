@@ -1,7 +1,7 @@
 {
-  "total_cost_usd": 2.1518325000000003,
-  "total_cost_krw": 3024,
-  "last_updated": "2026-06-10T21:17:15.912Z",
+  "total_cost_usd": 2.2567150000000002,
+  "total_cost_krw": 3171,
+  "last_updated": "2026-06-11T02:38:55.511Z",
   "history": [
     {
       "date": "2026-06-08",
@@ -200,6 +200,15 @@
       "output_tokens": 13985,
       "cost_usd": 0.08777750000000001,
       "cost_krw": 123
+    },
+    {
+      "date": "2026-06-11",
+      "timestamp": "2026-06-11T02:38:55.511Z",
+      "subject": "민법",
+      "input_tokens": 18514,
+      "output_tokens": 16348,
+      "cost_usd": 0.10488249999999999,
+      "cost_krw": 147
     }
   ]
 }
