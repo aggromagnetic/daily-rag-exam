@@ -673,42 +673,8 @@ async function runQuizGeneration(client, notebookId, subjectKey, subjectName, do
     const isFirstStep = (i === 0);
     const sessionStatus = sessionId ? "유지 중" : "최초 시작";
 
-    // 💡 [개선: 단원 맞춤형 핀포인트 기출 이력 필터링 (Curated Topic History)]
-    // 단원 제목에서 핵심 키워드 추출 (2글자 이상, 공통 메타어 제외)
-    const keywords = part.title
-      .split(/[,\s\(\)\/]+/)
-      .filter(w => w.length >= 2 && !['상편', '하편', '부문', '이론', '및', '등', '구조', '설비', '시공', '회계', '개론', '민법', '총칙', '물권법', '채권'].includes(w));
-    
-    const matchedHistoryItems = [];
-    const recentHistory = subjectHistory.slice(-10); // 💡 직전대화 10개에 포함됐던 문제만 중복 배제 대상
-    for (const histText of recentHistory) {
-      const histLines = histText.split('\n');
-      for (const line of histLines) {
-        const trimmedLine = line.trim();
-        if (!trimmedLine || !trimmedLine.includes('Q')) continue;
-        
-        // 키워드가 1개 이상 겹치면 기출 선별 수집
-        const hasKeyword = keywords.some(kw => trimmedLine.includes(kw));
-        if (hasKeyword) {
-          matchedHistoryItems.push(trimmedLine);
-        }
-      }
-    }
-    
-    // 최근 12개 문항 요약으로 슬라이딩 윈도우 구성 (글자수 제한 600자 마킹)
-    const uniqueMatched = Array.from(new Set(matchedHistoryItems)).reverse().slice(0, 12);
-    let partHistorySnippet = uniqueMatched.length > 0
-      ? uniqueMatched.join("\n")
-      : "없음 (해당 단원 최초 출제 혹은 관련 기출 요약 없음)";
-    if (partHistorySnippet.length > 600) {
-      partHistorySnippet = partHistorySnippet.substring(0, 600) + "... [일부 기출 생략]";
-    }
-
     console.log(`\n⚡ [${subjectName}] [Step ${i + 1}/${partitions.length}] RAG 질의 수행 중... (단원: ${part.title}, 출제수: ${part.count}문제)`);
     console.log(`ℹ️ [Step ${i + 1}] RAG 질의 전송 중... (세션 ID 보존 상태: ${sessionStatus})`);
-    
-    // 💡 디버깅용 CLI 콘솔 출력
-    console.log(`🎯 [Step ${i + 1} 메모리] 과거 기출 필터링 ${uniqueMatched.length}개 확보.`);
 
     let subpartInstructions = "";
     if (part.subparts && part.subparts.length > 0) {
@@ -730,8 +696,7 @@ async function runQuizGeneration(client, notebookId, subjectKey, subjectName, do
 3. 보기 기호: ①~⑤ 사용 (한 줄에 하나씩), 박스 조건(ㄱ, ㄴ, ㄷ / ㉠, ㉡, ㉢)은 개별 줄바꿈 필수.
 4. 오답 반영: 아래 오답 취약 개념 관련 실제 문제를 우선적으로 1~2문제 포함 (전체 ${part.count}문항수 유지).
    - [오답 개념]: ${selectedIncorrect.map(item => item.concept).join(", ") || "없음"}
-5. 중복 금지: 다음 문제들과 중복/유사한 문제는 철저히 제외.
-   - [과거 출제]: ${partHistorySnippet}
+5. 중복 금지: 기존 출제했던 문제(직전대화 10개에 포함됐던 문제)는 제외.
 6. 정답/해설: 문제 뒤 '## [정답 및 상세 해설]' 추가, '정답: ①' 형식 표기. 소스 해설을 그대로 기재 (해설 창작 금지, 소스에 없으면 생략). 사족 절대 금지.
 `;
 
