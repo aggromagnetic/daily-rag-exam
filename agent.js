@@ -178,8 +178,6 @@ function extractQuestionSummaries(markdown) {
 }
 
 
-
-
 // 🎲 결정론적 시드 기반 의사난수 생성기 (xorshift 기법으로 세션/날짜 불변 난수 보장)
 function createSeededRandom(seedStr) {
   let h = 0;
@@ -374,34 +372,59 @@ const SUBJECT_PARTITIONS = {
   accounting: [
     {
       step: 1,
-      title: "재무회계 상편",
-      count: 15,
+      title: "재무회계 상편 1 (회계의 기초, 개념체계, 재무제표 표시 및 재무비율분석)",
+      count: 6,
       subparts: [
-        { name: "회계의 기초 및 개념체계 (출제비중 12.5%)", weight: 12.5 },
-        { name: "재무제표 표시 및 재무비율분석 (출제비중 10.0%)", weight: 10.0 },
-        { name: "금융자산 - 현금, 수취채권, 기타금융자산 (출제비중 13.5%)", weight: 13.5 },
-        { name: "재고자산 (출제비중 10.0%)", weight: 10.0 },
-        { name: "유형자산, 무형자산 및 투자부동산 (출제비중 12.5%)", weight: 12.5 }
+        { name: "회계의 기초 (출제비중 6.5%)", weight: 6.5 },
+        { name: "재무보고를 위한 개념체계 (출제비중 6.0%)", weight: 6.0 },
+        { name: "재무제표 및 재무비율분석 (출제비중 10.0%)", weight: 10.0 }
       ]
     },
     {
       step: 2,
-      title: "재무회계 하편",
-      count: 11,
+      title: "재무회계 상편 2 (금융자산 1, 금융자산 2)",
+      count: 6,
       subparts: [
-        { name: "부채 (금융부채, 충당부채 등, 출제비중 6.5%)", weight: 6.5 },
-        { name: "자본회계 (출제비중 6.5%)", weight: 6.5 },
-        { name: "수익 비용 회계 (출제비중 7.0%)", weight: 7.0 },
-        { name: "회계변경과 오류수정 (출제비중 1.5%)", weight: 1.5 },
-        { name: "현금흐름표 (출제비중 10.0%)", weight: 10.0 }
+        { name: "금융자산 1 (현금 및 수취채권 등, 출제비중 9.5%)", weight: 9.5 },
+        { name: "금융자산 2 (기타 금융자산 등, 출제비중 4.0%)", weight: 4.0 }
       ]
     },
     {
       step: 3,
-      title: "원가관리회계",
-      count: 9,
+      title: "재무회계 상편 3 (재고자산, 유형자산, 무형자산과 투자부동산)",
+      count: 6,
       subparts: [
-        { name: "원가의 기초 및 배분 (출제비중 2.8%)", weight: 2.8 },
+        { name: "재고자산 (출제비중 10.0%)", weight: 10.0 },
+        { name: "유형자산 (출제비중 9.5%)", weight: 9.5 },
+        { name: "무형자산과 투자부동산 (출제비중 3.0%)", weight: 3.0 }
+      ]
+    },
+    {
+      step: 4,
+      title: "재무회계 하편 1 (부채, 자본회계)",
+      count: 6,
+      subparts: [
+        { name: "부채 (금융부채, 충당부채 등, 출제비중 6.5%)", weight: 6.5 },
+        { name: "자본회계 (출제비중 6.5%)", weight: 6.5 }
+      ]
+    },
+    {
+      step: 5,
+      title: "재무회계 하편 2 (수익 비용 회계, 회계변경과 오류수정, 현금흐름표 등)",
+      count: 6,
+      subparts: [
+        { name: "수익 비용 회계 (출제비중 7.0%)", weight: 7.0 },
+        { name: "회계변경과 오류수정 (출제비중 1.5%)", weight: 1.5 },
+        { name: "현금흐름표 및 재무제표 표시/분석 (출제비중 10.0%)", weight: 10.0 }
+      ]
+    },
+    {
+      step: 6,
+      title: "원가관리회계 (원가의 기초/배분, 개별/종합/전부/변동/표준원가계산, CVP분석, 단기의사결정)",
+      count: 5,
+      subparts: [
+        { name: "원가의 기초 (출제비중 0.8%)", weight: 0.8 },
+        { name: "원가의 배분 (출제비중 2.0%)", weight: 2.0 },
         { name: "개별원가계산과 종합원가계산 (출제비중 3.0%)", weight: 3.0 },
         { name: "전부원가계산과 변동원가계산 (출제비중 2.5%)", weight: 2.5 },
         { name: "표준원가계산 (출제비중 2.5%)", weight: 2.5 },
@@ -413,34 +436,55 @@ const SUBJECT_PARTITIONS = {
   facility: [
     {
       step: 1,
-      title: "건축구조",
-      count: 15,
+      title: "건축구조 1 (건축구조 총론, 토공사 및 기초구조, 조적구조, 적산 및 견적)",
+      count: 6,
       subparts: [
         { name: "건축구조 총론 (출제비중 4.5%)", weight: 4.5 },
         { name: "토공사 및 기초구조 (출제비중 3.5%)", weight: 3.5 },
         { name: "조적구조 (출제비중 3.5%)", weight: 3.5 },
-        { name: "철근콘크리트구조 (출제비중 8.0%)", weight: 8.0 },
-        { name: "강구조/철골구조 (출제비중 6.0%)", weight: 6.0 },
-        { name: "방수 및 방습공사 (출제비중 5.0%)", weight: 5.0 },
-        { name: "지붕 및 홈통공사 (출제비중 2.0%)", weight: 2.0 },
-        { name: "창호 및 유리공사 (출제비중 5.5%)", weight: 5.5 },
-        { name: "미장 및 타일공사 (출제비중 4.5%)", weight: 4.5 },
-        { name: "도장 및 수장공사 (출제비중 2.5%)", weight: 2.5 },
         { name: "적산 및 견적 (출제비중 5.0%)", weight: 5.0 }
       ]
     },
     {
       step: 2,
-      title: "건축설비",
-      count: 15,
+      title: "건축구조 2 (철근콘크리트구조, 강구조)",
+      count: 6,
+      subparts: [
+        { name: "철근콘크리트구조 (출제비중 8.0%)", weight: 8.0 },
+        { name: "강구조/철골구조 (출제비중 6.0%)", weight: 6.0 }
+      ]
+    },
+    {
+      step: 3,
+      title: "건축구조 3 (방수/방습, 지붕/홈통, 창호/유리, 미장/타일, 도장/수장)",
+      count: 6,
+      subparts: [
+        { name: "방수 및 방습공사 (출제비중 5.0%)", weight: 5.0 },
+        { name: "지붕 및 홈통공사 (출제비중 2.0%)", weight: 2.0 },
+        { name: "창호 및 유리공사 (출제비중 5.5%)", weight: 5.5 },
+        { name: "미장 및 타일공사 (출제비중 4.5%)", weight: 4.5 },
+        { name: "도장 및 수장공사 (출제비중 2.5%)", weight: 2.5 }
+      ]
+    },
+    {
+      step: 4,
+      title: "건축설비 1 (건축설비총론, 급수설비, 오수정화설비, 가스설비, 소방설비)",
+      count: 6,
       subparts: [
         { name: "건축설비총론 (출제비중 7.0%)", weight: 7.0 },
         { name: "급수설비 (출제비중 7.0%)", weight: 7.0 },
-        { name: "배수 통기 및 위생기구설비 (출제비중 4.5%)", weight: 4.5 },
         { name: "오수정화설비 (출제비중 2.0%)", weight: 2.0 },
         { name: "가스설비 (출제비중 2.0%)", weight: 2.0 },
-        { name: "소방설비 (출제비중 5.5%)", weight: 5.5 },
+        { name: "소방설비 (출제비중 5.5%)", weight: 5.5 }
+      ]
+    },
+    {
+      step: 5,
+      title: "건축설비 2 (급탕, 배수통기/위생기구, 난방/냉동, 공기조화/환기, 전기/수송, 홈네트워크/에너지)",
+      count: 6,
+      subparts: [
         { name: "급탕설비 (출제비중 4.5%)", weight: 4.5 },
+        { name: "배수 통기 및 위생기구설비 (출제비중 4.5%)", weight: 4.5 },
         { name: "난방 및 냉동설비 (출제비중 5.0%)", weight: 5.0 },
         { name: "공기조화 및 환기설비 (출제비중 1.5%)", weight: 1.5 },
         { name: "전기 및 수송설비 (출제비중 7.0%)", weight: 7.0 },
@@ -451,64 +495,65 @@ const SUBJECT_PARTITIONS = {
   civil: [
     {
       step: 1,
-      title: "민법총칙",
-      count: 18,
+      title: "민법총칙 상편 (민법서론, 권리와 의무, 자연인, 법인)",
+      count: 6,
       subparts: [
-        { name: "민법서론 및 권리와 의무 (출제비중 7.0%)", weight: 7.0 },
+        { name: "민법서론 (출제비중 2.5%)", weight: 2.5 },
+        { name: "권리와 의무 (출제비중 4.5%)", weight: 4.5 },
         { name: "자연인 (출제비중 8.0%)", weight: 8.0 },
-        { name: "법인 (출제비중 9.5%)", weight: 9.5 },
-        { name: "권리의 객체 및 권리변동 서설 (출제비중 5.5%)", weight: 5.5 },
-        { name: "법률행위 일반 (출제비중 6.0%)", weight: 6.0 },
-        { name: "의사표시 (출제비중 7.5%)", weight: 7.5 },
-        { name: "법률행위의 대리 (출제비중 5.5%)", weight: 5.5 },
-        { name: "법률행위의 무효와 취소 및 조건과 기한 (출제비중 5.5%)", weight: 5.5 },
-        { name: "기간과 소멸시효 (출제비중 5.0%)", weight: 5.0 }
+        { name: "법인 (출제비중 9.5%)", weight: 9.5 }
       ]
     },
     {
       step: 2,
-      title: "물권법 및 채권법",
-      count: 12,
+      title: "민법총칙 중편 (권리의 객체, 권리변동 서설, 법률행위 일반, 의사표시)",
+      count: 6,
       subparts: [
-        { name: "물권법 총론 및 물권의 변동 (출제비중 5.0%)", weight: 5.0 },
-        { name: "점유권 및 소유권 (출제비중 7.0%)", weight: 7.0 },
-        { name: "용익물권 및 담보물권 (출제비중 9.0%)", weight: 9.0 },
-        { name: "채권법 총론 및 계약법 총론 (출제비중 8.0%)", weight: 8.0 },
-        { name: "계약법 각론 - 매매, 임대차, 도급, 위임 (출제비중 7.0%)", weight: 7.0 },
-        { name: "부당이득 및 불법행위 (출제비중 4.5%)", weight: 4.5 }
+        { name: "권리의 객체 (출제비중 4.0%)", weight: 4.0 },
+        { name: "권리변동 서설 (출제비중 1.5%)", weight: 1.5 },
+        { name: "법률행위 일반 (출제비중 6.0%)", weight: 6.0 },
+        { name: "의사표시 (출제비중 7.5%)", weight: 7.5 }
+      ]
+    },
+    {
+      step: 3,
+      title: "민법총칙 하편 (법률행위의 대리, 무효와 취소, 조건과 기한, 기간과 소멸시효)",
+      count: 6,
+      subparts: [
+        { name: "법률행위의 대리 (출제비중 5.5%)", weight: 5.5 },
+        { name: "법률행위의 무효와 취소 (출제비중 3.0%)", weight: 3.0 },
+        { name: "조건과 기한 (출제비중 2.5%)", weight: 2.5 },
+        { name: "기간과 소멸시효 (출제비중 5.0%)", weight: 5.0 }
+      ]
+    },
+    {
+      step: 4,
+      title: "물권법 (물권법 총론, 물권의 변동, 점유권, 소유권, 용익물권, 담보물권)",
+      count: 6,
+      subparts: [
+        { name: "물권법 총론 (출제비중 1.0%)", weight: 1.0 },
+        { name: "물권의 변동 (출제비중 4.0%)", weight: 4.0 },
+        { name: "점유권 (출제비중 1.5%)", weight: 1.5 },
+        { name: "소유권 (출제비중 5.5%)", weight: 5.5 },
+        { name: "용익물권 (출제비중 3.0%)", weight: 3.0 },
+        { name: "담보물권 (출제비중 6.0%)", weight: 6.0 }
+      ]
+    },
+    {
+      step: 5,
+      title: "채권법 (채권법 총론, 계약법 총론, 계약법 각론 - 매매/임대차, 도급과 위임, 부당이득과 불법행위)",
+      count: 6,
+      subparts: [
+        { name: "채권법 총론 (출제비중 4.5%)", weight: 4.5 },
+        { name: "계약법 총론 (출제비중 3.5%)", weight: 3.5 },
+        { name: "계약법 각론 - 매매 (출제비중 3.5%)", weight: 3.5 },
+        { name: "임대차 (출제비중 1.0%)", weight: 1.0 },
+        { name: "도급과 위임 (출제비중 2.5%)", weight: 2.5 },
+        { name: "부당이득과 불법행위 (출제비중 4.5%)", weight: 4.5 }
       ]
     }
   ]
 };
-
-// 🎯 오답 키워드를 분석하여 현재 단계(Step) 범위와 매칭되는 오답만 선별하는 필터
-function getIncorrectForPartition(subjectIncorrect, subjectKey, step) {
-  if (!subjectIncorrect || subjectIncorrect.length === 0) return [];
-  
-  const keywordsMap = {
-    accounting: {
-      1: ["자산", "개념체계", "금융자산", "수취채권", "현금", "재고", "유형", "무형", "투자부동산", "비율분석", "재무제표"],
-      2: ["부채", "자본", "수익", "비용", "변경", "오류", "흐름표", "결산"],
-      3: ["원가", "배분", "cvp", "의사결정", "변동", "종합", "개별", "표준"]
-    },
-    facility: {
-      1: ["구조", "토공사", "기초", "조적", "철근", "콘크리트", "강구조", "철골", "방수", "방습", "지붕", "홈통", "창호", "유리", "미장", "타일", "도장", "수장", "적산", "견적", "벽돌"],
-      2: ["설비", "급수", "배수", "위생", "오수", "정화", "가스", "소방", "급탕", "난방", "냉동", "공기조화", "환기", "전기", "수송", "네트워크", "에너지"]
-    },
-    civil: {
-      1: ["총칙", "서론", "권리", "의무", "자연인", "능력", "미성년", "성년", "한정", "법인", "객체", "물건", "변동", "행위", "의사표시", "비진의", "허위", "착오", "사기", "강박", "대리", "무효", "취소", "조건", "기한", "시효", "소멸"],
-      2: ["물권", "점유", "소유", "지상", "지역", "전세", "유치", "저당", "담보", "채권", "계약", "청약", "승낙", "이행", "위험", "해제", "해지", "매매", "임대", "도급", "위임", "부당", "불법", "채무", "배상", "손해"]
-    }
-  };
-  
-  const keywords = keywordsMap[subjectKey]?.[step];
-  if (!keywords) return subjectIncorrect;
-  
-  return subjectIncorrect.filter(item => {
-    const conceptLower = item.concept.toLowerCase();
-    return keywords.some(kw => conceptLower.includes(kw));
-  });
-}
 
 // 🧩 마크다운 초안에서 문제지와 해설 파트를 분할 추출하는 헬퍼 함수
 function splitQuestionsAndExplanations(md) {
@@ -604,6 +649,17 @@ async function runQuizGeneration(client, notebookId, subjectKey, subjectName, do
   }
   const historySnippet = rawHistorySnippet;
 
+  // 🎯 가중치 확률적 추첨 기법 적용: 전체 오답 중 오늘 시험지에 녹여낼 핵심 취약개념 2개 무작위 추첨
+  const selectedIncorrect = selectIncorrectAnswersForToday(subjectIncorrect, 2);
+
+  const incorrectSnippet = selectedIncorrect.length > 0
+    ? selectedIncorrect.map((item, idx) => {
+        const cnt = item.count || 1;
+        const weight = calculateWeight(cnt);
+        return `- 취약점/개념: "${item.concept}" (누적 오답: ${cnt}회, 반영 비중 가중치: ${weight}%, 피드백 날짜: ${item.date})`;
+      }).join("\n")
+    : "없음 (현재 추첨된 오답 개념이 없거나 오답 리스트가 비어있습니다. 일반 커리큘럼 기준 고르게 출제해 주세요.)";
+
   // 🚀 순차 분할 RAG 생성 루틴 작동
   const partitions = SUBJECT_PARTITIONS[subjectKey] || [{ step: 1, title: "전체 범위", count: count }];
   const questionsChunks = [];
@@ -676,38 +732,51 @@ async function runQuizGeneration(client, notebookId, subjectKey, subjectName, do
     // 💡 디버깅용 CLI 콘솔 출력
     console.log(`🎯 [Step ${i + 1} 메모리] 과거 기출 필터링 ${uniqueMatched.length}개 확보, 당일 출제이력 ${todayPrevQuestions.length}개 기억 완료.`);
 
-    // 🎯 가중치 확률적 추첨 기법 및 단원별 키워드 매칭 필터링 적용
-    const filteredIncorrect = getIncorrectForPartition(subjectIncorrect, subjectKey, part.step);
-    const selectedIncorrect = selectIncorrectAnswersForToday(filteredIncorrect, 3);
-    
-    let incorrectInstruction = "";
-    if (selectedIncorrect.length > 0) {
-      const incorrectSnippet = selectedIncorrect.map(item => `- 취약 개념: ${item.concept}`).join("\n");
-      incorrectInstruction = `\n- 아래 오답 취약 개념 관련 기출문제 및 시험문제를 소스에서 찾아 우선적으로 2~3문제 포함하십시오. (단, 취약 개념 관련 문제를 우선 출제하되, 이 단계의 전체 출제 문항 수(${part.count}문항)는 절대로 변함이 없어야 하므로, 다른 세부 단원의 배분 수량을 그만큼 줄여서 총합을 칼같이 맞춰주십시오.):\n${incorrectSnippet}`;
-    }
-
     let subpartInstructions = "";
     if (part.subparts && part.subparts.length > 0) {
       const todayStr = getTodayString();
       const seedStr = `${todayStr}_${subjectKey}_step_${i + 1}`;
       const allocated = allocateQuestionsSeeded(part.subparts, part.count, seedStr);
       
-      subpartInstructions = `\n- 세부 문항 배분: ` + allocated.map(sp => `${sp.name} ${sp.count}문제`).join(", ");
+      subpartInstructions = `\n   * [세부 문항 배분 요구사항 (매일 가중치/날짜별 자동 로테이션 적용)]:\n` +
+        allocated.map(sp => `     - ${sp.name}: 정확히 ${sp.count}문항 출제`).join("\n") +
+        `\n     (주의: 위 문항 수 배분을 엄격히 준수하여 총 ${part.count}문항을 맞춰 주십시오!)`;
     }
 
     const prompt = `
-[주택관리사보 ${subjectName} 기출 추출 - ${part.title} (총 ${part.count}문항, 시작 번호: ${startQuestionNum}번)]
-1. 노트북에 업로드된 기출문제, 모의고사, 특강 교안, 출제가능문제집 등 모든 PDF 소스 문서들에서 실제 시험문제 및 연습문제들을 지문/보기 글자 하나 바꾸지 말고 그대로 추출하십시오. (절대 새로운 변형 문제를 스스로 만들지 마십시오.) 이 과정에서 "${docGuideName}" 문서에 정리된 단원별 출제 비율 및 세부 문항 배분 요구사항을 준수하여 적절한 범위의 문제를 찾아 추출해야 합니다.${incorrectInstruction}${subpartInstructions}
-2. 아래의 [과거 출제된 문제 목록] 및 [오늘 이미 출제된 앞 단계 문제 목록]과 조금이라도 겹치거나 유사한 중복 문제는 철저히 제외하십시오. (매우 중요)
-3. 번호는 "${startQuestionNum}. " 형식으로 매기고 보기는 ①~⑤만 사용해 한 줄에 하나씩 작성하십시오. 지문 내 박스형 조건(ㄱ, ㄴ, ㄷ 등)은 반드시 각각 줄바꿈 처리하십시오.
-4. 문제 뒤에 '## [정답 및 상세 해설]'을 붙여 '정답: ①' 형식으로 정답을 표기하고, 소스의 해설을 그대로 기재하십시오 (해설이 소스에 없으면 생략 가능).
+당신은 대한민국 주택관리사보 자격시험의 최고 권위 출제위원입니다. 
+제공된 노트북 소스 중 **"${docGuideName}"** 문서를 반드시 집중 참조하여, 수험생을 위한 고품질 기출 변형 문제지 중 **[제 ${i + 1}단계 분할 출제]** 파트를 작성해 주십시오.
 
----
-[과거 출제된 문제 목록 (중복 출제 절대 금지)]
-${partHistorySnippet}
-
-[오늘 이미 출제된 앞 단계 문제 목록 (중복 출제 절대 금지)]
-${todayPrevSnippet}
+### [출제 및 구성 조건]
+1. **과목**: ${subjectName} (총 ${count}문항 중 이번 단계에서는 **${part.count}문항** 출제)
+2. **범위/단원**: ${part.title}${subpartInstructions}
+3. **문제 번호 시작**: 이 단계에서 출제할 문제 번호는 **${startQuestionNum}번부터 ${endQuestionNum}번까지**입니다. (각 문항의 번호는 반드시 '${startQuestionNum}. ', '${startQuestionNum + 1}. ' 와 같이 시작하여야 하며, 문제 번호를 생략하거나 다르게 매겨서는 절대로 안 됩니다!)
+${isFirstStep ? `
+4. **최우선 반영 사항 (오답 및 누진 가중치)**:
+   다음 오답 목록은 수험생이 그동안 틀렸던 전체 오답 중 특별히 안배대상으로 선정된 취약 개념입니다. 이와 관련된 변형 문제를 이번 범위 내에 자연스럽게 1~2문제 녹여 출제해 주십시오.
+   ---
+   [오늘 출제할 오답 목록]
+   ${incorrectSnippet}
+   ---
+` : ''}
+4. **중복 배제 규칙 (극도로 중요 - 절대 동일 문제 출제 금지)**:
+   다음 리스트에 등장하는 질문, 보기 구조, 계산 조건 또는 정답 구도와 **완전히 동일하거나 극도로 유사한(숫자만 살짝 바꾼 수준 등) 문제는 절대로, 단 한 문제도 중복 출제해서는 안 됩니다.**
+   반드시 새로운 유형, 새로운 관점, 다른 계산 요소를 적용하여 '완전히 새로운 참신한 변형 문제'를 설계해 주십시오.
+   ---
+   [과거에 출제되었던 해당 단원 기출 목록 (중복 배제 필수)]
+   ${partHistorySnippet}
+   
+   [오늘 앞 단계에서 방금 출제된 모의고사 목록 (중복 배제 필수)]
+   ${todayPrevSnippet}
+   ---
+5. **문제집 서식 및 규칙 (매우 중요)**:
+   - 인사말, 출제 경향 분석, 수험생을 격려하는 글 등 문제와 해설 외의 사족(예: "안녕하십니까...", "Q1~Q2를 반영하여...")은 **절대로** 작성하지 마십시오.
+   - 텍스트의 맨 처음은 아무런 잡설 없이 곧바로 '## [시험 문제지]' 헤더로 시작하십시오.
+   - 각 문항은 **반드시** '${startQuestionNum}. ', '${startQuestionNum + 1}. ' 와 같이 **아라비아 숫자와 마침표(온점) 및 공백**으로 시작하여야 합니다. 문제 번호를 생략하고 바로 문제 지문을 작성하는 것은 **절대로 금지**됩니다.
+   - 보기는 반드시 '①', '②', '③', '④', '⑤' 기호만을 사용하고, 각 보기는 한 줄에 하나씩 줄바꿈하여 작성하십시오.
+   - 문제 본문이나 보기 내용 중에 'Q1', 'Q2' 등 문제 번호와 혼동될 수 있는 표현은 포함하지 마십시오.
+   - **반드시** 이 파트의 마지막 섹션에 이번에 출제한 문항들의 '## [정답 및 상세 해설]'을 작성해 주십시오.
+   - 해설 작성 시 각 문항의 정답은 '정답: ①' 형태로 명확하게 표기해 주십시오.
 `;
 
     let stepMarkdown = "";
@@ -726,7 +795,7 @@ ${todayPrevSnippet}
           question: prompt,
           notebook_id: targetNotebookId,
           browser_options: {
-            timeout_ms: 450000,
+            timeout_ms: 180000,
             stealth: {
               human_typing: false
             }
@@ -741,7 +810,7 @@ ${todayPrevSnippet}
           name: "ask_question",
           arguments: askArguments
         }, undefined, {
-          timeout: 480000
+          timeout: 210000
         });
 
         const generatedText = result.content[0].text;
@@ -782,21 +851,6 @@ ${todayPrevSnippet}
 
         if (isRefusal) {
           throw new Error(`NotebookLM 답변 거절(Soft Refusal) 또는 텍스트 길이 미달 감지 (획득 크기: ${stepMarkdown.length}자)`);
-        }
-
-        // 💡 [지문 번호 자가검증] 응답 텍스트에 실제 시작 문항 번호(예: "1." 또는 "19.")가 제대로 포함되어 있는지 검증하여 거절성 답변 원천 차단
-        // NotebookLM이 시작 번호 지시를 무시하고 1번부터 매겼을 수도 있으므로, startQuestionNum > 1일 때는 1번 또는 1. 도 같이 허용
-        const startNumPattern = new RegExp(`(^|\\D)${startQuestionNum}(\\D|$)`);
-        const altStartPattern = startQuestionNum > 1 ? new RegExp(`(^|\\D)1(\\D|$)`) : null;
-        const hasStartNumber = startNumPattern.test(stepMarkdown) || 
-                               stepMarkdown.includes(`${startQuestionNum}번`) ||
-                               (altStartPattern && (altStartPattern.test(stepMarkdown) || stepMarkdown.includes("1번")));
-        if (!hasStartNumber) {
-          if (stepMarkdown.length > 1000) {
-            console.warn(`⚠️ [자가치유 경고] 시작 번호(${startQuestionNum}번 또는 1번)를 식별할 수 없으나, 응답 길이가 충분히 길어(${stepMarkdown.length}자) 문제지가 정상 출제된 것으로 간주하고 진행합니다.`);
-          } else {
-            throw new Error(`출제 응답 내에서 시작 번호(${startQuestionNum}번 또는 1번)를 식별할 수 없습니다. 생성 실패 또는 거절 가능성이 높습니다.`);
-          }
         }
 
         // 💡 지능형 세션 ID 추출 및 갱신 보장
