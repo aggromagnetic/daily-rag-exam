@@ -1,7 +1,7 @@
 {
-  "total_cost_usd": 2.2567150000000002,
-  "total_cost_krw": 3171,
-  "last_updated": "2026-06-11T02:38:55.511Z",
+  "total_cost_usd": 2.3858900000000003,
+  "total_cost_krw": 3352,
+  "last_updated": "2026-06-11T21:13:51.511Z",
   "history": [
     {
       "date": "2026-06-08",
@@ -209,6 +209,15 @@
       "output_tokens": 16348,
       "cost_usd": 0.10488249999999999,
       "cost_krw": 147
+    },
+    {
+      "date": "2026-06-12",
+      "timestamp": "2026-06-11T21:13:51.511Z",
+      "subject": "회계원리",
+      "input_tokens": 19404,
+      "output_tokens": 20984,
+      "cost_usd": 0.12917499999999998,
+      "cost_krw": 181
     }
   ]
 }
