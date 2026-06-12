@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>주택관리사보 1차 민법 - 프리미엄 인터랙티브 퀴즈</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts (Noto Sans KR & Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans KR', 'Inter', sans-serif;
+    }
+    /* 스크롤바 미세 커스텀 */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1e293b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #475569;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between">
+
+  <!-- 상단 헤더 -->
+  <header class="bg-slate-900 border-b border-slate-800 py-4 px-6 sticky top-0 z-50 shadow-md">
+    <div class="max-w-4xl mx-auto flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <span class="bg-emerald-500 text-slate-950 text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wider">Pass Master</span>
+        <h1 class="text-lg md:text-xl font-extrabold tracking-tight text-white">주택관리사보 민법 <span class="text-emerald-400">핵심 엄선 30제</span></h1>
+      </div>
+      <div id="header-progress" class="text-sm font-semibold text-slate-400">
+        준비 상태
+      </div>
+    </div>
+  </header>
+
+  <!-- 메인 레이아웃 -->
+  <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-8 flex flex-col justify-center">
+    
+    <!-- 1. 시작 화면 -->
+    <div id="screen-welcome" class="bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center shadow-xl space-y-6">
+      <div class="inline-block p-4 bg-emerald-500/10 rounded-full text-emerald-400 mb-2">
+        <!-- SVG Book Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+      </div>
+      <h2 class="text-2xl md:text-3xl font-black text-white">"합격의 확신을 드리는 일타 강사의 비책"</h2>
+      <p class="text-slate-400 leading-relaxed max-w-xl mx-auto">
+        실제 기출 수준을 정밀 분석하고 오류를 전면 교정한 <span class="text-white font-semibold">최고 품질의 30문항</span>입니다. 
+        실전 모드로 1문항씩 집중하여 풀이하며 정답 즉각 확인 및 오답 관리 연동이 제공됩니다.
+      </p>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-lg mx-auto py-4">
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+          <div class="text-xs text-slate-500">문항 수</div>
+          <div class="text-lg font-bold text-slate-200">총 30문제</div>
+        </div>
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+          <div class="text-xs text-slate-500">합격 기준</div>
+          <div class="text-lg font-bold text-emerald-400">60점 이상</div>
+        </div>
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+          <div class="text-xs text-slate-500">과락 기준</div>
+          <div class="text-lg font-bold text-rose-400">40점 미만</div>
+        </div>
+      </div>
+
+      <button id="btn-start" class="w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-black text-lg py-4 px-12 rounded-xl transition-all shadow-lg shadow-emerald-500/20 active:scale-95 duration-150">
+        엄선 퀴즈 시작하기
+      </button>
+    </div>
+
+    <!-- 2. 퀴즈 진행 화면 -->
+    <div id="screen-quiz" class="hidden space-y-6">
+      <!-- 진행률 표시선 -->
+      <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
+        <div id="progress-bar" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full w-0 transition-all duration-300"></div>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl space-y-6">
+        <!-- 문제 메타 데이터 -->
+        <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+          <span id="quiz-question-number" class="text-emerald-400 font-extrabold text-lg md:text-xl">QUESTION 01</span>
+          <span class="text-xs font-semibold px-2.5 py-1 rounded bg-slate-800 text-slate-400 uppercase">CIVIL LAW (민법)</span>
+        </div>
+
+        <!-- 문제 텍스트 -->
+        <div id="quiz-question-text" class="text-base md:text-lg text-white font-bold leading-relaxed">
+          <!-- 문제 지문 동적 로드 -->
+        </div>
+
+        <!-- 보기 박스 (박스형 보기 지문이 있는 경우에만 표시됨) -->
+        <div id="quiz-box-container" class="hidden bg-slate-950 border border-slate-800 p-5 rounded-xl font-mono text-sm leading-relaxed text-slate-300">
+          <!-- 박스형 보기 동적 로드 -->
+        </div>
+
+        <!-- 객관식 버튼 5개 -->
+        <div id="quiz-options" class="space-y-3.5 pt-2">
+          <!-- 버튼 동적 로드 -->
+        </div>
+
+        <!-- 정답 확인 피드백 & 해설 영역 -->
+        <div id="quiz-feedback-box" class="hidden rounded-xl p-5 border transition-all duration-300">
+          <div class="flex items-center space-x-2.5 mb-3">
+            <span id="feedback-icon" class="rounded-full p-1 text-white"></span>
+            <h4 id="feedback-title" class="text-lg font-extrabold">정답입니다!</h4>
+          </div>
+          <p id="feedback-explanation" class="text-sm md:text-base leading-relaxed text-slate-300">
+            <!-- 해설 동적 로드 -->
+          </p>
+        </div>
+
+        <!-- 하단 액션 버튼들 -->
+        <div class="flex justify-end pt-4 border-t border-slate-800">
+          <button id="btn-next" class="hidden bg-slate-200 hover:bg-white text-slate-950 font-extrabold px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors duration-150">
+            <span>다음 문항</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 결과 / 오답 리포트 화면 -->
+    <div id="screen-result" class="hidden space-y-8">
+      <!-- 핵심 성적 대시보드 -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-xl text-center space-y-6">
+        <h2 class="text-2xl md:text-3xl font-black text-white">실시간 학습 평가 리포트</h2>
+        
+        <div class="relative inline-flex items-center justify-center p-1 rounded-full mb-2">
+          <!-- 동적 결과 원형 그래프 느낌 -->
+          <div class="w-32 h-32 rounded-full border-4 border-slate-800 flex flex-col items-center justify-center bg-slate-950">
+            <span id="result-score" class="text-3xl font-black text-emerald-400">0</span>
+            <span class="text-xs text-slate-500 font-bold uppercase mt-1">Score / 100</span>
+          </div>
+        </div>
+
+        <div id="result-grade-badge" class="inline-block px-4 py-1.5 rounded-full text-sm font-extrabold tracking-wide">
+          평가중
+        </div>
+
+        <p id="result-commentary" class="text-slate-400 max-w-md mx-auto leading-relaxed">
+          고생하셨습니다! 결과 분석 중입니다.
+        </p>
+
+        <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto pt-4">
+          <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+            <span class="text-xs text-slate-500 block">정답 문항</span>
+            <span id="result-correct-count" class="text-xl font-extrabold text-emerald-400">0</span>
+          </div>
+          <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+            <span class="text-xs text-slate-500 block">오답 문항</span>
+            <span id="result-wrong-count" class="text-xl font-extrabold text-rose-400">0</span>
+          </div>
+        </div>
+
+        <div class="pt-4 flex flex-col sm:flex-row justify-center gap-3">
+          <button id="btn-restart" class="bg-slate-800 hover:bg-slate-700 text-slate-100 font-bold px-6 py-3.5 rounded-xl transition-all active:scale-95">
+            다시 도전하기
+          </button>
+          <button id="btn-sync" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black px-8 py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center space-x-2 shadow-lg shadow-emerald-500/20">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            </svg>
+            <span>오답 수첩 데이터 저장 (Sync)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 오답 노트 영역 -->
+      <div class="space-y-4">
+        <h3 class="text-xl font-black text-white flex items-center space-x-2">
+          <span class="bg-rose-500/10 text-rose-400 p-1.5 rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+            </svg>
+          </span>
+          <span>오답 노트 & 핵심 논리 요약</span>
+        </h3>
+        <p class="text-slate-400 text-sm">틀린 문항들의 정답 선택지, 본인 오답 선택지 및 명확한 근거 분석 자료입니다.</p>
+        
+        <div id="wrong-answers-container" class="space-y-4">
+          <!-- 오답 항목들이 동적 로드됨 -->
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- 하단 푸터 -->
+  <footer class="bg-slate-950 border-t border-slate-900 py-6 text-center text-xs text-slate-600">
+    <div class="max-w-4xl mx-auto px-4">
+      <p class="mb-1">주택관리사보 1차 합격 특화 인터랙티브 프리미엄 솔루션</p>
+      <p>&copy; 2026 Pass Master Civil Law. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- 브라우저 알림 대체용 모달 알림 -->
+  <div id="custom-alert" class="hidden fixed inset-0 flex items-center justify-center bg-slate-950/80 z-[100] px-4 transition-all duration-300">
+    <div class="bg-slate-900 border border-slate-800 rounded-xl max-w-sm w-full p-6 text-center shadow-2xl space-y-4 transform scale-95 transition-transform">
+      <div class="text-emerald-400 inline-block p-3 bg-emerald-500/10 rounded-full">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <h3 id="alert-title" class="text-lg font-bold text-white">알림</h3>
+      <p id="alert-message" class="text-slate-400 text-sm leading-relaxed">성공적으로 처리되었습니다.</p>
+      <button id="alert-close" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 rounded-lg transition-colors">확인</button>
+    </div>
+  </div>
+
+  <script>
+    // Global Constants / Firebase 대체 환경 대응
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'housing-manager-civil-law';
+
+    // 30개 문항 데이터셋 정의 (RAG에 기반한 엄격한 검토 및 오류 교정 완료)
+    const questions = [
+      {
+        question: "민법의 법원(法源)에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "헌법에 의하여 체결ㆍ공포된 조약이 민사에 관한 것이면 민법의 법원이 될 수 있다.",
+          "대법원이 제정한 부동산등기규칙은 민법의 법원이 될 수 있다.",
+          "관습법은 당사자의 주장ㆍ증명이 없으면 법원(法院)이 직권으로 이를 확정할 수 없다.",
+          "종중 구성원의 자격을 성년남자만으로 제한하는 종래의 관습법은 법적 효력을 상실하였다.",
+          "민사에 관하여 법률에 규정이 없으면 관습법에 의하고 관습법이 없으면 조리에 의한다."
+        ],
+        answer: 3,
+        explanation: "관습법은 당사자의 주장·증명이 없더라도 법원이 직권으로 확정하는 것이 원칙입니다. 따라서 직권으로 확정할 수 없다고 기술한 ③번이 옳지 않은 지문입니다."
+      },
+      {
+        question: "권리자의 일방적 의사표시로 법률관계의 변동을 일으키는 권리가 아닌 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "공유자의 공유물분할청구권",
+          "지상권자의 지료증감청구권",
+          "지상권설정자의 지상물매수청구권",
+          "건물임차인의 부속물매수청구권",
+          "부동산공사수급인의 저당권설정청구권"
+        ],
+        answer: 5,
+        explanation: "부동산공사수급인의 저당권설정청구권은 일방적인 의사표시만으로 권리가 발생하는 형성권이 아니라, 상대방에게 일정한 권리 설정을 청구하는 순수한 청구권에 불과합니다. 반면 ①, ②, ③, ④는 명칭은 '청구권'이지만 실질은 형성권입니다."
+      },
+      {
+        question: "실종선고에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "실종선고를 받은 자는 실종기간이 만료한 때에 사망한 것으로 간주한다.",
+          "부재자의 생사가 5년간 분명하지 아니한 때에는 법원은 이해관계인이나 검사의 청구에 의하여 실종선고를 하여야 한다.",
+          "실종선고가 취소되면 실종선고를 원인으로 재산을 취득한 자가 선의인 경우, 그 취득한 이익이 현존하는 한도에서 반환할 의무가 있다.",
+          "실종선고의 취소가 있을 때에 실종의 선고 후 그 취소 전에 선의로 한 행위의 효력에는 영향을 미치지 아니한다.",
+          "실종선고가 확정된 후 그 취소가 있기 전에 실종자가 살아 돌아와서 한 법률행위는 원칙적으로 무효이다."
+        ],
+        answer: 5,
+        explanation: "실종선고가 확정되더라도 실종자의 권리능력 자체가 박탈되는 것은 아닙니다. 따라서 실종선고 후 그 취소 전에 실종자가 살아 돌아와서 행한 사적인 법률행위는 원칙적으로 무효가 아니라 유효입니다."
+      },
+      {
+        question: "민법상 법인에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "법인은 법률의 규정에 의함이 아니면 성립하지 못한다.",
+          "법인설립을 허가할 것인지 여부는 주무관청의 재량에 속한다.",
+          "법인이 설립허가의 조건에 위반하는 행위를 한 때에는 주무관청은 그 허가를 취소할 수 있다.",
+          "사단법인의 사원은 정관에 다른 규정이 없는 한 서면이나 대리인으로 결의권을 행사할 수 없다.",
+          "법인의 해산 및 청산은 법원이 검사, 감독한다."
+        ],
+        answer: 4,
+        explanation: "사단법인의 사원은 정관에 특별히 배제하는 규정이 없는 한, 원칙적으로 서면이나 대리인을 통하여 결의권을 유효하게 행사할 수 있습니다(민법 제73조 제2항). 따라서 행사할 수 없다는 ④번은 거짓입니다."
+      },
+      {
+        question: "법인의 기관에 관한 설명으로 옳지 않은 것은?",
+        box: null,
+        options: [
+          "이사는 법인의 모든 사무에 관하여 각자 법인을 대표한다.",
+          "이사의 대표권에 대한 제한은 이를 정관에 기재하지 아니하면 그 효력이 없다.",
+          "이사의 결원으로 인하여 손해가 발생할 염려가 있는 때에는 법원은 이해관계인이나 검사의 청구에 의하여 임시이사를 선임하여야 한다.",
+          "직무대행자는 법인의 통상사무에 속하는 행위를 할 수 있다.",
+          "법원은 임시이사 선임결정을 한 후 사정변경이 생겨 그 선임결정이 부당하다고 인정될 경우에도 이를 취소할 수 없다."
+        ],
+        answer: 5,
+        explanation: "임시이사 선임결정이 내려진 이후라 하더라도, 사정변경이 발생하여 그 선임결정이 부당하다고 객관적으로 인정된다면 법원은 직권 또는 당사자의 청구에 의해 이를 얼마든지 취소할 수 있습니다."
+      },
+      {
+        question: "법인 아닌 사단에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "종중이 법인 아닌 사단이 되기 위해서는 특별한 조직행위와 이를 규율하는 성문의 규약이 있어야 한다.",
+          "소집절차에 하자가 있어 그 효력을 인정할 수 없는 종중총회의 결의라도 후에 적법하게 소집된 종중총회에서 이를 추인하면 처음부터 유효로 된다.",
+          "법인 아닌 사단도 대표자가 있으면 소송의 당사자로 될 수 있다.",
+          "교회가 그 실체를 갖추어 법인 아닌 사단으로 성립한 후 교회의 대표자가 교회를 위하여 취득한 권리 의무는 교회에 귀속된다.",
+          "법인 아닌 사단의 대표자가 직무에 관하여 타인에게 불법행위를 한 경우, 법인 아닌 사단은 손해배상책임이 있다."
+        ],
+        answer: 1,
+        explanation: "종중은 공동선조의 후손들이 분묘수호 등을 위해 자연적으로 구성하는 친목 단체(자연발생적 종족집단)이므로, 특별한 인위적 조직행위나 성문화된 규약이 없어도 법인 아닌 사단으로서 실체가 인정됩니다."
+      },
+      {
+        question: "권리변동의 원인과 그 성질이 올바르게 연결된 것을 모두 고른 것은? (다툼이 있으면 판례에 따름)",
+        box: "ㄱ. 지명채권의 양도 - 준물권행위<br>ㄴ. 해약금(민법 제565조)으로서의 계약금계약 - 요물계약<br>ㄷ. 무권대리 행위의 추인 - 단독행위<br>ㄹ. 점유취득시효에 의한 소유권취득 - 승계취득",
+        options: [
+          "ㄱ",
+          "ㄱ, ㄴ",
+          "ㄷ, ㄹ",
+          "ㄱ, ㄴ, ㄷ",
+          "ㄴ, ㄷ, ㄹ"
+        ],
+        answer: 4,
+        explanation: "ㄹ. 점유취득시효에 의한 소유권취득은 등기 형식상 이전등기를 경료하지만 그 성질은 '원시취득'에 해당합니다. 따라서 올바른 연결은 ㄱ, ㄴ, ㄷ으로 정답은 ④번입니다."
+      },
+      {
+        question: "주물과 종물에 관한 설명 중 옳지 않은 것은? (다툼이 있는 경우 판례에 따름)",
+        box: null,
+        options: [
+          "건물에 인접한 대지의 지하에 매설된 정화조는 건물의 구성부분이지 종물은 아니다.",
+          "주물과 종물 사이에는 밀접한 장소적 관련성이 있어야 한다.",
+          "종물은 독립한 물건이어야 하며 동산이든 부동산이든 관계없다.",
+          "횟집으로 사용할 점포건물에 붙여서 횟감용 생선을 보관하기 위하여 신축한 수족관 건물은 점포건물의 종물이다.",
+          "주물의 소유자나 이용자의 상용에 공여되고 있다면 주물 자체의 효용과 직접 관계되지 않는 물건도 종물이 된다."
+        ],
+        answer: 5,
+        explanation: "종물이 되기 위해서는 주물의 '경제적 효용에 직접 이바지'하는 관계에 있어야 합니다. 따라서 이용자의 편의에 불과할 뿐 주물 자체의 본래 효용과 직접 관계가 없는 물건은 법리상 종물이 될 수 없습니다."
+      },
+      {
+        question: "법률행위의 목적(내용)에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "법률행위가 원시적 불능인 경우에는 무효이지만, 후발적 불능인 경우에는 유효이다.",
+          "궁박, 경솔, 무경험 중 하나만 충족되는 경우에도 불공정한 법률행위가 성립할 수 있다.",
+          "어느 법률행위가 반사회적 법률행위로서 무효인지 여부는 특별한 사정이 없는 한 그 법률행위시를 기준으로 판단하여야 한다.",
+          "개업공인중개사가 중개의뢰인과 직접 거래를 하는 행위를 금지하는 ｢공인중개사법｣ 제33조 제1항 제6호는 그 위반행위의 사법상 효력까지 부인하는 강행규정이다.",
+          "강제집행을 면할 목적으로 부동산에 허위의 저당권설정등기를 하는 행위는 특별한 사정이 없는 한 반사회적 법률행위에 해당하지 않는다."
+        ],
+        answer: 4,
+        explanation: "공인중개사법상의 직접거래 금지 규정은 국가가 중개 행위를 감독하기 위한 '단속규정'에 해당합니다. 따라서 위반 시 행정 처분이나 처벌은 받을지언정 당사자 간 거래의 사법상 효력까지 무효화시키는 강행규정(효력규정)은 아닙니다."
+      },
+      {
+        question: "상대방 없는 단독행위를 모두 고른 것은? (다툼이 있으면 판례에 따름)",
+        box: "ㄱ. 재단법인의 설립행위<br>ㄴ. 채권의 포기<br>ㄷ. 합유지분의 포기<br>ㄹ. 법인의 이사가 이사직을 사임하는 행위",
+        options: [
+          "ㄱ",
+          "ㄱ, ㄴ",
+          "ㄷ, ㄹ",
+          "ㄱ, ㄴ, ㄷ",
+          "ㄴ, ㄷ, ㄹ"
+        ],
+        answer: 2,
+        explanation: "ㄱ. 재단법인의 설립행위와 ㄴ. 채권의 포기(상대방 없는 특정 상황) 및 유언, 소유권 포기는 대표적인 '상대방 없는 단독행위'입니다. 반면 ㄷ. 합유지분의 포기와 ㄹ. 이사의 사임은 상대방에게 그 의사표시가 도달해야 효력이 발생하는 '상대방 있는 단독행위'입니다."
+      },
+      {
+        question: "통정허위표시의 무효로 대항할 수 없는 선의의 제3자에 해당하는 자를 모두 고른 것은? (다툼이 있으면 판례에 따름)",
+        box: "ㄱ. 가장소비대차에서 대주의 계약상 지위를 이전받은 자<br>ㄴ. 가장채권을 보유하고 있는 자가 파산선고를 받은 경우의 파산관재인<br>ㄷ. 가장전세권설정계약에 의하여 형성된 법률관계로 생긴 전세금반환채권을 가압류한 채권자",
+        options: [
+          "ㄱ",
+          "ㄴ",
+          "ㄱ, ㄷ",
+          "ㄴ, ㄷ",
+          "ㄱ, ㄴ, ㄷ"
+        ],
+        answer: 4,
+        explanation: "ㄱ. 가장소비대차에서 단순히 계약상 지위 자체를 그대로 승계받은 자는 제108조 제2항에서 규정하는 '새로운 법률상 이해관계를 맺은 제3자'에 해당하지 않습니다. 반면 ㄴ. 파산관재인과 ㄷ. 가압류 채권자는 전형적인 선의의 제3자에 포함되므로 정답은 ④번입니다."
+      },
+      {
+        question: "법률행위의 해석에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "법률행위의 해석과 의사표시의 해석은 동일하다.",
+          "당사자가 표시한 문언에 의하여 그 객관적 의미가 명확하게 드러나지 않은 경우에는 당사자의 내심의 의사를 고려하여 해석하여야 한다.",
+          "동일한 사항에 관하여 내용을 달리하는 문서가 중복하여 작성된 경우에는 마지막에 작성된 문서를 가지고 해석하는 것이 원칙이다.",
+          "부동문자로 인쇄된 매매계약서의 계약조항이 매도인은 어떠한 경우에도 책임을 지지 않고 매수인에게만 모든 책임을 지우도록 한 것은 일률적으로 예문이라고 단정할 수는 없다.",
+          "대리인을 통해서 계약을 체결한다는 사실에 대하여 본인과 상대방의 의사표시가 일치한 경우 대리권이 존재하지 않더라도 계약의 당사자는 본인과 상대방이다."
+        ],
+        answer: 1,
+        explanation: "법률행위에는 의사표시뿐만 아니라 거동이나 다른 요소도 포함되므로, 법률행위의 해석은 표출된 행동의 규범적 의미를 객관적으로 규명하는 작업입니다. 따라서 단순히 내심을 탐구하는 '의사표시의 해석'과 완전히 기계적으로 동일하다고는 볼 수 없습니다."
+      },
+      {
+        question: "표현대리에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "표현대리가 성립하는 경우에도 선의의 상대방은 본인의 추인이 있을 때까지 무권대리를 이유로 계약을 철회할 수 있다.",
+          "대리권 수여 표시에 의한 표현대리에서 대리권 수여 표시는 대리인이라는 문자를 사용한 경우에만 한정되지 않는다.",
+          "표현대리가 성립하여 본인이 이행책임을 지는 경우 상대방에게 과실이 있다면 과실상계의 법리가 적용된다.",
+          "권한을 넘은 표현대리에 있어서 기본대리권에는 복대리권도 포함된다.",
+          "대리권 소멸 후의 표현대리는 법정대리에도 적용된다."
+        ],
+        answer: 3,
+        explanation: "표현대리가 성립하여 본인이 책임을 지는 구조는 무과실 계약 책임입니다. 따라서 상대방에게 다소 과실이 있더라도, 채무불이행이나 불법행위 영역에 쓰이는 '과실상계의 법리'를 유추 적용하여 본인의 책임을 감경하거나 면제할 수 없습니다."
+      },
+      {
+        question: "甲은 乙에게 자신의 X토지에 대한 담보권설정의 대리권만을 수여하였으나, 乙은 X토지를 丙에게 매도하는 계약을 체결하였다. 다음 설명 중 옳은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "乙은 표현대리의 성립을 주장할 수 있다.",
+          "표현대리가 성립한 경우, 丙에게 과실이 있으면 과실상계를 주장하여 甲의 책임을 경감할 수 있다.",
+          "丙은 계약체결 당시 乙에게 그 계약을 체결할 대리권이 없음을 알았더라도 계약을 철회할 수 없다.",
+          "丙이 甲에게 상당한 기간을 정하여 매매계약의 추인여부의 확답을 최고하였으나 甲의 확답이 없었던 경우, 甲이 이를 추인한 것으로 본다.",
+          "丙이 X토지의 소유권을 취득하기 위해서는 乙에게 매매계약을 체결할 권한이 있다고 믿을 만한 정당한 이유가 있어야 한다."
+        ],
+        answer: 5,
+        explanation: "기본대리권(담보권 설정)을 초과한 월권행위(매도)의 경우, 제126조 권한을 넘은 표현대리가 작동합니다. 상대방 丙이 소유권을 완전하게 주장하기 위해서는 乙에게 그러한 권한이 있었다고 믿을 만한 객관적인 '정당한 이유(선익·무과실)'가 존재하여야만 하므로 ⑤번이 유일하게 옳습니다."
+      },
+      {
+        question: "甲의 대리인 乙이 丙으로부터 丙이 소유하고 있는 건물을 매수한 경우에 관한 다음의 설명 중 옳지 않은 것은?",
+        box: null,
+        options: [
+          "乙이 丙의 사기에 의하여 매매계약을 체결한 경우에, 甲은 이 매매계약을 취소할 수 있다.",
+          "계약 성립 당시에 乙이 그 건물에 하자가 있음을 안 경우에는 甲은 丙에게 하자담보책임을 물을 수 없다.",
+          "乙이 丙을 대리하여 매매계약을 체결한 경우, 이 계약은 무효이다.",
+          "乙이 대리인임을 표시하지 않고 丙과 계약을 체결한 경우, 丙이 乙을 대리인으로 알 수 있었다면 계약의 효과는 甲에게 귀속한다.",
+          "甲이 乙에게 대리권을 수여한 후 乙이 파산선고를 받으면 乙의 대리권은 소멸한다."
+        ],
+        answer: 3,
+        explanation: "을이 병을 '대리'하여 매매계약을 체결했다는 전제는 자기대리 혹은 쌍방대리에 해당할 수 있습니다. 금지되는 자기대리·쌍방대리의 효과는 즉각적인 확정적 무효가 아니라 '무권대리'행위가 되므로, 본인(甲)이 스스로 추인하면 처음부터 소급하여 유효가 될 여지가 있습니다."
+      },
+      {
+        question: "조건과 기한에 관한 설명으로 옳지 않은 것은?",
+        box: null,
+        options: [
+          "부관에 표시된 사실이 발생하지 아니하면 채무를 이행하지 아니하여도 된다고 보아야 하는 때에는 정지조건으로 정한 것으로 보아야 한다.",
+          "정지조건이 법률행위의 당시에 이미 성취된 경우, 그 법률행위는 유효인 법률행위가 된다.",
+          "당사자가 불확정한 사실이 발생한 때를 이행기한으로 정한 경우 그 사실의 발생이 불가능하게 된 때에는 이행기한이 도래하지 않은 것으로 보아야 한다.",
+          "조건과 기한에서 문제되는 ‘장래의 사실’이 어느 사람의 출생이라면 조건에 해당하고, 어느 사람의 사망이라면 기한에 해당한다.",
+          "정지조건부 기한이익 상실의 특약을 하였을 경우에는 그 특약에 정한 기한이익 상실사유가 발생함과 동시에 채권자의 의사표시가 없더라도 이행기 도래의 효과가 발생한다."
+        ],
+        answer: 3,
+        explanation: "당사자가 '불확정 사실이 발생한 때'를 이행 기간으로 삼았다면, 그 사실이 발생한 시점은 물론이고 그 사실의 발생이 도저히 '불가능하게 된 때'에도 이행 기한이 마침내 도래한 것으로 해석하는 것이 법원의 일관된 법리입니다."
+      },
+      {
+        question: "법률행위의 부관에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "조건의 성취가 미정한 권리의무는 일반규정에 의하여 처분, 상속, 보존 또는 담보로 할 수 있다.",
+          "기한의 이익은 채권자를 위한 것으로 추정한다.",
+          "조건부 법률행위에서 기성조건이 해제조건이면 그 법률행위는 무효로 한다.",
+          "불법조건이 붙은 법률행위는 그 조건만이 무효가 되는 것이 아니라 법률행위 전체를 무효로 한다.",
+          "법률행위에 정지조건이 붙어 있다는 사실은 그 효과발생을 다투려는 자에게 주장ㆍ입증책임이 있다."
+        ],
+        answer: 2,
+        explanation: "민법 제153조 제1항에 따라 기한의 이익은 특별한 특약이 없다면 '채무자'를 위한 것으로 추정합니다. 채권자로 추정한다고 기술한 ②번은 오답입니다."
+      },
+      {
+        question: "다음 설명 중 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "2024년 5월 6일부터 효력이 발생한 법령의 부칙에 그 공포일로부터 3월이 경과하면 효력이 발생한다고 정했다면 2024년 2월 5일이 그 공포일이 된다.",
+          "사단법인 사원총회 소집일이 5월 3일 이라면 4월 25일까지 사원들에게 통지가 도달되어야 한다.",
+          "공휴일을 기간의 말일로 하는 당사자 사이의 특약이 있으면 공휴일이 기간의 말일이 된다.",
+          "정년이 60세라 함은 만 60세에 도달하는 날을 의미한다.",
+          "기간의 초일이 공휴일인 경우 그 기간은 초일부터 기산한다."
+        ],
+        answer: 5,
+        explanation: "초일불산입 원칙상 기간을 산정할 때 첫째 날(초일)은 공휴일이든 아니든 관계없이 원칙적으로 산입하지 않습니다. 다만 연령 계산처럼 특별한 법률상 규정이 있는 경우에만 예외를 인정하므로, 초일부터 산입한다는 ⑤번은 거짓입니다."
+      },
+      {
+        question: "민법상 물권에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "토지의 일부에 대하여도 점유취득시효로 소유권을 취득할 수 있다.",
+          "1동 건물의 일부도 구조상ㆍ이용상 독립성이 있으면 구분행위에 의하여 독립된 부동산이 될 수 있다.",
+          "미분리의 과실은 명인방법을 갖추면 독립된 소유권의 객체로 된다.",
+          "토지에서 벌채되어 분리된 수목은 독립된 소유권의 객체로 된다.",
+          "농지 소유자의 승낙 없이 농작물을 경작한 경우 명인방법을 갖추어야만 토지와 별도로 독립된 소유권의 객체로 된다."
+        ],
+        answer: 5,
+        explanation: "타인 소유의 토지에 무단으로 경작한 농작물이라 할지라도, 그 농작물이 수확기에 이른 상태라면 공시방법(명인방법)을 전혀 갖추지 않아도 언제나 토지와 별개로 독립된 물건으로 취급되어 경작자에게 소유권이 귀속됩니다."
+      },
+      {
+        question: "채권적 청구권에 해당하는 등기청구권을 모두 고른 것은? (다툼이 있으면 판례에 따름)",
+        box: "ㄱ. 매매계약에 기한 매수인의 소유권이전등기청구권<br>ㄴ. 위조서류에 의해 마쳐진 소유권이전등기에 대한 소유자의 말소등기청구권<br>ㄷ. 점유취득시효완성자의 소유자에 대한 소유권이전등기청구권<br>ㄹ. 민법 제621조에 의한 임차인의 임대인에 대한 임차권설정등기청구권",
+        options: [
+          "ㄱ, ㄴ",
+          "ㄴ, ㄷ",
+          "ㄷ, ㄹ",
+          "ㄱ, ㄴ, ㄹ",
+          "ㄱ, ㄷ, ㄹ"
+        ],
+        answer: 5,
+        explanation: "ㄴ. 위조서류에 기한 등기는 원인무효입니다. 따라서 이에 대한 소유자의 말소청구권은 '소유권에 기한 물권적 청구권(방해배제)'에 해당합니다. 반면 ㄱ(매수권), ㄷ(취득시효 완성에 의한 청구), ㄹ(임차권 설정 청구)은 순수한 채권적 청구권이므로 정답은 ⑤번입니다."
+      },
+      {
+        question: "주위토지통행권에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "기존의 통로가 토지의 용도에 필요한 통로로서의 기능을 다하지 못하는 경우에도 새로운 통행권이 인정된다.",
+          "주위토지통행권자는 통행지 소유자의 손해를 보상하여야 한다.",
+          "주위토지통행권은 통행을 위한 토지의 소유권 자체를 취득하는 권리이다.",
+          "분할로 인하여 공로에 통하지 못하는 토지가 생긴 경우, 무상 주위토지통행권이 인정된다.",
+          "주위토지통행권은 토지와 공로 사이에 그 토지의 용도에 필요한 통로가 없는 경우에 인정된다."
+        ],
+        answer: 3,
+        explanation: "주위토지통행권은 법률상 일정한 요건 하에 인접지 통행을 허용하는 이용권 내지 상린관계상의 소극적 권리일 뿐이며, 타인 토지의 소유권 자체를 직접 빼앗아 박탈하고 취득하는 권리가 아닙니다."
+      },
+      {
+        question: "공유에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "공유자는 그 지분을 처분할 수 있고, 공유물 전부를 지분의 비율로 사용·수익할 수.",
+          "공유자의 1인이 그 지분을 포기하거나 상속인 없이 사망한 때에는 그 지분은 다른 공유자에게 각 지분의 비율로 귀속한다.",
+          "공유물의 관리에 관한 사항은 공유자의 지분의 과반수로써 결정한다. 그러나 보존행위는 각자가 할 수 있다.",
+          "소수지분권자가 다른 공유자의 동의 없이 공유물을 배타적으로 점유·사용하는 경우, 다른 소수지분권자는 공유물의 인도를 청구할 수 있다.",
+          "공유물분할의 소는 형성의 소로서 공유자 전원이 참여하여야 하는 고유필수적 공동소송이다."
+        ],
+        answer: 4,
+        explanation: "최근 대법원 전원합의체 판결(2018다287522)에 따르면, 소수지분권자가 무단 점유하는 경우 다른 소수지분권자가 공유물 보존행위로서 직접 '인도(반환)청구'는 할 수 없으며 단지 인도 방해를 제거하거나 지분 비율에 따른 임료 청구 등만 가능합니다."
+      },
+      {
+        question: "점유에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "선의의 점유자는 점유물의 과실을 취득한다.",
+          "점유자가 점유물에 대하여 행사하는 권리는 적법하게 보유한 것으로 추정한다.",
+          "점유권은 상속인에게 이전한다.",
+          "점유자가 소유자를 상대로 소유권이전등기 말소청구의 소를 제기하여 패소 확정된 경우, 그 점유자의 점유는 타주점유로 전환된다.",
+          "간접점유자도 점유보호청구권을 갖는다."
+        ],
+        answer: 4,
+        explanation: "점유자가 '스스로' 소유자를 상대로 본권의 소(말소청구 등)를 제기했다가 패소하더라도, 점유가 당연히 타주점유로 전환되는 것은 아닙니다. 오직 소유자(회복자)가 제기한 소송에서 점유자가 패소 확정되어야 승소 판결 확정 시점부터 타주점유로 전환됩니다."
+      },
+      {
+        question: "부동산의 점유취득시효에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "취득시효 완성으로 인한 소유권이전등기청구권은 채권적 청구권이다.",
+          "시효완성 당시의 소유권보존등기가 무효인 경우, 원칙적으로 그 등기명의인은 시효완성을 원인으로 한 소유권이전등기청구의 상대방이 될 수 없다.",
+          "시효완성 후 소유권이전등기를 마치기 전에 소유자가 목적물을 제3자에게 처분한 경우, 시효완성자는 특별한 사정이 없는 한 제3자에게 시효완성을 주장할 수 없다.",
+          "시효완성 후 소유권이전등기를 마치기 전에 소유자가 목적물에 저당권을 설정한 경우, 시효완성자가 소유권이전등기를 마치면 그 저당권은 당연히 소멸한다.",
+          "취득시효 완성 후 소유자가 목적물을 처분한 경우, 소유자의 처분행위가 불법행위를 구성할 수는 있으나 채무불이행을 구성하지는 않는다."
+        ],
+        answer: 4,
+        explanation: "취득시효 완성으로 인한 등기청구는 소유권의 공시가 일어나기 전의 채권적 효력에 가깝습니다. 만약 완성 후 소유권이 넘어가기 전에 소유자가 설정한 저당권은 적법하며, 점유자가 등기를 마치더라도 그 저당권은 소멸되지 않고 저당권이 설정된 부담을 안고 소유권을 승계 취득하게 됩니다."
+      },
+      {
+        question: "금전채무불이행으로 인한 손해배상에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "채무자는 과실 없음을 항변하지 못한다.",
+          "채권자가 손해의 발생과 그 손해액을 증명하여야 한다.",
+          "지연손해금채무는 이행지체로 인한 손해배상채무이다.",
+          "손해배상액은 특별한 사정이 없는 한 법정이율에 의한다.",
+          "이행지체에 대비한 지연손해금 비율을 따로 약정한 경우, 이는 손해배상액의 예정으로 감액의 대상이 될 수 있다."
+        ],
+        answer: 2,
+        explanation: "금전채무불이행에 대한 손해배상은 법상 특약(민법 제397조 제2항)이 존재합니다. 따라서 채권자는 손해의 실제 발생 여부나 구체적인 손해액을 굳이 별도로 증명할 필요 없이 법정이율만큼의 지급을 청구할 수 있으므로 ②번은 틀린 서술입니다."
+      },
+      {
+        question: "동시이행의 항변권에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "쌍무계약의 당사자 일방은 상대방이 그 채무이행을 제공할 때까지 자기의 채무이행을 거절할 수 있다.",
+          "동시이행의 항변권은 당사자의 주장이 없어도 법원이 직권으로 고려하여야 한다.",
+          "일방의 채무가 이행불능으로 인하여 손해배상채무로 바뀐 경우에도 동시이행의 항변권은 존속한다.",
+          "선이행의무자가 이행을 지체하는 동안에 상대방의 채무의 변제기가 도래한 경우, 특별한 사정이 없는 한 선이행의무자도 동시이행의 항변권을 행사할 수 있다.",
+          "계약해제로 인한 당사자 쌍방의 원상회복의무는 동시이행의 관계에 있다."
+        ],
+        answer: 2,
+        explanation: "동시이행의 항변권은 당사자가 '권리로서 주장(행사)'해야만 비로소 효력이 나타납니다. 따라서 당사자가 법정에서 항변권을 명확히 소송상 원용하지 않는다면, 법원이 직권으로 유추 파악해 상환이행판결을 해줄 수 없습니다."
+      },
+      {
+        question: "계약의 법정해제에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "해제는 해제권자의 일방적 의사표시로 그 효과가 발생하는 단독행위이다.",
+          "해제 후 원상회복을 위해 금전을 반환할 자는 해제한 날로부터 이자를 가산하여야 한다.",
+          "계약해제로부터 보호받는 제3자란 해제된 계약으로부터 생긴 법률적 효과를 기초로 해제 전에 새로운 이해관계를 가졌을 뿐만 아니라 등기ㆍ인도 등으로 완전한 권리를 취득한 자를 말한다.",
+          "채무자의 책임 있는 사유로 이행불능이 된 경우, 채권자는 이행기를 기다리지 않고, 최고 없이 계약을 해제할 수 있다.",
+          "계약의 일방 또는 쌍방이 여러 명인 경우, 특약이 없는 한 전원이 또는 전원에 대하여 해제의 의사표시를 하여야 한다."
+        ],
+        answer: 2,
+        explanation: "계약이 해제되어 수령했던 금전을 반환해야 하는 채무자는 해제일이 아니라, 실제 금전을 전달받은 바로 '그 수령일(받은 날)'부터 약정 법정이자를 가산하여 상환해야 하므로 ②번은 오답입니다."
+      },
+      {
+        question: "매도인의 담보책임에 관한 설명으로 옳은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "매매목적인 권리 전부가 타인에게 속한 경우, 선의의 매수인은 계약을 해제할 수 있으나 손해배상은 청구할 수 없다.",
+          "매매목적인 권리 일부가 타인에게 속한 경우, 악의의 매수인은 대금감액을 청구할 수 있다.",
+          "목적물의 수량이 부족한 경우, 악의의 매수인은 대금감액을 청구할 수 있다.",
+          "저당권이 설정된 부동산의 매수인이 저당권의 행사로 소유권을 잃은 경우, 악의의 매수인은 계약을 해제할 수 없다.",
+          "특정물 매매에서 목적물에 하자가 있는 경우, 악의의 매수인은 계약해제와 손해배상을 청구할 수 있다."
+        ],
+        answer: 2,
+        explanation: "권리의 일부가 타인에게 속하는 제572조 담보책임의 경우, 악의의 매수인이라 하더라도 권리를 완벽히 넘겨받지 못한 부족분만큼의 '대금 감액 청구권'을 당연히 행사할 수 있도록 인정해주고 있어 ②번이 정답입니다."
+      },
+      {
+        question: "민법상 건물의 소유를 목적으로 한 토지임대차에서 임차인의 지상물매수청구권에 관한 설명으로 옳은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "토지임차인의 지상물매수청구권은 형성권이므로, 그 행사로 임대인과 임차인 사이에 지상물에 관한 매매가 성립한다.",
+          "임차인의 차임연체액이 2기의 차임액에 달하여 임대인이 임대차계약을 해지한 경우에도 임차인은 지상물매수청구권을 행사할 수 있다.",
+          "지상물매수청구권의 대상이 되는 건물은 임대인의 동의를 얻어 신축한 것에 한정된다.",
+          "임대차기간의 정함이 없는 토지임대차에 있어서 임대인이 해지통고를 한 경우, 임차인은 계약갱신을 청구한 후가 아니면 지상물매수청구권을 행사할 수 없다.",
+          "지상물매수청구권을 배제하는 당사자 간의 약정은 임차인에게 불리하더라도 유효하다."
+        ],
+        answer: 1,
+        explanation: "지상물매수청구권은 일방적인 표시행위만으로 즉시 지상물의 매매계약(법정 가격)을 체결시키는 성격의 강력한 '형성권'입니다. ② 차임연체 해지자는 행사할 수 없고, ③ 동의가 없어도 청구 가능하며, ④ 해지통고를 받은 자는 계약 갱신 필요 없이 곧장 매수 청구를 할 수 있고, ⑤ 배제 특약은 임차인 불이익으로 원칙적 무효입니다."
+      },
+      {
+        question: "공작물의 점유자 및 소유자의 책임에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+        box: null,
+        options: [
+          "전기 그 자체는 공작물에 해당하지 않는다.",
+          "공작물의 점유자에게는 면책사유가 인정되지 않는다.",
+          "피해자에게 손해배상을 한 점유자 또는 소유자는 그 손해의 원인에 대해 책임이 있는 자에게 구상권을 행사할 수 있다.",
+          "공작물책임이 인정되기 위해서는 공작물의 하자와 손해 사이에 인과관계가 있어야 한다.",
+          "공작물에 대해 직접점유자와 간접점유자가 있는 경우, 원칙적으로 직접점유자가 1차적으로 책임을 진다."
+        ],
+        answer: 2,
+        explanation: "민법 제758조 제1항에 따르면, 1차 책임자인 공작물의 '점유자'는 자신의 손해 방지에 필요한 과실 없음을 완전히 입증하는 경우 '면책'될 수 있습니다. (다만 점유자가 면책될 시 2차 책임자인 '소유자'가 전적인 무과실책임을 집니다.)"
+      }
+    ];
+
+    // Quiz App State
+    let currentIdx = 0;
+    let score = 0;
+    let userAnswers = Array(questions.length).fill(null);
+    let quizFinished = false;
+
+    // DOM Elements
+    const screenWelcome = document.getElementById('screen-welcome');
+    const screenQuiz = document.getElementById('screen-quiz');
+    const screenResult = document.getElementById('screen-result');
+
+    const btnStart = document.getElementById('btn-start');
+    const btnNext = document.getElementById('btn-next');
+    const btnRestart = document.getElementById('btn-restart');
+    const btnSync = document.getElementById('btn-sync');
+
+    const headerProgress = document.getElementById('header-progress');
+    const progressBar = document.getElementById('progress-bar');
+    const qNumEl = document.getElementById('quiz-question-number');
+    const qTextEl = document.getElementById('quiz-question-text');
+    const boxContainer = document.getElementById('quiz-box-container');
+    const optionsContainer = document.getElementById('quiz-options');
+    const feedbackBox = document.getElementById('quiz-feedback-box');
+    const feedbackIcon = document.getElementById('feedback-icon');
+    const feedbackTitle = document.getElementById('feedback-title');
+    const feedbackExpl = document.getElementById('feedback-explanation');
+
+    const resultScore = document.getElementById('result-score');
+    const resultGradeBadge = document.getElementById('result-grade-badge');
+    const resultCommentary = document.getElementById('result-commentary');
+    const resultCorrectCount = document.getElementById('result-correct-count');
+    const resultWrongCount = document.getElementById('result-wrong-count');
+    const wrongAnswersContainer = document.getElementById('wrong-answers-container');
+
+    // Custom Alert Elements
+    const customAlert = document.getElementById('custom-alert');
+    const alertTitle = document.getElementById('alert-title');
+    const alertMessage = document.getElementById('alert-message');
+    const alertClose = document.getElementById('alert-close');
+
+    // Initialize Event Listeners
+    btnStart.addEventListener('click', startQuiz);
+    btnNext.addEventListener('click', handleNext);
+    btnRestart.addEventListener('click', restartQuiz);
+    btnSync.addEventListener('click', () => {
+      syncToParentGist();
+      showAlert('저장 및 전송 완료', '오답 수첩 정보가 부모 창에 성공적으로 연동(Sync)되었습니다.');
+    });
+    alertClose.addEventListener('click', closeAlert);
+
+    // Alert functions
+    function showAlert(title, msg) {
+      alertTitle.textContent = title;
+      alertMessage.textContent = msg;
+      customAlert.classList.remove('hidden');
+      setTimeout(() => {
+        customAlert.querySelector('div').classList.remove('scale-95');
+        customAlert.querySelector('div').classList.add('scale-100');
+      }, 50);
+    }
+
+    function closeAlert() {
+      customAlert.querySelector('div').classList.remove('scale-100');
+      customAlert.querySelector('div').classList.add('scale-95');
+      setTimeout(() => {
+        customAlert.classList.add('hidden');
+      }, 150);
+    }
+
+    // Start Quiz
+    function startQuiz() {
+      screenWelcome.classList.add('hidden');
+      screenQuiz.classList.remove('hidden');
+      currentIdx = 0;
+      score = 0;
+      userAnswers.fill(null);
+      quizFinished = false;
+      renderQuestion();
+    }
+
+    // Render Question
+    function renderQuestion() {
+      if (currentIdx >= questions.length) {
+        finishQuiz();
+        return;
+      }
+
+      // Update progress
+      const percent = Math.round(((currentIdx) / questions.length) * 100);
+      progressBar.style.width = `${percent}%`;
+      headerProgress.textContent = `${currentIdx + 1} / ${questions.length} 문제 진행중`;
+
+      const q = questions[currentIdx];
+      qNumEl.textContent = `QUESTION ${String(currentIdx + 1).padStart(2, '0')}`;
+      qTextEl.textContent = `${currentIdx + 1}. ${q.question}`;
+
+      // Box Handling
+      if (q.box) {
+        boxContainer.innerHTML = q.box;
+        boxContainer.classList.remove('hidden');
+      } else {
+        boxContainer.classList.add('hidden');
+      }
+
+      // Options Rendering
+      optionsContainer.innerHTML = '';
+      feedbackBox.classList.add('hidden');
+      btnNext.classList.add('hidden');
+
+      q.options.forEach((optText, index) => {
+        const optionNum = index + 1;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = `w-full text-left p-4 rounded-xl border border-slate-800 bg-slate-900/50 hover:bg-slate-800/60 hover:border-slate-700 active:scale-[0.99] transition-all flex items-start space-x-3 duration-150 group`;
+        
+        // Number badge
+        const badge = document.createElement('span');
+        badge.className = `inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-800 text-slate-400 text-xs font-bold shrink-0 group-hover:bg-slate-700 group-hover:text-white transition-colors`;
+        badge.textContent = optionNum;
+
+        // Content
+        const content = document.createElement('span');
+        content.className = `text-slate-300 group-hover:text-white text-sm md:text-base leading-relaxed`;
+        content.textContent = optText;
+
+        btn.appendChild(badge);
+        btn.appendChild(content);
+
+        // Click Logic
+        btn.addEventListener('click', () => selectOption(optionNum));
+        optionsContainer.appendChild(btn);
+      });
+    }
+
+    // Select Option
+    function selectOption(selectedNum) {
+      if (userAnswers[currentIdx] !== null) return; // Prevent multiple selection
+
+      userAnswers[currentIdx] = selectedNum;
+      const q = questions[currentIdx];
+      const isCorrect = (selectedNum === q.answer);
+
+      if (isCorrect) {
+        score++;
+      }
+
+      // Disable other buttons & style correct/incorrect
+      const buttons = optionsContainer.querySelectorAll('button');
+      buttons.forEach((btn, idx) => {
+        const optionNum = idx + 1;
+        btn.disabled = true;
+        btn.classList.remove('hover:bg-slate-800/60', 'hover:border-slate-700', 'active:scale-[0.99]');
+
+        const badge = btn.querySelector('span:first-child');
+        const text = btn.querySelector('span:last-child');
+
+        if (optionNum === q.answer) {
+          // Correct answer style
+          btn.className = `w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-500/10 flex items-start space-x-3 transition-all duration-150`;
+          badge.className = `inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500 text-slate-950 text-xs font-black shrink-0`;
+          text.className = `text-emerald-300 font-bold text-sm md:text-base leading-relaxed`;
+        } else if (optionNum === selectedNum && !isCorrect) {
+          // Wrong selection style
+          btn.className = `w-full text-left p-4 rounded-xl border-2 border-rose-500 bg-rose-500/10 flex items-start space-x-3 transition-all duration-150`;
+          badge.className = `inline-flex items-center justify-center w-6 h-6 rounded-full bg-rose-500 text-white text-xs font-black shrink-0`;
+          text.className = `text-rose-300 font-bold text-sm md:text-base leading-relaxed`;
+        } else {
+          // Non-selected styles fade a bit
+          btn.classList.add('opacity-40');
+        }
+      });
+
+      // Show detailed feedback box
+      feedbackBox.classList.remove('hidden');
+      if (isCorrect) {
+        feedbackBox.className = `rounded-xl p-5 border border-emerald-500/30 bg-emerald-500/5 transition-all`;
+        feedbackIcon.className = `rounded-full p-1 bg-emerald-500 text-slate-950`;
+        feedbackIcon.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg>
+        `;
+        feedbackTitle.textContent = `정답입니다!`;
+        feedbackTitle.className = `text-lg font-extrabold text-emerald-400`;
+      } else {
+        feedbackBox.className = `rounded-xl p-5 border border-rose-500/30 bg-rose-500/5 transition-all`;
+        feedbackIcon.className = `rounded-full p-1 bg-rose-500 text-white`;
+        feedbackIcon.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        `;
+        feedbackTitle.textContent = `오답입니다 (정답: ${q.answer}번)`;
+        feedbackTitle.className = `text-lg font-extrabold text-rose-400`;
+      }
+      feedbackExpl.textContent = q.explanation;
+
+      // Unhide "Next" or "Finish" Button
+      btnNext.classList.remove('hidden');
+      if (currentIdx === questions.length - 1) {
+        btnNext.innerHTML = `<span>퀴즈 완료 & 채점</span>`;
+      } else {
+        btnNext.innerHTML = `<span>다음 문항</span><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>`;
+      }
+    }
+
+    // Next button click
+    function handleNext() {
+      currentIdx++;
+      if (currentIdx < questions.length) {
+        renderQuestion();
+      } else {
+        finishQuiz();
+      }
+    }
+
+    // Finish Quiz
+    function finishQuiz() {
+      quizFinished = true;
+      screenQuiz.classList.add('hidden');
+      screenResult.classList.remove('hidden');
+      headerProgress.textContent = "학습 완료";
+      progressBar.style.width = '100%';
+
+      // Calculate score out of 100
+      const finalScore = Math.round((score / questions.length) * 100);
+      resultScore.textContent = finalScore;
+      resultCorrectCount.textContent = score;
+      resultWrongCount.textContent = questions.length - score;
+
+      // Grade classification
+      if (finalScore >= 80) {
+        resultGradeBadge.textContent = "🏆 합격 안정권 (최우수)";
+        resultGradeBadge.className = "inline-block px-4 py-1.5 rounded-full text-sm font-extrabold tracking-wide bg-emerald-500 text-slate-950";
+        resultCommentary.textContent = "합격을 축하합니다! 완벽한 학습 상태를 보여주고 계십니다. 이대로 실전에 입성하시면 고득점 합격을 확실하게 보증합니다!";
+      } else if (finalScore >= 60) {
+        resultGradeBadge.textContent = "👍 합격선 도달 (우수)";
+        resultGradeBadge.className = "inline-block px-4 py-1.5 rounded-full text-sm font-extrabold tracking-wide bg-teal-500 text-slate-950";
+        resultCommentary.textContent = "주택관리사보 민법 합격 커트라인(60점)을 안정적으로 충족하셨습니다. 아래 오답 노트를 활용해 일부 오개념을 메우면 완벽해집니다.";
+      } else if (finalScore >= 40) {
+        resultGradeBadge.textContent = "⚠️ 과락 모면 (보완 필요)";
+        resultGradeBadge.className = "inline-block px-4 py-1.5 rounded-full text-sm font-extrabold tracking-wide bg-amber-500 text-slate-950";
+        resultCommentary.textContent = "과락 기준(40점)은 모면했으나 합격선에는 조금 미치지 못합니다. 틀린 문제 중심의 철저한 피드백과 반복 회독이 수반되어야 합니다.";
+      } else {
+        resultGradeBadge.textContent = "🚨 과락 주의 (위험 상태)";
+        resultGradeBadge.className = "inline-block px-4 py-1.5 rounded-full text-sm font-extrabold tracking-wide bg-rose-500 text-white";
+        resultCommentary.textContent = "취약점 조치가 긴급하게 필요한 상태입니다. 일타강사의 상세한 오답 분석 지문과 조문 설명을 다시 한번 정독하시기 바랍니다.";
+      }
+
+      // Build Incorrect Note (오답 노트)
+      wrongAnswersContainer.innerHTML = '';
+      let wrongCount = 0;
+
+      questions.forEach((q, index) => {
+        const userSel = userAnswers[index];
+        if (userSel !== q.answer) {
+          wrongCount++;
+          const card = document.createElement('div');
+          card.className = "bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4 shadow-md";
+
+          // Header line
+          const header = document.createElement('div');
+          header.className = "flex justify-between items-center border-b border-slate-800 pb-2.5";
+          header.innerHTML = `
+            <span class="text-rose-400 font-extrabold">오답 분석 #${index + 1}</span>
+            <span class="text-xs bg-slate-800 px-2 py-0.5 rounded text-slate-400">정답 ${q.answer}번 / 본인 선택 ${userSel || '미선택'}번</span>
+          `;
+          card.appendChild(header);
+
+          // Question
+          const qText = document.createElement('p');
+          qText.className = "text-sm md:text-base font-bold text-slate-200 leading-relaxed";
+          qText.textContent = `${index + 1}. ${q.question}`;
+          card.appendChild(qText);
+
+          // Box (if exists)
+          if (q.box) {
+            const b = document.createElement('div');
+            b.className = "bg-slate-950 border border-slate-800/80 p-3.5 rounded text-xs leading-relaxed text-slate-400 font-mono";
+            b.innerHTML = q.box;
+            card.appendChild(b);
+          }
+
+          // Options logic visualization
+          const logic = document.createElement('div');
+          logic.className = "bg-slate-950/80 p-4 rounded-lg border border-rose-500/20 space-y-2";
+          
+          const title = document.createElement('div');
+          title.className = "text-xs font-extrabold text-slate-400 uppercase tracking-wider flex items-center space-x-1.5";
+          title.innerHTML = `<span class="inline-block w-2 h-2 bg-rose-500 rounded-full"></span><span>핵심 해설 및 보완 조치</span>`;
+          logic.appendChild(title);
+
+          const desc = document.createElement('p');
+          desc.className = "text-xs md:text-sm text-slate-300 leading-relaxed";
+          desc.textContent = q.explanation;
+          logic.appendChild(desc);
+
+          card.appendChild(logic);
+          wrongAnswersContainer.appendChild(card);
+        }
+      });
+
+      if (wrongCount === 0) {
+        wrongAnswersContainer.innerHTML = `
+          <div class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 p-6 rounded-xl text-center">
+            <h4 class="font-extrabold text-lg mb-1">🎉 퍼펙트 달성!</h4>
+            <p class="text-sm">단 하나의 오답도 존재하지 않습니다. 주택관리사보 시험 합격을 확신합니다!</p>
+          </div>
+        `;
+      }
+
+      // Automatically sync at the end
+      syncToParentGist();
+    }
+
+    // Sync incorrect list to Gist/Parent window (PostMessage)
+    function syncToParentGist() {
+      const wrongAnswers = [];
+      questions.forEach((q, index) => {
+        if (userAnswers[index] !== null && userAnswers[index] !== q.answer) {
+          wrongAnswers.push({
+            questionNo: index + 1,
+            question: q.question,
+            userSelected: userAnswers[index],
+            correctAnswer: q.answer,
+            explanation: q.explanation
+          });
+        }
+      });
+
+      const payload = {
+        type: 'quiz_sync',
+        appId: appId,
+        score: Math.round((score / questions.length) * 100),
+        totalCount: questions.length,
+        correctCount: score,
+        wrongCount: questions.length - score,
+        wrongAnswers: wrongAnswers,
+        timestamp: new Date().toISOString()
+      };
+
+      // 부모 창으로 데이터 전송
+      window.parent.postMessage(payload, '*');
+      console.log("Gist Synchronization Data Sent: ", payload);
+    }
+
+    // Restart Quiz
+    function restartQuiz() {
+      screenResult.classList.add('hidden');
+      screenWelcome.classList.remove('hidden');
+      headerProgress.textContent = "준비 상태";
+      progressBar.style.width = '0%';
+    }
+  </script>
+</body>
+</html>
