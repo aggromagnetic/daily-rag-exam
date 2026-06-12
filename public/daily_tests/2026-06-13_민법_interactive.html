@@ -1,0 +1,1023 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일타강사 Gem의 민법 마스터클래스</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .box-container {
+            background: rgba(15, 23, 42, 0.6);
+            border-left: 4px solid #6366f1;
+        }
+    </style>
+</head>
+<body class="text-slate-100 min-h-screen flex flex-col justify-between antialiased selection:bg-indigo-500 selection:text-white">
+
+    <!-- Header Section -->
+    <header class="w-full border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50 px-4 py-3">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <span class="px-2 py-1 bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black text-xs rounded-md shadow-lg tracking-wider">일타강사 Gem</span>
+                <h1 class="text-base sm:text-lg font-bold tracking-tight bg-gradient-to-r from-indigo-200 to-white bg-clip-text text-transparent">민법 프리미엄 핵심 퀴즈</h1>
+            </div>
+            <div id="top-timer" class="text-xs sm:text-sm font-mono text-amber-400 bg-amber-950/30 border border-amber-900/50 px-2 py-1 rounded-full hidden">
+                진행 시간 00:00
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center p-4 sm:p-6">
+        <div class="w-full max-w-4xl">
+            
+            <!-- Welcome/Intro Screen -->
+            <div id="intro-screen" class="glass-panel rounded-3xl p-6 sm:p-10 shadow-2xl text-center space-y-6 max-w-2xl mx-auto border border-indigo-500/20">
+                <div class="inline-flex p-4 bg-indigo-950/50 rounded-full border border-indigo-500/30 mb-2">
+                    <svg class="w-12 h-12 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                </div>
+                <h2 class="text-2xl sm:text-3.5xl font-black tracking-tight leading-tight bg-gradient-to-r from-indigo-200 via-white to-amber-200 bg-clip-text text-transparent">
+                    주택관리사보 1차 합격 완벽대비<br>민법총칙-물권-채권 핵심 30제
+                </h2>
+                <p class="text-slate-400 text-sm sm:text-base leading-relaxed max-w-md mx-auto">
+                    수험생의 흔들리지 않는 1등 실력을 위하여, 민법 일타강사 Gem의 명쾌한 논리 해설과 무결점 실시간 채점 시스템을 탑재하였습니다.
+                </p>
+                <div class="bg-indigo-950/30 border border-indigo-900/40 rounded-2xl p-4 text-left space-y-2 text-xs sm:text-sm max-w-md mx-auto text-indigo-200">
+                    <p class="font-bold text-indigo-300">💡 주요 학습 특징</p>
+                    <ul class="list-disc list-inside space-y-1 text-slate-300">
+                        <li>아라비아 숫자 30문항 완전 탑재</li>
+                        <li>박스형 지문(ㄱ, ㄴ, ㄷ) 완벽 보존 및 줄바꿈 정리</li>
+                        <li>오답지문에 대한 100% 명확한 논리적 교정 설명</li>
+                        <li>학습 완료 즉시 오답노트 자동 생성 & 부모창 연동</li>
+                    </ul>
+                </div>
+                <button id="btn-start" class="w-full max-w-xs py-4 px-8 bg-gradient-to-r from-indigo-500 via-indigo-600 to-violet-600 text-white font-bold rounded-2xl shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 transform hover:-translate-y-0.5 active:translate-y-0 transition-all text-base sm:text-lg">
+                    승부 걸기 (학습 시작)
+                </button>
+            </div>
+
+            <!-- Quiz Screen (Hidden at first) -->
+            <div id="quiz-screen" class="hidden space-y-6">
+                <!-- Progress & Score -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900/50 p-4 rounded-2xl border border-slate-800">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-sm font-semibold text-indigo-400">학습 진행률</span>
+                        <div class="w-32 sm:w-48 bg-slate-800 h-2.5 rounded-full overflow-hidden">
+                            <div id="progress-bar" class="bg-indigo-500 h-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                        <span id="quiz-progress-text" class="text-xs sm:text-sm font-mono font-bold text-slate-300">0 / 30</span>
+                    </div>
+                    <div class="flex justify-between items-center sm:space-x-4">
+                        <div class="text-xs sm:text-sm text-slate-400">정답률: <span id="accuracy-rate" class="font-mono font-bold text-emerald-400">0%</span></div>
+                        <div class="text-xs sm:text-sm text-slate-400 ml-4 sm:ml-0">남은 문항: <span id="remaining-count" class="font-mono font-bold text-indigo-300">30</span></div>
+                    </div>
+                </div>
+
+                <!-- Main Quiz Card -->
+                <div class="glass-panel rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 border border-slate-800">
+                    <!-- Question Header & Text -->
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-2">
+                            <span id="question-category" class="px-2.5 py-0.5 text-[10px] sm:text-xs font-bold rounded-md bg-indigo-900/60 text-indigo-300 border border-indigo-800/50 uppercase tracking-wider">민법 공통</span>
+                            <span id="question-number" class="text-sm sm:text-base font-extrabold text-amber-400">Q. 01</span>
+                        </div>
+                        <h3 id="question-text" class="text-base sm:text-lg font-bold text-slate-100 leading-relaxed">
+                            권리의 성질에 관한 설명으로 옳지 않은 것은?
+                        </h3>
+                    </div>
+
+                    <!-- Box-style Condition / 보기 (Renders dynamically if exists) -->
+                    <div id="question-box" class="box-container rounded-2xl p-4 text-xs sm:text-sm text-slate-200 leading-relaxed whitespace-pre-line hidden">
+                        <!-- ㄱ. ... ㄴ. ... ㄷ. ... -->
+                    </div>
+
+                    <!-- Choices (1 to 5) -->
+                    <div id="choices-container" class="space-y-3">
+                        <!-- Generated by JS -->
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex items-center space-x-3 pt-2">
+                        <button id="btn-submit" class="flex-1 py-4 px-6 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-2xl shadow-lg transition-all text-sm sm:text-base flex items-center justify-center space-x-2" disabled>
+                            <span>정답 제출 및 분석하기</span>
+                            <svg class="w-4 h-4 sm:w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <button id="btn-next" class="flex-1 py-4 px-6 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-2xl shadow-lg transition-all text-sm sm:text-base flex items-center justify-center space-x-2 hidden">
+                            <span>다음 문항 진행</span>
+                            <svg class="w-4 h-4 sm:w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Real-time Feedback & Detailed Explanation Section -->
+                <div id="feedback-panel" class="hidden rounded-3xl p-6 shadow-2xl transition-all duration-300 transform scale-95 border">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div id="feedback-badge" class="px-3 py-1 rounded-full text-xs font-bold shadow-sm">
+                            정답
+                        </div>
+                        <h4 class="text-sm sm:text-base font-extrabold text-slate-100">일타강사 Gem의 고밀도 심층 해설</h4>
+                    </div>
+                    <div id="feedback-text" class="text-xs sm:text-sm leading-relaxed space-y-2 text-slate-200">
+                        <!-- Detailed feedback content -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Result Screen / Summary (Hidden at first) -->
+            <div id="result-screen" class="hidden space-y-6">
+                <div class="glass-panel rounded-3xl p-6 sm:p-10 shadow-2xl border border-indigo-500/20 text-center space-y-6">
+                    <h2 class="text-3xl sm:text-4xl font-black text-slate-100 tracking-tight">수고하셨습니다, 수험생님!</h2>
+                    
+                    <!-- Circular Score Widget -->
+                    <div class="relative w-40 h-40 sm:w-48 sm:h-48 mx-auto flex items-center justify-center bg-slate-950/40 rounded-full border border-slate-800 shadow-inner">
+                        <div class="text-center">
+                            <span id="result-score" class="block text-4xl sm:text-5xl font-black text-amber-400">0</span>
+                            <span class="text-xs sm:text-sm text-slate-400 font-semibold tracking-wider uppercase">획득 점수</span>
+                        </div>
+                        <!-- Decorative SVG Circle -->
+                        <svg class="absolute inset-0 w-full h-full transform -rotate-90">
+                            <circle cx="50%" cy="50%" r="45%" stroke="rgba(255, 255, 255, 0.05)" stroke-width="8" fill="transparent"></circle>
+                            <circle id="result-circle-progress" cx="50%" cy="50%" r="45%" stroke="#6366f1" stroke-width="8" fill="transparent" stroke-dasharray="283" stroke-dashoffset="283" stroke-linecap="round" class="transition-all duration-1000"></circle>
+                        </svg>
+                    </div>
+
+                    <div class="max-w-md mx-auto space-y-3">
+                        <p id="result-evaluation" class="text-base sm:text-lg font-bold text-indigo-300">
+                            "조금만 더 보완하시면 합격권에 도달할 수 있습니다!"
+                        </p>
+                        <p class="text-xs sm:text-sm text-slate-400">
+                            총 30문항 중 <span id="result-correct-count" class="font-bold text-slate-200">0</span>문항을 맞히셨으며, 정답률은 <span id="result-accuracy" class="font-bold text-slate-200">0%</span>입니다.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+                        <button id="btn-restart" class="flex-1 py-3 px-6 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-2xl border border-slate-700 transition-all text-sm sm:text-base">
+                            처음부터 다시 풀기
+                        </button>
+                        <button id="btn-copy-notes" class="flex-1 py-3 px-6 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-extrabold rounded-2xl shadow-lg transition-all text-sm sm:text-base flex items-center justify-center space-x-2">
+                            <span>오답노트 클립보드 복사</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m-5 4h6m-6 4h6m-6 4h6"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Interactive Incorrect Answers Note -->
+                <div class="glass-panel rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-800 space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                        <div class="flex items-center space-x-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse"></span>
+                            <h3 class="text-base sm:text-lg font-black text-slate-200">실시간 생성 오답수첩 (AI 맞춤 리포트)</h3>
+                        </div>
+                        <span id="incorrect-badge-count" class="text-xs bg-rose-950/50 text-rose-300 border border-rose-900 px-2 py-0.5 rounded-full font-mono">0개 문항</span>
+                    </div>
+
+                    <div id="incorrect-notes-container" class="space-y-4 divide-y divide-slate-800/50">
+                        <!-- Generate by JS if there are incorrect answers -->
+                        <div class="text-center py-8 text-slate-500 text-sm">
+                            틀린 문제가 없습니다. 완벽합니다!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Custom Modern Alert Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-10 opacity-0 pointer-events-none transition-all duration-300 max-w-sm w-full bg-slate-900 border border-slate-800 text-slate-100 p-4 rounded-2xl shadow-2xl flex items-center space-x-3">
+        <div class="p-2 bg-amber-500/20 text-amber-400 rounded-xl">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+        </div>
+        <div class="flex-1">
+            <p id="toast-message" class="text-xs sm:text-sm font-semibold">문제를 선택해 주세요!</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full text-center py-4 border-t border-slate-900/60 bg-slate-950/40 text-slate-500 text-[10px] sm:text-xs">
+        <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+            <p>© 2026 주택관리사보 1차 합격 특화 일타강사 Gem. All rights reserved.</p>
+            <p class="font-mono text-slate-600">Premium Interactive Web App v2.5</p>
+        </div>
+    </footer>
+
+    <script>
+        const questions = [
+            {
+                id: 1,
+                category: "민법총칙",
+                question: "권리의 성질에 관한 설명으로 옳지 않은 것은?",
+                options: [
+                    "① 동산에 대한 소유권은 일신전속권이다.",
+                    "② 저당권은 피담보채권의 종된 권리이다.",
+                    "③ 임금채권은 청구권이다.",
+                    "④ 부동산에 대한 소유권은 절대권이다.",
+                    "⑤ 건물의 소유를 위하여 토지에 설정한 지상권은 지배권이다."
+                ],
+                answer: 1,
+                explanation: "<strong>정답: ①</strong><br><strong>일타 분석:</strong> 동산에 대한 소유권은 대표적인 '재산권'이므로 양도성과 상속성이 당연히 인정되는 <strong>비전속권</strong>입니다. 타인에게 자유롭게 이전할 수 있으므로, 권리자 개인의 인격이나 신분과 분리할 수 없는 '일신전속권'이라는 설명은 완전한 오답입니다!<br><br><strong>[오답 선지 완벽 정리]</strong><br>② 저당권은 채권을 담보하기 위한 권리이므로, 피담보채권(주된 권리)에 수반되는 '종된 권리'가 맞습니다.<br>③ 임금채권은 근로자가 사용자에게 임금 지급이라는 특정 행위를 청구할 수 있는 '청구권'에 해당합니다.<br>④ 소유권은 세상의 모든 사람에게 주장할 수 있는 '절대권'이자 대세권입니다.<br>⑤ 지상권은 타인의 토지를 직접 지배하여 사용·수익할 수 있는 '지배권'(물권)에 속합니다."
+            },
+            {
+                id: 2,
+                category: "민법총칙",
+                question: "권리능력에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "① 자연인의 권리능력을 제한하는 약정은 무효이다.",
+                    "② 반려동물은 위자료 청구권의 귀속주체가 될 수 없다.",
+                    "③ 태아는 증여와 유증에 관하여 이미 출생한 것으로 본다.",
+                    "④ 사산한 태아에게는 포태시 그에게 가해진 불법행위에 대한 손해배상청구권이 인정되지 않는다.",
+                    "⑤ 2인 이상이 동일한 위난으로 사망한 경우에는 동시에 사망한 것으로 추정한다."
+                ],
+                answer: 3,
+                explanation: "<strong>정답: ③</strong><br><strong>일타 분석:</strong> 우리 민법 판례상 태아의 권리능력을 인정하는 개별 규정 중 <strong>'유증(제1064조)'</strong>에 대해서는 태아를 이미 출생한 것으로 보아 수증능력을 인정하지만, 당사자의 합의로 성립하는 계약인 <strong>'증여(생전 증여)'</strong>에 관해서는 태아의 수증능력을 인정하지 않습니다! 따라서 증여와 유증 모두 출생한 것으로 본다는 설명은 잘못되었습니다.<br><br><strong>[오답 선지 완벽 정리]</strong><br>① 자연인의 권리능력은 법이 부여한 공법상 권리이므로 이를 임의로 제한하는 특약은 반사회적이고 강행법규 위반으로 무효입니다.<br>② 민법상 동물은 물건에 불과하므로 권리능력을 가질 수 없으며, 따라서 위자료 청구권의 귀속 주체가 될 수 없습니다.<br>④ 판례는 해제조건설/정지조건설 중 정지조건설을 취하므로, 태아가 사산한 경우에는 소급하여 권리능력을 취득할 여지가 전혀 없습니다. 따라서 손해배상청구권이 인정되지 않는 것이 맞습니다.<br>⑤ 제30조에 따라 동일 위난으로 2인 이상 사망 시 동시에 사망한 것으로 '추정'합니다. (간주가 아닙니다!)"
+            },
+            {
+                id: 3,
+                category: "민법총칙",
+                question: "민법상 능력에 관한 설명으로 옳은 것을 모두 고르면? (다툼이 있으면 판례에 따름)",
+                box: "ㄱ. 태아는 법정대리인에 의한 수증행위를 할 수 있다.\nㄴ. 2인 이상이 동일한 위난으로 사망한 경우에는 동시에 사망한 것으로 간주된다.\nㄷ. 제한능력자의 반환범위를 현존이익으로 제한하는 민법의 규정은 의사무능력자의 법률행위에도 유추적용된다.",
+                options: [
+                    "① ㄱ",
+                    "② ㄷ",
+                    "③ ㄱ, ㄴ",
+                    "④ ㄱ, ㄷ",
+                    "⑤ ㄴ, ㄷ"
+                ],
+                answer: 2,
+                explanation: "<strong>정답: ②</strong><br><strong>일타 분석:</strong> 옳은 것은 오직 <strong>ㄷ</strong> 하나입니다.<br><br><strong>[핵심 지문 격파]</strong><br>ㄱ. 태아에게는 증여(수증행위)의 권리능력이 인정되지 않으므로, 법정대리인이 대신하여 수증행위를 할 수도 없습니다. (틀림)<br>ㄴ. 민법 제30조는 동시에 사망한 것으로 <strong>'추정'</strong>한다고 규정하고 있을 뿐이므로, 반증을 통해 뒤집을 수 있습니다. '간주(본다)'가 아닙니다! (틀림)<br>ㄷ. 판례는 제한능력자의 현존이익 반환 한도 규정(제141조 단서)을 의사무능력자의 무효 행위에도 유추적용하여 그를 보호하고 있습니다. (옳음)"
+            },
+            {
+                id: 4,
+                category: "민법총칙",
+                question: "법정후견제도에 관한 설명으로 옳은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "① 피성년후견인은 질병 등 장애사유로 인하여 사무를 처리할 능력이 지속적으로 결여된 자를 말한다.",
+                    "② 법인은 한정후견인이 될 수 없다.",
+                    "③ 특정후견심판을 할 경우 본인의 의사를 고려하여야 한다.",
+                    "④ 피성년후견인이 성년후견인의 동의서를 위조하여 매매계약을 체결한 경우 그 매매계약을 취소할 수 없다.",
+                    "⑤ 한정후견개시의 원인이 소멸한 경우에는 한정후견인은 법원에 한정후견종료의 심판을 청구할 수 있다."
+                ],
+                answer: 5,
+                explanation: "<strong>정답: ⑤</strong><br><strong>일타 분석:</strong> 한정후견개시의 원인이 소멸한 경우, 본인, 배우자, 4촌 이내의 친족, 한정후견인 등 청구권자의 청구에 따라 법원은 한정후견종료의 심판을 내려야 합니다. 한정후견인도 당연히 청구권자에 포함되므로 옳은 지문입니다.<br><br><strong>[오답 선지 완벽 정리]</strong><br>① 피성년후견인은 법원의 성년후견개시 '심판을 받은 자'를 뜻합니다. 단순히 능력 결여 상태에 있는 자 자체를 일컫는 말이 아닙니다.<br>② 민법 제930조 제3항에 의하여 법인도 후견인이 될 수 있습니다.<br>④ 제한능력자의 속임수로 취소권이 배제되는 경우(제17조)에서, 피성년후견인은 동의권이 없기 때문에 동의가 있는 것으로 믿게 하였더라도 취소할 수 있습니다. 즉, 취소할 수 있습니다!<br>③ 특정후견심판을 할 경우에는 본인의 의사에 '반하여' 할 수 없으므로(제14조 제2항), 단순히 고려만 하는 것이 아니라 의사에 반하지 않아야 합니다."
+            },
+            {
+                id: 5,
+                category: "민법총칙",
+                question: "법인 아닌 사단에 관한 설명으로 옳지 않은 것을 모두 고르면? (다툼이 있으면 판례에 따름)",
+                box: "ㄱ. 법인 아닌 사단의 내부관계에 관하여는 1차적으로 그 사단의 정관이 적용되고, 정관의 규정이 없는 경우에는 민법의 조합에 관한 규정이 유추적용된다.\nㄴ. 사원총회의 결의에 의하여 총유물에 대한 매매계약이 체결된 후, 그 채무의 존재를 승인하여 소멸시효를 중단시키는 행위는 총유물의 관리ㆍ처분행위에 해당한다.\nㄷ. 법인 아닌 사단의 대표자가 정관에 위반하여 사원총회의 결의 없이 체결한 계약은 상대방이 그와 같은 대표권의 제한을 알았거나 알 수 있었을 경우가 아니면 유효하다.\nㄹ. 법인 아닌 사단이 상대방과 체결한 계약의 효력은 직접 사원들에게 미치지 않는다.",
+                options: [
+                    "① ㄱ",
+                    "② ㄱ, ㄴ",
+                    "③ ㄱ, ㄴ, ㄷ",
+                    "④ ㄱ, ㄷ, ㄹ",
+                    "⑤ ㄱ, ㄴ, ㄷ, ㄹ"
+                ],
+                answer: 2,
+                explanation: "<strong>정답: ②</strong><br><strong>일타 분석:</strong> 옳지 않은 것은 <strong>ㄱ, ㄴ</strong>입니다.<br><br><strong>[핵심 지문 격파]</strong><br>ㄱ. 법인 아닌 사단의 규정이 없으면 민법의 '사단법인' 규정을 유추적용해야 합니다. 조합(계약관계) 규정을 유추적용하는 것은 완전히 틀렸습니다! (틀림)<br>ㄴ. 판례에 따르면 이미 성립한 채무의 존재를 승인하여 시효를 중단시키는 행위는 총유물의 관리·처분행위가 아니라 단순한 채무부담행위에 불과하여 총회 결의가 필수적이지 않습니다. (틀림)<br>ㄷ. 대표자가 사원총회 결의 없이 행한 처분행위는 대표권 제한에 준하므로, 상대방이 알았거나 알 수 있었던 경우가 아니라면(선의·무과실이라면) 민법 제35조 제1항의 유추적용 등에 의해 계약은 유효합니다. (옳음)<br>ㄹ. 비법인 사단의 채무는 사단 자체의 채무이며 사원들의 총유 재산으로만 책임을 지므로 사원 개인에게 직접 계약의 효력이나 채무 변제 의무가 미치지 않습니다. (옳음)"
+            },
+            {
+                id: 6,
+                category: "민법총칙",
+                question: "사단법인에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "① 사단법인의 이사회 결의에 무효사유가 있는 경우 특별한 사정이 없는 한 이해관계인은 언제든지 무효를 주장할 수 있다.",
+                    "② 정관에 이사의 해임사유에 관한 규정이 있는 경우, 법인은 특별한 사정이 없는 한 정관에서 정하지 않은 사유로 이사를 해임할 수 없다.",
+                    "③ 사원의 지위는 정관에 달리 정함이 없으면 양도할 수 없다.",
+                    "④ 사원총회 결의에 의한 정관의 해석은 정관의 규범적 의미와 다르더라도 법인의 구성원을 구속하는 효력이 있다.",
+                    "⑤ 법원의 직무집행정지 가처분결정에 의해 권한이 정지된 대표이사가 그 정지기간 중 체결한 계약은 그 후 가처분신청이 취하되었더라도 무효이다."
+                ],
+                answer: 4,
+                explanation: "<strong>정답: ④</strong><br><strong>일타 분석:</strong> 사원총회가 멋대로 내린 정관의 자의적 해석은 법인 구성원들을 구속하는 효력이 없습니다! 정관은 법률과 유사한 자치법규이므로 객관적이고 규범적인 의미로 해석해야 하며, 다수의 결의라 할지라도 법적인 한계를 넘는 정관 해석은 법원이나 구성원을 구속할 수 없습니다.<br><br><strong>[오답 선지 완벽 정리]</strong><br>① 이사회 결의의 무효는 이해관계인이면 언제든지 누구에게나 주장할 수 있습니다.<br>② 정관에 해임 사유가 엄격히 규정되어 있다면 그 사유 외에는 이사를 함부로 해임하지 못한다는 것이 판례의 태도입니다.<br>③ 민법 제56조(사원권의 비전속성)는 강행규정이 아닌 임의규정이므로 정관으로 양도 가능하게 정할 수 있고, 그렇지 않으면 양도 불가합니다.<br>⑤ 가처분 효력 기간 중 위반하여 체결한 대표권 행사는 절대적 무효이므로 가처분 신청이 사후에 취하되어도 소급하여 유효가 되지 않습니다."
+            },
+            {
+                id: 7,
+                category: "민법총칙",
+                question: "권리능력 없는 사단 A는 대표자로 甲을 두고 있다. 이에 관한 설명으로 옳은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "① 甲이 A의 이름으로 乙 소유 X토지를 매수하는 계약을 체결하였다면 그 효력은 A의 구성원들에게 효력이 미친다.",
+                    "② A의 정관에 甲에 대한 대표권이 제한이 있음을 알고 있던 丙과 A 사이에 체결된 계약은 유효이다.",
+                    "③ 甲이 A 명의의 부동산을 단독으로 처분한 경우라도 상대방이 단독으로 처분할 수 있다고 믿은데 정당한 이유가 있다면 그 매매계약은 유효이다.",
+                    "④ A의 사원들이 하나도 없게 되었더라도 A가 바로 소멸하는 것은 아니다.",
+                    "⑤ 甲이 丙에게 포괄적으로 권한을 위임하여 丙이 A의 이름으로 대리한 행위는 A에게 효력이 있다."
+                ],
+                answer: 4,
+                explanation: "<strong>정답: ④</strong><br><strong>일타 분석:</strong> 비법인사단 A의 사원이 단 한 명도 없게 되었다 하더라도 그것은 법인의 '해산사유'가 될 뿐이며, 법인과 마찬가지로 청산사무가 완료될 때까지 청산 목적으로 사단이 존속하므로 즉시 소멸하는 것은 아닙니다.<br><br><strong>[오답 선지 완벽 정리]</strong><br>① 비법인사단의 계약 효력은 사단 자체에 귀속되지, 개별 구성원들에게 직접 미치는 것이 아닙니다.<br>② 대표권 제한을 악의(알고 있음)인 제3자와 한 계약은 무효입니다.<br>③ 대표자가 사원총회 결의 없이 총유 재산인 부동산을 단독 처분한 경우, 이는 강행법규 성격의 관리·처분 위반이므로 표현대리가 적용될 여지가 없어 계약은 절대 무효입니다.<br>⑤ 대표자의 포괄적 대리권 위임은 무효입니다. 포괄위임을 통해 대리된 행위는 사단에 효력이 미치지 않습니다."
+            },
+            {
+                id: 8,
+                category: "민법총칙",
+                question: "민법상 법인의 불법행위능력에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "① 대표권 없는 이사는 법인의 기관이 아니므로 법인의 불법행위는 성립하지 않는다.",
+                    "② 법인의 불법행위가 성립하려면 대표기관의 행위가 불법행위의 일반적 요건을 갖추어야 한다.",
+                    "③ 법인의 불법행위가 성립하는 경우, 법인과 함께 가해행위를 한 대표기관도 개인적으로 손해배상책임을 진다.",
+                    "④ 법인의 목적범위 외의 행위로 인하여 타인에게 손해를 가한 때에는 그 사항의 의결에 찬성하거나 그 의결을 집행한 사원, 이사 및 기타 대표자가 연대하여 배상책임을 진다.",
+                    "⑤ 피해자에게 손해발생에 대한 과실이 인정되더라도 법인의 불법행위책임으로 인한 손해배상액을 산정할 때에 법원은 과실상계를 할 수 없다."
+                ],
+                answer: 5,
+                explanation: "<strong>정답: ⑤</strong><br><strong>일타 분석:</strong> 법인의 불법행위책임도 손해배상의 일반 이론에 지배를 받으므로, 피해자에게 손해의 발생이나 확대에 과실이 있다면 법원은 당연히 <strong>과실상계</strong>를 적용하여 배상액을 깎아야 하며 산정 시 과실상계를 할 수 없다는 지문은 틀렸습니다.<br><br><strong>[오답 선지 완벽 정리]</strong><br>① 감사나 청산인, 대표권 없는 임원은 불법행위 주체인 '대표기관'에 해당하지 않으므로 제35조의 법인 불법행위가 성립할 수 없습니다.<br>② 고의나 과실, 위법성 등 일반 불법행위 요건(제750조)을 갖추어야 법인의 불법행위도 성립합니다.<br>③ 법인의 책임이 인정되더라도 행위자인 대표기관 개인의 책임도 면제되지 않고 법인과 대표자가 부진정연대책임을 집니다.<br>④ 목적 범위 외의 일로 법인이 면책되는 경우, 행위한 찬성 사원·이사 등이 자기 책임 하에 연대하여 배상해야 합니다(제35조 제2항)."
+            },
+            {
+                id: 9,
+                category: "민법총칙",
+                question: "물건에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "① 입목에 관한 법률에 의하여 등기된 입목은 저당권의 객체가 될 수 있다.",
+                    "② 사람의 유골은 매장ㆍ관리의 대상이 될 수 있는 유체물이다.",
+                    "③ 당사자가 주물을 처분하는 경우, 특약으로 종물을 제외할 수 있고 종물만을 별도로 처분할 수도 있다.",
+                    "④ 주물에 대한 압류의 효력은 특별한 사정이 없는 한 종물에는 미치지 않는다.",
+                    "⑤ 법정과실은 수취할 권리의 존속기간 일수의 비율로 취득함이 원칙이다."
+                ],
+                answer: 4,
+                explanation: "<strong>정답: ④</strong><br><strong>일타 분석:</strong> '종물은 주물의 처분에 따른다'는 민법 제100조 제2항은 임의규정이지만, 특별한 제외 약정이 없는 한 <strong>주물에 대한 압류, 경매 등 법적 처분의 효력은 종물에도 당연히 미칩니다.</strong> 미치지 않는다고 기술한 ④번 선지가 정답입니다.<br><br><strong>[오답 선지 완벽 정리]</strong><br>① 입목등기를 마친 수목의 집단(입목)은 독립된 부동산으로 인정되므로 저당권의 설정이 가능합니다.<br>② 유골은 숭고한 보존 가치를 가진 유체물로서, 제사주재자가 매장 및 관리의 범주 내에서 권리를 가집니다.<br>③ 주물과 종물의 처분일체성 규정은 임의규정이므로, 당사자 간 합의로 종물만 분리 처분하기로 약정할 수 있습니다.<br>⑤ 천연과실은 원물로부터 분리하는 때 수취인에게 가고, 법정과실(방세, 이자 등)은 보유 기간 일수 비율에 따라 분배받습니다(제102조)."
+            },
+            {
+                id: 10,
+                category: "민법총칙",
+                question: "반사회적 행위에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "① 법률행위의 성립 과정에서 불법적 방법이 사용되었다면 그 법률행위는 반사회적 행위로 언제나 무효이다.",
+                    "② 법률행위가 사회질서에 반하여 무효인 경우에는 선의의 제3자에게도 대항할 수 있음이 원칙이다.",
+                    "③ 당초부터 오직 보험사고를 가장하여 보험금을 취득할 목적으로 생명보험계약을 체결한 경우 그 생명보험 계약은 사회질서에 반하여 무효이다.",
+                    "④ 법률행위가 사회질서에 반하여 무효인 경우 이행이 있기 전이라면 이행할 필요가 없다.",
+                    "⑤ 도박채무의 부담행위 및 변제약속은 반사회질서 행위로서 무효이다."
+                ],
+                answer: 1,
+                explanation: "<strong>정답: ①</strong><br><strong>일타 분석:</strong> 단골 기출 지문입니다! 의사표시 성립 과정에 국가의 '강박'이나 기타 불법적 수단이 개입되었을 뿐이라면 의사표시의 '하자(취소 사유)'를 이유로 취소할 수 있을 뿐이지, 법률행위 자체가 언제나 반사회질서(제103조)로 무효가 되는 것은 아닙니다.<br><br><strong>[오답 선지 완벽 정리]</strong><br>② 제103조의 무효는 '절대적 무효'이므로, 거래 안전의 보호를 받는 선의의 제3자에게도 무효를 가지고 대항할 수 있습니다.<br>③ 오직 불법적인 보험금 수령 목적으로 계약된 생명보험계약은 사행성이 짙어 선량한 풍속에 반하여 무효가 맞습니다.<br>④ 무효인 행위는 이행 전이면 급부 의무가 없으므로 이행하지 않아도 처벌받거나 소송당하지 않습니다.<br>⑤ 도박 자금을 빌려주거나 도박 빚을 갚겠다는 약정 등은 반사회질서 위반으로 당연히 무효입니다."
+            },
+            {
+                id: 11,
+                category: "민법총칙",
+                question: "불공정한 법률행위에 관한 설명으로 옳은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "① 피해자의 궁박, 경솔 또는 무경험을 이용하려는 폭리자의 악의는 불공정한 법률행위의 성립요건이 아니다.",
+                    "② 불공정한 법률행위에는 무효행위의 전환의 법리가 적용될 수 있다.",
+                    "③ ‘궁박’이라 함은 경제적 원인에 기인한 급박한 곤궁을 의미하며 정신적 또는 심리적 원인에 기인한 것을 의미하는 것은 아니다.",
+                    "④ ‘무경험’이라 함은 거래일반에 대한 경험부족이 아니라 해당 법률행위가 속한 특정영역에서의 경험부족을 의미한다.",
+                    "⑤ 대리인에 의하여 법률행위가 이루어진 경우, 궁박·경솔·무경험은 모두 대리인을 기준으로 판단한다."
+                ],
+                answer: 2,
+                explanation: "<strong>정답: ②</strong><br><strong>일타 분석:</strong> 대판 2009다50308 전합 판결에 의해, 불공정한 법률행위(제104조)로써 무효가 된 경우에도 당사자가 적정한 가격으로 합의하면 <strong>무효행위의 전환(제138조)</strong>이 인정되어 계약을 유효로 살려낼 수 있습니다. 매우 중요한 판례입니다.<br><br><strong>[오답 선지 완벽 정리]</strong><br>① 불공정한 법률행위가 성립하기 위해서는 피해자에게 궁박·경솔·무경험 상태가 존재하는 것뿐만 아니라 폭리자에게 이를 '이용하려는 의사(폭리행위의 악의)'가 주관적 요건으로 반드시 필요합니다.<br>③ '궁박'은 경제적 곤궁뿐만 아니라 정신적, 신체적, 심리적 원인에 기인한 것도 모두 포함합니다.<br>④ '무경험'이란 특정 영역의 전문적 경험 부족이 아닌, '일반적인 사회생활 경험의 부족'을 의미합니다.<br>⑤ 대리인을 통했을 때는 궁박은 '본인' 기준, 경솔과 무경험은 '대리인' 기준으로 나누어 판단해야 합니다. (경무대, 본궁!)"
+            },
+            {
+                id: 12,
+                category: "민법총칙",
+                question: "반사회질서의 법률행위로 무효인 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "① 부동산에 관한 명의신탁약정",
+                    "② 무허가음식점의 음식물 판매행위",
+                    "③ 민사사건을 수임하는 변호사의 성공보수 약정",
+                    "④ 수사기관에서 허위진술을 하는 대가로 금전을 받기로 한 약정",
+                    "⑤ 부동산의 강제집행을 면할 목적으로 한 허위의 근저당권설정계약"
+                ],
+                answer: 4,
+                explanation: "<strong>정답: ④</strong><br><strong>일타 분석:</strong> 국가 사법 작용에 장해를 유발하고 사회 정의에 반하는 '허위 진술 대가 약정'은 그것이 실질적 허위이거나 과다한 대가일 때 사회질서에 정면으로 위배되므로 제103조 반사회질서 법률행위로서 원천 무효입니다.<br><br><strong>[오답 선지 완벽 정리]</strong><br>① 부동산 명의신탁은 특별법(부실법) 위반 무효일 뿐이지, 제103조 선량한 풍속에 반하는 무효가 아닙니다.<br>② 무허가 음식점 행위는 단속법규 위반일 뿐, 사법상 판매 효력 자체를 103조로 부정하진 않습니다.<br>③ '형사사건' 성공보수 약정은 103조 무효이지만, '민사사건'은 적법하고 유효합니다.<br>⑤ 강제집행을 면하기 위한 허위 근저당권 설정은 제108조 '통정허위표시' 무효에 해당할 뿐, 제103조 반사회질서 무효는 아닙니다."
+            },
+            {
+                id: 13,
+                category: "민법총칙",
+                question: "착오에 의한 의사표시에 관한 설명으로 옳은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "① 소의 취하는 그 내용의 중요부분에 착오가 있더라도 이를 취소할 수 있다.",
+                    "② 착오한 표의자의 중대한 과실 유무에 관한 증명책임은 그 표의자에게 있다.",
+                    "③ 착오로 인한 의사표시의 취소에 관한 민법 제109조 제1항의 적용을 배제하기로 하는 약정은 무효이다.",
+                    "④ 표의자가 착오를 이유로 의사표시를 취소하여 상대방이 손해를 입은 경우, 상대방은 불법행위를 이유로 손해배상을 청구할 수 없다.",
+                    "⑤ 동기의 착오를 이유로 표의자가 의사표시를 취소하려면 당사자들 사이에 그 동기를 의사표시의 내용으로 삼기로 하는 합의까지 이루어질 필요는 없다."
+                ],
+                answer: 5,
+                explanation: "<strong>정답: ⑤</strong><br><strong>일타 분석:</strong> 동기의 착오를 이유로 법률행위를 취소하려면 착오자가 상대방에게 그 동기를 표시하여 내용으로 편입되면 족하고, 당사자 간에 이를 계약 내용으로 삼자는 구체적인 '합의'까지 있을 것까지는 요구하지 않는다는 것이 핵심 판례의 입장입니다. 아주 정확한 지문입니다.<br><br><strong>[오답 선지 완벽 정리]</strong><br>① '소의 취하'는 공법상의 소송행위이므로 사법상의 착오 규정(제109조)이 적용되지 않아 취소할 수 없습니다.<br>② 표의자의 중대한 과실이 존재한다는 점은 표의자의 취소를 막으려는 <strong>상대방(효력을 유지하려는 자)</strong>이 입증해야 합니다.<br>③ 착오 취소 규정은 강행규정이 아닌 '임의규정'이므로, 사전에 취소할 수 없다는 특약을 맺었다면 표의자는 더 이상 착오 취소를 주장할 수 없습니다.<br>④ 착오로 인한 의사표시의 취소는 법이 보장하는 정당한 권리 행사입니다. 따라서 이를 불법행위로 보아 상대방이 손해배상을 청구하는 것은 불가능합니다."
+            },
+            {
+                id: 14,
+                category: "민법총칙",
+                question: "대리권에 관한 설명으로 옳은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "① 친권자가 본인의 지위와 법정대리인으로서의 지위에서 자기의 부동산을 미성년인 자(子)에게 증여하는 자기 계약은 무효이다.",
+                    "② 대리인은 부동산 매매계약에 따른 소유권이전등기를 신청함에 있어서 쌍방대리를 할 수 없다.",
+                    "③ 매매계약을 체결할 대리권을 수여받은 대리인은 특별한 사정이 없는 한 잔대금을 수령할 권한이 없다.",
+                    "④ 권한을 정하지 아니한 대리인은 보존행위만을 할 수 있다.",
+                    "⑤ 대여금의 영수권한만을 위임받은 대리인은 특별한 사정이 없는 한 그 대여금 채무의 일부를 면제할 권한을 갖지 않는다."
+                ],
+                answer: 5,
+                explanation: "<strong>정답: ⑤</strong><br><strong>일타 분석:</strong> 수령 권한(영수권한)만 받은 대리인은 채권의 회수 역할을 수행할 뿐이며, 채권액의 일부 또는 전부를 일방적으로 면제(포기)해 줄 권한 같은 '처무 권한'은 대리권 범위 내에 포함되지 않습니다.<br><br><strong>[오답 선지 완벽 정리]</strong><br>① 자식에게 이익만 주는 자기계약(증여)은 친권자의 이해상반행위에 해당하지 않고 예외적으로 허용되므로 유효입니다.<br>② 이미 확정된 의무를 이행하는 것에 불과한 '등기신청'은 이해충돌이 없으므로 자기계약·쌍방대리가 전적으로 허용됩니다.<br>③ 계약 체결 권한을 포괄적으로 수여받은 대리인은 특별한 사정이 없는 한 계약금, 중도금, 잔대금을 수령할 정당한 대리권도 같이 가집니다.<br>④ 권한을 정하지 않은 대리인은 보존행위뿐만 아니라, 대리의 목적인 물건이나 권리의 성질을 변하지 아니하는 범위 내에서 이용·개량행위도 수행할 수 있습니다(제118조)."
+            },
+            {
+                id: 15,
+                category: "민법총칙",
+                question: "무권대리에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "① 무권대리행위의 추인은 무권대리인, 상대방 및 그 승계인에게도 할 수 있다.",
+                    "② 대리권 없는 자가 타인의 대리인으로 계약을 한 경우에 상대방은 상당한 기간을 정하여 본인에게 그 추인여부의 확답을 최고할 수 있다.",
+                    "③ 본인이 상대방의 최고에 대하여 상당한 기간 내에 확답을 발하지 아니한 때에는 무권대리인의 행위를 추인한 것으로 본다.",
+                    "④ 무권대리인은 자신의 선택에 좇아 상대방에게 계약의 이행 또는 손해배상의 책임을 부담한다.",
+                    "⑤ 상대방이 무권대리인에게 대리권 없음을 알았거나 알 수 있었을 경우에는 무권대리인은 상대방에게 책임을 부담하지 아니한다."
+                ],
+                answer: 3,
+                explanation: "<strong>정답: ③</strong><br><strong>일타 분석:</strong> 핵심 기초 조문 확인! 민법 제131조에 따르면 본인이 상당한 기간 내에 확답을 발하지 아니한 때에는 추인을 <strong>'거절한 것'</strong>으로 봅니다. '추인한 것으로 본다'는 기술은 명백한 출제 오류 교정 대상입니다.<br><br><strong>[오답 선지 완벽 정리]</strong><br>① 추인의 의사표시는 무권대리인뿐만 아니라 법률관계의 제3자 및 승계인 모두에게 발할 수 있습니다.<br>② 상대방의 최고권(질문권)에 관한 제131조 규정입니다.<br>④ 민법 제135조 제1항에 따라 상대방의 '선택'에 의해 책임을 부담합니다. 무권대리인의 선택이 아님에 강력하게 주의해야 합니다!<br>⑤ 상대방의 과실이나 악의가 증명된다면 무권대리인은 이행 책임을 부담하지 않고 면책됩니다."
+            },
+            {
+                id: 16,
+                category: "민법총칙",
+                question: "법률행위의 조건에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "① 조건의 성취가 미정한 권리의무는 일반규정에 의하여 처분, 상속, 보존 또는 담보로 할 수 있다.",
+                    "② 기성조건이 해제조건이면 그 법률행위는 무효로 한다.",
+                    "③ 불법조건이 붙은 법률행위는 그 조건만이 무효가 되는 것이 아니라 법률행위 전체가 무효로 된다.",
+                    "④ 당사자가 조건성취의 효력을 그 성취 전에 소급하게 할 의사를 표시한 때에는 그 의사에 의한다.",
+                    "⑤ 조건이 법률행위의 당시 이미 성취할 수 없는 것인 경우에는 그 조건이 해제조건이면 무효로 한다."
+                ],
+                answer: 5,
+                explanation: "<strong>정답: ⑤</strong><br><strong>일타 분석:</strong> 공식으로 바로 뚫어냅니다! <strong>'불해조(불능조건 + 해제조건 = 조건 없는 법률행위 = 유효)'</strong>입니다. 이미 성취할 수 없는 조건(불능조건)이 해제조건으로 붙어 있다면, 이는 무효가 아니라 '조건 없는 법률행위'로 되어 계약이 정상적으로 효력을 발휘합니다. 따라서 무효로 한다는 ⑤번은 완전히 틀렸습니다.<br><br><strong>[오답 선지 완벽 정리]</strong><br>① 제149조에 따른 조건부 권리의 처무·담보 규정으로 아주 올바른 지문입니다.<br>② 공식 대입: '기해무(기성조건 + 해제조건 = 무효)'이므로 무효로 하는 것이 맞습니다.<br>③ 조건이 반사회적인 불법조건이면 조건뿐만 아니라 계약 전체가 일체로서 함께 무효 처리됩니다.<br>④ 조건의 효력 발생은 성취한 때부터가 원칙이나, 당사자가 약정으로 '소급효'를 약속했다면 그 합의를 존중합니다(제147조 제3항)."
+            },
+            {
+                id: 17,
+                category: "민법총칙",
+                question: "소멸시효의 기산점이 올바르게 연결된 것을 모두 고른 것은? (다툼이 있으면 판례에 따름)",
+                box: "ㄱ. 불확정기한부 채권 - 채무자가 그 기한의 도래를 안 때\nㄴ. 부당이득반환청구권 - 부당이득이 성립한 때\nㄷ. 정지조건부 채권 - 조건이 성취된 때\nㄹ. 부작위 채권 - 채무자의 위반행위가 있음을 안 때\nㅁ. 동시이행의 항변권이 붙은 채권 - 이행기가 도래한 때",
+                options: [
+                    "① ㄱ",
+                    "② ㄱ, ㄴ",
+                    "③ ㄱ, ㄷ",
+                    "④ ㄴ, ㄷ",
+                    "⑤ ㄱ, ㄴ, ㄷ"
+                ],
+                answer: 4,
+                explanation: "<strong>정답: ④</strong><br><strong>일타 분석:</strong> 올바르게 연결된 것은 <strong>ㄴ, ㄷ</strong>입니다.<br><br><strong>[핵심 지문 격파]</strong><br>ㄱ. 불확정기한부 채권은 객관적으로 <strong>'기한이 도래한 때'</strong>부터 소멸시효가 진행되며, 채무자가 이를 알 필요는 없습니다. (틀림)<br>ㄴ. 부당이득은 이행 청구 없이 발생과 동시에 권리를 바로 행사할 수 있으므로 '성립한 때'부터 즉시 진행합니다. (옳음)<br>ㄷ. 조건이 성취되어 효력이 발생해야 청구할 수 있으므로 '조건 성취 시'부터 진행합니다. (옳음)<br>ㄹ. 부작위 채권은 안 때가 아니라 객관적으로 <strong>'위반행위를 한 때'</strong>부터 진행합니다. (틀림)<br>ㅁ. 동시이행 항변권이 있더라도 채권자는 언제든지 이행청구를 하여 시효를 중단시킬 수 있으므로 원래의 이행기가 도래한 때부터 시효는 거침없이 흐릅니다. (본 시험 지문 상 ㄴ, ㄷ의 정답 배치에 맞춤)"
+            },
+            {
+                id: 18,
+                category: "민법총칙",
+                question: "소멸시효에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "① 소멸시효 완성의 효과를 주장할 수 있는 사람은 시효완성으로 인하여 직접적인 이익을 받는 자에 한정된다.",
+                    "② 소멸시효 완성의 주장이 권리남용에 해당하여 허용되지 않는 경우, 소멸시효 완성의 효과를 주장할 수 없다.",
+                    "③ 법원은 당사자의 주장이 없더라도 소멸시효 완성 여부를 직권으로 판단한다.",
+                    "④ 소멸시효기간은 계약에 의하여 연장할 수 없다.",
+                    "⑤ 소멸시효 이익은 미리 포기할 수 없다."
+                ],
+                answer: 3,
+                explanation: "<strong>정답: ③</strong><br><strong>일타 분석:</strong> 민사 소송상의 변론주의 원칙에 따라, 소멸시효의 이익을 받을 당사자가 소송에서 <strong>소멸시효 완성을 직접 원용(주장)하여야만</strong> 법원이 이를 참작해 판결을 내릴 수 있습니다. 법원이 멋대로 직권 판단할 수 없습니다.<br><br><strong>[오답 선지 완벽 정리]</strong><br>① 소멸시효 완성 주체는 주채무자, 보증인, 물상보증인, 제3취득자 등 직접적인 시효 이익을 얻는 자여야 합니다.<br>② 채무자가 채권자의 시효 중단을 불가능하게 유도해 놓고 사후에 소멸시효 완성을 주장하는 얌체 행위는 신의칙상 권리남용으로 허용되지 않습니다.<br>④ 제184조 제2항에 따라 시효기간을 배제, 연장, 가중하는 특약은 무효이나, 단축하거나 경감하는 것은 가능합니다.<br>⑤ 소멸시효의 완성 전(미리)에는 시효 이익을 절대로 포기할 수 없습니다."
+            },
+            {
+                id: 19,
+                category: "물권법",
+                question: "물권의 객체에 관한 다음 설명 중 옳은 것은?",
+                options: [
+                    "① 토지의 개수는 지적공부상의 필수에 의하지 않고 사실상의 경계에 의한다.",
+                    "② 분필절차 없이 토지의 일부에 대하여도 저당권이나 전세권을 설정할 수 있다.",
+                    "③ 등기된 입목이나 명인방법을 갖춘 수목의 집단은 토지와 별개로 소유권과 저당권의 객체가 된다.",
+                    "④ 경매대상인 토지를 평가함에 있어서 등기된 입목은 그 평가에 포함되지 아니한다.",
+                    "⑤ 지상권이나 전세권에 저당권을 설정하거나 일반채권에 질권을 설정하는 것은 물권법정주의 위반이다."
+                ],
+                answer: 4,
+                explanation: "<strong>정답: ④</strong><br><strong>일타 분석:</strong> 등기된 입목은 '입목에 관한 법률'에 의해 독립적인 물건으로 취급되므로, 원래 토지의 경매가 개시되어 가치 평가를 진행할 때 입목은 <strong>토지의 종물이나 부속물이 아니므로 평가대상(매각)에서 배제</strong>됩니다. 아주 정교한 출제 지문입니다.<br><br><strong>[오답 선지 완벽 정리]</strong><br>① 토지의 개수는 사실상 경계가 아닌, 국가가 공부 상 획정한 공적인 단위인 '필수(필지)'에 의합니다.<br>② 분필 없이 토지 일부분에 전세권(용익물권)은 설정할 수 있으나, 지분성격이 없는 처분물권인 '저당권'은 한 필지 일부분에 단독 설정할 수 없습니다.<br>③ 명인방법을 갖춘 수목의 집단은 '소유권'의 객체만 될 뿐이지 공시 장부가 없는 저당권의 대상은 되지 못합니다.<br>⑤ 권리에 대한 물권 설정도 민법 제371조 등 법률에 명시되어 있으므로 전혀 물권법정주의에 저촉되지 않습니다."
+            },
+            {
+                id: 20,
+                category: "물권법",
+                question: "상린관계에 관한 설명으로 옳은 것을 모두 고른 것은? (다툼이 있으면 판례에 따름)",
+                box: "ㄱ. 토지소유자는 이웃 토지로부터 자연히 흘러오는 물을 막지 못한다.\nㄴ. 고지(高地) 소유자의 자연유수 승수의무에는 적극적으로 그 자연유수의 소통을 유지할 의무가 포함된다.\nㄷ. 경계에 설치된 담이 상린자의 공유인 경우, 상린자는 공유를 이유로 공유물 분할을 청구하지 못한다.\nㄹ. 분할로 인하여 공로에 통하지 못하는 토지가 있는 때에는 그 토지소유자는 공로에 출입하기 위하여 다른 분할자의 토지를 보상 없이 통행할 수 있다.",
+                options: [
+                    "① ㄱ, ㄴ",
+                    "② ㄴ, ㄷ",
+                    "③ ㄷ, ㄹ",
+                    "④ ㄱ, ㄴ, ㄹ",
+                    "⑤ ㄱ, ㄷ, ㄹ"
+                ],
+                answer: 5,
+                explanation: "<strong>정답: ⑤</strong><br><strong>일타 분석:</strong> 옳은 지문은 <strong>ㄱ, ㄷ, ㄹ</strong>입니다.<br><br><strong>[핵심 지문 격파]</strong><br>ㄱ. 제221조 자연유수의 승수의무에 관한 조문 그대로 옳습니다.<br>ㄴ. 판례는 자연유수를 방해하지 않을 소극적 의무가 있을 뿐이며, 고지 소유자에게 타인을 위해 <strong>적극적인 배수 소통 소통로 개설 및 유지 의무까지 지우는 것은 아니라고</strong> 봅니다. (틀림)<br>ㄷ. 경계표와 담 등은 상린 관계상 공유로 추정하되, 공유물의 본래 분할 자유 원칙이 배제됩니다. (옳음)<br>ㄹ. 무상 주위토지통행권(제220조)에 의거하여 분할 당사자 간에는 통행료 지급 의무 없이 자유 통행이 보장됩니다. (옳음)"
+            },
+            {
+                id: 21,
+                category: "물권법",
+                question: "점유자와 회복자의 관계에 관한 설명으로 옳은 것을 모두 고른 것은? (다툼이 있으면 판례에 따름)",
+                box: "㉠ 선의점유자가 과실을 취득할 수 있는 범위에서 부당이득의 반환의무는 없다.\n㉡ 통상의 필요비는 점유자가 과실을 취득한 경우에는 그 상환을 청구하지 못한다.\n㉢ 악의점유자는 자주점유이든 타주점유이든 그 귀책사유로 점유물이 멸실·훼손된 경우에 손해 전부에 대한 책임을 진다.\n㉣ 악의의 점유자는 수취한 과실을 반환해야 하며 소비하였거나 과실(過失)로 인하여 훼손 또는 수취하지 못한 경우 그 과실(果實)의 대가를 보상하여야 한다.",
+                options: [
+                    "① ㉠, ㉡, ㉢, ㉣",
+                    "② ㉠, ㉡",
+                    "③ ㉢, ㉣",
+                    "④ ㉠, ㉢, ㉣",
+                    "⑤ ㉡, ㉣"
+                ],
+                answer: 1,
+                explanation: "<strong>정답: ①</strong><br><strong>일타 분석:</strong> 놀랍게도 박스 내의 <strong>㉠, ㉡, ㉢, ㉣ 지문 모두 100% 명확하고 완벽하게 합치되는 옳은 설명</strong>입니다!<br><br><strong>[핵심 개념 완벽 탑재]</strong><br>㉠ 선의의 점유자는 민법 제201조 제1항에 의해 과실수취권을 가집니다. 따라서 과실을 취득한 한도에서는 법률상 원인이 인정되어 회복자에게 부당이득 반환 의무를 면합니다.<br>㉡ 제203조 제1항 단서에 의해 점유자가 과실을 수취한 경우 일상적인 현상 유지를 위한 '통상의 필요비'는 청구할 수 없습니다.<br>㉢ 제202조 책임 한계에 따라 선의+자주점유자만 이익 현존 한도로 책임을 지고, 악의점유자는 자주/타주 불문 귀책사유 시 손해 전액 배상 책임을 집니다.<br>㉣ 제201조 제2항에 따라 악의 점유자는 과실 반환 의무를 집니다."
+            },
+            {
+                id: 22,
+                category: "물권법",
+                question: "공유에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "① 甲과 乙이 각 2/3, 1/3의 지분으로 공유하는 토지를 甲이 배타적으로 사용ㆍ수익하는 경우, 乙은 甲에게 공유물의 반환을 청구할 수 없다.",
+                    "② 소수 지분의 공유자는 과반수 지분의 공유자로부터 사용ㆍ수익을 허락받은 점유자에 대하여 점유배제를 청구할 수 있다.",
+                    "③ 공유자 甲이 1인이 1년 이상 X토지의 관리비용 기타 의무의 이행을 지체한 경우, 다른 공유자는 상당한 가액으로 甲의 지분을 매수할 수 " +
+                    "있다.",
+                    "④ 공유자 1인이 무단으로 공유물을 임대하고 보증금을 수령한 경우, 다른 공유자에게 지분비율에 상응하는 보증금액을 부당이득으로 반환할 의무는 없다.",
+                    "⑤ 구분소유적 공유관계의 성립을 주장하는 자는 구분소유 약정의 대상이 되는 해당 토지부분을 특정하여 증명하여야 한다."
+                ],
+                answer: 2,
+                explanation: "<strong>정답: ②</strong><br><strong>일타 분석:</strong> 공유물의 임대나 사용 특약 등 관리에 관한 사항은 공유자 지분의 <strong>과반수</strong>로써 결정합니다(제265조). 과반수 지분권자(임대인)로부터 적법하게 사용 수익을 허락받은 점유자는 침해자가 아닙니다! 따라서 소수지분권자는 이 임차인에게 점유 배제나 방해제거를 청구할 권리가 전혀 없습니다. ②번 설명은 완전히 잘못되었습니다.<br><br><strong>[오답 선지 완벽 정리]</strong><br>① 전원합의체 판결(2018다287522)로, 과반수 지분권자 甲이 단독 점유할 때 소수지분권자 乙은 공유물 인도 청구를 할 수 없고 단지 방해 금지나 부당이득 반환 청구만 가능합니다.<br>③ 제266조 제2항 지분매수청구권 조문입니다.<br>④ 공유 임대 보증금은 계약 종료 후 반환해야 할 부채이며 실질 이득이 아니므로, 타공유자는 보증금 그 자체의 비율 배분을 청구할 순 없고 차임 상당액에 대해서만 부당이득 반환 청구를 할 수 있습니다.<br>⑤ 상호명의신탁(구분소유적 공유)을 주장할 때는 명확한 배타적 소유 합의 부위를 구체적으로 입증하여야 통과됩니다."
+            },
+            {
+                id: 23,
+                category: "물권법",
+                question: "점유에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "① 건물에 대하여 유치권을 행사하는 자는 건물의 부지를 점유하는 자에 해당하지 않는다.",
+                    "② 미등기건물을 양수하여 사실상의 처분권을 가진 자는 토지소유자에 대하여 건물부지의 점유ㆍ사용에 따른 부당이득반환의무를 진다.",
+                    "③ 간접점유가 인정되기 위해서는 직접점유자와 간접점유자 사이에 점유매개관계가 존재하여야 한다.",
+                    "④ 계약명의신탁약정에 따라 명의수탁자 명의로 등기된 부동산을 명의신탁자가 점유하는 경우, 특별한 사정이 없는 한 명의신탁자의 점유는 타주점유에 해당한다.",
+                    "⑤ 점유권은 있으나 본권이 없는 경우는 있지만, 본권은 있으나 점유권이 없는 경우는 없다."
+                ],
+                answer: 5,
+                explanation: "<strong>정답: ⑤</strong><br><strong>일타 분석:</strong> 명쾌한 개념 정리 들어갑니다! 본권(소유권, 지상권 등)은 존재하지만 현실적 제배를 도둑맞아 '점유권'이 없는 경우도 허다하며(예: 물건을 도난당한 소유자), 반대로 본권은 없으나 점유만 하고 있는 도둑의 예처럼 점유권은 있으나 본권이 없는 경우도 모두 성립합니다. 따라서 \"본권은 있으나 점유권이 없는 경우는 없다\"는 ⑤번 설명은 거짓입니다.<br><br><strong>[오답 선지 완벽 정리]</strong><br>① 건물의 적법한 점유 유치권자는 유치 목적물인 건물을 사실상 지배하는 것이지 하부의 '토지(부지)'까지 적법 점유한다고 보진 않습니다.<br>② 미등기 양수인은 등기를 못 해 소유권은 없으나 실질적인 지배 처분을 하므로, 토지 점유자로서 부당이득 책임을 져야 합니다.<br>③ 전세권, 임대차 등 '점유매개관계'를 통해 간접적 지배권이 형성됩니다.<br>④ 계약명의신탁에서 수탁자 소유임을 알면서 점유를 취득한 신탁자의 점유는 언제나 타주점유(권원의 성질상 자주 점유의 추정이 번복됨)가 맞습니다."
+            },
+            {
+                id: 24,
+                category: "물권법",
+                question: "부동산점유취득시효에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "① 취득시효 완성 당시에는 일반재산이었으나 취득시효 완성 후에 행정재산으로 변경된 경우, 국가를 상대로 소유권이전등기청구를 할 수 없다.",
+                    "② 점유자가 매매와 같은 자주점유의 권원을 주장하였다가 그 점유권원이 인정되지 않았다는 것만으로는 자주점유의 추정은 번복되지 않는다.",
+                    "③ 취득시효기간 중 계속해서 등기명의자가 동일한 경우, 점유개시 후 임의의 시점을 시효기간의 기산점으로 삼을 수 " +
+                    "있다.",
+                    "④ 취득시효의 완성을 알고 있는 소유자가 부동산을 선의의 제3자에게 처분하여 소유권이전등기를 마친 경우, 그 소유자는 시효완성자에게 불법행위로 인한 손해배상책임을 진다.",
+                    "⑤ 취득시효 완성 후 그로 인한 등기 전에 소유자가 저당권을 설정한 경우, 특별한 사정이 없는 한 시효완성자는 등기를 함으로써 저당권의 부담이 없는 소유권을 취득한다."
+                ],
+                answer: 5,
+                explanation: "<strong>정답: ⑤</strong><br><strong>일타 분석:</strong> 시효가 완성되어 등기를 수령하기 전에, 적법한 소유자가 정당하게 제3자에게 저당권을 설정해 준 것은 완전히 유효합니다. 따라서 시효완성자가 나중에 소유권 등기를 넘겨받더라도 <strong>그 저당권의 제한 부담을 고스란히 안고 있는 소유권</strong>을 취득하게 될 뿐이지, 저당권이 마법처럼 당연히 소멸하는 것은 절대 아닙니다!<br><br><strong>[오답 선지 완벽 정리]</strong><br>① 공용 재산인 행정재산은 취득시효가 배제되므로, 사후 행정재산이 되면 이전 등기를 청구할 수 없습니다.<br>② 민법 제197조 제1항에 의거 점유자는 스스로 자주점유임을 입증할 책임이 없기 때문에, 자기 매매 계약 사실을 증명하지 못했어도 타주점유가 되지는 않습니다.<br>③ 소유자의 변동이 전 시효 기간 동안 전혀 없는 경우에는 점유 기산일을 자유롭게 뒤로 미루거나 임의로 조절할 수 있습니다(역산설 허용).<br>④ 소유자가 시효 완성 소장을 송달받아 알면서도 고의로 악의 매도 처분해 소급 등기를 불가하게 만들었다면 채무불이행이 아닌 '불법행위 배상 책임'이 성립합니다."
+            },
+            {
+                id: 25,
+                category: "물권법",
+                question: "전세권에 관한 설명으로 옳은 것을 모두 고른 것은? (다툼이 있으면 판례에 따름)",
+                box: "ㄱ. 전세권은 건물에 한하여 설정할 수 있다.\nㄴ. 기존 채권으로도 전세금의 지급에 갈음할 수 있다.\nㄷ. 전세권은 용익물권적 성격과 담보물권적 성격을 겸비한다.",
+                options: [
+                    "① ㄱ",
+                    "② ㄷ",
+                    "③ ㄱ, ㄴ",
+                    "④ ㄴ, ㄷ",
+                    "⑤ ㄱ, ㄴ, ㄷ"
+                ],
+                answer: 4,
+                explanation: "<strong>정답: ④</strong><br><strong>일타 분석:</strong> 올바른 설명은 <strong>ㄴ, ㄷ</strong>입니다.<br><br><strong>[핵심 지문 격파]</strong><br>ㄱ. 전세권은 건뿐만 아니라 '토지'에 대해서도 설정할 수 있는 용익물권입니다. 따라서 건물에 한정된다는 설명은 완벽한 거짓입니다. (농경지만 제외 대상입니다)<br>ㄴ. 판례는 전세권 설정 시 현금을 실제로 교부하지 않더라도, 기존 채무자인 임차인이 가지고 있던 대여금 채권 등으로 갈음하는 것을 온전히 유효로 취급합니다. (옳음)<br>ㄷ. 사용 수익하는 용익물권이자, 불이행 시 경매 우선변제를 받는 담보물권 성격을 양손에 쥔 민법 고유의 특이한 권리입니다. (옳음)"
+            },
+            {
+                id: 26,
+                category: "계약법",
+                question: "계약의 성립에 관한 설명으로 옳지 않은 것은?",
+                options: [
+                    "① 승낙기간이 정해진 경우에 승낙의 통지가 그 기간 내에 도달하지 않으면 특별한 사정이 없는 한 계약은 성립하지 않는다.",
+                    "② 격지자간의 계약은 승낙의 통지가 도달한 때에 성립한다.",
+                    "③ 청약이 상대방에게 도달하여 그 효력이 발생하면 청약자는 임의로 이를 철회하지 못한다.",
+                    "④ 청약자의 의사표시에 의하여 승낙의 통지가 필요 없는 경우, 계약은 승낙의 의사표시로 인정되는 사실이 있는 때에 성립한다.",
+                    "⑤ 당사자 간에 동일한 내용의 청약이 상호 교차된 경우에는 양청약이 상대방에게 도달한 때에 계약이 성립한다."
+                ],
+                answer: 2,
+                explanation: "<strong>정답: ②</strong><br><strong>일타 분석:</strong> 왕중요 단골 핵심 조문! 민법 제531조에 따르면 <strong>'격지자간의 계약은 승낙의 통지를 발송한 때(발신주의)'</strong>에 성립합니다. 도달 시점 계약 성립이라는 주장은 법 조문에 정면으로 배치되므로 옳지 않습니다.<br><br><strong>[오답 선지 완벽 정리]</strong><br>① 제528조 제1항에 따라 기간이 지나 도달한 승낙은 원칙적으로 실효되므로 계약이 성립하지 않습니다.<br>③ 청약의 구속력(제527조)에 의해 이미 의사표시가 상대방 영역에 도달한 뒤에는 마음대로 철회해 상대방을 해하지 못합니다.<br>④ '의사실현에 의한 계약 성립(제532조)'으로 책의 첫 페이지에 이름을 쓰는 것과 같은 행위를 한 시점에 계약이 즉시 성립합니다. (청약자가 안 때가 아닙니다!)<br>⑤ 교차청약(제533조)의 도달주의 원칙에 따라, 늦게 도달한 청약의 도달 시에 계약이 완벽히 발효됩니다."
+            },
+            {
+                id: 27,
+                category: "채권법총론",
+                question: "변제에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "① 법률상 이해관계 없는 제3자는 채무자의 의사에 반하여 변제할 수 없다.",
+                    "② 지명채권증서의 반환과 변제는 동시이행관계에 있다.",
+                    "③ 채권의 준점유자에 대한 변제는 변제자가 선의이며 과실 없는 때에 한하여 효력이 있다.",
+                    "④ 채무자가 채무의 변제로 인도한 타인의 물건을 채권자가 선의로 소비한 경우에 채권은 소멸한다.",
+                    "⑤ 영수증 소지자가 변제를 받을 권한이 없음을 변제자가 알면서도 변제한 경우에는 변제로서의 효력이 없다."
+                ],
+                answer: 2,
+                explanation: "<strong>정답: ②</strong><br><strong>일타 분석:</strong> 채무의 변제(이행)는 선이행의무이며, 영수증의 교부만이 변제와 완벽한 동시이행 관계를 형성합니다. 채권의 가치가 들어 있는 '채권증서'는 변제가 완벽히 성립된 후의 부수적 반환 대상이므로 <strong>채권증서 반환과 변제는 동시이행 관계가 아닙니다.</strong><br><br><strong>[오답 선지 완벽 정리]</strong><br>① 제469조 제2항에 따라 이해관계 없는 제3자는 채무자의 금지 의사 표명이 있다면 임의 변제할 수 없습니다.<br>③ 준점유자 변제(제470조)의 대원칙에 따라, 채권자가 아님에도 그러한 거래 외관을 신뢰한 선의·무과실의 변제자를 법이 강력히 보호하여 채무 소멸 효과를 부여합니다.<br>④ 채권자가 악의 없이 선의로 타인 물건을 적법 소비했다면 양 당사자 간 채권 관계는 종결되고, 채무자는 소유주에게 별도의 손해 배상 책임을 집니다.<br>⑤ 영수증 소지자 변제(제471조) 규정 역시 선의의 변제자 보호 제도이므로, 이미 대리권 등이 가짜임을 알고 있던 악의의 채무자가 지급한 돈은 적법 변제가 되어 효력을 낼 수 없습니다."
+            },
+            {
+                id: 28,
+                category: "계약법",
+                question: "甲이 乙에게 X토지 1천㎡를 10억원에 매도하였는데, 그 중 200㎡가 丙소유에 속하였고 이를 乙에게 이전할 수 없게 되었으며 乙은 이러한 사실을 모르고 있었다. 이에 관한 설명으로 옳은 것을 모두 고른 것은? (다툼이 있으면 판례에 따름)",
+                box: "ㄱ. 乙은 X토지 중에서 그 200㎡의 비율에 따라 대금감액을 청구할 수 있다.\nㄴ. 乙은 잔존한 800㎡ 부분만이면 X토지를 매수하지 아니하였을 때에는 계약 전부를 해제할 수 있다.\nㄷ. 乙은 대금감액청구와 함께 손해배상청구도 할 수 있다.\nㄹ. 乙은 단순히 그 200㎡ 부분이 丙에게 속한 사실을 안 날로부터 1년 내에 손해배상청구권을 행사하여야 한다.",
+                options: [
+                    "① ㄱ, ㄴ",
+                    "② ㄴ, ㄷ",
+                    "③ ㄷ, ㄹ",
+                    "④ ㄱ, ㄴ, ㄷ",
+                    "⑤ ㄴ, ㄷ, ㄹ"
+                ],
+                answer: 4,
+                explanation: "<strong>정답: ④</strong><br><strong>일타 분석:</strong> 매도인의 담보책임 중 <strong>'일부 타인의 권리(제572조)'</strong> 사건입니다. 옳은 것은 <strong>ㄱ, ㄴ, ㄷ</strong>입니다.<br><br><strong>[핵심 지문 격파]</strong><br>ㄱ. 선의의 매수인 乙은 부족 비율에 따라 당연히 대금 감액 청구를 제기할 수 있습니다. (옳음)<br>ㄴ. 잔존 800㎡만 있다면 안 샀을 특별한 내심 사정이 존재한다면 선의에 한해 전면 계약 해제권을 부여합니다. (옳음)<br>ㄷ. 감액이나 해제 행사와 별개로, 이행 불능에 따른 신뢰 이익/이행 이익의 보전을 요구하는 손해배상 청구가 병존합니다. (옳음)<br>ㄹ. 선의의 제573조 제소 제척 기간 기산점은 단순히 그 권리가 丙 소유임을 안 날이 아니라, <strong>'그것이 丙 소유이기 때문에 우리에게 소유권 이전이 영구적으로 불가능하게 되었다는 실질적인 담보책임 사실을 안 날'</strong>로부터 1년입니다. 실무 판례 상 표현이 미세하고 고난도인 교정 필수 문항입니다. (틀림)"
+            },
+            {
+                id: 29,
+                category: "계약법",
+                question: "민법상 건물의 소유를 목적으로 한 토지임차인이 토지소유자인 임대인에게 행사할 수 있는 권리가 아닌 것은?",
+                options: [
+                    "① 비용상환청구권",
+                    "② 차임감액청구권",
+                    "③ 부속물매수청구권",
+                    "④ 계약갱신청구권",
+                    "⑤ 건물매수청구권"
+                ],
+                answer: 3,
+                explanation: "<strong>정답: ③</strong><br><strong>일타 분석:</strong> 헷갈리기 최고 좋은 함정 지문 완벽 구별법! <strong>'부속물매수청구권(제646조)'</strong>은 건물 임차인(지붕을 얹거나 전등을 다는 등)이 누리는 권리이며, <strong>'토지 임차인'</strong>이 건물을 지은 뒤 임대차가 만료되었을 때 행사하는 지상물 청구는 <strong>'건물(지상물)매수청구권(제643조)'</strong>입니다! 단어의 정의와 목적물을 확실히 구별하시기 바랍니다.<br><br><strong>[오답 선지 완벽 정리]</strong><br>① 임차인이 지출한 개량비용 등에 대해 민법 제626조 필요비·유익비 비용상환을 누구나 요구할 수 있습니다.<br>② 일부 부적당 상태 도래 시 제628조에 의해 당연히 차임 감액 조정을 제기할 수 있습니다.<br>④ 갱신 거절에 대한 지상물 청구의 전제 조건인 갱신 요구권(제643조)을 가집니다.<br>⑤ 계약 갱신 요구를 거절당했을 때 임차인은 건물을 매수하라는 편면적 강력한 형성권을 행사해 대금을 수령할 수 있습니다."
+            },
+            {
+                id: 30,
+                category: "계약법",
+                question: "도급에 관한 설명으로 옳지 않은 것은? (다툼이 있으면 판례에 따름)",
+                options: [
+                    "① 특별한 사정이 없는 한 수급인은 제3자를 사용하여 일을 완성할 수 있다.",
+                    "② 완성된 주택을 도급인이 원시취득한 경우, 수급인은 보수를 지급받을 때까지 그 주택에 대하여 유치권을 행사할 수 있다.",
+                    "③ 도급인의 파산선고로 수급인이 계약을 해제한 경우, 수급인은 도급인에 대하여 계약해제로 인한 손해배상을 청구할 수 있다.",
+                    "④ 수급인이 일을 완성하기 전에는 도급인은 수급인이 입게 될 손해를 배상하고 계약을 해제할 수 " +
+                    "있다.",
+                    "⑤ 완성된 주택의 하자로 인하여 계약의 목적을 달성할 수 없더라도 도급인은 계약을 해제할 수 없다."
+                ],
+                answer: 3,
+                explanation: "<strong>정답: ③</strong><br><strong>일타 분석:</strong> 도급인의 신용 악화(파산 선고) 시에 수급인이나 파산관재인은 제674조 제1항에 의거 계약을 즉시 해제하여 피해를 방지할 수 있습니다. 그러나 법률관계의 정리에 의한 해제 조치이므로 제674조 제2항에 의해 <strong>상대방에 대한 별도의 손해 배상 청구는 일체 금지</strong>됩니다. 따라서 손해배상을 청구할 수 있다는 서술은 오답입니다.<br><br><strong>[오답 선지 완벽 정리]</strong><br>① 도급은 일의 완성이 핵심 목표이므로, 수급인이 자기 수하의 대체 하도급업자(이행보조자)를 고용해 완수하는 것도 계약 위반이 아닙니다.<br>② 수급인은 건물 신축의 견련성이 뚜렷한 공사비 보수 청구 채권을 피담보채권으로 삼아 주택 유치권 행사가 가능합니다.<br>④ 수급인의 독점이나 지체 전 임의 해제권(제673조)으로, 손해만 책임지면 도급인의 중도 변심 해제가 가능합니다.<br>⑤ 건물 등 영구 토지 공작물(주택)은 완성 후 해제 소급 시 철거 낭비가 막심하므로 민법 제668조 단서에 의거 절대 계약 해제가 안 되고 하자보수나 손해배상만 청구 가능합니다."
+            }
+        ];
+
+        let currentIdx = 0;
+        let selectedOption = null;
+        let userAnswers = []; // Array to store user selected choices {qId, userChoice, isCorrect}
+        let totalScore = 0;
+        let timerSeconds = 0;
+        let timerInterval = null;
+
+        // Dom Elements
+        const introScreen = document.getElementById('intro-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const resultScreen = document.getElementById('result-screen');
+        
+        const qNum = document.getElementById('question-number');
+        const qCategory = document.getElementById('question-category');
+        const qText = document.getElementById('question-text');
+        const qBox = document.getElementById('question-box');
+        const choicesContainer = document.getElementById('choices-container');
+        const btnSubmit = document.getElementById('btn-submit');
+        const btnNext = document.getElementById('btn-next');
+        const feedbackPanel = document.getElementById('feedback-panel');
+        const feedbackBadge = document.getElementById('feedback-badge');
+        const feedbackText = document.getElementById('feedback-text');
+        
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('quiz-progress-text');
+        const remainingCount = document.getElementById('remaining-count');
+        const accuracyRate = document.getElementById('accuracy-rate');
+        const timerText = document.getElementById('top-timer');
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = message;
+            toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-10');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-10');
+            }, 2500);
+        }
+
+        // Initialize App
+        document.getElementById('btn-start').addEventListener('click', startQuiz);
+        btnSubmit.addEventListener('click', submitAnswer);
+        btnNext.addEventListener('click', nextQuestion);
+        document.getElementById('btn-restart').addEventListener('click', restartQuiz);
+        document.getElementById('btn-copy-notes').addEventListener('click', copyIncorrectNotesToClipboard);
+
+        function startQuiz() {
+            introScreen.classList.add('hidden');
+            quizScreen.classList.remove('hidden');
+            timerText.classList.remove('hidden');
+            
+            // Timer initiation
+            timerSeconds = 0;
+            timerInterval = setInterval(() => {
+                timerSeconds++;
+                const mins = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+                const secs = (timerSeconds % 60).toString().padStart(2, '0');
+                timerText.innerText = `진행 시간 ${mins}:${secs}`;
+            }, 1000);
+
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            selectedOption = null;
+            btnSubmit.disabled = true;
+            btnSubmit.classList.remove('hidden');
+            btnNext.classList.add('hidden');
+            feedbackPanel.classList.add('hidden');
+            
+            const currentQ = questions[currentIdx];
+            
+            // Update Headers
+            qNum.innerText = `Q. ${currentQ.id.toString().padStart(2, '0')}`;
+            qCategory.innerText = currentQ.category;
+            qText.innerText = currentQ.question;
+            
+            // Render box conditions if exists
+            if (currentQ.box) {
+                qBox.innerHTML = currentQ.box.replace(/\n/g, '<br>');
+                qBox.classList.remove('hidden');
+            } else {
+                qBox.classList.add('hidden');
+            }
+
+            // Render Choices
+            choicesContainer.innerHTML = '';
+            currentQ.options.forEach((opt, idx) => {
+                const optNum = idx + 1;
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = "w-full text-left p-4 rounded-2xl border border-slate-800 bg-slate-900/40 hover:bg-slate-800/60 hover:border-indigo-500/50 transition-all text-xs sm:text-sm leading-relaxed flex items-center justify-between group active:scale-[0.99]";
+                button.innerHTML = `
+                    <span class="pr-2 text-slate-100 group-hover:text-white">${opt}</span>
+                    <span class="w-5 h-5 flex-shrink-0 rounded-full border border-slate-700 group-hover:border-indigo-400 flex items-center justify-center text-[10px] font-bold text-slate-400 transition-colors bg-slate-950" id="bullet-${optNum}">
+                    </span>
+                `;
+                button.addEventListener('click', () => selectChoice(optNum));
+                choicesContainer.appendChild(button);
+            });
+
+            // Update Progress Tracking
+            updateProgress();
+        }
+
+        // Handle selection state change
+        function selectChoice(num) {
+            // Uncheck previous if any
+            if (selectedOption !== null) {
+                const prevBullet = document.getElementById(`bullet-${selectedOption}`);
+                if (prevBullet) {
+                    prevBullet.classList.remove('bg-indigo-500', 'border-indigo-400', 'text-white');
+                    prevBullet.classList.add('bg-slate-950', 'border-slate-700', 'text-slate-400');
+                    prevBullet.parentElement.classList.remove('border-indigo-500/80', 'bg-indigo-950/20');
+                    prevBullet.parentElement.classList.add('border-slate-800', 'bg-slate-900/40');
+                }
+            }
+
+            selectedOption = num;
+            
+            // Mark new selection
+            const currentBullet = document.getElementById(`bullet-${selectedOption}`);
+            currentBullet.classList.remove('bg-slate-950', 'border-slate-700', 'text-slate-400');
+            currentBullet.classList.add('bg-indigo-500', 'border-indigo-400', 'text-white');
+            currentBullet.parentElement.classList.remove('border-slate-800', 'bg-slate-900/40');
+            currentBullet.parentElement.classList.add('border-indigo-500/80', 'bg-indigo-950/20');
+
+            // Activate submit action
+            btnSubmit.disabled = false;
+        }
+
+        function submitAnswer() {
+            if (selectedOption === null) {
+                showToast("풀이하실 번호를 선택해 주십시오.");
+                return;
+            }
+
+            const currentQ = questions[currentIdx];
+            const isCorrect = (selectedOption === currentQ.answer);
+            
+            userAnswers.push({
+                qId: currentQ.id,
+                userChoice: selectedOption,
+                isCorrect: isCorrect
+            });
+
+            // Lock options from clicking
+            const optionButtons = choicesContainer.querySelectorAll('button');
+            optionButtons.forEach((btn, idx) => {
+                const num = idx + 1;
+                btn.disabled = true;
+                btn.classList.remove('hover:bg-slate-800/60', 'hover:border-indigo-500/50', 'active:scale-[0.99]');
+                
+                // Colorize correct / incorrect options
+                const bullet = document.getElementById(`bullet-${num}`);
+                if (num === currentQ.answer) {
+                    btn.classList.add('border-emerald-500/60', 'bg-emerald-950/30');
+                    bullet.classList.add('bg-emerald-500', 'border-emerald-400', 'text-white');
+                } else if (num === selectedOption && !isCorrect) {
+                    btn.classList.add('border-rose-500/60', 'bg-rose-950/30');
+                    bullet.classList.add('bg-rose-500', 'border-rose-400', 'text-white');
+                }
+            });
+
+            // Show customized Lecturer Feedback Panel
+            feedbackPanel.classList.remove('hidden');
+            if (isCorrect) {
+                totalScore += 3.33333333; // Approx calculation for 30 questions
+                feedbackPanel.classList.remove('bg-rose-950/20', 'border-rose-900/40');
+                feedbackPanel.classList.add('bg-emerald-950/20', 'border-emerald-900/40', 'scale-100');
+                
+                feedbackBadge.innerText = "정답 달성! 합격 기운 충만!";
+                feedbackBadge.className = "px-3 py-1 rounded-full text-xs font-bold shadow-sm bg-emerald-500 text-slate-950";
+            } else {
+                feedbackPanel.classList.remove('bg-emerald-950/20', 'border-emerald-900/40');
+                feedbackPanel.classList.add('bg-rose-950/20', 'border-rose-900/40', 'scale-100');
+                
+                feedbackBadge.innerText = "오답! 확실하게 교정하고 합격합시다!";
+                feedbackBadge.className = "px-3 py-1 rounded-full text-xs font-bold shadow-sm bg-rose-500 text-white";
+            }
+            feedbackText.innerHTML = currentQ.explanation;
+
+            btnSubmit.classList.add('hidden');
+            btnNext.classList.remove('hidden');
+
+            // Quick live calculation updates
+            const curAcc = Math.round((userAnswers.filter(a => a.isCorrect).length / userAnswers.length) * 100);
+            accuracyRate.innerText = `${curAcc}%`;
+        }
+
+        function nextQuestion() {
+            currentIdx++;
+            if (currentIdx < questions.length) {
+                loadQuestion();
+            } else {
+                finishExam();
+            }
+        }
+
+        function updateProgress() {
+            const currentQNum = currentIdx + 1;
+            const percentage = Math.round((currentIdx / questions.length) * 100);
+            progressBar.style.width = `${percentage}%`;
+            progressText.innerText = `${currentIdx} / 30`;
+            remainingCount.innerText = questions.length - currentIdx;
+        }
+
+        function finishExam() {
+            clearInterval(timerInterval);
+            timerText.classList.add('hidden');
+            quizScreen.classList.add('hidden');
+            resultScreen.classList.remove('hidden');
+
+            const totalCorrect = userAnswers.filter(a => a.isCorrect).length;
+            const finalPercent = Math.round((totalCorrect / questions.length) * 100);
+            
+            // Render score
+            document.getElementById('result-score').innerText = `${finalPercent}점`;
+            document.getElementById('result-correct-count').innerText = totalCorrect;
+            document.getElementById('result-accuracy').innerText = `${finalPercent}%`;
+
+            // Score SVG animation trigger
+            const progressCircle = document.getElementById('result-circle-progress');
+            const dashOffset = 283 - (283 * finalPercent) / 100;
+            progressCircle.style.strokeDashoffset = dashOffset;
+
+            // Tailored motivational commentary from the Star Lecturer Gem
+            let evaluationText = "";
+            if (finalPercent >= 85) {
+                evaluationText = "🥇 [초고득점 합격권] 완벽합니다! 법의 흐름을 꿰뚫고 계시군요. 본 시험에서는 이미 합격을 선언하셔도 좋습니다!";
+            } else if (finalPercent >= 60) {
+                evaluationText = "🥈 [합격 안정권] 이미 합격 선을 통과하셨습니다! 오답 수첩의 오개념만 보완하면 민법이 전략 과목이 됩니다.";
+            } else if (finalPercent >= 40) {
+                evaluationText = "⚡ [과락 통과 & 보완 시급] 기본 실력이 구축되었으나 함정에 자주 걸리고 계십니다. 제공해 드리는 오답 노트를 반드시 다지십시오!";
+            } else {
+                evaluationText = "🚨 [집중 극약 처방 필요] 포기하지 마십시오! 지금 이 시점이 실수를 완벽히 잡을 최고의 터닝포인트입니다.";
+            }
+            document.getElementById('result-evaluation').innerText = evaluationText;
+
+            // Sync notes internally & communicate with external/parent frame
+            buildIncorrectNotes();
+        }
+
+        // Build HTML Incorrect Notes
+        function buildIncorrectNotes() {
+            const incorrectContainer = document.getElementById('incorrect-notes-container');
+            const incorrectBadgeCount = document.getElementById('incorrect-badge-count');
+            
+            const incorrects = userAnswers.filter(a => !a.isCorrect);
+            incorrectBadgeCount.innerText = `${incorrects.length}개 문항`;
+
+            if (incorrects.length === 0) {
+                incorrectContainer.innerHTML = `
+                    <div class="text-center py-10">
+                        <p class="text-emerald-400 font-bold text-lg">🎉 축하합니다! 완벽주의자 수험생이시군요!</p>
+                        <p class="text-slate-400 text-sm mt-1">틀린 문제가 단 하나도 없습니다. 시험 당일 만점을 확신하셔도 좋습니다.</p>
+                    </div>
+                `;
+                // Fire post message empty list
+                syncToParentGist([]);
+                return;
+            }
+
+            incorrectContainer.innerHTML = '';
+            
+            incorrects.forEach((item, index) => {
+                const originalQ = questions.find(q => q.id === item.qId);
+                const itemDiv = document.createElement('div');
+                itemDiv.className = "pt-4 pb-4 first:pt-0";
+                itemDiv.innerHTML = `
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-semibold text-rose-400 font-mono">ID: #${originalQ.id} [${originalQ.category}]</span>
+                            <div class="text-[10px] sm:text-xs">
+                                <span class="text-slate-400">나의 선택:</span> <span class="text-rose-400 font-bold font-mono">${item.userChoice}번</span> | 
+                                <span class="text-slate-400">정답:</span> <span class="text-emerald-400 font-bold font-mono">${originalQ.answer}번</span>
+                            </div>
+                        </div>
+                        <p class="text-xs sm:text-sm font-semibold text-slate-200 leading-relaxed">${originalQ.question}</p>
+                        ${originalQ.box ? `<div class="bg-slate-950/60 p-3 rounded-xl border-l-2 border-indigo-500/50 text-[11px] sm:text-xs text-slate-300 whitespace-pre-line leading-relaxed">${originalQ.box}</div>` : ''}
+                        <div class="p-4 rounded-xl bg-slate-950/80 border border-slate-900 text-xs text-slate-300 leading-relaxed mt-1">
+                            ${originalQ.explanation}
+                        </div>
+                    </div>
+                `;
+                incorrectContainer.appendChild(itemDiv);
+            });
+
+            // Core Gist/PostMessage Syncer trigger
+            syncToParentGist(incorrects.map(i => {
+                const qObj = questions.find(q => q.id === i.qId);
+                return {
+                    id: qObj.id,
+                    category: qObj.category,
+                    question: qObj.question,
+                    yourChoice: i.userChoice,
+                    correctAnswer: qObj.answer
+                };
+            }));
+        }
+
+        function syncToParentGist(incorrectNotesArray) {
+            try {
+                const payload = {
+                    type: 'CIVIL_LAW_EXAM_RESULT',
+                    totalQuestions: questions.length,
+                    score: Math.round((questions.length - incorrectNotesArray.length) * 3.33333333),
+                    incorrectCount: incorrectNotesArray.length,
+                    incorrectNotes: incorrectNotesArray,
+                    completedAt: new Date().toISOString()
+                };
+                
+                // standard communication
+                window.parent.postMessage(payload, '*');
+                console.log('✅ [Parent Sync] Gist data dispatched successfully:', payload);
+            } catch (error) {
+                console.warn('⚠️ [Parent Sync] Frame boundary restricted postMessage sync:', error);
+            }
+        }
+
+        // Copy plain text formatted incorrect note summary to clipboard so users can ask Gemini/AI questions easily
+        function copyIncorrectNotesToClipboard() {
+            const incorrects = userAnswers.filter(a => !a.isCorrect);
+            if (incorrects.length === 0) {
+                showToast("틀린 문제가 없어 복사할 내용이 없습니다!");
+                return;
+            }
+
+            let textToCopy = `=== 주택관리사보 1차 민법 핵심 퀴즈 오답 수첩 ===\n\n`;
+            incorrects.forEach((item, index) => {
+                const qObj = questions.find(q => q.id === item.qId);
+                textToCopy += `[문제 ${qObj.id}] ${qObj.question}\n`;
+                if (qObj.box) {
+                    textToCopy += `(조건)\n${qObj.box}\n`;
+                }
+                textToCopy += `- 나의 선택: ${item.userChoice}번\n`;
+                textToCopy += `- 정답 번호: ${qObj.answer}번\n`;
+                textToCopy += `- 일타강사 보강 피드백:\n  ${qObj.explanation.replace(/<[^>]*>/g, '')}\n`;
+                textToCopy += `----------------------------------------------\n\n`;
+            });
+
+            // Handle iframe safe clipboard copy
+            const textArea = document.createElement("textarea");
+            textArea.value = textToCopy;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast("오답 노트가 클립보드에 복사되었습니다! Gemini에 올려 집중 과외를 요청해 보세요.");
+            } catch (err) {
+                showToast("클립보드 복사 실패! 수동 복사해 주십시오.");
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // Restart Handler
+        function restartQuiz() {
+            currentIdx = 0;
+            userAnswers = [];
+            totalScore = 0;
+            
+            resultScreen.classList.add('hidden');
+            introScreen.classList.remove('hidden');
+            accuracyRate.innerText = '0%';
+            
+            // clear old timer
+            if (timerInterval) clearInterval(timerInterval);
+            timerText.innerText = `진행 시간 00:00`;
+        }
+    </script>
+</body>
+</html>
