@@ -573,16 +573,8 @@ async function runQuizGeneration(client, notebookId, subjectKey, subjectName, do
   }
   const historySnippet = rawHistorySnippet;
 
-  // 🎯 가중치 확률적 추첨 기법 적용: 전체 오답 중 오늘 시험지에 녹여낼 핵심 취약개념 2개 무작위 추첨
-  const selectedIncorrect = selectIncorrectAnswersForToday(subjectIncorrect, 2);
-
-  const incorrectSnippet = selectedIncorrect.length > 0
-    ? selectedIncorrect.map((item, idx) => {
-        const cnt = item.count || 1;
-        const weight = calculateWeight(cnt);
-        return `- 취약점/개념: "${item.concept}" (누적 오답: ${cnt}회, 반영 비중 가중치: ${weight}%, 피드백 날짜: ${item.date})`;
-      }).join("\n")
-    : "없음 (현재 추첨된 오답 개념이 없거나 오답 리스트가 비어있습니다. 일반 커리큘럼 기준 고르게 출제해 주세요.)";
+  // 🎯 오답 취약개념 반영이 사용자 요청으로 제외되었습니다.
+  const selectedIncorrect = [];
 
   // 🚀 순차 분할 RAG 생성 루틴 작동
   const partitions = SUBJECT_PARTITIONS[subjectKey] || [{ step: 1, title: "전체 범위", count: count }];
@@ -611,14 +603,6 @@ async function runQuizGeneration(client, notebookId, subjectKey, subjectName, do
         `\n     (주의: 위 문항 수 배분을 엄격히 준수하여 총 ${part.count}문항을 맞춰 주십시오!)`;
     }
 
-    let incorrectInstructions = "";
-    if (selectedIncorrect && selectedIncorrect.length > 0) {
-      incorrectInstructions = `아래 오답 취약 개념 중 **현재 범위/단원(${part.title})에 명확히 해당하는 개념에 대해서만** 관련 실제 문제를 정확히 1문제씩 포함하십시오. (현재 범위에 해당하지 않는 개념은 이번 시험지 출제에서 제외하고 무시하십시오. 전체 ${part.count}문항수 유지).
-   - [오답 개념]: ${selectedIncorrect.map(item => item.concept).join(", ")}`;
-    } else {
-      incorrectInstructions = `현재 반영할 오답 취약 개념이 없습니다. 일반 커리큘럼 범위에 맞춰 고르게 출제해 주십시오. (전체 ${part.count}문항수 유지).`;
-    }
-
     const prompt = `
 당신은 주택관리사보 시험 문제 추출기입니다.
 노트북 소스 PDF들에서 실제 문제를 지문/보기 변경 없이 원형 그대로 ${part.count}문항 추출하십시오. (변형/창작 절대 금지, "${docGuideName}" 비중 준수)
@@ -626,9 +610,8 @@ async function runQuizGeneration(client, notebookId, subjectKey, subjectName, do
 1. 범위/단원: ${part.title}${subpartInstructions}
 2. 번호 시작: ${startQuestionNum}번 ~ ${endQuestionNum}번 ('${startQuestionNum}. ' 형식 준수)
 3. 보기 기호: ①~⑤ 사용 (한 줄에 하나씩), 박스 조건(ㄱ, ㄴ, ㄷ / ㉠, ㉡, ㉢)은 개별 줄바꿈 필수.
-4. 오답 반영: ${incorrectInstructions}
-5. 중복 금지: 기존 출제했던 문제(직전대화 10개에 포함됐던 문제)는 제외.
-6. 정답/해설: 문제 뒤 '## [정답 및 상세 해설]' 추가, '정답: ①' 형식 표기. 소스 해설을 그대로 기재 (해설 창작 금지, 소스에 없으면 생략). 사족 절대 금지.
+4. 중복 금지: 기존 출제했던 문제(직전대화 10개에 포함됐던 문제)는 제외.
+5. 정답/해설: 문제 뒤 '## [정답 및 상세 해설]' 추가, '정답: ①' 형식 표기. 소스 해설을 그대로 기재 (해설 창작 금지, 소스에 없으면 생략). 사족 절대 금지.
 `;
 
     let stepMarkdown = "";
