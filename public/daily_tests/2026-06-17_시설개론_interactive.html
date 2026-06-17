@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="ko" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주택관리사보 1차 시설개론 일타강사 30제</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            300: '#c4b5fd',
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                        },
+                        darkbg: '#0f172a', /* slate-900 */
+                        darkcard: '#1e293b', /* slate-800 */
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #0f172a;
+            color: #f1f5f9;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
+</head>
+<body class="h-full flex flex-col justify-between">
+
+    <!-- Header -->
+    <header class="bg-slate-800 border-b border-slate-700 shadow-md py-4 px-6 sticky top-0 z-40">
+        <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-3">
+                <span class="bg-brand-600 text-white text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">주택관리사보 1차</span>
+                <h1 class="text-xl font-black text-white tracking-tight">시설개론 <span class="text-brand-400">일타강사 비법 30제</span></h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="text-right">
+                    <p class="text-xs text-slate-400">진행도</p>
+                    <p class="text-sm font-bold text-slate-200" id="header-progress">0 / 30 문제</p>
+                </div>
+                <div class="w-24 bg-slate-700 rounded-full h-2.5">
+                    <div id="header-progress-bar" class="bg-brand-500 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-5xl w-full mx-auto p-4 md:p-6 flex flex-col justify-center">
+        
+        <!-- INTRO SCREEN -->
+        <div id="intro-screen" class="bg-slate-800 rounded-2xl border border-slate-700 shadow-xl p-8 text-center max-w-2xl mx-auto my-8">
+            <div class="w-20 h-20 bg-brand-500/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-brand-500/30">
+                <svg class="w-10 h-10 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-4">"시설개론, 단 한 과목도 낙고 없이 고득점으로 패스합니다!"</h2>
+            <p class="text-slate-300 leading-relaxed mb-6">
+                주택관리사보 1차 합격의 열쇠인 <strong class="text-brand-400">시설개론 핵심 기출&예상 30문항</strong>을 수록하였습니다. <br>
+                실제 시험과 완전히 동일한 싱크로율의 문항을 한 문제씩 풀어나가며, 보기 전체에 적용된 명쾌한 해설을 통해 개념을 완벽하게 체득하십시오.
+            </p>
+            <div class="bg-slate-900/60 rounded-xl p-4 mb-8 text-left border border-slate-700/50 space-y-2">
+                <div class="flex items-start space-x-2">
+                    <span class="text-brand-400 font-bold">✔</span>
+                    <p class="text-sm text-slate-300"><strong class="text-white">실전식 인터랙티브 테스트:</strong> 클릭과 동시에 정오답이 판별되고 피드백이 노출됩니다.</p>
+                </div>
+                <div class="flex items-start space-x-2">
+                    <span class="text-brand-400 font-bold">✔</span>
+                    <p class="text-sm text-slate-300"><strong class="text-white">전 지문 완전 해설:</strong> 정답뿐만 아니라 오답 지문이 왜 틀렸는지 완벽한 가이드를 짚어줍니다.</p>
+                </div>
+                <div class="flex items-start space-x-2">
+                    <span class="text-brand-400 font-bold">✔</span>
+                    <p class="text-sm text-slate-300"><strong class="text-white">스마트 오답노트:</strong> 시험 종료 후 오답만 추출하여 암기 및 요약 전송용 텍스트 복사를 지원합니다.</p>
+                </div>
+            </div>
+            <button onclick="quizApp.start()" class="w-full sm:w-auto bg-brand-600 hover:bg-brand-500 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-brand-600/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0 text-lg">
+                일타강사 실전 모의고사 시작하기
+            </button>
+        </div>
+
+        <!-- QUIZ SCREEN -->
+        <div id="quiz-screen" class="hidden space-y-6 my-4">
+            <!-- Progress Info Card -->
+            <div class="bg-slate-800 rounded-xl border border-slate-700 p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center space-x-3">
+                    <span id="q-number-badge" class="bg-slate-700 text-brand-300 font-bold text-sm px-3 py-1.5 rounded-lg border border-slate-600">Q. 01</span>
+                    <span class="text-slate-400 text-xs sm:text-sm">주택관리사보 1차 시설개론 실전 테스트</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button onclick="quizApp.toggleHint()" class="flex items-center space-x-1 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs px-3 py-1.5 rounded-lg transition-all font-medium">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                        <span>힌트 보기</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hint Box -->
+            <div id="hint-box" class="hidden bg-amber-950/30 border border-amber-500/20 rounded-xl p-4 text-amber-200 text-sm leading-relaxed transition-all duration-300">
+                <strong class="text-amber-400 block mb-1">💡 일타강사의 핵심 단서:</strong>
+                <span id="hint-text">여기에 힌트 내용이 들어갑니다.</span>
+            </div>
+
+            <!-- Question and Box Container -->
+            <div class="bg-slate-800 rounded-2xl border border-slate-700 p-6 md:p-8 shadow-xl">
+                <p id="question-text" class="text-lg md:text-xl font-bold text-white leading-relaxed mb-6">
+                    문제가 이곳에 출력됩니다.
+                </p>
+
+                <!-- Box for Special Content (ㄱ,ㄴ,ㄷ,ㄹ 등) -->
+                <div id="question-box-container" class="hidden bg-slate-900 border-l-4 border-brand-500 p-4 rounded-r-xl mb-6 text-slate-300 text-sm whitespace-pre-line font-mono">
+                    <!-- Box Content -->
+                </div>
+
+                <!-- Answer Options (1 to 5) -->
+                <div class="space-y-3" id="options-container">
+                    <!-- Options Dynamic Loading -->
+                </div>
+            </div>
+
+            <!-- FEEDBACK AREA (Initially Hidden, slides down upon choice) -->
+            <div id="feedback-panel" class="hidden bg-slate-800 rounded-2xl border border-slate-700 p-6 md:p-8 shadow-xl transition-all duration-300">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div id="feedback-badge" class="flex items-center justify-center w-10 h-10 rounded-full font-black text-lg">
+                        <!-- ✔ or ✘ -->
+                    </div>
+                    <h3 id="feedback-title" class="text-lg md:text-xl font-black">정답입니다!</h3>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="bg-slate-900/60 rounded-xl p-5 border border-slate-700/50">
+                        <h4 class="text-brand-400 font-extrabold text-sm mb-3 uppercase tracking-wider">📋 일타강사의 전 지문 정밀 현장 강의</h4>
+                        <div id="feedback-explanations" class="space-y-3 text-slate-300 text-sm md:text-base leading-relaxed">
+                            <!-- Option analyses go here -->
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end pt-2">
+                        <button id="next-btn" onclick="quizApp.next()" class="bg-brand-600 hover:bg-brand-500 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg shadow-brand-600/20 transition-all transform hover:-translate-y-0.5 text-base flex items-center space-x-2">
+                            <span id="next-btn-text">다음 문제로 이동</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULT SCREEN -->
+        <div id="result-screen" class="hidden space-y-8 my-8">
+            <!-- Score Overview Card -->
+            <div class="bg-slate-800 rounded-2xl border border-slate-700 shadow-xl p-8 text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl font-black text-white mb-2">테스트 결과 리포트</h2>
+                <p class="text-slate-400 text-sm mb-6">주택관리사보 1차 시험 시설개론 일타강사 30제</p>
+
+                <!-- Score Circle / Badge -->
+                <div class="relative w-40 h-40 mx-auto mb-6 flex items-center justify-center bg-slate-900 rounded-full border-4" id="score-circle-border">
+                    <div class="text-center">
+                        <span class="block text-4xl font-extrabold text-white" id="result-score">0점</span>
+                        <span class="text-xs text-slate-400" id="result-ratio">0 / 30 맞춤</span>
+                    </div>
+                </div>
+
+                <div class="max-w-md mx-auto mb-8">
+                    <p id="result-status-text" class="text-lg font-bold mb-2">아쉬운 점수입니다. 과락 기준을 유의하세요!</p>
+                    <p id="result-critique" class="text-slate-300 text-sm leading-relaxed">
+                        시설개론은 법률이나 이론뿐만 아니라 시방서의 아주 세밀한 수치와 규정이 출제되므로 꼼꼼한 지문 분석 복습이 생명입니다. 아래 오답 노트를 활용해 복습하세요!
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button onclick="quizApp.restart()" class="bg-slate-700 hover:bg-slate-600 text-white font-bold px-6 py-3 rounded-xl transition-all border border-slate-600">
+                        처음부터 다시 풀기
+                    </button>
+                    <a href="#wrong-answers-section" class="bg-brand-600 hover:bg-brand-500 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-lg shadow-brand-600/20 text-center">
+                        오답 노트 확인하기
+                    </a>
+                </div>
+            </div>
+
+            <!-- Incorrect Answers Review Section -->
+            <div id="wrong-answers-section" class="max-w-4xl mx-auto space-y-6">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-slate-700 pb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-white flex items-center space-x-2">
+                            <span class="bg-red-500/10 text-red-400 px-2.5 py-1 rounded-lg text-xs font-bold border border-red-500/20">오답 복습</span>
+                            <span>수험생 맞춤형 오답 노트</span>
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1">틀린 문항을 기반으로 단서와 일타강사의 핵심 암기법을 완벽 정리합니다.</p>
+                    </div>
+                    <!-- Copy Button -->
+                    <button onclick="quizApp.copyIncorrectReport()" class="flex items-center space-x-2 bg-slate-700 hover:bg-slate-600 text-slate-200 border border-slate-600 px-4 py-2 rounded-xl text-sm transition-all">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        </svg>
+                        <span>오답 노트 복사하기 (AI 제출용)</span>
+                    </button>
+                </div>
+
+                <!-- Clipboard Copy Toast Notification -->
+                <div id="copy-toast" class="hidden bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-sm px-4 py-3 rounded-xl text-center transition-all duration-300">
+                    🎉 오답 노트를 복사했습니다! 이 텍스트를 복사하여 인공지능(AI)에게 추가적인 요약 및 취약점 분석을 요청해보세요!
+                </div>
+
+                <!-- Wrong Questions List Container -->
+                <div id="wrong-questions-list" class="space-y-6">
+                    <!-- Dynamic rendering of incorrect questions -->
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-6 px-6 text-center text-xs text-slate-500">
+        <div class="max-w-5xl mx-auto space-y-2">
+            <p>© 2026 주택관리사보 1차 시설개론 합격 보장 일타클래스. All rights reserved.</p>
+            <p>본 시스템은 교육 목적으로 실전 기출 문항 분석을 위해 엄격히 최적화 설계된 인공지능 인터랙티브 학습기입니다.</p>
+        </div>
+    </footer>
+
+    <!-- JS App Logic -->
+    <script>
+        // Full Dataset of 30 Questions
+        const originalQuestions = [
+            {
+                num: 1,
+                question: "건축물 주요실의 용도와 기본등분포 활하중($kN/m^2$)의 크기 중 옳은 것은?",
+                box: null,
+                options: [
+                    "도서관의 서고: 4.5",
+                    "기계실의 공조실: 4",
+                    "공동주택의 공용실: 3",
+                    "주거용 건축물의 거실: 1.5",
+                    "판매장의 상점: 5(1층), 4(2층 이상일 경우)"
+                ],
+                answer: 5, // 1-based index (⑤)
+                hint: "도서관 서고는 아주 무거운 책이 가득 차는 곳이라 7.5로 매우 크고, 주거용 거실은 가장 기본적인 2.0입니다.",
+                coreConcept: "용도별 기본등분포 활하중(KDS 41)",
+                explanations: [
+                    "① 틀림. 도서관의 서고 기본등분포 활하중은 7.5 $kN/m^2$입니다. 책들이 매우 조밀하게 밀집되므로 최고 수준의 설계하중이 적용됩니다.",
+                    "② 틀림. 기계실의 공조실 기본등분포 활하중은 5.0 $kN/m^2$입니다. 기계 장비 하중을 받아야 하므로 높게 책정되어 있습니다.",
+                    "③ 틀림. 공동주택의 공용실(공동오락실, 공용회의실 등)은 5.0 $kN/m^2$입니다. 군집 인원이 몰릴 수 있는 장소이기 때문입니다.",
+                    "④ 틀림. 주거용 건축물의 거실 기본등분포 활하중은 2.0 $kN/m^2$입니다. (공동주택 세대 내 발코니는 3.0이 적용됩니다.)",
+                    "⑤ 맞음. 판매장의 상점 설계 시 활하중은 1층의 경우 5.0 $kN/m^2$, 2층 이상일 경우 4.0 $kN/m^2$로 규정되어 있어 완전히 옳습니다."
+                ]
+            },
+            {
+                num: 2,
+                question: "부재의 응력에 관한 설명으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "축방향력은 축방향으로 작용하는 힘으로 압축 또는 인장하여 부재를 신축하게 하는 일단의 부재 내에 발생하는 힘의 작용을 말한다.",
+                    "구조물을 구성하는 부재에 하중 및 외력을 받을 경우 이에 대응하는 부재 내부의 저항력인 응력은 하중보다 작은 값으로 산정한다.",
+                    "압축력은 부재의 압축방향으로 누르거나 밀어서 줄이려는 힘을 말한다.",
+                    "전단강도란 전단력에 대한 저항강도로 재료에 가할 수 있는 최대의 전단력을 단면적으로 나눈 값이다.",
+                    "휨모멘트는 부재를 휘게 하는 모멘트로 볼록 또는 오목하게 만든다."
+                ],
+                answer: 2, // ②
+                hint: "구조적 안전을 도모하기 위해서는 외력에 저항하여 부재가 버티는 내부의 저항인 '응력'이 평형 상태를 이루거나 충분한 허용 성능을 가져야 합니다.",
+                coreConcept: "외력(하중)과 부재의 응력 및 구조 안전성",
+                explanations: [
+                    "① 맞음. 축방향력은 부재 중심축과 나란하게 작용하여 인장(부재 늘림) 또는 압축(부재 줄임)을 발생시키는 힘입니다.",
+                    "② 틀림. 부재가 외력에 저항하며 내부에서 버티는 힘(내력)인 응력은 하중이 작용할 때 그 하중과 평형 상태를 이루는 크기(혹은 구조 안전 설계 상 하중 이상을 감당하는 크기)로 산정해야 하며, 임의로 하중보다 작은 값으로 산정하면 구조물이 붕괴됩니다.",
+                    "③ 맞음. 압축력은 부재를 눌러서 부재의 길이를 수축시키는 작용을 의미합니다.",
+                    "④ 맞음. 전단강도는 부재를 가로지르며 자르려는 힘(전단력)에 버티는 세기로, 파괴 시 최대전단력을 그 단면적으로 나누어 나타냅니다.",
+                    "⑤ 맞음. 휨모멘트는 부재에 가해지는 굽힘 효과로, 단면 상부에 압축, 하부에 인장(또는 그 반대)을 발생시켜 볼록하거나 오목한 변형을 만듭니다."
+                ]
+            },
+            {
+                num: 3,
+                question: "부등(동)침하의 방지대책에 대한 내용으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "건물을 경량화한다.",
+                    "건물의 평면 길이를 길게 한다.",
+                    "지지 말뚝을 사용한다.",
+                    "온통기초를 사용한다.",
+                    "인접건물과의 거리를 멀게한다."
+                ],
+                answer: 2, // ②
+                hint: "건물 평면이 한쪽으로 너무 길거나 모양이 복잡하면, 지반의 지지력이 부위마다 다를 때 쉽게 뒤틀리며 침하가 발생하기 쉽습니다.",
+                coreConcept: "지반의 부등침하 원인과 방지 대책",
+                explanations: [
+                    "① 맞음. 건물의 자체 하중을 경량화하면 지반에 작용하는 압력이 낮아지므로 침하량 자체를 크게 억제할 수 있습니다.",
+                    "② 틀림. 건물의 평면 길이를 '길게' 하면 부위별 지반 특성 차이에 따른 변위차가 발생하기 쉬워 부등침하 가능성이 매우 높아집니다. 따라서 방지대책으로는 평면 길이를 '짧게' 하거나, 신축이음(익스팬션 조인트)을 주어 분할해야 합니다.",
+                    "③ 맞음. 단단한 암반층까지 지지 말뚝을 설치하면 지반 침하를 완전히 예방할 수 있는 훌륭한 대책이 됩니다.",
+                    "④ 맞음. 온통기초(Mat foundation)는 바닥 전체를 일체의 판으로 구성하여 부등침하를 방지하는 강성이 높은 기초입니다.",
+                    "⑤ 맞음. 인접건물과 거리를 멀리 두어 상호 지반 응력권이 겹치는 간섭 현상을 피하는 것이 부등침하 및 침하 간섭을 줄이는 길입니다."
+                ]
+            },
+            {
+                num: 4,
+                question: "기초판의 형식에 따른 분류에 해당하지 않는 것은?",
+                box: null,
+                options: [
+                    "독립기초",
+                    "잠함기초",
+                    "연속기초",
+                    "온통기초",
+                    "복합기초"
+                ],
+                answer: 2, // ②
+                hint: "기초판의 '형식'은 하중을 지반에 전달하는 판의 기하학적 형태(1개 기둥용, 여러 기둥용, 연속형, 전체판 등)에 따른 분류입니다.",
+                coreConcept: "기초의 분류 (기초판 형식 vs 시공방식/깊이)",
+                explanations: [
+                    "① 맞음. 독립기초는 단 1개의 기둥을 독립된 기초판 하나가 지지하는 가장 단순한 기초판 형식입니다.",
+                    "② 틀림. 잠함기초(우물통기초, Caisson foundation)는 기초판의 형식이 아니라 지반을 굴착하면서 케이슨 구조물을 가라앉혀 만드는 '시공 방식' 또는 '깊은 기초'에 따른 분류입니다.",
+                    "③ 맞음. 연속기초(줄기초)는 조적벽이나 일렬로 늘어선 기둥 아래에 띠 모양으로 길게 이어지는 기초판 형식입니다.",
+                    "④ 맞음. 온통기초는 건물 바닥 전체 면적을 하나의 큰 콘크리트 슬래브 기초판으로 지지하는 형식입니다.",
+                    "⑤ 맞음. 복합기초는 2개 이상의 기둥 하중을 하나의 공동 기초판으로 지지하는 형태입니다."
+                ]
+            },
+            {
+                num: 5,
+                question: "조적식 쌓기에 대한 내용으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "영식쌓기는 벽 모서 또는 끝부분의 마구리 켜에서는 반절이나 이오토막을 사용한다.",
+                    "프랑스식쌓기는 입면상으로 매 켜에서 길이쌓기와 마구리쌓기를 번갈아서 쌓는 방식으로 내력벽용으로 사용된다.",
+                    "아치쌓기는 부재의 하부에 인장력이 발생되지 않는 쌓기법이다.",
+                    "창대쌓기는 창대벽돌을 15°정도 경사로 옆세워 쌓는다.",
+                    "미국식쌓기는 길이로 5켜 쌓고, 마구리로 1켜씩 반복하여 쌓는다."
+                ],
+                answer: 2, // ②
+                hint: "프랑스식 쌓기는 매 켜에서 길이와 마구리가 혼합되어 모서리에 이오토막 등이 들어가지 않지만 통줄눈이 발생하는 단점이 있어 구조 벽체용으로는 부적합합니다.",
+                coreConcept: "벽돌 조적식 쌓기법의 특징",
+                explanations: [
+                    "① 맞음. 영식쌓기는 가장 튼튼한 구조용 쌓기로서 모서리나 끝부분의 마구리 켜에 '이오토막' 또는 '반절'을 사용하여 통줄눈을 방지합니다.",
+                    "② 틀림. 프랑스식쌓기(플레미시 쌓기)는 외관이 매우 아름답지만 내부 벽체에 '통줄눈'이 발생하여 취약하므로 비내력벽(장식벽)용으로 주로 사용되며, 내력벽용으로는 쓰이지 않습니다.",
+                    "③ 맞음. 아치는 상부 하중을 아치 축선을 따라 압축력으로 변환시켜 지반에 분산하므로 인장력이 거의 발생하지 않는 조적 역학의 총아입니다.",
+                    "④ 맞음. 창 밑에 쌓는 창대쌓기는 빗물이 흐르도록 15도 정도 밖으로 경사지게 하여 옆세워 쌓습니다.",
+                    "⑤ 맞음. 미국식쌓기는 내부(내력벽 뒷면)는 영식으로 쌓고 표면은 길이쌓기 5~6켜마다 마구리쌓기 1켜를 두어 마감 효율과 구조력을 동시에 잡는 공법입니다."
+                ]
+            },
+            {
+                num: 6,
+                question: "다음 구조용 강재의 명칭에 대한 내용으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "SN－건축구조용 압연강재",
+                    "SS－일반구조용 압연강재",
+                    "HSA－건축구조용 고성능 압연강재",
+                    "SHN－건축구조용 열간압연형강",
+                    "SMA－용접구조용 열간압연강재"
+                ],
+                answer: 5, // ⑤
+                hint: "SMA에서 'A'는 '내후성(Atmospheric Corrosion Resistance)'을 뜻하는 표식입니다.",
+                coreConcept: "구조용 강재의 규격 약어 및 명칭",
+                explanations: [
+                    "① 맞음. SN(Steel New)은 지진 등에 대비해 소성 변형 능력을 강화한 건축구조용 압연강재입니다.",
+                    "② 맞음. SS(Steel Structural)는 가장 보편적으로 쓰이는 일반구조용 압연강재입니다.",
+                    "③ 맞음. HSA(High performance Steel for Architecture)는 고강도 및 고성능을 실현한 건축구조용 압연강재입니다.",
+                    "④ 맞음. SHN(Steel H-Beam New)은 건축구조용 열간압연 H형강을 지칭합니다.",
+                    "⑤ 틀림. SMA는 '용접구조용 내후성 열간압연강재'를 의미합니다. 단순히 '용접구조용 열간압연강재'는 SM(Steel Marine/Structural)입니다."
+                ]
+            },
+            {
+                num: 7,
+                question: "아스팔트 방수와 시멘트 액체방수를 비교한 것으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "시멘트 액체방수는 외기에 대한 영향이 직감적이다.",
+                    "아스팔트 방수의 경우 보호누름이 없어도 무방하다.",
+                    "아스팔트 방수가 방수 지속성 측면에서 유리하다.",
+                    "시멘트 액체방수가 아스팔트 방수에 비해서 결함부 발견이 용이하다.",
+                    "방수층에 대한 신축성은 아스팔트 방수가 크다."
+                ],
+                answer: 2, // ②
+                hint: "아스팔트는 유기물 계열이며 열에 의해 물성이 변하고 기계적 마찰이나 훼손에 약하므로, 시공 후 옥상 등에 방수층을 깔면 무조건 단단한 무근콘크리트 층을 올려야 합니다.",
+                coreConcept: "아스팔트 방수와 시멘트 액체방수의 특징 비교",
+                explanations: [
+                    "① 맞음. 시멘트 액체방수는 무기질계이므로 외기 온도 변화, 지반 거동, 자외선 열화 등에 즉각적으로 반응하여 균열이 생기기 쉽습니다.",
+                    "② 틀림. 아스팔트 방수층은 열과 하중에 쉽게 함몰되거나 찢어지므로 자외선 차단 및 기계적 파손 방지를 위한 '보호누름(보호콘크리트 등)'이 필수적으로 수반되어야 합니다.",
+                    "③ 맞음. 아스팔트 방수는 여러 겹 적층하여 도막이 두껍고 탄성이 좋아 방수 성능과 수명이 매우 길고 우수합니다.",
+                    "④ 맞음. 시멘트 액체방수는 도막이 얇아 누수 발생 시 결함부가 바로 노출되어 상대적으로 보수할 곳을 찾기 쉽습니다.",
+                    "⑤ 맞음. 아스팔트는 연성 및 신축성이 우수하여 건물의 미세한 균열이나 거동에도 찢어지지 않고 견디는 복원 능력이 큽니다."
+                ]
+            },
+            {
+                num: 8,
+                question: "유리의 종류에 관한 설명으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "강화유리는 판유리를 연화점 이상으로 가열 후 서서히 냉각시켜 열처리한 유리이다.",
+                    "로이유리는 가시광선 투과율을 높인 에너지 절약형 유리이다.",
+                    "배강도 유리는 절단이 불가능하다.",
+                    "유리블록은 보온, 채광, 의장 등의 효과가 있다.",
+                    "접합유리는 파손 시 유리파편의 비산을 방지할 수 있다."
+                ],
+                answer: 1, // ①
+                hint: "강화유리의 핵심은 급격한 가열 후 표면에 강력한 압축 응력을 불어넣기 위해 찬 바람 등으로 '이것'을 시켜야 한다는 것입니다.",
+                coreConcept: "유리의 가공 공법 및 종류별 성질",
+                explanations: [
+                    "① 틀림. 강화유리는 판유리를 연화점($600\\sim 700^\\circ C$) 근처까지 가열한 후 고압의 공기로 '급격히 냉각(급랭)'시켜 표면에 압축응력을 형성한 것입니다. '서서히 냉각(서냉)'하는 것은 유리 내부 응력을 제거하여 평범하게 자를 수 있게 만드는 일반유리 공정입니다.",
+                    "② 맞음. 로이유리(Low-E glass)는 은(Ag) 등의 금속 산화물막을 코팅하여 적외선(열선)을 차단하면서도 가시광선은 투과시키는 단열유리입니다.",
+                    "③ 맞음. 배강도유리(열선반사 또는 준강화유리 계열) 및 강화유리는 열처리 가공이 끝난 후에는 내부 응력 불균형으로 인해 현장 절단이나 가공이 절대 불가능합니다.",
+                    "④ 맞음. 유리블록은 속이 빈 이중 블록 형태로 단열, 방음이 뛰어나며 장식용 조적 벽체 및 채광창으로 사용됩니다.",
+                    "⑤ 맞음. 접합유리는 두 장의 판유리 사이에 강인한 PVB 수지 중간막을 넣어 접합했기 때문에 깨지더라도 파편이 중간막에 달라붙어 떨어지지 않고 비산을 방지합니다."
+                ]
+            },
+            {
+                num: 9,
+                question: "유리의 설치공법에 관한 설명으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "열선반사 유리의 경우 막면의 실링 충전부 이외의 부분에 프라이머가 부착된 경우는 프라이머가 건조하기 전에 청소한다.",
+                    "개스킷을 끼운 상태는 외관 상 균일성이 유지되도록 모서리로부터 끼워 나간다.",
+                    "실란트 충전은 가능한 한 짧은 시간에 이루어지도록 한다.",
+                    "고정창 이외의 개폐창에서는 개폐 시의 충격에 의한 유리의 파손을 방지하기 위해 개폐방식에 따라 적절한 단부 스페이서를 설치한다.",
+                    "개스킷은 유리의 각 변길이보다 약간 길게 하며, 비드홈에 정확히 물리도록 일정한 힘으로 끼워야 한다."
+                ],
+                answer: 2, // ②
+                hint: "고무 개스킷을 설치할 때 늘어나는 성질이 있습니다. 이를 한쪽 끝(모서리)부터 쭉 당겨서 끼우면 나중에 어떻게 될지 연상해 보세요.",
+                coreConcept: "유리 공사 표준 시방 및 설치 공법",
+                explanations: [
+                    "① 맞음. 프라이머가 묻어서 건조되어 굳어버리면 코팅막과 유리 표면을 상하지 않게 닦아내기 극히 곤란하므로 건조 전 즉시 청소해야 합니다.",
+                    "② 틀림. 개스킷은 각 변의 '중앙부'에서 시작하여 양 모서리 방향으로 끼워 나가야 복원력 및 유격에 따른 늘어짐이나 우는 현상이 없이 균일하게 밀착됩니다. 모서리부터 끼우면 끝부분이 비정상적으로 늘어나 조기 이탈의 원인이 됩니다.",
+                    "③ 맞음. 실란트(코킹)는 시공 시 대기 중 수분과 반응해 표면 경화가 빠르게 시작되므로 균일한 도막 형성을 위해 되도록 신속히 일체화 충전해야 합니다.",
+                    "④ 맞음. 창문이 여닫히거나 오르내릴 때 프레임에 부딪혀 파괴되는 것을 방지하도록 유리 모서리 단부에 완충용 스페이서 블록을 적절히 대어 줍니다.",
+                    "⑤ 맞음. 수축에 대비하여 실제 창틀 변길이보다 약 1~2% 정도 살짝 여유를 주어 길게 재단한 후 밀어 넣듯이 힘을 주어 끼웁니다."
+                ]
+            },
+            {
+                num: 10,
+                question: "창호에 사용되는 용어 설명 중 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "박배는 창문을 돌쩌귀나 경첩을 이용하여 창문틀에 다는 작업을 말한다.",
+                    "풍소란은 유리끼우기에 사용되는 탄성재로 방수성, 기밀성을 갖는 밀봉재를 말한다.",
+                    "멀리온은 창면적이 클 때, 창의 보강 및 미관을 목적으로 사용하는 보강재를 말한다.",
+                    "여밈대는 미서기, 오르내리기창이 서로 여며지는 선대를 말한다.",
+                    "마중대는 미닫이, 여닫이 문짝이 서로 맞닿는 선대를 말한다."
+                ],
+                answer: 2, // ②
+                hint: "바람 풍(風) 자를 씁니다. 즉 문을 닫았을 때 문짝 틈새로 황소바람이 들이치는 것을 막기 위해 덧대어 대는 나무나 부속을 가리킵니다.",
+                coreConcept: "창호 세부 부속 명칭 및 용어",
+                explanations: [
+                    "① 맞음. 박배(Fitting)란 제작된 문짝을 흰지, 경첩 등을 활용해 문틀에 완벽히 피팅하여 달아 매는 기성 가공 작업을 의미합니다.",
+                    "② 틀림. 유리끼우기에 사용되는 탄성 밀봉재는 '개스킷(Gasket)' 혹은 '코킹(실란트)'이라 합니다. 풍소란(風防)은 여밈대나 마중대가 교차 접착하는 문짝 사이 틈새에 찬바람과 기류 유입을 방지하기 위해 세로로 부착하는 바람막이 부재를 말합니다.",
+                    "③ 맞음. 멀리온(Mullion, 중간수직틀)은 대형 창에서 프레임 강도를 높이고 안전 및 시각적 세분을 위해 세로로 설치하는 부재입니다.",
+                    "④ 맞음. 미서기 창호에서 두 문짝이 엇갈리며 포개어 닫히는 접촉 부위 세로 선대를 여밈대라 부릅니다.",
+                    "⑤ 맞음. 쌍여닫이나 미닫이문에서 두 문짝이 서로 이마를 마주 대며 정면으로 맞닿는 부위 세로 선대를 마중대라 칭합니다."
+                ]
+            },
+            {
+                num: 11,
+                question: "기둥, 벽체의 모서리 면, 각진 면, 구석 면의 미장보호를 위해 사용하는 철물은?",
+                box: null,
+                options: [
+                    "와이어 라스",
+                    "메탈 라스",
+                    "펀칭 메탈",
+                    "논슬립",
+                    "코너비드"
+                ],
+                answer: 5, // ⑤
+                hint: "영어 단어 코너(Corner, 모서리)에 보호용 비드(Bead)를 덧붙여 미장 마무리를 칼날처럼 반듯하게 유지하고 파손을 방지합니다.",
+                coreConcept: "미장 보호 및 보강용 철물 종류",
+                explanations: [
+                    "① 틀림. 와이어 라스는 연강선을 꼬아 만든 그물망으로 미장모르타르의 부착 탈락 방지용 바탕재입니다.",
+                    "② 틀림. 메탈 라스는 얇은 강판에 칼집을 내어 당겨 늘린 금속망으로 벽이나 천장 미장의 박리 방지용 바탕재입니다.",
+                    "③ 틀림. 펀칭 메탈은 강판에 구멍을 송송 뚫어 놓은 기능성 장식판입니다.",
+                    "④ 틀림. 논슬립(Non-slip)은 계단 디딤판 끝부분에 붙여 보행자가 미끄러지는 것을 막는 황동 또는 철제 철물입니다.",
+                    "⑤ 맞음. 코너비드(Corner Bead)는 기둥이나 벽 모서리 코너 부위에 미리 시공하여 미장 바름을 용이하게 하고, 외부 충격 시 모서리 미장층이 깨져나가는 것을 완벽하게 보호하는 철물입니다."
+                ]
+            },
+            {
+                num: 12,
+                question: "미장공사에 관한 설명으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "결합재와 골재 및 혼화재의 배합은 질량비로, 혼화제, 안료, 해초풀 및 짚 등의 사용량은 결합재에 대한 용적비로 표시하는 것을 원칙으로 한다.",
+                    "마감두께는 라스 또는 졸대 바탕일 때는 바탕 먹임의 두께 및 손질바름은 제외한 바름층 전체의 두께를 말한다.",
+                    "미장바름을 지지하는 데 필요한 강도와 강성이 있어야 한다.",
+                    "물기가 많은 바탕면은 통풍, 기계적 건조 등에 의해 물기를 조정한 후 바름작업을 시작한다.",
+                    "미장 바름순서는 위에서 아래로 하며 실내는 천장, 벽, 바닥의 순으로 한다."
+                ],
+                answer: 1, // ①
+                hint: "기본적인 시멘트나 골재는 대량으로 섞으므로 '부피(용적)'로 재는 것이 현장에서 편하고, 아주 정밀하게 소량 들어가는 약품/안료는 '무게(질량)'로 제어합니다.",
+                coreConcept: "미장공사 시방서 표준 규정",
+                explanations: [
+                    "① 틀림. 미장공사 표준시방서상 결합재와 골재, 혼화재 배합은 '용적비(부피)'로 표시하는 것이 원칙이며, 아주 정밀한 투입이 요구되는 화학 혼화제, 안료, 풀, 짚 등은 결합재에 대한 '질량비(무게)'로 기준을 표시하여 혼합해야 합니다. 두 비례 기준의 명칭이 서로 뒤바뀌어 서술되었습니다.",
+                    "② 맞음. 마감두께 산정 시 바탕면의 울퉁불퉁함을 메우는 '바탕먹임'이나 초벌 전 손질바름 부위 두께는 설계 기준 마감두께에서 제외합니다.",
+                    "③ 맞음. 미장 모르타르가 경화 후 구조체의 미세 거동 및 자체 하중을 지탱하기 위해 결합 바탕과의 충분한 접착 및 강도가 보증되어야 합니다.",
+                    "④ 맞음. 바탕면이 너무 축축하고 물기가 과도하면 모르타르가 미끄러지고 건조 수축 시 접착 불량 및 균열이 발생하므로 함수율을 정밀 조정한 후 도포해야 합니다.",
+                    "⑤ 맞음. 작업 중인 위에서 찌꺼기가 떨어지므로 항상 '위에서 아래'로 진행하며, 실내 공간은 위쪽 구조물인 '천장 -> 벽 -> 바닥'의 흐름으로 진행하는 것이 정석입니다."
+                ]
+            },
+            {
+                num: 13,
+                question: "미장공사 시공시 바름순서에 대한 설명으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "위에서 아래로 시공한다.",
+                    "실내 미장공사는 천장, 벽, 바닥 순으로 실시한다.",
+                    "벽과 수평으로 교차되는 밑벽을 먼저 바르고 처마 밑, 반자ㆍ차양 밑 등의 순으로 바르는 것이 원칙이다.",
+                    "천장돌림, 벽돌림 등의 규준이 되는 부분을 먼저 정확히 바른 후 천장, 벽면 등의 넓은 면을 바르는 순으로 한다.",
+                    "외벽 미장공사는 옥상난간에서부터 지층으로 시공한다."
+                ],
+                answer: 3, // ③
+                hint: "미장 모르타르를 바를 때는 중력에 의해 낙하하는 찌꺼기가 이미 깨끗하게 발라 놓은 면을 오염시키지 않도록 항상 상부 돌출 부위를 하부보다 먼저 시공해야 합니다.",
+                coreConcept: "미장 바름 작업의 공간적 순서 체계",
+                explanations: [
+                    "① 맞음. 중력의 법칙에 의해 미장재 낙하 피해를 최소화하고자 상부에서 하부로 작업을 일관되게 추진합니다.",
+                    "② 맞음. 천장 시공 시 발생하는 낙하물이 벽이나 바닥을 더럽힐 수 있으므로 '천장 -> 벽 -> 바닥'의 수직 하강형 순서가 모범적입니다.",
+                    "③ 틀림. 미장 공사의 기본 원칙은 돌출된 천장 처마 밑, 반자, 차양 밑 등 상부의 까다롭고 떨어지기 쉬운 수평 구역을 '먼저' 완료한 후에, 그 아래의 수직 벽면(밑벽)을 '나중에' 발라 내려오는 것입니다. 수평 밑벽을 먼저 바른다는 본 지문은 순서가 거꾸로 되었습니다.",
+                    "④ 맞음. 경계나 모서리의 마감 선이 되는 규준틀(천장돌림, 벽돌림 등) 가이드를 잡아 둔 뒤 넓고 평평한 중심부를 채워야 반듯하고 정밀한 면이 나옵니다.",
+                    "⑤ 맞음. 외부 비계 작업을 타며 최상부 옥상 난간(파라펫)에서 출발하여 아래층, 지상층 순서로 하향 진행합니다."
+                ]
+            },
+            {
+                num: 14,
+                question: "타일공사에 관한 설명으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "치장줄눈은 타일 부착 3시간 정도 경과 후 줄눈파기를 실시한다.",
+                    "타일붙임용 모르타르의 배합비는 용적비로 계상한다.",
+                    "타일 제품의 흡수성이 높은 순서는 토기질, 도기질, 석기질, 자기질의 순이다.",
+                    "타일붙이기는 벽타일, 바닥타일의 순서로 실시한다.",
+                    "모르타르로 부착하는 타일공법의 붙임시간(open time)은 모두 동일하게 관리한다."
+                ],
+                answer: 5, // ⑤
+                hint: "타일을 붙이는 공법에는 압착공법, 개량압착공법, 접착제공법, 모자이크 타일 공법 등이 있으며 공법과 현장 기후, 타일 크기에 따라 붙임 모르타르가 마르는 오픈 타임은 상이합니다.",
+                coreConcept: "타일 시공 및 재료 특성",
+                explanations: [
+                    "① 맞음. 타일 부착 후 약 3시간이 지난 시점에 줄눈 부위의 여분 모르타르를 파내는 '줄눈파기'를 진행해야 단단한 본체 고정과 선명한 치장줄눈 시공이 가능합니다.",
+                    "② 맞음. 현장에서 시멘트와 모래의 배합 비율은 일정한 표준 계량 용기(버킷 등)를 사용해 체적(용적비)으로 산정하여 시공합니다.",
+                    "③ 맞음. 고온에서 치밀하게 소성할수록 조직이 조밀해져 흡수성이 최소화됩니다. 즉, 토기질($30\\%\\uparrow$) > 도기질($15\\%\\sim 20\\%$) > 석기질($5\\%\\sim 10\\%$) > 자기질($1\\%\\downarrow$) 순으로 흡수성이 매우 정확하게 나열되어 있습니다.",
+                    "④ 맞음. 바닥 타일을 먼저 깔아 버리면 그 위에 벽 타일을 시공할 때 디딤 발이나 낙하물로 인해 바닥 타일이 깨지거나 이탈하므로, 항상 '벽타일 -> 바닥타일' 순서로 전개합니다.",
+                    "⑤ 틀림. 타일 붙임시간(오픈 타임, Open Time)은 바름 모르타르가 수분을 잃고 피막이 형성되어 접착력이 저하되기 전의 골든 타임을 뜻합니다. 이는 대형 타일인지, 외벽인지, 내벽인지 또는 압착식인지 개량식인지 공법에 따라 기준 시간 규정이 판이하므로 일률적으로 '모두 동일하게 관리한다'는 완전히 그릇된 시방 관리 기법입니다."
+                ]
+            },
+            {
+                num: 15,
+                question: "도장공사에 관한 설명으로 옳은 것은?",
+                box: null,
+                options: [
+                    "바니시(varnish)는 입체무늬 등의 도막이 생기도록 만든 에나멜이다.",
+                    "롤러도장은 붓도장보다 도장 속도가 느리지만 일정한 도막두께를 유지할 수 있다.",
+                    "도료의 견본품 제출 시 목재 바탕일 경우 100mm × 200mm 크기로 제출한다.",
+                    "수지는 물이나 용체에 녹지 않는 무채 또는 유채의 분말이다.",
+                    "철재면 바탕 만들기는 일반적으로 가공 장소에서 바탕재 조립 후에 한다."
+                ],
+                answer: 3, // ③
+                hint: "도료의 견본판 규격 기준을 묻는 정밀한 시방 문제입니다. 목재 바탕 견본의 규격(100 x 200mm) 수치를 기억해 두세요.",
+                coreConcept: "도장 공사 표준 시방 요건",
+                explanations: [
+                    "① 틀림. 바니시(Varnish)는 안료가 들어있지 않은 무색 투명한 도막 형성액으로 목재 고유의 질감을 살려 보호하는 투명 도료입니다. 입체무늬 도료는 무늬코트나 엠보싱 에나멜 종류입니다.",
+                    "② 틀림. 롤러도장은 면적이 넓은 벽 등에 시공하여 붓도장보다 시공 속도가 월등히 '빠릅니다'. 단, 도막 두께가 균일하지 못하고 구석진 정밀 작업에는 불리합니다.",
+                    "③ 맞음. 시방서 규정에 명시된 바에 따르면 도장 견본품 제출 시, 목재 바탕 시험판의 표준 치수는 $100\\text{mm} \\times 200\\text{mm}$ 크기로 제작하여 감독원 승인을 받도록 규정되어 있습니다.",
+                    "④ 틀림. 물이나 용제에 녹지 않는 유색/무색의 분말은 '안료(Pigment)'에 대한 정의입니다. 수지는 도료의 도막을 형성하는 주요 접착제 결합 성분입니다.",
+                    "⑤ 틀림. 철재면은 조립 및 용접을 해버리면 겹치는 틈새나 접합 구석면에 방청(녹막이) 칠과 사포질 등의 바탕 만들기가 불가능해집니다. 따라서 반드시 가공 장소에서 부재를 '조립하기 전'에 완벽히 바탕 만들기를 완료해야 합니다."
+                ]
+            },
+            {
+                num: 16,
+                question: "열이동 현상에 대한 설명 중 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "밀도가 낮은 재료는 열전도율이 작다.",
+                    "온도차가 작은 경우 열전도율이 커진다.",
+                    "재료에 습기가 차거나 함수량이 큰 경우 열전도율이 커진다.",
+                    "작은 공극이 많으면 열전도율이 작다.",
+                    "단열재나 보온재는 열전도율이 낮은 재료를 사용하여야 한다."
+                ],
+                answer: 2, // ②
+                hint: "열전도율($\\lambda$)은 외부 환경 조건(온도차의 크고 작음)에 따라 수치가 이리저리 춤추는 값이 아닌, 재료 본연이 가진 '고유 물리 성질'입니다.",
+                coreConcept: "재료의 열전도 특성 및 영향 인자",
+                explanations: [
+                    "① 맞음. 밀도가 낮은 재료(스티로폼 등)는 내부에 공기층을 많이 머금고 있어 열의 전도를 크게 차단하므로 열전도율이 매우 낮습니다.",
+                    "② 틀림. 열전도율은 온도차가 작거나 크다고 해서 변하는 변동값이 아닌 물질 고유의 열 전달 상수입니다. 단지 두 지점의 온도차가 커지면 이동하는 '열량(열관류량)'이 늘어날 뿐입니다.",
+                    "③ 맞음. 물의 열전도율은 정지된 공기보다 약 25배나 큽니다. 따라서 단열재가 젖거나 습기를 머금으면 열전도율이 수직 상승하여 단열 성능을 통째로 상실합니다.",
+                    "④ 맞음. 아주 미세한 닫힌 공극들이 촘촘히 포진해 있으면 열 대류가 억제되므로 열전도율이 대폭 감소하여 훌륭한 단열재가 됩니다.",
+                    "⑤ 맞음. 단열 목적의 보온재는 열을 차단해야 하므로 당연히 고유 열전도율이 극히 낮은 소재를 선별해야 합니다."
+                ]
+            },
+            {
+                num: 17,
+                question: "옥내 배수관의 관경을 결정하는 방법으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "옥내 배수관의 관경은 기구배수부하단위법 등에 의하여 결정할 수 있다.",
+                    "기구배수부하단위는 각 기구의 최대 배수유량을 소변기 최대 배수유량으로 나눈 값에 동시사용률 등을 고려하여 결정한다.",
+                    "배수 수평지관의 관경은 그것에 접속하는 트랩구경과 기구배수관의 관경과 같거나 커야 한다.",
+                    "배수 수평지관은 배수가 흐르는 방향으로 관경을 축소하지 않는다.",
+                    "배수 수직관의 관경은 가장 큰 배수부하를 담당하는 최하층 관경을 최상층까지 동일하게 적용한다."
+                ],
+                answer: 2, // ②
+                hint: "위생설비 배수 단위의 기준이 되는 대표 기구는 일상 속에서 누구나 매일 손을 씻고 물을 흘려보내는 가장 보편적인 소형 기구(32mm 관경 배수구)입니다.",
+                coreConcept: "배수관경 산정 및 기구배수부하단위(Fixture Unit, FU)",
+                explanations: [
+                    "① 맞음. 건물의 예상 배수량을 실용적으로 산정하기 위해 각 위생기구에 고유 수치를 부여한 '기구배수부하단위(FU)' 기법을 널리 씁니다.",
+                    "② 틀림. 기구배수부하단위의 기준(1 FU)이 되는 기구는 소변기가 아니라 '사적인 세면기(Lavatory)'입니다. 세면기의 표준 배수 유량인 약 $28.5\\text{ L/min}$($7.5\\text{ gpm}$)을 기준값인 1.0으로 삼고, 다른 기구들의 유량을 이 표준값 대비 비율로 단순 환산하여 총합을 구합니다.",
+                    "③ 맞음. 배수가 내려오는 길목에 병목현상이 생기면 역류하므로 지관 관경은 이보다 상부인 트랩 구경이나 개별 기구배수관 직경보다 무조건 일치하거나 넓어야 안전합니다.",
+                    "④ 맞음. 흐르는 하류 방향으로 관경을 줄여버리면 슬러지나 이물질이 끼어 배수관이 즉각 폐쇄됩니다. 따라서 하류 방향으로 갈수록 관경은 유지되거나 넓어져야 합니다.",
+                    "⑤ 맞음. 수직배관의 경우 층별로 압력 불균형이 생기면 트랩 봉수가 파괴되므로 최하층의 최대 부하를 버티는 굵은 관경을 최상층 루프 통기 끝단까지 균일하게 통통하게 올려주어야 공기 압력 균형에 절대적으로 이롭습니다."
+                ]
+            },
+            {
+                num: 18,
+                question: "배수관에 대한 설명으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "간접배수를 받는 물받이 용기는 화장실, 세면실, 쉽게 접근할 수 없는 장소, 환기가 되지 않는 장소 등에 설치하지 않는다.",
+                    "간접배수를 받는 물받이 용기를 바닥면 보다 낮게 설치하여 U트랩을 사용하는 경우에는 그 청소구를 바닥면까지 연장하여 설치한다.",
+                    "우수 수직관은 배수 수직관 및 통기 수직관으로 겸용하지 않는다.",
+                    "우수 수평주관 또는 우수부지 배수관에 접속하는 우수 수평지관에는 배수트랩을 설치한다.",
+                    "각종 음료용 저수탱크 등의 간접배수관의 배수구 공간은 최소 150mm로 한다."
+                ],
+                answer: 4, // ④
+                hint: "우수(빗물)관은 원칙적으로 깨끗하고 냄새가 나지 않는 순수한 물길입니다. 일반 생활 배수관이나 오수관과 합류하기 전 단계에서는 독자 배관이므로 굳이 저항 요소인 이것을 달 이유가 평상시엔 없습니다.",
+                coreConcept: "우수배수 및 간접배수 배관 시방",
+                explanations: [
+                    "① 맞음. 간접배수 싱크나 물받이는 청결과 관찰이 중요하므로 어둡고 구석지며 환기가 안 되거나 숨겨진 공간에 방치하듯 설치해서는 안 됩니다.",
+                    "② 맞음. U트랩이 바닥 하부에 묻히면 소제 및 찌꺼기 제거용 청소구 마개를 바닥 높이까지 끄집어 올려 시공해 주어야 유지관리가 원활합니다.",
+                    "③ 맞음. 폭우가 내릴 때 우수 수직관이 가득 차면 엄청난 수압과 공기압이 발생하므로 이를 함부로 일반 오수/배수/통기관에 혼용했다간 실내 변기나 세면기로 오수가 역류 분출하는 참사가 터집니다.",
+                    "④ 틀림. 우수 수평주관이나 부지 배수관에 접속하는 일반 우수수평지관에는 가스 정체 및 악취 역류 방지를 위해 '트랩을 설치하지 않는 것이 원칙'입니다. 우수관은 막힘없는 배수가 제1 목적이며 합류 지점에 특수한 트랩을 두는 경우 외에는 개별 트랩 설치 시 저항만 커집니다.",
+                    "⑤ 맞음. 사람이 마시는 음용 저수조 배관은 오염 방지를 위해 간접 배수하되, 역류 오염 물질이 닿을 수 없도록 물리적 공기 틈새(배수구 공간)를 최소 $150\\text{mm}$ 이상 완전 이격해 주어야 위생법상 승인됩니다."
+                ]
+            },
+            {
+                num: 19,
+                question: "통기설비에 관한 설명으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "오물정화조의 배기관은 단독으로 대기 중에 개구하고 일반 통기관과 연결하지 않는다.",
+                    "외벽 면을 관통하여 연장하는 통기관의 통기구는 하향으로 설치한다.",
+                    "통기수직관의 하부는 가장 낮은 위치의 배수수평지관보다 낮은 위치에서 45도 Y형관을 사용하여 배수수직관에 연결한다.",
+                    "각개통기관의 배수관과의 접속점은 기구의 최고수면과 배수수평지관이 수직관에 접속되는 점을 연결한 동수 구배선보다 상위에 있도록 배관해야 합니다.",
+                    "개별 통기관은 대변기나 기타 이와 유사한 기구류를 제외하고 통기관은 트랩웨어 보다 낮은 위치에서 분기한다."
+                ],
+                answer: 5, // ⑤
+                hint: "개별 통기관이 트랩의 가두어 둔 물(봉수) 수위보다 아래쪽(낮은 쪽)에서 갈라져 나가면 배수 시 이물질과 오수가 통기관 안으로 역류하여 통기 통로가 금방 막혀 버립니다.",
+                coreConcept: "통기관의 설치 목적과 배관 기성 기준",
+                explanations: [
+                    "① 맞음. 정화조 배기관은 지독한 황화수소와 암모니아 가스가 가득하므로, 이를 일반 실내 통기관과 연결해 두면 정화조 유독 가스가 실내 위생기구로 전부 누출되므로 반드시 단독 대기 개방합니다.",
+                    "② 맞음. 외벽을 뚫고 돌출된 통기관은 눈, 비, 이물질이 내부로 들이치지 않도록 끝단을 하향 곡관으로 구부려 시공하는 것이 철칙입니다.",
+                    "③ 맞음. 통기 배관 내부에 맺히는 결로수나 역류한 미세 물방울이 배수관으로 자연 배출되도록, 통기수직관 하부는 가장 최하단 배수지관 밑부분에서 $45^\\circ$ Y형관을 통해 배수 수직관 본체에 합류 결속시킵니다.",
+                    "④ 맞음. 각개통기관이 제 역할을 하려면 기구의 최고 수위선보다 높은 곳에서 구배선 위로 통풍 통로가 수평 또는 상향 전개되어야 배수 압력 변동 시 역류를 완벽히 막아 냅니다.",
+                    "⑤ 틀림. 개별 통기관(각개통기관)은 배출수가 유입되어 통로를 막는 대형 사고를 피하기 위해, 예외 없이 위생기구 트랩웨어(넘침 구레선, Trap weir)보다 '반드시 높은 위치'에서 분기하여 가파르게 입상시켜 배관해야 합니다."
+                ]
+            },
+            {
+                num: 20,
+                question: "액화석유가스와 액화천연가스에 대한 내용으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "액화석유가스는 공기보다 무겁다.",
+                    "액화석유가스의 단위는 kg/h를 사용한다.",
+                    "액화천연가스는 청정연료이다.",
+                    "액화천연가스는 무색, 무미, 무취하다.",
+                    "액화천연가스는 부탄, 프로판 등이 주성분이다."
+                ],
+                answer: 5, // ⑤
+                hint: "LNG(액화천연가스)는 도시가스 배관을 통해 유입되는 가스이며, 주요 성분은 탄소 1개에 수소 4개가 결합한 가장 단순하고 가벼운 유기 가스입니다.",
+                coreConcept: "LPG(액화석유가스)와 LNG(액화천연가스)의 물성 비교",
+                explanations: [
+                    "① 맞음. LPG(액화석유가스)는 주성분이 프로판, 부탄으로 분자량이 공기 평균(29)보다 훨씬 무거워 누출 시 바닥에 납작하게 가라앉아 체류합니다.",
+                    "② 맞음. LPG는 기화 전 액상 형태로 용기에 충전되어 거래 및 이송되므로 소비 설계 단위를 시간당 무게($\text{kg/h}$) 단위로 측정해 운용합니다.",
+                    "③ 맞음. LNG는 완전 연소 시 매연, 아황산가스 등의 공해 물질이 거의 배출되지 않아 현존 최고의 환경친화적 청정 도시 연료입니다.",
+                    "④ 맞음. 천연 상태의 메탄 가스는 본래 아무런 색도, 맛도, 냄새도 없습니다. (단, 가정용 가스는 누출 감지를 위해 메르캅탄 계열의 부취제를 섞어 특유의 계란 썩는 냄새가 나도록 만듭니다.)",
+                    "⑤ 틀림. LNG(액화천연가스)의 주성분은 메탄($\text{CH}_4$)입니다. 부탄과 프로판은 통에 담아 파는 가스인 LPG(액화석유가스)의 주성분입니다."
+                ]
+            },
+            {
+                num: 21,
+                question: "가스설비에 대한 내용으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "지하 매설배관으로 폴리에틸렌피복강관을 사용할 경우에는 이음부에 부식 방지 조치를 한다.",
+                    "가스배관의 접합은 용접을 원칙으로 한다.",
+                    "가스배관의 나사 접합을 할 경우라도 유니온은 사용하지 않는다.",
+                    "지하 매설 시 타 매설관 과의 이격 거리는 평행 시 15cm 이상, 교차 시 30cm 이상으로 한다.",
+                    "호칭지름이 13mm 미만의 것에는 1m마다, 13mm 이상 33mm 미만의 것에는 2m마다, 33mm 이상의 것에는 3m마다 가스배관 지지쇠붙이를 설치한다."
+                ],
+                answer: 4, // ④
+                hint: "가스 배관은 굴착 공사 시 파손 위험이 극도로 크므로, 땅속 다른 매설 시설물(수도, 전기, 통신선 등)과 나란하게 달릴 때는 충분한 거리 이격(최소 자 한 자 반 거리)이 법적으로 확보되어야 합니다.",
+                coreConcept: "가스배관 매설 및 지지 설치 시방 규정",
+                explanations: [
+                    "① 맞음. 강관 외면에 폴리에틸렌 피복을 한 부식 방지용 배관이라 할지라도 절단과 가공, 이음 부위는 피복이 벗겨져 드러나므로 반드시 방청 콜타르 에폭시 수지 등으로 완벽한 마감 절연 코팅을 해야 합니다.",
+                    "② 맞음. 가스는 미세한 틈으로도 대형 폭발을 유발하므로 영구적이고 기밀성이 가장 우수한 용접 결합을 최우선 원칙으로 규정합니다.",
+                    "③ 맞음. 유니온(Union) 이음은 조임부 노화로 가스 누출 위험이 대단히 높아 가스 배관 라인에서는 절대 사용을 금지하고 나사 이음이나 플랜지 용접을 씁니다.",
+                    "④ 틀림. 도시가스 매설 시방상 다른 매설관(하수도, 상수도, 전기 케이블 등)과의 이격거리는 평행하게 평행 주행 시에는 최소 '30cm 이상'을 확보해야 하며, 교차 시에는 최소 10cm 이상(실무 규정상 다소 완화되나 일반 시험에서는 평행 시 30cm가 빈출 정답)을 유지해야 합니다. 평행 15cm라는 설명은 위험한 과소 수치입니다.",
+                    "⑤ 맞음. 가스 배관이 처지거나 흔들리는 것을 막기 위해 가스 기술 기준에 부합하는 정밀 규격별 지지구(새들, 브래킷) 간격(13미만-1m / 13~33미만-2m / 33이상-3m)을 옳게 서술하고 있습니다."
+                ]
+            },
+            {
+                num: 22,
+                question: "소방설비에 대한 설명으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "공장 또는 창고시설로서 750배 이상의 특수가연물을 저장ㆍ취급하는 경우에는 각 옥외소화전 5m 이내에 방수총을 별도로 설치하거나 옥외소화전과 방수총이 겸용으로 된 것으로 설치한다.",
+                    "자동화재탐지설비의 발신기는 특정소방대상물의 층마다 설치하되, 해당 특정소방대상물의 각 부분으로부터 하나의 발신기까지의 수평거리가 20m 이하가 되도록 설치한다.",
+                    "옥내소화전설비의 수원은 계산하여 나온 유효수량 외에 유효수량의 3분의 1 이상을 옥상에 설치해야 한다.",
+                    "스프링클러의 가압송수장치의 송수량은 0.1MPa의 방수압력기준으로 80ℓ/min 이상의 방수 성능을 가진 기준개수의 모든 헤드로부터의 방수량을 충족시킬 수 있는 양 이상으로 한다.",
+                    "펌프의 성능은 체절운전 시 정격토출압력의 140%를 초과하지 않고, 정격토출량의 150%로 운전 시 정격토출압력의 65% 이상이 되어야 하며, 펌프의 성능을 시험할 수 있는 성능시험배관을 설치해야 한다."
+                ],
+                answer: 2, // ②
+                hint: "소방 기본 설계에서 사람이 수동으로 불을 알리는 발신기나 경보 설비까지 비상 시 보행 및 수평 이동거리 규정은 흔히 화재안전성능기준에서 25m를 기준으로 설정합니다.",
+                coreConcept: "화재안전성능기준(NFPC)의 소방 설비 규정",
+                explanations: [
+                    "① 맞음. 창고나 공장의 대형 가연물 특수 시설에는 거대한 화재 진압력을 발휘할 수 있는 옥외소화전 연계 방수총 설비 배치가 법적으로 타당하게 명령됩니다.",
+                    "② 틀림. 자동화재탐지설비 발신기는 각 층마다 설치하되 해당 대상물의 모든 구석 임의 점으로부터 하나의 수평거리 기준이 '25m 이하'가 되도록 배치하도록 강제하고 있습니다. 20m 이하는 불필요하게 좁은 잘못된 법적 기준치 설명입니다.",
+                    "③ 맞음. 옥내소화전 가동 실패에 대비하여 고가수조 형태의 소방 비상 수원(옥상수원)을 유효 수량의 최소 1/3 이상 추가 확보하여 상단에 항시 보관해야 합니다.",
+                    "④ 맞음. 스프링클러 헤드는 노즐 1개당 최소 $0.1\\text{ MPa}$ 압력 하에서 정확히 시간당 분당 $80\\text{ L/min}$ 이상의 일정한 살수 방수를 보증해 주는 가압 송수량이 요구됩니다.",
+                    "⑤ 맞음. 소방 펌프 성능 곡선의 가장 기본이 되는 안전 기준 요건(체절압력 140% 이하, 150% 유량 시 정격압력 65% 이상 확보)을 명확하게 표현한 지문입니다."
+                ]
+            },
+            {
+                num: 23,
+                question: "소화설비에 해당되지 않는 것은?",
+                box: null,
+                options: [
+                    "소화기구",
+                    "옥외소화전 설비",
+                    "연결살수설비",
+                    "스프링클러설비",
+                    "이산화탄소소화설비"
+                ],
+                answer: 3, // ③
+                hint: "소방시설법상 '소화설비'는 화재 초기 수동/자동으로 물이나 약제를 뿌려 불을 즉시 '끄는(소화)' 기구이고, '소화활동설비'는 전문 소방대원들이 화재 현장에 진입해 구조 및 대형 진압 활동을 '돕기 위한' 고성능 설비입니다.",
+                coreConcept: "소방시설의 세부 분류 체계",
+                explanations: [
+                    "① 맞음. 소화기, 자동확산소화장치 등은 소화설비의 가장 대표적이고 기본적인 장비입니다.",
+                    "② 맞음. 건물 실외에 설치하여 옥외 화재 차단 및 진화용으로 직접 방수하는 수동 소화설비입니다.",
+                    "③ 틀림. 연결살수설비는 지하층 등 밀폐되고 시야 확보가 어려운 공간에 소방차가 호스를 연결하여 내부 살수를 지원하는 대표적인 '소화활동설비'입니다. 초기 진압용 '소화설비' 군에 편입되는 분류가 아닙니다.",
+                    "④ 맞음. 스프링클러설비는 화재 감지 시 배관 가압수로 자동으로 즉각 살수 소화하는 자동 소화설비의 대명사입니다.",
+                    "⑤ 맞음. 전기실이나 기계실 등 물로 불을 끄면 손실이 막심한 곳에 불연성 CO2 가스를 가득 방출하여 질식 진압하는 특수 가스계 소화설비입니다."
+                ]
+            },
+            {
+                num: 24,
+                question: "소방설비의 방수압력에 대한 내용으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "옥내소화전 방수압력: 0.17MPa이상",
+                    "옥외소화전 방수압력: 0.15MPa이상",
+                    "스프링클러 설비 방수압력: 0.1MPa이상",
+                    "드렌처설비 방수압력: 0.1MPa이상",
+                    "연결송수관 방수압력: 0.35MPa이상"
+                ],
+                answer: 2, // ②
+                hint: "옥외소화전은 옥내소화전에 비해 더 높고 넓은 외부 화재 및 이웃 건물로의 연소 확산을 막아야 하므로 옥내 기준($0.17\\text{ MPa}$)보다 훨씬 더 강한 수압과 방수 도달 거리가 필요합니다.",
+                coreConcept: "소방설비별 노즐 선단 표준 방수압력 규격",
+                explanations: [
+                    "① 맞음. 옥내소화전의 노즐 끝단 최상층 최하 기준 방수압력은 $0.17\\text{ MPa}$ 이상($0.7\\text{ MPa}$ 이하)이어야 합니다.",
+                    "② 틀림. 옥외소화전설비의 정격 방수압력은 노즐 선단에서 최소 '0.25 MPa 이상'이어야 합니다. 0.15 MPa이라는 설명은 기준 압력에 크게 미달하는 그릇된 수치입니다.",
+                    "③ 맞음. 스프링클러 헤드는 미세 물방울 살포를 위해 기준 헤드 끝에서 $0.1\\text{ MPa}$ 이상($1.2\\text{ MPa}$ 이하)의 압력이 요구됩니다.",
+                    "④ 맞음. 인접 건물 연소 방지용 수막 형성 장치인 드렌처설비의 표준 설계 가압 압력은 최소 $0.1\\text{ MPa}$ 이상입니다.",
+                    "⑤ 맞음. 소방차에서 고층 건물로 가압 송수한 물을 받아내는 소방대용 연결송수관 방수구의 기준압은 고층 건축물 소화 기준인 $0.35\\text{ MPa}$ 이상이어야 합니다."
+                ]
+            },
+            {
+                num: 25,
+                question: "급탕설비를 설명한 내용 중 가장 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "단관식 급탕배관에 비하여 순환식 급탕배관의 설비비가 고가이다.",
+                    "저탕형 탕비기에는 온도를 일정하게 유지하기 위하여 서모스탯을 사용한다.",
+                    "직접가열식은 열효율이 좋은 방식에 속한다.",
+                    "간접가열식은 대규모 건물에 적합한 방식이다.",
+                    "개별식 급탕법은 급탕규모가 커지면 유지관리가 용이해진다."
+                ],
+                answer: 5, // ⑤
+                hint: "개별식(국소식) 급탕은 집집마다 가스 순간온수기나 전기온수기를 제각각 다는 방식입니다. 아파트 1,000세대에 이를 다 설치했을 때 관리 사무소 입장에서 어떨지 생각해 보세요.",
+                coreConcept: "중앙식 급탕과 개별식 급탕의 성격 및 장단점",
+                explanations: [
+                    "① 맞음. 단관식은 가고 오는 관이 1개지만, 순환식은 식은 온수를 다시 데우려고 돌아오는 '반탕관(환탕관)'을 추가 배관해야 하므로 공사 비용이 비쌉니다.",
+                    "② 맞음. 탕 속 물 온도가 일정치 이상 올라가면 가열 열원을 차단하는 온도조절 장치(Thermostat, 서모스탯)를 부착해야 화상 및 과열 사고를 막습니다.",
+                    "③ 맞음. 직접가열식은 보일러 내부에서 급탕용 물을 직접 불로 때워 데우므로 중간 열교환 손실이 없어 열효율 자체는 뛰어납니다.",
+                    "④ 맞음. 간접가열식은 고압 보일러 스팀을 열교환기를 거쳐 급탕하는 방식으로 보일러 스케일이 안 끼고 압력 균형 유지가 쉬워 호텔, 대형 빌딩 등에 완벽히 적합합니다.",
+                    "⑤ 틀림. 개별식 급탕법은 규모가 대형화되면 수십, 수백 개의 개별 가열 보일러 기기가 건물 곳곳에 파편적으로 위치하므로 노화된 부속 교체, 일괄 기계 검사 등 종합적인 '유지관리 소요와 비용이 극도로 번거롭고 어려워집니다.' 규모가 커질수록 기기를 한 곳에 집중하는 '중앙식'이 유지관리에 훨씬 유리합니다."
+                ]
+            },
+            {
+                num: 26,
+                question: "압축식 냉동기의 구성요소 중 옳은 것은?",
+                box: null,
+                options: [
+                    "흡수기, 증발기, 응축기, 재생기",
+                    "흡수기, 팽창밸브, 응축기, 재생기",
+                    "압축기, 증발기, 팽창밸브, 응축기",
+                    "압축기, 흡수기, 응축기, 증발기",
+                    "압축기, 응축기, 재생기, 증발기"
+                ],
+                answer: 3, // ③
+                hint: "전기 에너지를 직접 모터로 공급하여 기계식 냉매 압축을 일으키는 압축식 냉동기의 4대 사이클 장치는 에어컨 실외기와 실내기의 원리를 연상하면 됩니다.",
+                coreConcept: "증기압축식 냉동 사이클의 4대 구성요소",
+                explanations: [
+                    "① 틀림. 흡수기, 재생기는 기계적 모터(압축기) 없이 화학적 흡수 용액을 끓여 작동하는 '흡수식 냉동기'의 전형적인 핵심 구성 부속입니다.",
+                    "② 틀림. 이 역시 화학 용매를 다루는 흡수식 냉동 사이클 일부와 팽창밸브가 기괴하게 뒤섞인 가설입니다.",
+                    "③ 맞음. 증기압축식 냉동기의 순환 4대 핵심 기기는 '압축기(Compressor) -> 응축기(Condenser) -> 팽창밸브(Expansion Valve) -> 증발기(Evaporator)'로 구성되어 저온에서 열을 빼앗아 고온으로 방출하는 역사이클을 완벽하게 수행합니다.",
+                    "④ 틀림. 압축식 사이클 구조에 화학식 냉동용 '흡수기'가 잘못 끼어들어 오답입니다.",
+                    "⑤ 틀림. 흡수식 냉동기의 고열 끓임 장치인 '재생기(발생기)'가 돌출되어 압축식 사이클에 부합하지 않습니다."
+                ]
+            },
+            {
+                num: 27,
+                question: "직류와 교류의 저압의 크기로 옳게 연결한 것은?",
+                box: null,
+                options: [
+                    "직류: 600V이하, 교류: 750V이하",
+                    "직류: 750V이하, 교류: 600V이하",
+                    "직류: 1,000V이하, 교류: 1,500V이하",
+                    "직류: 1,500V이하, 교류: 1,000V이하",
+                    "직류: 1,500V이하, 교류: 2,000V이하"
+                ],
+                answer: 4, // ④
+                hint: "최근 개정 도입된 한국전기설비규정(KEC) 통합 기준에 따라, 신재생 에너지(태양광 등 직류 발전) 활성화를 위해 직류와 교류 저압 판정 한계 전압 수치가 과거에 비해 전격 상향 조정되었습니다.",
+                coreConcept: "한국전기설비규정(KEC) 상 저압의 범위 정의",
+                explanations: [
+                    "① 틀림. 과거 법 개정 전의 낡은 옛날식 기준이거나 임의로 조작된 수치입니다.",
+                    "② 틀림. 개정 전 직류 750V 이하, 교류 600V 이하 기준에 대한 잔재 설명입니다. 현재는 법이 완전히 개정되었습니다.",
+                    "③ 틀림. 직류와 교류의 상한값 수치가 서로 거꾸로 표기되어 잘못되었습니다.",
+                    "④ 맞음. 개정 KEC 전압 구분 규정에 따른 저압 기준은 '직류(DC)의 경우 1,500V 이하', '교류(AC)의 경우 1,000V 이하'로 정의되어 실무 및 시험에서 가장 핵심적으로 정답 처리되는 개정 수치입니다.",
+                    "⑤ 틀림. 교류 전압 한계를 과하게 책정하여 상위 고압 영역을 침범한 가공의 오답 지문입니다."
+                ]
+            },
+            {
+                num: 28,
+                question: "운송설비에 대한 설명으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "교류엘리베이터는 기동토크가 작다.",
+                    "온도상승이 60℃ 이상으로 되는 저항기류에 접속하는 전선은 내열성의 전선을 사용한다.",
+                    "엘리베이터용 메인로프의 안전율은 20이상으로 하며, 로프의 본수 및 직경은 승강기 검사기준에 적합하게 한다.",
+                    "주전동기회로에서 분기하는 회로에는 과전류차단기를 시설한다.",
+                    "가이드레일은 피트 바닥에서 승강로 상부 슬래브 밑까지 설치한다."
+                ],
+                answer: 3, // ③
+                hint: "엘리베이터 메인 로프는 여러 줄의 강선을 꼬아 만들기 때문에 극한 상황에서도 견디는 파단 저항 배수(안전율)를 정하지만, 20이라는 수치는 상식적인 기계 구조 설계 마진을 초과하는 대단히 비현실적 과장입니다.",
+                coreConcept: "승강기 검사기준 및 로프 안전율",
+                explanations: [
+                    "① 맞음. 교류 엘리베이터(유도 전동기 직접 제어식 등)는 직류 제어 엘리베이터에 비해 기동 초기 회전력(기동토크)이 상대적으로 약하고 속도 가감 제어가 투박한 편입니다.",
+                    "② 맞음. 열이 많이 생기는 고열 저항 제어 부속 배선은 화재 예방 및 절연 파괴를 막기 위해 유리 섬유나 불소 수지 피복의 내열성 특수 전선을 쓰는 것이 규정상 타당합니다.",
+                    "③ 틀림. 승강기 안전 검사 기준상 엘리베이터 권상용 메인 로프의 설계 안전율은 2가닥 이상의 경우 일반적으로 '10 이상'(혹은 최신 승객용의 경우 속도 및 와이어 로프 형식에 따라 12 이상 등)으로 규정되어 있습니다. 이를 '20 이상'으로 터무니없이 과도하게 서술한 지문은 명백한 수치 왜곡 오류입니다.",
+                    "④ 맞음. 모터 과열 및 단락 사고 시 고가의 승강 전동기 권선이 손상되는 것을 막기 위해 상류 분기점에 즉각 과전류 차단기를 배치해 차단 체계를 구축해야 합니다.",
+                    "⑤ 맞음. 엘리베이터 카와 균형추가 흔들림 없이 수직 궤도를 완전 안정적으로 이송되도록, 유도 가이드 레일은 승강로의 최하단 피트 기초 바닥부터 옥탑 기계실 바닥 슬래브 밑면까지 중단 없이 수직 전 구간을 관통 장착합니다."
+                ]
+            },
+            {
+                num: 29,
+                question: "승강기의 제동장치가 작동되는 경우가 아닌 것은?",
+                box: null,
+                options: [
+                    "승강행정이 상하 한계에 도달하였을 때",
+                    "카가 과속으로 운행될 때",
+                    "동력이 차단되었을 때",
+                    "출입문이 완전히 닫혀졌을 경우",
+                    "카의 안전운전을 유지하는 일부에 결함이 발생하였을 때"
+                ],
+                answer: 4, // ④
+                hint: "엘리베이터의 비상 제동장치(브레이크)는 기계적 파손, 오작동, 속도 이탈, 단전 등 '비정상적이고 위험한 돌발 사고' 상황 시 탑승객 추락을 막기 위해 가동되는 최후의 안전장치입니다.",
+                coreConcept: "승강기 비상제동 및 운행 안전장치 원리",
+                explanations: [
+                    "① 맞음. 카가 정상 이송 한계를 넘어서 최상층이나 최하층 바닥을 들이받으려 할 때 한계 리미트 스위치가 감지하여 기계 브레이크를 전격 작동시킵니다.",
+                    "② 맞음. 조속기(Governor)에 의해 카 속도가 규정치의 115%~130%를 돌파하여 추락 폭주하는 과속이 감지되면 와이어를 잡아채며 기계식 조속기 비상 정지 장치가 작동합니다.",
+                    "③ 맞음. 전원이 꺼지거나 정전(단전)되어 엘리베이터 전력 공급이 중단되면, 스프링 장력에 의해 작동하는 브레이크 슈가 권상기 드럼을 전격 고정하는 'Fail-Safe(페일 세이프)' 제동 원리가 작용합니다.",
+                    "④ 틀림. 엘리베이터 승강장의 모든 출입문이 완전 무결하게 닫힌 것은 승객 탑승이 완료되어 카가 정지 상태를 풀고 안심하고 '안전하게 출발해도 좋다는 신호(도어인터록 성립 상태)'입니다. 비상 정지 장치가 작동할 긴급 위험 상황이 절대 아닙니다.",
+                    "⑤ 맞음. 도어 안전 스위치 풀림, 비상 탈출구 감지 불량 등 카 내부의 절대 안전 계통 회로에 미세한 신호 결함이라도 감출 시 즉각 제동기가 투입되어 운행을 원천 정지시킵니다."
+                ]
+            },
+            {
+                num: 30,
+                question: "홈네트워크 구현 기술 중 유선통신 기술에 해당하지 않는 것은?",
+                box: null,
+                options: [
+                    "Home RF",
+                    "이더넷",
+                    "IEEE 1394",
+                    "PLC",
+                    "Home PNA"
+                ],
+                answer: 1, // ①
+                hint: "약어 뒤에 붙은 'RF'는 'Radio Frequency'의 약자로 무선 안테나를 통해 고주파 전파를 날려 보내는 무선 통신 원리임을 고스란히 보여주는 명칭입니다.",
+                coreConcept: "홈 네트워크 정보 통신 매체(유선 vs 무선)",
+                explanations: [
+                    "① 맞음(해당하지 않음). Home RF는 전선 포설 없이 실내 무선 라디오 주파수 대역을 이용해 가전 기기 간 소규모 무선 통신을 매개해 주는 전형적인 '무선 통신' 표준 기술입니다. 따라서 유선 통신이 아니므로 옳지 않은 ⑤번 형식의 완벽한 오답 지문 정답입니다.",
+                    "② 틀림. 이더넷(Ethernet)은 우리가 흔히 아는 UTP 랜케이블을 활용해 기기를 직접 연결하는 가장 강력하고 대중적인 고속 '유선 통신' 기술입니다.",
+                    "③ 틀림. IEEE 1394는 가전 및 멀티미디어 기기 간 대용량 데이터 전송을 위해 개발된 고속 유선 직렬 인터페이스 규격입니다.",
+                    "④ 틀림. PLC(Power Line Communication, 전력선통신)는 벽면의 기존 220V 고압 구동 전력선 라인에 미세한 고주파 통신 신호를 같이 실어 보내 추가 배선 없이 데이터를 주고받는 획기적인 '유선 통신' 기법입니다.",
+                    "⑤ 틀림. Home PNA(Home Phone-line Networking Alliance)는 집 안에 이미 깔려 있는 유휴 일반 전화선 구리선을 연결선 삼아 신호를 중첩 송출해 네트워킹을 구현하는 '유선 통신' 연맹 규격입니다."
+                ]
+            }
+        ];
+
+        class QuizApp {
+            constructor() {
+                this.questions = [...originalQuestions];
+                this.currentIndex = 0;
+                this.userAnswers = new Array(this.questions.length).fill(null);
+                this.hintVisible = false;
+            }
+
+            start() {
+                document.getElementById('intro-screen').classList.add('hidden');
+                document.getElementById('result-screen').classList.add('hidden');
+                document.getElementById('quiz-screen').classList.remove('hidden');
+                
+                this.currentIndex = 0;
+                this.userAnswers.fill(null);
+                this.showQuestion();
+            }
+
+            showQuestion() {
+                const q = this.questions[this.currentIndex];
+                this.hintVisible = false;
+                document.getElementById('hint-box').classList.add('hidden');
+                document.getElementById('feedback-panel').classList.add('hidden');
+
+                // Progress Info Update
+                document.getElementById('q-number-badge').textContent = `Q. ${q.num < 10 ? '0' + q.num : q.num}`;
+                document.getElementById('header-progress').textContent = `${q.num} / 30 문제`;
+                
+                const percent = Math.round((q.num / this.questions.length) * 100);
+                document.getElementById('header-progress-bar').style.width = `${percent}%`;
+
+                // Render Question Text
+                document.getElementById('question-text').innerHTML = this.renderMath(q.question);
+
+                // Render Box if applicable
+                const boxContainer = document.getElementById('question-box-container');
+                if (q.box) {
+                    boxContainer.innerHTML = this.renderMath(q.box);
+                    boxContainer.classList.remove('hidden');
+                } else {
+                    boxContainer.classList.add('hidden');
+                }
+
+                // Render Options
+                const optionsContainer = document.getElementById('options-container');
+                optionsContainer.innerHTML = '';
+
+                q.options.forEach((optText, index) => {
+                    const optionBtn = document.createElement('button');
+                    optionBtn.className = "w-full text-left bg-slate-700/50 hover:bg-slate-700 border border-slate-600 hover:border-brand-500 rounded-xl p-4 transition-all duration-200 flex items-start space-x-3 text-slate-200 text-sm md:text-base group font-medium";
+                    optionBtn.onclick = () => this.selectOption(index);
+                    
+                    const marker = document.createElement('span');
+                    marker.className = "flex-shrink-0 w-6 h-6 bg-slate-800 border border-slate-600 text-slate-400 group-hover:text-brand-300 group-hover:border-brand-400 text-xs font-bold rounded-full flex items-center justify-center transition-colors";
+                    marker.textContent = (index + 1);
+
+                    const content = document.createElement('span');
+                    content.className = "flex-grow pt-0.5 leading-relaxed";
+                    content.innerHTML = this.renderMath(optText);
+
+                    optionBtn.appendChild(marker);
+                    optionBtn.appendChild(content);
+                    optionsContainer.appendChild(optionBtn);
+                });
+
+                // Update Next Button Text
+                const nextBtnText = document.getElementById('next-btn-text');
+                if (this.currentIndex === this.questions.length - 1) {
+                    nextBtnText.textContent = "테스트 제출 및 결과 보기";
+                } else {
+                    nextBtnText.textContent = "다음 문제로 이동";
+                }
+
+                // Smooth scroll to top of main area
+                window.scrollTo({ top: 100, behavior: 'smooth' });
+            }
+
+            toggleHint() {
+                const q = this.questions[this.currentIndex];
+                const hintBox = document.getElementById('hint-box');
+                const hintText = document.getElementById('hint-text');
+
+                this.hintVisible = !this.hintVisible;
+                if (this.hintVisible) {
+                    hintText.innerHTML = this.renderMath(q.hint);
+                    hintBox.classList.remove('hidden');
+                } else {
+                    hintBox.classList.add('hidden');
+                }
+            }
+
+            selectOption(choiceIdx) {
+                // Ignore if already answered
+                if (this.userAnswers[this.currentIndex] !== null) return;
+
+                const q = this.questions[this.currentIndex];
+                this.userAnswers[this.currentIndex] = choiceIdx;
+
+                // Highlight Selected Option
+                const optionsContainer = document.getElementById('options-container');
+                const optionButtons = optionsContainer.children;
+                const correctIdx = q.answer - 1;
+
+                for (let i = 0; i < optionButtons.length; i++) {
+                    const btn = optionButtons[i];
+                    btn.disabled = true; // disable after select
+                    
+                    if (i === correctIdx) {
+                        // Correct Option Style
+                        btn.classList.remove('bg-slate-700/50', 'hover:bg-slate-700', 'border-slate-600');
+                        btn.classList.add('bg-emerald-950/40', 'border-emerald-500', 'text-emerald-200');
+                        btn.querySelector('span').classList.add('bg-emerald-500', 'text-white', 'border-emerald-400');
+                    } else if (i === choiceIdx) {
+                        // User Wrong Option Style
+                        btn.classList.remove('bg-slate-700/50', 'hover:bg-slate-700', 'border-slate-600');
+                        btn.classList.add('bg-rose-950/40', 'border-rose-500', 'text-rose-200');
+                        btn.querySelector('span').classList.add('bg-rose-500', 'text-white', 'border-rose-400');
+                    } else {
+                        // Dull others
+                        btn.classList.add('opacity-40');
+                    }
+                }
+
+                this.showFeedback(choiceIdx === correctIdx);
+            }
+
+            showFeedback(isCorrect) {
+                const q = this.questions[this.currentIndex];
+                const panel = document.getElementById('feedback-panel');
+                const badge = document.getElementById('feedback-badge');
+                const title = document.getElementById('feedback-title');
+                const explDiv = document.getElementById('feedback-explanations');
+
+                panel.classList.remove('hidden');
+
+                if (isCorrect) {
+                    badge.className = "flex items-center justify-center w-10 h-10 rounded-full font-black text-lg bg-emerald-500 text-slate-900 shadow-md shadow-emerald-500/20";
+                    badge.innerHTML = "✓";
+                    title.textContent = "정답입니다! 완벽한 통찰력이네요.";
+                    title.className = "text-emerald-400 text-lg md:text-xl font-black";
+                } else {
+                    badge.className = "flex items-center justify-center w-10 h-10 rounded-full font-black text-lg bg-rose-500 text-white shadow-md shadow-rose-500/20";
+                    badge.innerHTML = "✗";
+                    title.textContent = `틀렸습니다! 정답은 ${q.answer}번입니다.`;
+                    title.className = "text-rose-400 text-lg md:text-xl font-black";
+                }
+
+                // Render Explanations
+                explDiv.innerHTML = '';
+                q.explanations.forEach((itemText, i) => {
+                    const itemPara = document.createElement('p');
+                    
+                    // Highlight the item that corresponds to correct answer or chosen option
+                    if (i === (q.answer - 1)) {
+                        itemPara.className = "bg-slate-900 p-2.5 rounded-lg border-l-4 border-emerald-500 text-emerald-200 font-medium my-1";
+                    } else if (i === this.userAnswers[this.currentIndex]) {
+                        itemPara.className = "bg-slate-900 p-2.5 rounded-lg border-l-4 border-rose-500 text-rose-300 font-medium my-1";
+                    } else {
+                        itemPara.className = "text-slate-300 text-sm py-1 pl-1";
+                    }
+                    
+                    itemPara.innerHTML = this.renderMath(itemText);
+                    explDiv.appendChild(itemPara);
+                });
+
+                // Auto-scroll feedback into view
+                setTimeout(() => {
+                    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            }
+
+            next() {
+                if (this.currentIndex < this.questions.length - 1) {
+                    this.currentIndex++;
+                    this.showQuestion();
+                } else {
+                    this.finish();
+                }
+            }
+
+            finish() {
+                document.getElementById('quiz-screen').classList.add('hidden');
+                document.getElementById('result-screen').classList.remove('hidden');
+
+                // Compute Score
+                let correctCount = 0;
+                this.questions.forEach((q, idx) => {
+                    if (this.userAnswers[idx] === (q.answer - 1)) {
+                        correctCount++;
+                    }
+                });
+
+                const totalScore = Math.round((correctCount / this.questions.length) * 100);
+                const isPassed = totalScore >= 60; // 60점 합격 기준
+
+                // Display score
+                document.getElementById('result-score').textContent = `${totalScore}점`;
+                document.getElementById('result-ratio').textContent = `${correctCount} / 30 맞춤`;
+
+                const circleBorder = document.getElementById('score-circle-border');
+                const statusText = document.getElementById('result-status-text');
+                const critique = document.getElementById('result-critique');
+
+                if (isPassed) {
+                    circleBorder.className = "relative w-40 h-40 mx-auto mb-6 flex items-center justify-center bg-slate-900 rounded-full border-4 border-emerald-500 shadow-xl shadow-emerald-500/10";
+                    statusText.textContent = "🎉 합격을 축하합니다! (패스 성공)";
+                    statusText.className = "text-2xl font-black text-emerald-400 mb-2";
+                    critique.textContent = "합격 안전선에 완벽하게 안착하셨습니다! 시설개론 일타강사의 실전 감각을 유감없이 증명하셨네요. 실제 시험에서도 현재의 정교한 오답 분석 감각을 고수하신다면 무조건 고득점 합격입니다!";
+                } else {
+                    circleBorder.className = "relative w-40 h-40 mx-auto mb-6 flex items-center justify-center bg-slate-900 rounded-full border-4 border-rose-500 shadow-xl shadow-rose-500/10";
+                    statusText.textContent = "⚠️ 불합격 위험선 (보충 학습 요망)";
+                    statusText.className = "text-2xl font-black text-rose-400 mb-2";
+                    critique.textContent = "아쉽게도 합격 기준인 60점에 도달하지 못했습니다. 시설개론은 시방서 규정 및 엄밀한 화학적, 역학적 조건이 핵심 출제되므로 지엽적인 암기도 필요합니다. 아래 생성된 맞춤 오답 노트를 기반으로 취약 영역을 철저히 복습하십시오!";
+                }
+
+                // Render Wrong Questions List
+                this.renderWrongAnswers();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            renderWrongAnswers() {
+                const wrongContainer = document.getElementById('wrong-questions-list');
+                wrongContainer.innerHTML = '';
+
+                let wrongCount = 0;
+
+                this.questions.forEach((q, idx) => {
+                    const userChoice = this.userAnswers[idx];
+                    const correctChoice = q.answer - 1;
+
+                    if (userChoice !== correctChoice) {
+                        wrongCount++;
+
+                        const card = document.createElement('div');
+                        card.className = "bg-slate-800 rounded-xl border border-slate-700/80 p-6 space-y-4 shadow-md";
+
+                        const header = document.createElement('div');
+                        header.className = "flex items-center justify-between border-b border-slate-700 pb-3";
+                        
+                        const badge = document.createElement('span');
+                        badge.className = "bg-slate-700 text-slate-300 text-xs font-extrabold px-3 py-1.5 rounded-md border border-slate-600";
+                        badge.textContent = `오답 문항 Q. ${q.num < 10 ? '0' + q.num : q.num}`;
+
+                        const category = document.createElement('span');
+                        category.className = "text-brand-300 font-bold text-xs bg-brand-950/40 border border-brand-500/20 px-2.5 py-1 rounded-full";
+                        category.textContent = q.coreConcept;
+
+                        header.appendChild(badge);
+                        header.appendChild(category);
+
+                        const body = document.createElement('div');
+                        body.className = "space-y-3";
+
+                        const qText = document.createElement('p');
+                        qText.className = "text-slate-100 font-bold text-base leading-relaxed";
+                        qText.innerHTML = this.renderMath(q.question);
+
+                        const choicesInfo = document.createElement('div');
+                        choicesInfo.className = "grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm";
+
+                        const correctLine = document.createElement('div');
+                        correctLine.className = "bg-emerald-950/30 text-emerald-300 border border-emerald-500/20 rounded-lg p-3";
+                        correctLine.innerHTML = `<strong>정답 ⑤:</strong> ${this.renderMath(q.options[correctChoice])}`;
+
+                        const userLine = document.createElement('div');
+                        userLine.className = "bg-rose-950/30 text-rose-300 border border-rose-500/20 rounded-lg p-3";
+                        userLine.innerHTML = `<strong>나의 선택:</strong> ${userChoice === null ? '미응답' : this.renderMath(q.options[userChoice])}`;
+
+                        choicesInfo.appendChild(correctLine);
+                        choicesInfo.appendChild(userLine);
+
+                        const focusTip = document.createElement('div');
+                        focusTip.className = "bg-slate-900 rounded-lg p-4 border border-slate-700 text-slate-300 text-sm leading-relaxed";
+                        focusTip.innerHTML = `
+                            <strong class="text-amber-400 block mb-1">🔥 일타강사 긴급 약점 처방:</strong>
+                            <span class="block">${this.renderMath(q.explanations[correctChoice])}</span>
+                            <span class="text-xs text-slate-500 mt-2 block">※ 오답 원인 극복을 위해 위 지문의 역학 구조 및 수치 관계를 철저히 암기하십시오.</span>
+                        `;
+
+                        body.appendChild(qText);
+                        body.appendChild(choicesInfo);
+                        body.appendChild(focusTip);
+
+                        card.appendChild(header);
+                        card.appendChild(body);
+                        wrongContainer.appendChild(card);
+                    }
+                });
+
+                if (wrongCount === 0) {
+                    wrongContainer.innerHTML = `
+                        <div class="bg-emerald-950/20 border border-emerald-500/20 rounded-2xl p-8 text-center">
+                            <p class="text-emerald-400 font-black text-xl mb-2">🎉 축하합니다! 오답이 없습니다.</p>
+                            <p class="text-slate-400 text-sm">전체 30문항을 100% 완벽하게 소화하셨습니다. 완벽한 합격 상태입니다!</p>
+                        </div>
+                    `;
+                }
+            }
+
+            copyIncorrectReport() {
+                // Generate a markdown structure formatted for easy copy-pasting to LLMs like Gemini
+                let text = `### [주택관리사보 1차 시설개론 오답 분석 리포트]\n\n`;
+                text += `틀린 문제들을 기반으로 하여 핵심 개념 요약 및 암기 요령을 요청합니다.\n\n`;
+
+                let count = 0;
+                this.questions.forEach((q, idx) => {
+                    const userChoice = this.userAnswers[idx];
+                    const correctChoice = q.answer - 1;
+
+                    if (userChoice !== correctChoice) {
+                        count++;
+                        text += `**[오답 ${count}] Q.${q.num}. ${q.question}**\n`;
+                        text += `- 출제분야: ${q.coreConcept}\n`;
+                        text += `- 정답보기: ${q.options[correctChoice]}\n`;
+                        text += `- 나의선택: ${userChoice === null ? '미응답' : q.options[userChoice]}\n`;
+                        text += `- 일타강사 핵심가이드: ${q.explanations[correctChoice]}\n\n`;
+                    }
+                });
+
+                if (count === 0) {
+                    text += "오답이 존재하지 않는 100% 완벽한 테스트 상태입니다.";
+                }
+
+                // Create a temporary textarea for copying to clipboard (iframe safe method)
+                const tempTextArea = document.createElement('textarea');
+                tempTextArea.value = text;
+                tempTextArea.style.position = 'fixed'; // Avoid scrolling to bottom
+                document.body.appendChild(tempTextArea);
+                tempTextArea.select();
+                
+                try {
+                    document.execCommand('copy');
+                    
+                    // Show Toast Notification
+                    const toast = document.getElementById('copy-toast');
+                    toast.classList.remove('hidden');
+                    setTimeout(() => {
+                        toast.classList.add('hidden');
+                    }, 5000);
+
+                } catch (err) {
+                    console.error('클립보드 복사 실패:', err);
+                } finally {
+                    document.body.removeChild(tempTextArea);
+                }
+            }
+
+            restart() {
+                this.start();
+            }
+
+            // Simple LaTeX renderer helper for inline markdown
+            renderMath(str) {
+                if (!str) return '';
+                // Since this is a simple HTML vanilla JS tool, we will convert most standard LaTeX 
+                // in the dataset to nicely readable clean Unicode or style.
+                // Examples: $kN/m^2$ -> kN/m², $600\sim 700^\circ C$ -> 600~700°C, \approx -> ≒
+                return str
+                    .replace(/\$kN\/m\^2\$/g, 'kN/m²')
+                    .replace(/\$600\\sim 700\^\\circ C\$/g, '600~700°C')
+                    .replace(/\\approx/g, '≒')
+                    .replace(/\$15\^\\circ\$/g, '15°')
+                    .replace(/\$28\.5\\text\{ L\/min\}\$/g, '28.5 L/min')
+                    .replace(/\$7\.5\\text\{ gpm\}\$/g, '7.5 gpm')
+                    .replace(/\$150\\text\{mm\}\$/g, '150mm')
+                    .replace(/\$45\^\\circ\$/g, '45°Y')
+                    .replace(/\$0\.1\\text\{ MPa\}\$/g, '0.1 MPa')
+                    .replace(/\$1\.2\\text\{ MPa\}\$/g, '1.2 MPa')
+                    .replace(/\$80\\text\{ L\/min\}\$/g, '80 L/min')
+                    .replace(/\$0\.17\\text\{ MPa\}\$/g, '0.17 MPa')
+                    .replace(/\$0\.7\\text\{ MPa\}\$/g, '0.7 MPa')
+                    .replace(/\$0\.25\\text\{ MPa\}\$/g, '0.25 MPa')
+                    .replace(/\$0\.35\\text\{ MPa\}\$/g, '0.35 MPa')
+                    .replace(/\\text\{kg\/h\}/g, 'kg/h')
+                    .replace(/\$30\\%\\uparrow\$/g, '30% 이상')
+                    .replace(/\$15\\%\\sim 20\\%\$/g, '15% ~ 20%')
+                    .replace(/\$5\\%\\sim 10\\%\$/g, '5% ~ 10%')
+                    .replace(/\$1\\%\\downarrow\$/g, '1% 이하')
+                    .replace(/\$CH\_4\$/g, 'CH₄')
+                    .replace(/\\text\{CH\}\_4/g, 'CH₄')
+                    .replace(/\\text\{CO\}\_2/g, 'CO₂')
+                    .replace(/\\text\{mm\}/g, 'mm');
+            }
+        }
+
+        // Initialize application when DOM ready
+        let quizApp;
+        window.addEventListener('DOMContentLoaded', () => {
+            quizApp = new QuizApp();
+        });
+    </script>
+</body>
+</html>
