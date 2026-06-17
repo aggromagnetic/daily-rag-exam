@@ -1,6 +1,30 @@
 {
   "tests": [
     {
+      "filename": "2026-06-17_회계원리.md",
+      "date": "2026-06-17",
+      "time": "10:38",
+      "subject": "회계원리",
+      "interactive": true,
+      "htmlFilename": "2026-06-17_회계원리_interactive.html"
+    },
+    {
+      "filename": "2026-06-17_시설개론.md",
+      "date": "2026-06-17",
+      "time": "10:59",
+      "subject": "시설개론",
+      "interactive": true,
+      "htmlFilename": "2026-06-17_시설개론_interactive.html"
+    },
+    {
+      "filename": "2026-06-17_민법.md",
+      "date": "2026-06-17",
+      "time": "11:03",
+      "subject": "민법",
+      "interactive": true,
+      "htmlFilename": "2026-06-17_민법_interactive.html"
+    },
+    {
       "filename": "2026-06-16_회계원리.md",
       "date": "2026-06-16",
       "time": "08:46",
