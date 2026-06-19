@@ -1,0 +1,1885 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주택관리사보 1차 회계원리 극비 비밀과외</title>
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Pretendard 대체용 Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+        }
+        .glow-green:hover {
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+        }
+        .glow-red:hover {
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
+</head>
+<body class="text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+
+    <!-- Top Navigation Header -->
+    <header class="bg-slate-900 border-b border-slate-800 py-4 px-6 sticky top-0 z-50 shadow-md">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <span class="bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">주택관리사보 1차</span>
+                <h1 class="text-lg md:text-xl font-black text-white tracking-tight flex items-center gap-2">
+                    <span class="text-emerald-400">회계원리</span> 마스터 클래스
+                </h1>
+            </div>
+            <div class="flex items-center gap-4 text-xs md:text-sm text-slate-400">
+                <div class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span>강사: <strong>재미나이(Gemini)</strong></span>
+                </div>
+                <div class="bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 text-slate-300 font-semibold">
+                    목표 점수: <span class="text-emerald-400">90점 이상 달성</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-4xl w-full mx-auto p-4 md:p-6 flex flex-col justify-center">
+        
+        <!-- Welcome Screen (Intro) -->
+        <div id="intro-screen" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-10 shadow-2xl space-y-8">
+            <div class="text-center space-y-4">
+                <div class="inline-block p-4 bg-emerald-500/10 rounded-full border border-emerald-500/20 text-emerald-400 mb-2">
+                    <!-- Graduation Cap Icon -->
+                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6"></path></svg>
+                </div>
+                <h2 class="text-2xl md:text-4xl font-extrabold text-white leading-tight">
+                    "회계원리를 넘지 못하면 <br class="hidden md:inline">합격은 없습니다."
+                </h2>
+                <p class="text-slate-400 text-sm md:text-base max-w-lg mx-auto">
+                    과락률 1위의 마의 과목, 회계원리! 지엽적인 암기가 아닌 철저한 <strong class="text-emerald-400">분개 구조 이해</strong>와 <strong class="text-emerald-400">정밀한 계산 훈련</strong>만이 합격을 보장합니다. 본 모의고사는 기출 최다 빈출 35문제를 선별했습니다.
+                </p>
+            </div>
+
+            <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-3">
+                <h3 class="text-sm font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+                    <span class="w-1.5 h-3 bg-emerald-500 rounded-sm"></span> 독한 트레이닝 지침
+                </h3>
+                <ul class="text-xs md:text-sm text-slate-400 space-y-2 list-disc pl-5">
+                    <li>실제 시험과 동일하게 총 <span class="text-white font-semibold">35문항</span>이 한 문제씩 출제됩니다.</li>
+                    <li>모든 계산 문제의 상세한 흐름을 일타강사 관점에서 친절하게 풀어줍니다.</li>
+                    <li>시험이 끝나면 자동으로 생성되는 <span class="text-emerald-400 font-semibold">오답 노트 데이터</span>를 복사하여 취약점을 점검해 보세요.</li>
+                </ul>
+            </div>
+
+            <!-- Name and Start Section -->
+            <div class="max-w-md mx-auto space-y-4">
+                <div>
+                    <label for="student-name" class="block text-xs font-bold text-slate-400 mb-2 uppercase tracking-wide">학습을 시작할 수험생 이름을 입력하세요</label>
+                    <input type="text" id="student-name" placeholder="예: 홍길동" value="예비 주택관리사" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-center font-bold">
+                </div>
+                <button onclick="startQuiz()" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 hover:from-emerald-400 hover:to-teal-400 transition-all font-black text-lg py-4 rounded-xl shadow-lg shadow-emerald-500/15 flex items-center justify-center gap-2">
+                    실전 모의고사 입장하기
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="hidden space-y-6">
+            <!-- Progress & Dashboard -->
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-900 border border-slate-800 px-5 py-4 rounded-xl">
+                <div class="w-full md:w-auto flex items-center justify-between md:justify-start gap-4">
+                    <span class="text-sm font-bold text-slate-400 uppercase tracking-wider">진행 현황</span>
+                    <span class="bg-slate-950 text-emerald-400 font-black text-sm px-3 py-1 rounded-lg border border-slate-800" id="progress-text">1 / 35</span>
+                </div>
+                <!-- Progress Bar -->
+                <div class="w-full md:flex-grow max-w-md bg-slate-950 h-2.5 rounded-full overflow-hidden border border-slate-800">
+                    <div id="progress-bar" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+                <div class="text-xs font-bold text-slate-400 text-right w-full md:w-auto">
+                    실시간 획득 점수: <span id="current-score" class="text-white text-base font-black">0</span>점
+                </div>
+            </div>
+
+            <!-- Main Interactive Card -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl relative overflow-hidden space-y-6">
+                <!-- Instructor Encouraging speech (Dynamic Bubble) -->
+                <div class="bg-indigo-950/40 border border-indigo-900/50 p-4 rounded-xl flex items-start gap-3">
+                    <div class="bg-indigo-500 text-slate-950 font-black text-xs px-2.5 py-1.5 rounded-lg shrink-0">일타 조언</div>
+                    <p id="instructor-tips" class="text-slate-300 text-xs md:text-sm italic leading-relaxed">
+                        "차변과 대변의 균형을 잊지 마세요! 회계는 균형의 미학입니다."
+                    </p>
+                </div>
+
+                <!-- Question Title -->
+                <div class="space-y-2">
+                    <div class="text-xs font-extrabold text-emerald-400 uppercase tracking-wide flex items-center gap-1.5">
+                        <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                        QUESTION <span id="question-number">1</span>
+                    </div>
+                    <h3 id="question-text" class="text-base md:text-lg font-bold text-white leading-relaxed">
+                        재무제표 요소의 정의에 관한 설명으로 옳지 않은 것은?
+                    </h3>
+                </div>
+
+                <!-- Box Content (Optional Table/List) -->
+                <div id="box-container" class="transition-all">
+                    <!-- Rendered dynamically -->
+                </div>
+
+                <!-- Options List -->
+                <div id="options-container" class="space-y-3">
+                    <!-- Rendered dynamically as large premium buttons -->
+                </div>
+
+                <!-- Instant Feedback and Reveal Box -->
+                <div id="feedback-panel" class="hidden rounded-xl p-5 border transition-all space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div id="feedback-icon" class="rounded-full p-2 text-slate-950"></div>
+                        <h4 id="feedback-title" class="text-lg font-black uppercase tracking-wide">정답입니다!</h4>
+                    </div>
+                    
+                    <!-- Action Toggle Button to reveal step-by-step math explanations -->
+                    <button id="toggle-explanation-btn" onclick="toggleExplanation()" class="w-full bg-slate-950 hover:bg-slate-950/80 text-slate-300 py-3 rounded-lg border border-slate-800 hover:border-slate-700 transition font-bold text-xs flex items-center justify-center gap-2">
+                        <span>💡 일타강사의 초집중 핵심비법 해설 펼치기</span>
+                        <svg class="w-4 h-4 transform transition-transform" id="explanation-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+
+                    <!-- Commentary Body -->
+                    <div id="explanation-body" class="hidden bg-slate-950 p-5 rounded-xl border border-slate-800/80 text-sm leading-relaxed space-y-4">
+                        <div class="text-slate-200 border-b border-slate-800 pb-3 font-semibold">
+                            📘 출제 의도 및 오답 교정 해설
+                        </div>
+                        <div id="explanation-text" class="text-slate-300 space-y-3 whitespace-pre-line text-xs md:text-sm">
+                            <!-- Raw detail steps loaded from data -->
+                        </div>
+                    </div>
+
+                    <!-- Next Question trigger -->
+                    <button id="next-btn" onclick="goToNextQuestion()" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-extrabold text-base py-4 rounded-xl shadow-lg transition hover:from-emerald-400 hover:to-teal-400 flex items-center justify-center gap-2">
+                        <span>다음 문제 풀기</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result / Score Report Screen -->
+        <div id="report-screen" class="hidden space-y-8">
+            <canvas id="confetti-canvas" class="fixed inset-0 pointer-events-none z-10 hidden"></canvas>
+
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-10 shadow-2xl space-y-8 relative overflow-hidden">
+                <div class="text-center space-y-4">
+                    <span class="bg-emerald-500/10 text-emerald-400 text-xs font-extrabold px-3 py-1.5 rounded-full border border-emerald-500/20 tracking-wider uppercase">최종 성적 평가서</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-white"><span id="user-display-name">수험생</span>님의 학습 리포트</h2>
+                    <p class="text-slate-400 text-xs md:text-sm">본 데이터는 주택관리사보 1차 합격 가능성을 가늠할 수 있는 귀중한 지표입니다.</p>
+                </div>
+
+                <!-- Stats Dashboard Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 text-center">
+                        <div class="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">최종 점수</div>
+                        <div class="text-2xl md:text-3xl font-black text-white"><span id="final-score" class="text-emerald-400">0</span> / 100</div>
+                    </div>
+                    <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 text-center">
+                        <div class="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">정답 문항</div>
+                        <div class="text-2xl md:text-3xl font-black text-white"><span id="correct-count">0</span> / 35</div>
+                    </div>
+                    <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 text-center">
+                        <div class="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">평균 정답률</div>
+                        <div class="text-2xl md:text-3xl font-black text-white"><span id="success-rate" class="text-teal-400">0%</span></div>
+                    </div>
+                    <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 text-center col-span-2 md:col-span-1">
+                        <div class="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">강사 평가 등급</div>
+                        <div class="text-lg md:text-xl font-extrabold" id="instructor-rank">우수합격</div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Feedback Message From 일타강사 -->
+                <div class="bg-emerald-950/20 border border-emerald-900/40 p-5 rounded-xl space-y-2">
+                    <h4 class="text-sm font-bold text-emerald-400 flex items-center gap-1.5">
+                        <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                        일타강사 재미나이의 합격 예측 코멘트
+                    </h4>
+                    <p id="rank-feedback-text" class="text-xs md:text-sm text-slate-300 leading-relaxed italic">
+                        "합격을 확신합니다! 기본기가 아주 탄탄하시군요. 오답 정리를 한 번만 훑고 가시면 실제 시험장에서 수석 합격의 주인공이 되실 겁니다!"
+                    </p>
+                </div>
+
+                <!-- Interactive Incorrect Answers Note (오답노트) -->
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                        <h3 class="text-base font-bold text-white flex items-center gap-2">
+                            <span class="w-2 h-4 bg-rose-500 rounded-sm"></span> 나만의 오답 노트 및 핵심 요약집
+                        </h3>
+                        <button onclick="copyIncorrectReport()" class="bg-slate-950 hover:bg-slate-800 text-xs text-emerald-400 border border-slate-800 rounded px-2.5 py-1.5 font-bold transition flex items-center gap-1.5">
+                            <!-- Copy icon -->
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                            텍스트로 오답 보고서 복사하기
+                        </button>
+                    </div>
+
+                    <!-- List of incorrect answers -->
+                    <div id="incorrect-list" class="space-y-3 max-h-[300px] overflow-y-auto pr-2">
+                        <!-- Filled via script -->
+                    </div>
+                </div>
+
+                <!-- Post-Exam Guidance -->
+                <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 text-center space-y-3">
+                    <p class="text-xs text-slate-400">
+                        💡 위의 <strong>오답 보고서</strong>를 복사한 다음, 채팅창에 붙여넣어 <strong>"이 틀린 문항들의 핵심 개념을 더 쉽게 설명해줘"</strong> 라고 입력하시면 극대화된 복습 효과를 볼 수 있습니다!
+                    </p>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button onclick="location.reload()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold py-4 rounded-xl border border-slate-700 transition text-center">
+                        다시 도전하기 (초기화)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer Information -->
+    <footer class="bg-slate-950 border-t border-slate-900 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto px-6 space-y-2">
+            <p>© 2026 주택관리사보 1차 족집게 트레이닝 프로그램. All Rights Reserved.</p>
+            <p>본 프로그램은 학술적 데이터 및 공식 기출을 복원한 교육 자료이며 안전 가이드라인을 완전 준수합니다.</p>
+        </div>
+    </footer>
+
+    <!-- App Logic Script -->
+    <script>
+        // 35 Questions Master Database
+        const questions = [
+            {
+                id: 1,
+                question: "재무제표 요소의 정의에 관한 설명으로 옳지 않은 것은?",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs md:text-sm space-y-1">
+                        <div>ㄱ. 자산은 현재사건의 결과로 기업이 통제하는 현재의 경제적 자원이다.</div>
+                        <div>ㄴ. 부채는 과거사건의 결과로 기업이 경제적 자원을 이전해야 하는 과거의무이다.</div>
+                        <div>ㄷ. 자본은 기업의 자산에서 모든 부채를 차감한 후의 채권자지분이다.</div>
+                        <div>ㄹ. 수익은 자산의 감소 또는 부채의 증가로서 자본의 증가를 가져온다.</div>
+                        <div>ㅁ. 비용은 자산의 증가 또는 부채의 감소로서 자본의 감소를 가져온다.</div>
+                    </div>
+                `,
+                options: [
+                    "① ㄱ, ㄴ, ㄹ, ㅁ",
+                    "② ㄱ, ㄹ, ㅁ",
+                    "③ ㄴ, ㄹ, ㅁ",
+                    "④ ㄴ, ㄷ, ㄹ, ㅁ",
+                    "⑤ ㄱ, ㄴ, ㄷ, ㄹ, ㅁ"
+                ],
+                answer: 4, // ⑤
+                explanation: `ㄱ. 자산은 '과거사건'의 결과로 기업이 통제하는 현재의 경제적 자원이다. (현재사건 X)
+ㄴ. 부채는 과거사건의 결과로 기업이 경제적 자원을 이전해야 하는 '현재의무'이다. (과거의무 X)
+ㄷ. 자본은 기업의 자산에서 모든 부채를 차감한 후의 '잔여지분'이다. (채권자지분 X)
+ㄹ. 수익은 자산의 '증가' 또는 부채의 '감소'로서 자본의 증가를 가져온다. (자산의 감소/부채 증가 X)
+ㅁ. 비용은 자산의 '감소' 또는 부채의 '증가'로서 자본의 감소를 가져온다. (자산의 증가/부채 감소 X)
+
+따라서 ㄱ, ㄴ, ㄷ, ㄹ, ㅁ 모두 옳지 않은 지문이므로 정답은 ⑤번입니다.`
+            },
+            {
+                id: 2,
+                question: "다음의 거래에서 분개하여야 할 회계상 거래는?",
+                box: null,
+                options: [
+                    "① 회사는 종업원을 ￦10,000의 조건으로 채용하였다.",
+                    "② 은행 보통예금이자 ￦10,000이 통장에 가산되었다.",
+                    "③ 회사는 주식 1주를 10주로 주식 분할을 시행하였다.",
+                    "④ 사무실을 월 ￦10,000의 집세를 지급하는 조건으로 계약을 체결하였다.",
+                    "⑤ 은행에서 ￦10,000을 차입하기로 하고 건물을 담보로 제공하였다."
+                ],
+                answer: 1, // ②
+                explanation: `회계상 거래는 기업의 자산, 부채, 자본에 직접적으로 증감 변화를 유발하는 사건이어야 합니다.
+
+① 종업원 채용 계약, ④ 월세 지급 조건 임대차 계약, ⑤ 담보 제공은 계약 상태이거나 소유권이 이전되지 않은 담보물 설정에 불과하여 자산/부채의 실질적인 변동을 발생시키지 않습니다.
+③ 주식 분할 또한 자본금 총액 변동 없이 주식수만 증가하는 행위로써 분개 거래가 아닙니다.
+② 보통예금이자의 가산은 자산(보통예금)의 증가와 수익(이자수익)의 발생을 동반하므로 '회계상 거래'로 완벽히 분개해야 합니다.`
+            },
+            {
+                id: 3,
+                question: "시산표를 작성함으로써 발견할 수 있는 오류는?",
+                box: null,
+                options: [
+                    "① 실제 거래한 금액과는 다른 금액을 차·대변에 동일하게 전기한 경우",
+                    "② 매입채무 계정의 대변에 전기해야 하는데 차변으로 전기한 경우",
+                    "③ 매입채무 계정의 차변에 기록하여야 하는데 매출채권 계정의 차변에 기록한 경우",
+                    "④ 거래가 발생하였으나 분개와 전기가 누락된 경우",
+                    "⑤ 소모품 사용에 관한 거래에 대하여 두 번 분개한 경우"
+                ],
+                answer: 1, // ②
+                explanation: `시산표는 복식부기의 대차평균 원리(차변 합계 = 대변 합계)를 바탕으로 검증합니다. 따라서 대차 평형이 깨지는 오류만 발견할 수 있습니다.
+
+② 대변에 가야 할 매입채무 금액을 차변에 적어버리면, 차변 합계가 대변 합계보다 비정상적으로 커지게 되어 대차 불일치가 발생합니다. 이로써 즉각 시산표상 오류로 검출됩니다.
+①, ③, ④, ⑤의 경우는 오류가 대차 양변에 동일한 금액적 영향(차변과 대변이 동일하게 누락, 중복, 다른 계정으로 전사 등)을 미쳐 대차 평균이 유지되므로 시산표만으로는 찾아낼 수 없는 맹점 오류입니다.`
+            },
+            {
+                id: 4,
+                question: "재무보고를 위한 개념체계의 설명으로 옳지 않은 것은?",
+                options: [
+                    "① 재무보고서는 정확한 서술보다는 상당 부분 추정, 판단 및 모형에 근거한다.",
+                    "② 회계기준위원회는 중요성에 대한 획일적인 계량 임계치를 정하거나 특정한 상황에서 무엇이 중요한 것인지를 미리 결정할 수 있다.",
+                    "③ 단 하나의 경제적 현상을 충실하게 표현하는 데 여러 방법이 있을 수 있으나 동일한 경제적 현상에 대해 대체적인 회계처리방법을 허용하면 비교가능성이 감소한다.",
+                    "④ 유용한 재무정보의 질적 특성은 재무제표에서 제공되는 정보에도 적용되며, 그 밖의 방법으로 제공되는 재무정보에도 적용된다.",
+                    "⑤ 보강적 질적 특성은 서술되는 방법이 둘 다 목적적합하고 충실하게 표현하는 것이라면 어떤 방법을 서술에 사용해야 할지를 결정하는 데 도움을 주는 특성이다."
+                ],
+                answer: 1, // ②
+                explanation: `기준서상 개념체계에 의하면 중요성은 개별 기업 재무보고서의 관점에서 해당 정보가 누락되거나 왜곡표시될 때 미치는 영향력을 뜻합니다. 
+
+따라서 중요성은 개별 기업의 특유한 측면을 반영하므로, 회계기준위원회(IASB)가 중요성에 대한 '획일적인 계량 임계치를 정하거나 미리 결정할 수 없다'고 명시하고 있습니다.`
+            },
+            {
+                id: 5,
+                question: "재무보고를 위한 일반목적과 재무제표 요소의 정의 및 인식에 관한 설명으로 옳지 않은 것은?",
+                options: [
+                    "① 일반목적 재무보고의 목적은 주요 이용자가 기업에 자원을 제공하는 것에 대한 의사결정을 할 때 유용한 재무정보를 제공하는 것이다.",
+                    "② 보고기업의 경영진도 해당 기업에 대한 재무정보에 관심이 있다. 그러나 경영진은 그들이 필요로 하는 재무정보를 내부에서 구할 수 있기 때문에 일반목적 재무보고서에 의존할 필요가 없다.",
+                    "③ 일반목적 재무보고서는 보고기업의 가치를 보여주기 위해 고안된 것이다. 따라서 그 보고서는 현재 및 잠재적인 정보이용자가 보고기업의 가치를 추정하는 데 도움이 되는 정보를 제공한다.",
+                    "④ 일반목적 재무보고서는 현재 및 잠재적 투자자, 대여자 및 기타 채권자가 필요로 하는 모든 정보를 제공하지는 않으며 제공할 수도 없다.",
+                    "⑤ 재무보고서는 사업활동과 경제활동에 대해 박식하고, 정보를 검토하고 분석하는 데 부지런한 정보이용자를 위해 작성된다."
+                ],
+                answer: 2, // ③
+                explanation: `일반목적 재무보고서는 '보고기업의 가치 자체를 보여주기 위해 고안된 것이 아닙니다.' 다만 이용자들이 보고기업의 가치를 직접 추정하는 데 유용한 관련 정보를 제공할 뿐입니다. 
+
+문장 앞단인 "보고기업의 가치를 보여주기 위해 고안된 것이다"는 명백히 틀린 진술이므로 정답은 ③번입니다.`
+            },
+            {
+                id: 6,
+                question: "(주)한국의 기초자산은 ￦40,000이고, 기말자산은 ￦60,000이다. 매출액순이익률은 6%이며, 총자산회전율(평균총자산 기준)이 4회일 경우, 당기순이익은?",
+                options: [
+                    "① ￦10,000",
+                    "② ￦11,000",
+                    "③ ￦12,000",
+                    "④ ￦13,000",
+                    "⑤ ￦14,000"
+                ],
+                answer: 2, // ③
+                explanation: `비율 분석 및 계산 단계:
+1. 평균총자산 = (기초자산 ￦40,000 + 기말자산 ￦60,000) / 2 = ￦50,000
+2. 총자산회전율 = 매출액 / 평균총자산 = 4회
+   -> 매출액 = ￦50,000 × 4 = ￦200,000
+3. 매출액순이익률 = 당기순이익 / 매출액 = 6%
+   -> 당기순이익 = ￦200,000 × 6% = ￦12,000
+
+따라서 당기순이익은 ￦12,000(③번)입니다.`
+            },
+            {
+                id: 7,
+                question: "다음은 (주)한국의 20×1년 말 자산에 관한 일부 자료이다. (주)한국의 20×1년 말 현금 및 현금성자산은?",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs md:text-sm space-y-1">
+                        <div>· 통화 및 수표 ￦80,000</div>
+                        <div>· 당좌차월 ￦20,000</div>
+                        <div>· 수입인지 및 우표 ￦5,000</div>
+                        <div>· 보통예금(이 중 ￦15,000은 담보설정) ￦20,000</div>
+                        <div>· 양도성예금증서(취득 시 만기 90일) ￦5,000</div>
+                        <div>· 만기 3개월 남은 정기예금 ￦3,000</div>
+                        <div>· 당좌개설보증금 ￦10,000</div>
+                        <div>· 초단기수익증권(120일 만기) ￦15,000</div>
+                    </div>
+                `,
+                options: [
+                    "① ￦120,000",
+                    "② ￦80,000",
+                    "③ ￦125,000",
+                    "④ ￦90,000",
+                    "⑤ ￦105,000"
+                ],
+                answer: 3, // ④
+                explanation: `현금 및 현금성자산 포함 여부 판정:
+1. 통화 및 수표 (포함): ￦80,000
+2. 보통예금 중 담보설정 제외분 (포함): ￦20,000 - ￦15,000 = ￦5,000 (담보설정은 인출이 제한되므로 제외)
+3. 양도성예금증서 (포함): 취득일 기준 90일(3개월 이내) 만기이므로 ￦5,000 포함
+
+* 제외 항목 분석:
+- 당좌차월 (단기부채 / 단기차입금)
+- 수입인지 및 우표 (소모품 또는 선급비용)
+- 만기 3개월 남은 정기예금 (보고기간말 기준이 아닌 '취득일' 기준으로 판단해야 함. 취득당시 만기가 불분명하고 3개월 남은 것만으로는 판정 불가하므로 단기금융상품)
+- 당좌개설보증금 (사용 제한 보증금이므로 장기투자자산)
+- 초단기수익증권 (취득 당시 만기 120일이므로 90일 초과되어 제외)
+
+계산: ￦80,000 + ￦5,000 + ￦5,000 = ￦90,000 (④번)`
+            },
+            {
+                id: 8,
+                question: "다음 중 금융상품으로만 구성되어 있는 것은?",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs md:text-sm space-y-1">
+                        <div>㉠ 정기예금</div>
+                        <div>㉡ 매출채권</div>
+                        <div>㉢ 선수수익</div>
+                        <div>㉣ 지분상품</div>
+                        <div>㉤ 매입채무</div>
+                        <div>㉥ 선급금</div>
+                        <div>㉦ 미지급법인세</div>
+                        <div>㉧ 제품보증충당부채</div>
+                    </div>
+                `,
+                options: [
+                    "① ㉠, ㉡, ㉢",
+                    "② ㉢, ㉥, ㉧",
+                    "③ ㉡, ㉣, ㉤",
+                    "④ ㉣, ㉦, ㉧",
+                    "⑤ ㉤, ㉥, ㉦"
+                ],
+                answer: 2, // ③
+                explanation: `금융상품이란 '계약'에 의해 일방에게 금융자산을 발생시키고 동시에 거래 상대방에게 금융부채나 지분상품을 발생시키는 것입니다.
+
+- 금융상품에 해당하는 것: ㉠ 정기예금(자산), ㉡ 매출채권(자산), ㉣ 지분상품(자본/자산), ㉤ 매입채무(부채)
+- 금융상품이 아닌 것 (비금융항목):
+  - ㉢ 선수수익, ㉥ 선급금: 미래에 현금을 주고받는 것이 아니라 '용역이나 상품'을 제공받을 권리/의무이므로 비금융항목입니다.
+  - ㉦ 미지급법인세: 계약이 아닌 '법적 의무'에 기인하므로 비금융항목입니다.
+  - ㉧ 제품보증충당부채: 계약상 정해진 현금 지급 의무가 불확실하므로 비금융항목입니다.
+
+보기 중 금융상품으로만 짝지어진 것은 ㉡, ㉣, ㉤ 이므로 정답은 ③번입니다.`
+            },
+            {
+                id: 9,
+                question: "20×1년 (주)한국의 외상매출로 인한 현금유입은 얼마인가?",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs md:text-sm space-y-1">
+                        <div>· 매출채권 기초잔액 ￦150,000</div>
+                        <div>· 매출채권 기말잔액 ￦180,000</div>
+                        <div>· 외상매출액 ￦530,000</div>
+                        <div>· 환입 및 매출에누리 ￦10,000</div>
+                        <div>· 매출채권의 손상확정 ￦5,000</div>
+                        <div>· 기중 현금매출액 ￦215,000</div>
+                    </div>
+                `,
+                options: [
+                    "① ￦485,000",
+                    "② ￦700,000",
+                    "③ ￦715,000",
+                    "④ ￦480,000",
+                    "⑤ ￦495,000"
+                ],
+                answer: 0, // ①
+                explanation: `매출채권 T계정을 그려보면 쉽게 풀립니다!
+
+[매출채권 차변]
+- 기초잔액: ￦150,000
+- 당기외상매출액: ￦530,000
+→ 차변 합계 = ￦680,000
+
+[매출채권 대변]
+- 환입 및 매출에누리: ￦10,000
+- 손상확정(제거): ￦5,000
+- 기말잔액: ￦180,000
+- 외상매출 회수액(현금유입액): X
+
+차변 합계(￦680,000) = 대변 합계(￦195,000 + X)
+∴ X(현금회수액) = ￦680,000 - ￦195,000 = ￦485,000
+
+(참고: 기중 현금매출액 ￦215,000은 외상매출금 회수와는 상관없는 현금 직접 매출이므로 가산하지 않습니다. 질문은 '외상매출로 인한 현금유입'을 묻고 있습니다.)`
+            },
+            {
+                id: 10,
+                question: "다음 중 금융상품이 아닌 항목은?",
+                options: [
+                    "① 소득세예수금",
+                    "② 상환우선주",
+                    "③ 매입채무",
+                    "④ 미지급비용",
+                    "⑤ 단기차입금"
+                ],
+                answer: 0, // ①
+                explanation: `소득세예수금은 급여 지급 시 원천징수한 소득세로, 계약상 거래가 아닌 법률에 의해 납세 의무가 발생하는 법적 의무 부채입니다. 따라서 계약을 전제로 하는 '금융부채'에서 제외됩니다.
+
+나머지 상환우선주, 매입채무, 미지급비용, 단기차입금은 모두 계약관계에 의해 현금이나 금융자산을 인도해야 하는 계약상 의무가 있는 금융상품에 해당합니다.`
+            },
+            {
+                id: 11,
+                question: "다음 중 당기순이익이 증가하는 거래는?",
+                options: [
+                    "① 기타포괄손익-공정가치 측정 금융자산의 공정가치가 ￦1,000 증가하였다.",
+                    "② 전기분 미수이자 ￦15,000을 현금으로 회수하다.",
+                    "③ 대여금 ￦100,000과 이자 ￦1,500을 현금으로 받다.",
+                    "④ 당기손익-공정가치 측정 금융자산의 공정가치가 ￦3,000 감소하였다.",
+                    "⑤ 전기에 영업권 ￦10,000이 손상되었으나 당기 손상이 회복되어 환입하였다."
+                ],
+                answer: 2, // ③
+                explanation: `① FVOCI 금융자산 평가이익은 자본계정인 '기타포괄손익(OCI)'으로 처리되어 당기순이익에 영향을 미치지 않습니다.
+② 전기분 미수이자(자산)가 현금(자산)으로 교환된 것뿐이므로 수익 발생이 없습니다.
+③ 원금 대여금 회수분 외에 '이자수익 ￦1,500'이 현금으로 유입되었으므로 당기순이익이 ￦1,500 증가합니다. (정답)
+④ FVPL 금융자산 공정가치 감소는 당기손익(비용)이므로 당기순이익을 감소시킵니다.
+⑤ 영업권(Goodwill)은 내부적으로 창출될 수 없으며, 한 번 손상차손을 인식한 경우 어떠한 경우에도 환입할 수 없습니다.`
+            },
+            {
+                id: 12,
+                question: "(주)한국의 20×1년 말 재무상태표의 금융자산은 ￦3,000이고, 금융부채는 ￦500이다. 다음 자료를 이용할 때 20×1년 말 (주)한국의 매출채권(A)과 매입채무(B)는?",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs md:text-sm">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <div class="font-bold text-emerald-400 border-b border-slate-800 pb-1 mb-2">[자산]</div>
+                                <div>○ 매출채권 ( A )</div>
+                                <div>○ 대여금 ￦500</div>
+                                <div>○ 선급비용 ￦500</div>
+                                <div>○ 투자사채 ￦1,000</div>
+                            </div>
+                            <div>
+                                <div class="font-bold text-rose-400 border-b border-slate-800 pb-1 mb-2">[부채]</div>
+                                <div>○ 매입채무 ( B )</div>
+                                <div>○ 선수수익 ￦100</div>
+                                <div>○ 차입금 ￦100</div>
+                                <div>○ 사채 ￦200</div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                options: [
+                    "① ￦1,000, ￦100",
+                    "② ￦1,000, ￦200",
+                    "③ ￦1,000, ￦300",
+                    "④ ￦1,500, ￦100",
+                    "⑤ ￦1,500, ￦200"
+                ],
+                answer: 4, // ⑤
+                explanation: `금융항목 분류 판정법:
+
+1. 금융자산 공식: 매출채권(A) + 대여금(￦500) + 투자사채(￦1,000) = ￦3,000
+   (*선급비용은 용역을 제공받을 권리이므로 비금융자산입니다.)
+   -> A(매출채권) + ￦1,500 = ￦3,000
+   ∴ A = ￦1,500
+
+2. 금융부채 공식: 매입채무(B) + 차입금(￦100) + 사채(￦200) = ￦500
+   (*선수수익은 미래에 용역을 제공할 의무이므로 비금융부채입니다.)
+   -> B(매입채무) + ￦300 = ￦500
+   ∴ B = ￦200
+
+따라서 매출채권(A)은 ￦1,500, 매입채무(B)는 ￦200인 ⑤번이 정답입니다.`
+            },
+            {
+                id: 13,
+                question: "(주)한국은 재고자산감모손실 중 80%는 비정상감모로 처리하며, 정상감모손실과 평가손실은 매출원가에 포함한다. (주)한국의 20×1년 재고자산 관련 자료가 다음과 같을 때, 매출원가는?",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs md:text-sm space-y-1">
+                        <div>· 기초재고자산 ￦15,000 (재고자산평가충당금 ￦0)</div>
+                        <div>· 당기매입액 ￦85,000</div>
+                        <div>· 기말장부수량 30개 (단위당 원가 ￦1,000)</div>
+                        <div>· 기말실제수량 25개 (단위당 순실현가능가치 ￦1,100)</div>
+                    </div>
+                `,
+                options: [
+                    "① ￦71,000",
+                    "② ￦73,000",
+                    "③ ￦72,000",
+                    "④ ￦70,000",
+                    "⑤ ￦75,000"
+                ],
+                answer: 0, // ①
+                explanation: `차근차근 매출원가 계산 단계:
+1. 판매가능상품액 = 기초재고자산(￦15,000) + 당기매입액(￦85,000) = ￦100,000
+2. 기말 장부상 재고금액 = 장부수량 30개 × @￦1,000 = ￦30,000
+3. 재고 감모 수량 = 장부수량 30개 - 실제수량 25개 = 5개
+   -> 총 감모손실 = 5개 × @￦1,000 = ￦5,000
+   -> 비정상 감모손실(영업외비용) = ￦5,000 × 80% = ￦4,000
+   -> 정상 감모손실(매출원가 가산) = ￦5,000 × 20% = ￦1,000
+4. 기말 평가손실: 순실현가능가치(@￦1,100)가 원가(@￦1,000)보다 크므로 평가손실은 발생하지 않습니다(저가법 적용).
+
+[최종 매출원가 구하기]
+= 판매가능상품액(￦100,000) - 기말장부상재고(￦30,000) + 정상감모손실(￦1,000)
+= ￦71,000 (①번)`
+            },
+            {
+                id: 14,
+                question: "유형자산의 취득원가에 포함되는 것을 모두 고른 것은?",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs md:text-sm space-y-1">
+                        <div>ㄱ. 유형자산이 경영진이 의도하는 방식으로 가동될 수 있으나, 아직 실제로 사용되지는 않고 있는 경우에 발생하는 원가</div>
+                        <div>ㄴ. 유형자산 취득 시 정상적으로 작동되는지 여부를 시험하는 과정에서 발생하는 원가</div>
+                        <div>ㄷ. 적격자산의 취득과 관련하여 발생한 차입금에 대한 이자 원가</div>
+                        <div>ㄹ. 기업의 영업 전부 또는 일부를 재배치하는 과정에서 발생하는 원가</div>
+                        <div>ㅁ. 유형자산의 건설과 직접적으로 관련되어 발생한 종업원급여</div>
+                    </div>
+                `,
+                options: [
+                    "① ㄱ, ㄴ, ㄷ",
+                    "② ㄴ, ㄷ, ㄹ",
+                    "③ ㄱ, ㄹ, ㅁ",
+                    "④ ㄴ, ㄷ, ㅁ",
+                    "⑤ ㄴ, ㄹ, ㅁ"
+                ],
+                answer: 3, // ④
+                explanation: `취득원가 포함 여부 판정:
+ㄴ. 정상 작동 여부를 시험(시운전)하는 과정에서 발생한 원가 (포함)
+ㄷ. 자본화대상 적격자산 취득에 직결된 차입원가/이자비용 (포함)
+ㅁ. 건설에 직접 직결된 종업원 급여 (포함)
+
+* 제외 항목(당기 비용 처리):
+ㄱ. 기계가 준비 완료되었으나 실제 사용 대기 중에 발생한 감가상각 등 관리비 성격 원가 (제외)
+ㄹ. 영업 및 부서 재배치 등 조직 구조 재편에 들어간 비용 (제외)
+
+따라서 ㄴ, ㄷ, ㅁ가 취득원가에 들어가므로 정답은 ④번입니다.`
+            },
+            {
+                id: 15,
+                question: "다음 중 유형자산에 대한 설명으로 옳지 않은 것은?",
+                options: [
+                    "① 유형자산의 잔존가치는 해당 자산의 장부금액과 같거나 큰 금액으로 증가할 수도 있다.",
+                    "② 특정 유형자산을 재평가할 때, 해당 자산이 포함되는 유형자산 분류 전체를 재평가한다.",
+                    "③ 유형자산을 재평가모형에 따라 공정가치로 재평가함에 따른 자산의 장부금액이 증가한 경우에는 그 증가액을 재평가잉여금으로 하여 재무상태표의 자본항목인 기타포괄손익누계액으로 처리한다.",
+                    "④ 시설에 대한 정기적인 종합검사 원가는 자산인식기준을 충족하더라도 비용으로 처리한다.",
+                    "⑤ 적격자산의 취득, 건설 또는 생산과 직접 관련된 차입원가는 당해 자산원가의 일부로 자본화하여야 한다."
+                ],
+                answer: 3, // ④
+                explanation: `정기적이고 종합적인 검사 원가는 자산의 자산인식기준(미래 경제적 효익의 유입 가능성이 높고 신뢰성 측정 가능)을 충족한다면, 별도의 자산 항목으로 인식하여 장부금액에 가산(자본화)하여야 합니다. 
+
+비용으로 무조건 처리한다는 설명은 잘못되었습니다.`
+            },
+            {
+                id: 16,
+                question: "충당부채에 관한 설명으로 옳은 것을 모두 고른 것은?",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs md:text-sm space-y-1">
+                        <div>㉠ 충당부채를 인식하기 위해서는 당해 의무를 이행하기 위하여 경제적 효익을 갖는 자원이 유출될 가능성이 매우 높아야 한다.</div>
+                        <div>㉡ 충당부채로 인식하는 금액은 현재의무를 보고기간 말에 이행하기 위하여 소요되는 지출에 대한 최선의 추정치이어야 한다.</div>
+                        <div>㉢ 충당부채의 명목가액과 현재가치의 차이가 중요한 경우에는 의무를 이행하기 위하여 예상되는 지출액의 현재가치로 평가한다.</div>
+                        <div>㉣ 충당부채와 관련된 의무의 이행과 관련하여 자산처분이 예상되는 경우 자산의 예상처분이익은 충당부채를 측정하는 데 고려하여야 한다.</div>
+                    </div>
+                `,
+                options: [
+                    "① ㉠, ㉡",
+                    "② ㉠, ㉡, ㉢",
+                    "③ ㉠, ㉡, ㉣",
+                    "④ ㉡, ㉢",
+                    "⑤ ㉡, ㉢, ㉣"
+                ],
+                answer: 3, // ④
+                explanation: `㉠ 충당부채 인식 조건에서 경제적 효익을 가진 자원의 유출 가능성은 '높아야(probable)' 하는 수준이지 '매우 높을' 필요까지는 없습니다.
+㉣ 충당부채를 산정할 때, 미래 자산 처분으로 예상되는 이익은 충당부채 측정액에서 차감하거나 고려하지 않습니다(처분이익과 부채 상환은 별개의 독립사건).
+
+따라서 옳은 설명은 ㉡, ㉢ 뿐이므로 ④번이 정답입니다.`
+            },
+            {
+                id: 17,
+                question: "(주)한국은 20×1년 초에 계약금액 ￦1,000,000인 건설공사를 수주하고, 20×3년 말에 공사를 완공하였다. 이와 관련된 자료는 다음과 같다. (주)한국이 20×1년 인식할 공사손익과 미청구공사(또는 초과청구공사) 금액은? (단, 진행률은 발생누적계약원가를 추정총계약원가로 나눈 비율로 계산한다.)",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-900 border-b border-slate-800">
+                                    <th class="p-2 font-bold text-slate-300">구분</th>
+                                    <th class="p-2 font-bold text-slate-300">20×1년</th>
+                                    <th class="p-2 font-bold text-slate-300">20×2년</th>
+                                    <th class="p-2 font-bold text-slate-300">20×3년</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-slate-900">
+                                    <td class="p-2 text-slate-400">실제발생 공사원가</td>
+                                    <td class="p-2 text-slate-200">￦320,000</td>
+                                    <td class="p-2 text-slate-200">￦200,000</td>
+                                    <td class="p-2 text-slate-200">￦280,000</td>
+                                </tr>
+                                <tr class="border-b border-slate-900">
+                                    <td class="p-2 text-slate-400">연도 말 예상 추가원가</td>
+                                    <td class="p-2 text-slate-200">￦480,000</td>
+                                    <td class="p-2 text-slate-200">￦280,000</td>
+                                    <td class="p-2 text-slate-200">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 text-slate-400">계약대금 청구액</td>
+                                    <td class="p-2 text-slate-200">￦350,000</td>
+                                    <td class="p-2 text-slate-200">￦350,000</td>
+                                    <td class="p-2 text-slate-200">￦300,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `,
+                options: [
+                    "① 공사이익 ￦80,000, 미청구공사 ￦50,000",
+                    "② 공사손실 ￦(60,000), 초과청구공사 ￦30,000",
+                    "③ 공사이익 ￦60,000, 초과청구공사 ￦(30,000)",
+                    "④ 공사이익 ￦80,000, 초과청구공사 ￦(50,000)",
+                    "⑤ 공사손실 ￦(80,000), 미청구공사 ￦30,000"
+                ],
+                answer: 0, // ①
+                explanation: `20×1년 진행률과 매출 계산:
+1. 20×1년 총추정원가 = 당기원가(￦320,000) + 추가원가(￦480,000) = ￦800,000
+2. 20×1년 진행률 = ￦320,000 / ￦800,000 = 40%
+3. 20×1년 공사매출(수익) = 총계약금 ￦1,000,000 × 40% = ￦400,000
+4. 20×1년 공사손익 = 공사매출(￦400,000) - 실제공사원가(￦320,000) = ￦80,000 이익
+5. 미청구공사(계약자산) = 누적 인식 수익(￦400,000) - 청구액(￦350,000) = ￦50,000
+
+따라서 공사이익 ￦80,000과 미청구공사 ￦50,000이 산출되므로 정답은 ①번입니다.`
+            },
+            {
+                id: 18,
+                question: "(주)한국은 20×1년 초에 (주)대한과 공장건설계약을 체결하였다. 총공사계약금액은 ￦100,000이며, 공사가 완성된 20×3년 말까지 건설공사와 관련된 자료는 다음과 같다. (주)한국은 진행기준을 적용하여 수익을 인식하며, 공사진행률은 누적발생공사원가에 기초하여 측정한다. 20×2년에 인식해야 할 공사손익은?",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-900 border-b border-slate-800">
+                                    <th class="p-2 font-bold text-slate-300">구분</th>
+                                    <th class="p-2 font-bold text-slate-300">20×1년</th>
+                                    <th class="p-2 font-bold text-slate-300">20×2년</th>
+                                    <th class="p-2 font-bold text-slate-300">20×3년</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-slate-900">
+                                    <td class="p-2 text-slate-400">당기 발생 공사원가</td>
+                                    <td class="p-2 text-slate-200">￦20,000</td>
+                                    <td class="p-2 text-slate-200">￦35,000</td>
+                                    <td class="p-2 text-slate-200">￦55,000</td>
+                                </tr>
+                                <tr class="border-b border-slate-900">
+                                    <td class="p-2 text-slate-400">추정 총공사원가</td>
+                                    <td class="p-2 text-slate-200">￦80,000</td>
+                                    <td class="p-2 text-slate-200">￦110,000</td>
+                                    <td class="p-2 text-slate-200">￦110,000</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 text-slate-400">공사대금 청구액</td>
+                                    <td class="p-2 text-slate-200">￦35,000</td>
+                                    <td class="p-2 text-slate-200">￦35,000</td>
+                                    <td class="p-2 text-slate-200">￦30,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `,
+                options: [
+                    "① 공사손실 ￦5,000",
+                    "② 공사이익 ￦10,000",
+                    "③ 공사손실 ￦10,000",
+                    "④ 공사이익 ￦15,000",
+                    "⑤ 공사손실 ￦15,000"
+                ],
+                answer: 4, // ⑤
+                explanation: `공사 진행 분석 (중요 예상공사손실 즉시인식 파트):
+
+[20×1년도 인식 공사손익]
+- 누적진행률 = 20×1년 발생 ￦20,000 / 추정원가 ￦80,000 = 25%
+- 20×1년 누적공사이익 = (수익 100,000 - 추정원가 80,000) × 25% = ￦5,000
+
+[20×2년도 인식 공사손익]
+- 20×2년 누적발생원가 = 20,000 + 35,000 = ￦55,000
+- 20×2년 말 시점의 추정 총원가 = ￦110,000
+- 20×2년 말 진행률 = ￦55,000 / ￦110,000 = 50%
+- 이때, 총공사예상손실 발생 확인! -> 계약수익(￦100,000) - 추정원가(￦110,000) = 전체 ￦10,000의 총손실 예상.
+- 기준서 규정: 예상 손실은 즉시 전액 인식해야 함.
+- 20×2년 누적인식할 손익 = (-)￦10,000 (총예상손실액)
+- 20×2년 당기 인식 공사손익 = 20×2년 누적손익(-￦10,000) - 20×1년 기인식 이익(￦5,000) = (-)￦15,000 (공사손실 ￦15,000)
+
+따라서 정답은 ⑤번입니다.`
+            },
+            {
+                id: 19,
+                question: "(주)한국은 20×1년 초에 액면금액 ￦1,000인 상품권 10매를 1매당 ￦900에 고객에게 최초 발행하였다. 고객은 상품권 액면금액의 80% 이상을 사용하면 잔액을 현금으로 돌려받을 수 있다. (주)한국은 20×1년 12월 31일까지 회수된 상품권 8매에 대해 상품 인도와 함께 잔액 ￦700을 현금으로 지급하였다. (주)한국이 상기 상품권과 관련하여 20×1년 포괄손익계산서에 인식할 수익금액은?",
+                options: [
+                    "① ￦6,500",
+                    "② ￦7,200",
+                    "③ ￦8,300",
+                    "④ ￦9,000",
+                    "⑤ ￦10,000"
+                ],
+                answer: 0, // ①
+                explanation: `상품권 발행 및 대가 정산 구조:
+
+1. 상품권 발행 시 회사는 현금 ￦9,000(10매 × 900원)을 받고 선수금(계약부채)으로 처리합니다. 장부상 상품권 1매의 유효 가치는 실제 수령액 기준인 ￦900입니다.
+2. 회수된 상품권은 총 8매입니다. 회수 시점에 관련된 가치는 원래 8매 × @￦900 = ￦7,200입니다.
+3. 상품 교환 과정에서 잔액 ￦700을 현금으로 지급(환불)해주었으므로, 이 현금 지급액만큼은 매출 수익을 발생시키지 않고 계약 부채 정산으로 차감하게 됩니다.
+4. 따라서 최종 매출 인식액 = 8매에 해당했던 계약부채 유입액(￦7,200) - 현금 환불액(￦700) = ￦6,500 입니다.
+
+정답은 ①번입니다.`
+            },
+            {
+                id: 20,
+                question: "(주)한국은 20×1년 4월 1일에 은행으로부터 ￦100,000을 1년간 차입하고 이자는 만기 상환 시 ￦10,000을 지급하기로 하였다. 결산 수정 분개로 옳은 것은?",
+                options: [
+                    "① (차) 현 금 100,000, 이 자 비 용 2,500 / (대) 단 기 차 입 금 100,000, 미지급이자비용 2,500",
+                    "② (차) 현 금 100,000 / (대) 단 기 차 입 금 100,000",
+                    "③ (차) 이 자 비 용 2,500 / (대) 현 금 2,500",
+                    "④ (차) 이 자 비 용 10,000 / (대) 미지급이자비용 10,000",
+                    "⑤ (차) 이 자 비 용 7,500 / (대) 미지급이자비용 7,500"
+                ],
+                answer: 4, // ⑤
+                explanation: `기간 손익 인식(발생주의 원칙):
+
+1. 차입일: 20×1년 4월 1일
+2. 결산일: 20×1년 12월 31일 (9개월이 경과됨)
+3. 만기이자 총액 = ￦10,000
+4. 당기 발생 경과분 이자비용 계산 = ￦10,000 × 9/12 = ￦7,500
+5. 결산일 수정분개: 당기 귀속 이자비용을 잡고, 대변에는 아직 지급하지 않은 부채로 처리합니다.
+   -> (차) 이자비용 7,500 / (대) 미지급이자비용 7,500 (⑤번 정답)`
+            },
+            {
+                id: 21,
+                question: "(주)한국의 20×1년도 영업활동 현금흐름은 ￦800,000으로 보고되었다. (주)한국의 당기순이익은? (단, 이자비용은 영업활동으로 분류한다.)",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs md:text-sm space-y-1">
+                        <div>· 토지처분(장부금액 ￦500,000) ￦600,000</div>
+                        <div>· 매출채권(순액) 증가 ￦160,000</div>
+                        <div>· 매출채권 손상차손 ￦20,000</div>
+                        <div>· 미지급금 증가 ￦15,000</div>
+                        <div>· 매입채무 증가 ￦80,000</div>
+                        <div>· 감가상각비 ￦120,000</div>
+                        <div>· 이자비용 ￦10,000</div>
+                    </div>
+                `,
+                options: [
+                    "① ￦740,000",
+                    "② ￦900,000",
+                    "③ ￦840,000",
+                    "④ ￦860,000",
+                    "⑤ ￦880,000"
+                ],
+                answer: 2, // ③
+                explanation: `간접법 영업활동 현금흐름 역산 풀이:
+
+공식: 영업활동 현금흐름 = 당기순이익 + 현금유출이 없는 비용 가산 - 현금유입이 없는 수익 차감 + 영업관련 자산·부채 변동
+
+- 감가상각비 (가산): +￦120,000
+- 토지처분이익 (차감): -￦100,000 (토지처분가액 600,000 - 장부 500,000 = 100,000은 투자활동이므로 당기순이익에서 배제하기 위해 차감)
+- 매출채권 '순액' 증가 (차감): -￦160,000 (매출채권 순액 증가는 현금유출 자산증가로 보아 차감. 이때 손상차손 ￦20,000은 순액 변동에 이미 녹아있어 추가 가산 안함)
+- 미지급금 증가: 반영 안 함 (미지급금은 일반적으로 비영업활동인 투자/재무활동 부채로 취급)
+- 매입채무 증가 (가산): +￦80,000
+- 이자비용: 당기순이익에 이미 차감되어 있고 영활동으로 계속 분류되므로 조정할 필요 없음.
+
+계산식 수립:
+영업활동 현금흐름 800,000 = 당기순이익(X) + 120,000 - 100,000 - 160,000 + 80,000
+800,000 = X - 60,000
+∴ 당기순이익(X) = ￦840,000 (③번)`
+            },
+            {
+                id: 22,
+                question: "다음의 자료를 사용하여 계산된 영업활동으로 인한 현금흐름은?",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs md:text-sm space-y-1">
+                        <div>○ 당기순이익 ￦40,000</div>
+                        <div>○ 유형자산처분손실 ￦2,000</div>
+                        <div>○ 매입채무의 증가 ￦3,000</div>
+                        <div>○ 차입금 상환 ￦1,000</div>
+                        <div>○ 미수금의 증가 ￦500</div>
+                    </div>
+                `,
+                options: [
+                    "① ￦40,000",
+                    "② ￦42,000",
+                    "③ ￦45,000",
+                    "④ ￦45,500",
+                    "⑤ ￦47,000"
+                ],
+                answer: 2, // ③
+                explanation: `간접법 영업활동 현금흐름 조정 계산:
+
+- 당기순이익: ￦40,000에서 출발
+- 유형자산처분손실 (가산): +￦2,000 (비영업 활동 손실이므로 당기순이익에 가산)
+- 매입채무의 증가 (가산): +￦3,000 (영업 부채 증가로 현금 유입 효과)
+- 차입금 상환: 조정 배제 (재무활동 현금유출임)
+- 미수금의 증가: 조정 배제 (유형자산 처분 등의 비영업 활동으로 인한 자산 변동이므로 배제)
+
+최종 영업 현금흐름 = 40,000 + 2,000 + 3,000 = ￦45,000 (③번)`
+            },
+            {
+                id: 23,
+                question: "(주)한국이 보고한 20×1년의 당기순이익은 ￦250,000이다. 다음 자료를 이용하여 계산한 20×1년도 영업활동 현금흐름은?",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs md:text-sm space-y-1">
+                        <div>· 사채상환 ￦10,000</div>
+                        <div>· 자산처분이익 ￦15,000</div>
+                        <div>· 매출채권 순증가 ￦30,000</div>
+                        <div>· 배당금지급 ￦15,000</div>
+                        <div>· 감가상각비 ￦20,000</div>
+                        <div>· 매입채무 증가 ￦10,000</div>
+                        <div>· 매출채권 손상차손 ￦5,000</div>
+                        <div>· 건물처분 ￦30,000</div>
+                    </div>
+                `,
+                options: [
+                    "① ￦225,000",
+                    "② ￦240,000",
+                    "③ ￦235,000",
+                    "④ ￦245,000",
+                    "⑤ ￦255,000"
+                ],
+                answer: 1, // ②
+                explanation: `영업활동 현금흐름 구성 요소 가감 적용:
+
+- 출발: 당기순이익 ￦250,000
+- 자산처분이익 (차감): -￦15,000
+- 매출채권 순증가 (차감): -￦30,000
+- 감가상각비 (가산): +￦20,000
+- 매입채무 증가 (가산): +￦10,000
+- 매출채권 손상차손 (가산): +￦5,000
+*비영업 항목(사채상환-재무, 배당금지급-재무, 건물처분-투자)은 조정 제외
+
+계산: 250,000 - 15,000 - 30,000 + 20,000 + 10,000 + 5,000 = ￦240,000 (②번)`
+            },
+            {
+                id: 24,
+                question: "(주)한국의 매출과 관련하여 조달된 현금 유입은?",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs overflow-x-auto">
+                        <table class="w-full text-left border-collapse mb-2">
+                            <thead>
+                                <tr class="bg-slate-900 border-b border-slate-800">
+                                    <th class="p-2 font-bold text-slate-300">구분</th>
+                                    <th class="p-2 font-bold text-slate-300">기초</th>
+                                    <th class="p-2 font-bold text-slate-300">기말</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-slate-900">
+                                    <td class="p-2 text-slate-400">매출채권</td>
+                                    <td class="p-2 text-slate-200">￦450,000</td>
+                                    <td class="p-2 text-slate-200">￦600,000</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 text-slate-400">손실충당금</td>
+                                    <td class="p-2 text-slate-200">￦5,000</td>
+                                    <td class="p-2 text-slate-200">￦8,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-slate-300 text-xs space-y-1">
+                            <div>· 당기 총매출액 ￦1,800,000 (현금매출 ￦300,000 포함)</div>
+                            <div>· 당기 포괄손익계산서의 손상차손 ￦5,000</div>
+                        </div>
+                    </div>
+                `,
+                options: [
+                    "① ￦1,648,000",
+                    "② ￦1,650,000",
+                    "③ ￦1,353,000",
+                    "④ ￦1,656,000",
+                    "⑤ ￦1,348,000"
+                ],
+                answer: 0, // ①
+                explanation: `정교한 매출 채권 회수 분석:
+
+1. 외상 매출액 = 총매출(￦1,800,000) - 현금매출(￦300,000) = ￦1,500,000
+2. 손실충당금 T계정 분석을 통한 대손제거액 구하기:
+   - 기초 충당금(5,000) + 당기 대손상각비(5,000) - 기말 충당금(8,000) = 대손확정 제거액(2,000)
+3. 외상매출금 회수액 구하기(매출채권 T계정):
+   - 기초(450,000) + 외상매출(1,500,000) - 대손확정제거(2,000) - 기말(600,000) = 외상회수액(1,348,000)
+4. 총 매출 관련 현금유입액 = 현금매출(300,000) + 외상매출회수(1,348,000) = ￦1,648,000
+
+정답은 ①번입니다.`
+            },
+            {
+                id: 25,
+                question: "(주)한국의 영업활동으로 인한 현금흐름이 ￦350,000일 때, 20×1년 당기순이익은? (단, 이자비용은 영업활동이다.)",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs md:text-sm space-y-1">
+                        <div>· 매출채권(순액) 증가 ￦50,000</div>
+                        <div>· 매출채권 손상차손 ￦12,000</div>
+                        <div>· 재고자산 감소 ￦40,000</div>
+                        <div>· 미수임대료의 증가 ￦20,000</div>
+                        <div>· 이자비용 ￦15,000</div>
+                        <div>· 매입채무의 감소 ￦20,000</div>
+                        <div>· 감가상각비 ￦30,000</div>
+                        <div>· 사채상환 ￦50,000</div>
+                    </div>
+                `,
+                options: [
+                    "① ￦370,000",
+                    "② ￦350,000",
+                    "③ ￦330,000",
+                    "④ ￦390,000",
+                    "⑤ ￦358,000"
+                ],
+                answer: 0, // ①
+                explanation: `영업활동 현금흐름 공식을 통한 당기순이익 역산:
+
+공식: 영업활동 현금흐름(350,000) = 당기순이익(X) + 조정 항목들
+
+- 매출채권 '순액' 증가 (차감): -￦50,000 (손상차손 ￦12,000은 매출채권 순액 증감 변동에 이미 자동 조정되어 있으므로 이중 계산하지 않음)
+- 재고자산 감소 (가산): +￦40,000
+- 미수임대료의 증가 (차감): -￦20,000
+- 매입채무의 감소 (차감): -￦20,000
+- 감가상각비 (가산): +￦30,000
+*비영업 항목: 사채상환은 재무활동이므로 무관, 이자비용은 영업활동이므로 원래 당기순이익 내부 정산대로 두어 추가 가감하지 않음.
+
+식: 350,000 = X - 50,000 + 40,000 - 20,000 - 20,000 + 30,000
+350,000 = X - 20,000
+∴ 당기순이익(X) = ￦370,000 (①번)`
+            },
+            {
+                id: 26,
+                question: "(주)한국의 20×1년도 현금흐름표 자료가 다음과 같을 때, 투자활동 현금흐름은?",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs md:text-sm space-y-1">
+                        <div>○ 기초 현금 및 현금성자산 ￦9,000</div>
+                        <div>○ 기말 현금 및 현금성자산 ￦5,000</div>
+                        <div>○ 재무활동 현금흐름 (-)￦17,000</div>
+                        <div>○ 영업활동 현금흐름 ￦25,000</div>
+                    </div>
+                `,
+                options: [
+                    "① (-)￦12,000",
+                    "② (-)￦8,000",
+                    "③ (-)￦4,000",
+                    "④ ￦4,000",
+                    "⑤ ￦8,000"
+                ],
+                answer: 0, // ①
+                explanation: `현금흐름 전체 가감 관계식 적용:
+
+1. 총 현금의 순증감액 = 기말 현금(￦5,000) - 기초 현금(￦9,000) = (-)￦4,000
+2. 총 순증감액 = 영업활동 현금흐름 + 투자활동 현금흐름(X) + 재무활동 현금흐름
+   - (-)￦4,000 = ￦25,000 + X + (-)￦17,000
+   - (-)￦4,000 = ￦8,000 + X
+   ∴ X = (-)￦12,000
+
+따라서 투자활동으로 인한 현금흐름은 (-)￦12,000 이므로 정답은 ①번입니다.`
+            },
+            {
+                id: 27,
+                question: "(주)세무의 기초 및 기말재고자산은 다음과 같다. 당기 제품제조원가와 당기 매출원가는?",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs overflow-x-auto mb-3">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-900 border-b border-slate-800">
+                                    <th class="p-2 font-bold text-slate-300">구분</th>
+                                    <th class="p-2 font-bold text-slate-300">기초 잔액</th>
+                                    <th class="p-2 font-bold text-slate-300">기말 잔액</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-slate-900">
+                                    <td class="p-2 text-slate-400">원재료</td>
+                                    <td class="p-2 text-slate-200">￦27,000</td>
+                                    <td class="p-2 text-slate-200">￦9,000</td>
+                                </tr>
+                                <tr class="border-b border-slate-900">
+                                    <td class="p-2 text-slate-400">재공품</td>
+                                    <td class="p-2 text-slate-200">￦30,000</td>
+                                    <td class="p-2 text-slate-200">￦15,000</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 text-slate-400">제품</td>
+                                    <td class="p-2 text-slate-200">￦35,000</td>
+                                    <td class="p-2 text-slate-200">￦28,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-slate-300 text-xs space-y-1">
+                        <div>· 원재료의 제조공정 투입금액은 모두 직접재료원가이며 당기 중 매입한 원재료는 ￦83,000이다.</div>
+                        <div>· 기초원가(Prime Cost)는 ￦306,000이고, 전환원가(Conversion Cost)의 50%가 제조간접원가이다.</div>
+                    </div>
+                `,
+                options: [
+                    "① ￦408,500 | ￦511,000",
+                    "② ￦511,000 | ￦511,000",
+                    "③ ￦511,000 | ￦526,000",
+                    "④ ￦526,000 | ￦526,000",
+                    "⑤ ￦526,000 | ￦533,000"
+                ],
+                answer: 4, // ⑤
+                explanation: `원가관리 정밀 추적 단계:
+
+1. 당기 원재료 사용액(직접재료비) = 기초원재료(27,000) + 매입액(83,000) - 기말원재료(9,000) = ￦101,000
+2. 기초원가(Prime Cost) = 직접재료원가(101,000) + 직접노무원가(A) = 306,000
+   ∴ 직접노무원가(A) = ￦205,000
+3. 전환원가(직접노무비 + 제조간접비)에서 제조간접비의 비중이 50%이므로, 직접노무비(205,000)와 제조간접비가 일대일로 동액입니다.
+   ∴ 제조간접원가 = ￦205,000
+4. 당기총제조원가 = 직접재료(101,000) + 직접노무(205,000) + 제조간접(205,000) = ￦511,000
+5. 당기제품제조원가 = 기초재공품(30,000) + 당기총제조원가(511,000) - 기말재공품(15,000) = ￦526,000
+6. 당기매출원가 = 기초제품(35,000) + 당기제품제조원가(526,000) - 기말제품(28,000) = ￦533,000
+
+따라서 제품제조원가는 ￦526,000, 매출원가는 ￦533,000인 ⑤번이 정답입니다.`
+            },
+            {
+                id: 28,
+                question: "(주)한국은 두 개의 보조부문(S1, S2)과 두 개의 제조부문(P1, P2)으로 제품을 생산하고 있다. 직접배부법으로 보조부문원가를 배부한 결과, P1에 배부된 보조부문의 원가 합계액이 ￦120,000인 경우, S1에 집계된 부문원가는?",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs overflow-x-auto">
+                        <table class="w-full text-left border-collapse mb-2">
+                            <thead>
+                                <tr class="bg-slate-900 border-b border-slate-800">
+                                    <th class="p-2 font-bold text-slate-300" rowspan="2">구분</th>
+                                    <th class="p-2 font-bold text-slate-300" colspan="2">보조부문</th>
+                                    <th class="p-2 font-bold text-slate-300" colspan="2">제조부문</th>
+                                    <th class="p-2 font-bold text-slate-300" rowspan="2">계</th>
+                                </tr>
+                                <tr class="bg-slate-900 border-b border-slate-800">
+                                    <th class="p-2 text-slate-400">S1</th>
+                                    <th class="p-2 text-slate-400">S2</th>
+                                    <th class="p-2 text-slate-400">P1</th>
+                                    <th class="p-2 text-slate-400">P2</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-slate-900">
+                                    <td class="p-2 text-slate-400 font-semibold">부문원가</td>
+                                    <td class="p-2 text-emerald-400 font-bold">? (X)</td>
+                                    <td class="p-2 text-slate-200">￦140,000</td>
+                                    <td class="p-2 text-slate-400">-</td>
+                                    <td class="p-2 text-slate-400">-</td>
+                                    <td class="p-2 text-slate-400">-</td>
+                                </tr>
+                                <tr class="border-b border-slate-900">
+                                    <td class="p-2 text-slate-400 font-semibold">S1 용역배부</td>
+                                    <td class="p-2 text-slate-400">-</td>
+                                    <td class="p-2 text-slate-300">40%</td>
+                                    <td class="p-2 text-slate-300">20%</td>
+                                    <td class="p-2 text-slate-300">40%</td>
+                                    <td class="p-2 text-slate-300">100%</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 text-slate-400 font-semibold">S2 용역배부</td>
+                                    <td class="p-2 text-slate-300">30%</td>
+                                    <td class="p-2 text-slate-400">-</td>
+                                    <td class="p-2 text-slate-300">40%</td>
+                                    <td class="p-2 text-slate-300">30%</td>
+                                    <td class="p-2 text-slate-300">100%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `,
+                options: [
+                    "① ￦100,000",
+                    "② ￦110,000",
+                    "③ ￦120,000",
+                    "④ ￦130,000",
+                    "⑤ ￦140,000"
+                ],
+                answer: 2, // ③
+                explanation: `직접배부법은 보조부문 상호간의 용역 거래를 완전히 무시하고 오직 제조부문으로만 배부합니다.
+
+1. S1의 제조부문배부 가중치(S2 무시): P1(20%), P2(40%)로 구성
+   -> P1 배부 비율 = 20% / (20% + 40%) = 1/3
+2. S2의 제조부문배부 가중치(S1 무시): P1(40%), P2(30%)로 구성
+   -> P1 배부 비율 = 40% / (40% + 30%) = 4/7
+3. P1에 배부된 최종 보조원가 합계 식 수립:
+   P1 배부액 = [S1 원가(X) × 1/3] + [S2 원가(￦140,000) × 4/7] = ￦120,000
+   (X / 3) + 80,000 = 120,000
+   X / 3 = 40,000
+   ∴ X = ￦120,000
+
+따라서 S1에 최초 집계된 부문원가는 ￦120,000(③번)입니다.`
+            },
+            {
+                id: 29,
+                question: "(주)한국의 20×1년 1월 영업 자료에서 추출한 정보이다. (주)한국의 1월 중 당기 제품제조원가가 ￦600,000이라면 1월의 재료매입액은?",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs md:text-sm">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-1">
+                            <div>· 기초재공품원가 ￦24,000</div>
+                            <div>· 기말재공품원가 ￦37,000</div>
+                            <div>· 기초재료원가 ￦16,000</div>
+                            <div>· 기말재료원가 ￦13,000</div>
+                            <div>· 직접노무원가 ￦200,000</div>
+                            <div>· 기타 제조간접원가 ￦70,000</div>
+                            <div>· 간접노무원가 ￦80,000</div>
+                            <div>· 감가상각비(본사) ￦50,000</div>
+                            <div>· 보험료(공장) ￦30,000</div>
+                            <div>· 판매수수료 ￦20,000</div>
+                        </div>
+                    </div>
+                `,
+                options: [
+                    "① ￦210,000",
+                    "② ￦220,000",
+                    "③ ￦225,000",
+                    "④ ￦230,000",
+                    "⑤ ￦240,000"
+                ],
+                answer: 3, // ④
+                explanation: `원가 역산 흐름 설계:
+
+1. 당기총제조원가 역산:
+   당기제품제조원가(600,000) = 기초재공품(24,000) + 당기총제조원가(X) - 기말재공품(37,000)
+   600,000 = X - 13,000
+   ∴ 당기총제조원가(X) = ￦613,000
+
+2. 제조간접비 집계:
+   *주의: 본사 감가상각비와 판매수수료는 비제조(판관비) 원가이므로 제외!
+   공장 제조간접비 = 기타 제조간접비(70,000) + 간접노무비(80,000) + 공장 보험료(30,000) = ￦180,000
+
+3. 당기총제조원가 분해하여 직접재료원가(사용액) 구하기:
+   당기총제조원가(613,000) = 직접재료원가(Y) + 직접노무원가(200,000) + 제조간접원가(180,000)
+   613,000 = Y + 380,000
+   ∴ 직접재료원가(Y) = ￦233,000
+
+4. 재료매입액 계산:
+   직접재료원가(사용액 233,000) = 기초재료(16,000) + 당기재료매입액(Z) - 기말재료(13,000)
+   233,000 = Z + 3,000
+   ∴ Z = ￦230,000 (④번 정답)`
+            },
+            {
+                id: 30,
+                question: "제조기업인 (주)한국이 변동원가계산방법에 의하여 제품원가를 계산할 때 제품원가에 포함되는 항목을 모두 고른 것은?",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs md:text-sm space-y-1">
+                        <div>ㄱ. 직접재료원가</div>
+                        <div>ㄴ. 직접노무원가</div>
+                        <div>ㄷ. 본사건물 감가상각비</div>
+                        <div>ㄹ. 월정액 공장임차료</div>
+                    </div>
+                `,
+                options: [
+                    "① ㄱ, ㄷ, ㄹ",
+                    "② ㄱ, ㄴ, ㄹ",
+                    "③ ㄴ, ㄷ",
+                    "④ ㄴ, ㄹ",
+                    "⑤ ㄱ, ㄴ"
+                ],
+                answer: 4, // ⑤
+                explanation: `원가계산방법에 따른 범위:
+
+- 변동원가계산에서는 조업도 변동에 따라 비례하여 증가하는 '변동제조원가'만 제품 원가에 포함시킵니다.
+  - ㄱ. 직접재료원가 (변동제조원가 - 포함)
+  - ㄴ. 직접노무원가 (변동제조원가 - 포함)
+- 제외 항목:
+  - ㄷ. 본사 건물 감가상각비: 비제조활동 판관비 성격이므로 제품 원가 아님.
+  - ㄹ. 월정액 공장임차료: 고정제조간접비에 해당하므로 변동원가계산에서는 기간비용으로 즉시 처리되고 제품원가에서 제외됩니다.
+
+따라서 제품원가 산입 요소는 ㄱ, ㄴ이므로 정답은 ⑤번입니다.`
+            },
+            {
+                id: 31,
+                question: "아파트건설 전문업체인 (주)한국은 새로운 아파트 공법을 개발하고, 이에 대한 홍보를 위해 100m² 면적의 아파트 1개에 대하여 무료로 시공을 수행하면서 총 50시간의 노무시간을 투입하였다. (주)한국은 아파트 공법 시공의 경우 노무시간이 80%의 학습률을 가지는 학습효과가 존재하고, 누적평균시간 학습곡선모형을 따를 것으로 추정하고 있다. (주)한국은 동일한 구조와 형태 및 면적(100m²)의 7개 아파트(총 700m²)에 대한 시공 의뢰를 받았다. 이와 관련하여 투입될 것으로 추정되는 직접노무시간은?",
+                options: [
+                    "① 154.8시간",
+                    "② 165.8시간",
+                    "③ 195.8시간",
+                    "④ 200.8시간",
+                    "⑤ 204.8시간"
+                ],
+                answer: 0, // ①
+                explanation: `누적평균시간 학습곡선 모형 대입 및 풀이:
+
+1. 누적생산량 기준 2배 단위로 평균시간이 감소합니다. (학습률 80%)
+   - 1대 생산 시: 평균시간 50시간 (총 누적 50시간)
+   - 2대 생산 시: 평균 50 × 80% = 40시간 (총 누적 40 × 2 = 80시간)
+   - 4대 생산 시: 평균 40 × 80% = 32시간 (총 누적 32 × 4 = 128시간)
+   - 8대 생산 시: 평균 32 × 80% = 25.6시간 (총 누적 25.6 × 8 = 204.8시간)
+
+2. 문제의 요구사항 파악:
+   이미 1대의 아파트를 완공하였으며, 추가로 7대를 수주하였습니다. (총 생산 목표량 = 8대)
+   - 8대 전체 시공 시 추정되는 총 직접노무시간 = 204.8시간
+   - 이 중 이미 투입 완료된 최초 1대의 노무시간(50시간)을 차감해야 '추가로 투입될 7개 아파트에 대한 노무시간'을 구할 수 있습니다.
+   - 추가 추정 노무시간 = 204.8시간 - 50시간 = 154.8시간
+
+따라서 정답은 ①번입니다.`
+            },
+            {
+                id: 32,
+                question: "생산량과 총제조원가는 다음과 같다. 20×3년도에 총고정제조원가가 10% 증가할 경우, 생산량이 400단위일 때 총제조원가는?",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs md:text-sm space-y-1">
+                        <div>· 20×1년: 200단위 | 총제조원가 ￦600,000</div>
+                        <div>· 20×2년: 300단위 | 총제조원가 ￦800,000</div>
+                    </div>
+                `,
+                options: [
+                    "① ￦1,000,000",
+                    "② ￦1,020,000",
+                    "③ ￦1,040,000",
+                    "④ ￦1,060,000",
+                    "⑤ ￦1,080,000"
+                ],
+                answer: 1, // ②
+                explanation: `고저점법에 의한 원가 공식(Y = a + bX) 추정:
+
+1. 단위당 변동원가(b) 구하기:
+   (고점 원가 - 저점 원가) / (고점 조업도 - 저점 조업도)
+   = (￦800,000 - ￦600,000) / (300단위 - 200단위) = ￦200,000 / 100단위 = @￦2,000
+
+2. 고정원가(a) 계산(20×2년 대입):
+   총제조원가(800,000) = 고정원가(a) + (300단위 × @2,000)
+   800,000 = a + 600,000
+   ∴ 기초 총고정원가(a) = ￦200,000
+
+3. 20×3년 고정비 변동사항 적용:
+   총고정제조원가가 10% 상승하므로, 새 고정원가 = ￦200,000 × 1.1 = ￦220,000
+
+4. 400단위 조업도 생산 시 총제조원가 추정:
+   총원가 = ￦220,000 (고정비) + (400단위 × @￦2,000)
+   = ￦220,000 + ￦800,000 = ￦1,020,000 (②번)`
+            },
+            {
+                id: 33,
+                question: "(주)한국은 제품생산에 소비할 원재료 ￦85,000을 구입하여 보유하고 있으나, 현재 제품생산에 사용할 수 없다. (주)한국은 원재료에 대해 두 가지 대안을 고려하고 있다. (주)한국이 (대안 2)를 선택하는 경우, (대안 1)에 비하여 증가 또는 감소하는 이익은?",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs md:text-sm space-y-1.5">
+                        <div><strong>(대안 1)</strong> 원재료를 그대로 외부에 ￦50,000에 판매하는 것</div>
+                        <div><strong>(대안 2)</strong> 원재료에 ￦5,000의 다른 원재료를 혼합하여 변환한 후 ￦66,000에 판매하는 것</div>
+                    </div>
+                `,
+                options: [
+                    "① ￦10,000 증가",
+                    "② ￦11,000 증가",
+                    "③ ￦11,000 감소",
+                    "④ ￦16,000 증가",
+                    "⑤ ￦16,000 감소"
+                ],
+                answer: 1, // ②
+                explanation: `관련 의사결정 증분 분석:
+* 기존에 취득 완료한 원재료 원가 ￦85,000은 어떤 안을 선택하더라도 회수 불가능한 '매몰원가(Sunk Cost)'이므로 의사결정 시 철저히 배제해야 합니다!
+
+- (대안 1) 선택 시 유입액: ￦50,000
+- (대안 2) 선택 시 유입액(추가 가공 적용 후): 
+  매출액(￦66,000) - 추가 가공비(￦5,000) = 순유입 ￦61,000
+  
+두 대안의 증분비교:
+(대안 2)의 이익 ￦61,000 - (대안 1)의 이익 ￦50,000 = ￦11,000 증가
+
+따라서 대안 2를 선택할 때 대안 1 대비 이익은 ￦11,000 증가하게 되므로 정답은 ②번입니다.`
+            },
+            {
+                id: 34,
+                question: "(주)한국은 붕어빵을 제조 판매한다. 붕어빵 제조는 매년 1,000단위이며, 단위당 제조원가는 아래의 표와 같다. 그런데 생산업자가 원재료 등 1,000단위를 단위당 ￦80에 공급하겠다고 제안하였다. 이 제안을 수락할 경우 생산설비를 연 ￦8,000에 임대할 수 있다. (주)한국이 제안을 수락할 경우 단위당 최대 지급액은? (단, 고정제조간접원가의 60%는 계속해서 발생된다.)",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs md:text-sm">
+                        <div class="font-bold text-emerald-400 mb-1.5">[1,000단위 생산 시 단위당 제조원가]</div>
+                        <div>· 직접재료원가 ￦30</div>
+                        <div>· 직접노무원가 ￦20</div>
+                        <div>· 변동제조간접원가 ￦10</div>
+                        <div>· 고정제조간접원가 ￦50</div>
+                        <div class="border-t border-slate-800 mt-1.5 pt-1 font-bold text-slate-300">· 붕어빵의 단위당 제조원가 ￦110</div>
+                    </div>
+                `,
+                options: [
+                    "① ￦70",
+                    "② ￦75",
+                    "③ ￦86",
+                    "④ ￦85",
+                    "⑤ ￦88"
+                ],
+                answer: 4, // ⑤
+                explanation: `부품/제품 자가제조 vs 외부구입 의사결정 분석:
+
+1. 외부 구입 시 '회피가능한' 자가제조 원가 계산 (단위당):
+   - 직접재료비: ￦30
+   - 직접노무비: ￦20
+   - 변동제조간접비: ￦10
+   - 고정제조간접비 회피가능액: 전체 ￦50 중 60%가 계속 발생(회피불가)하므로, 40%가 회피가능합니다.
+     -> ￦50 × 40% = ￦20
+   ※ 단위당 총 회피가능 자가제조원가 = 30 + 20 + 10 + 20 = ￦80
+
+2. 외부에서 부품을 살 때 얻을 수 있는 기회이익(기회비용) 계산:
+   - 외부 수락 시 남는 생산설비 임대수익 연 ￦8,000 가능
+   - 단위당 기회이익 = ￦8,000 / 1,000단위 = ￦8
+
+3. 외부구입 시 수락할 수 있는 단위당 최대 지급가능 금액 공식:
+   최대지급액 = 회피가능 제조원가(￦80) + 임대기회이익(￦8) = ￦88
+
+따라서 최대 지급액은 ￦88인 ⑤번이 정답입니다.`
+            },
+            {
+                id: 35,
+                question: "(주)한국은 상품매매업을 영위하고 있다. 20×1년 3분기의 상품매입예산은 다음과 같다. 20×1년 9월의 현금지출예상액은?",
+                box: `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-900 border-b border-slate-800">
+                                    <th class="p-2 font-bold text-slate-300">구분</th>
+                                    <th class="p-2 font-bold text-slate-300">7월</th>
+                                    <th class="p-2 font-bold text-slate-300">8월</th>
+                                    <th class="p-2 font-bold text-slate-300">9월</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="p-2 text-slate-400 font-semibold">상품매입액(예산)</td>
+                                    <td class="p-2 text-slate-200">￦70,000</td>
+                                    <td class="p-2 text-slate-200">￦90,000</td>
+                                    <td class="p-2 text-slate-200">￦80,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-slate-300 text-xs space-y-1.5 mt-2">
+                        <div>· 매월 상품매입은 현금매입 40%와 외상매입 60%로 이루어진다.</div>
+                        <div>· 매입시점의 현금 매입에 대해서는 2%의 할인을 받고 있다.</div>
+                        <div>· 외상 매입의 30%는 매입한 달에 지급하고, 나머지는 그 다음 달에 모두 지급한다.</div>
+                    </div>
+                `,
+                options: [
+                    "① ￦78,560",
+                    "② ￦79,560",
+                    "③ ￦83,560",
+                    "④ ￦85,560",
+                    "⑤ ￦88,560"
+                ],
+                answer: 2, // ③
+                explanation: `현금예산 수립 및 9월 지출액 상세 계산:
+
+1. 9월 현금 매입에 따른 실지출액(2% 할인 혜택 고려):
+   - 9월 현금 매입분 원금 = ￦80,000 × 40% = ￦32,000
+   - 2% 할인 반영 실지출 = ￦32,000 × (1 - 0.02) = ￦31,360
+
+2. 9월 외상 매입대금 중 9월 중 즉시 상환액(30%):
+   - 9월 외상 매입액 = ￦80,000 × 60% = ￦48,000
+   - 당월 결제액(30%) = ￦48,000 × 30% = ￦14,400
+
+3. 8월 외상 매입대금 중 9월 이월 상환액(70%):
+   - 8월 외상 매입액 = ￦90,000 × 60% = ￦54,000
+   - 이월분 지급액(70%) = ￦54,000 × 70% = ￦37,800
+
+4. 9월 현금지출 총액 합산:
+   ￦31,360(9월현금할인분) + ￦14,400(9월외상당월분) + ￦37,800(8월외상잔액분)
+   = ￦83,560
+
+따라서 9월의 현금지출 예상액은 ￦83,560(③번)입니다.`
+            }
+        ];
+
+        // System dynamic text bubbles from one-top instructor (Gemini)
+        const instructorSpeeches = [
+            "좋습니다! 첫 단추가 중요해요. 기본 정의부터 완벽히 짚어봅시다.",
+            "분개는 회계의 심장입니다. 자산 부채 자본의 흐름을 쫓아가세요!",
+            "시산표 문제는 대차균형의 불일치 현상만 추적하면 답이 보입니다.",
+            "개념체계 문제는 획일성이라는 함정을 경계하셔야 합니다.",
+            "이용자 부류와 의사결정 유용성을 정교하게 구별하는 것이 핵심!",
+            "총자산회전율 공식은 평균 자산을 분모로 둔다는 점을 명심하세요.",
+            "만기 90일 이내! 현금성자산의 절대조건입니다.",
+            "금융상품은 '계약'이라는 단어 두 글자만 명심하면 다 풀립니다.",
+            "T계정을 그리는 자, 무조건 1분 컷으로 고득점을 챙깁니다.",
+            "계약에 기인하지 않는 세무적 예수금 등은 철저히 비금융항목!",
+            "당기순이익에 영향을 주는 것은 자본 항목이 아닌 오직 수익/비용!",
+            "선급비용은 미래 서비스 수취 권리라 비금융자산입니다. 명심하세요!",
+            "감모 손실에서 정상 감모와 비정상 감모 배분 비율을 똑바로 구별하세요.",
+            "시운전 비용은 당연히 기계 값에 얹어줘야 정당하겠죠?",
+            "유형자산 인식기준을 통과했다면 자본화! 아주 심플한 진리입니다.",
+            "충당부채 조건은 100% 확실이 아니라 유출 가능성이 '높음'입니다.",
+            "공사진행률은 누적원가 비중으로만 나누면 정답이 떨어집니다.",
+            "총예상손실 발생 시 즉시 전액 인식! 시험 단골 킬러 문항입니다.",
+            "상품권 액면 대가에서 현금 환불 차감액 빼는 것 잊지 마세요.",
+            "월할 계산! 이자비용은 일한 개월 수 만큼 쪼개서 기말 조정합니다.",
+            "간접법에서 비현금 비용 가산과 투자활동이익 차감을 헷갈리면 안됩니다.",
+            "간접법 문제는 공식 표 하나 그려두고 빈칸 채우듯이 대입하면 됩니다.",
+            "사채상환 배당금 등 재무활동 변동은 머릿속에서 완벽히 배제하세요.",
+            "매출채권 손상 차손과 손실충당금 변동액을 가미한 회수 공식!",
+            "순액 매출채권 증가액 속에 이미 대손 변동이 연동되어 있습니다.",
+            "기초에서 기말을 가감하는 전체 현금의 순증가 흐름을 보세요.",
+            "원가 T계정을 원재료에서 제공품, 제품까지 연쇄적으로 굴려봅시다.",
+            "직접배부법은 보조 상호간 배부 무시! 분모에서 지워버리세요.",
+            "공장 감가상각과 본사 감가상각을 구별해야 함정 카드를 피합니다.",
+            "변동원가는 고정제조간접비를 즉시 기간 비용으로 소각시킵니다.",
+            "누적평균시간학습은 수치가 2배수로 도약할 때마다 학습률을 곱해갑니다.",
+            "고저점법 b 구하기: 원가차이를 조업도차이로 나눠버리세요.",
+            "매몰원가는 지나간 과거의 그늘일 뿐, 의사결정의 태양이 아닙니다.",
+            "회피가능 자가제조 원가에 기회이익 임대수익을 가산하는 원리!",
+            "어려워 보이지만 할인 조건과 당월/이월 지급비율을 곱하면 간단해요!"
+        ];
+
+        // App States
+        let studentName = "";
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let correctCount = 0;
+        let userAnswers = []; // Records indices selected by user or null
+
+        // UI references
+        const introScreen = document.getElementById('intro-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const reportScreen = document.getElementById('report-screen');
+        const studentNameInput = document.getElementById('student-name');
+        
+        // Quiz View elements
+        const progressText = document.getElementById('progress-text');
+        const progressBar = document.getElementById('progress-bar');
+        const currentScoreSpan = document.getElementById('current-score');
+        const instructorTips = document.getElementById('instructor-tips');
+        const questionNumber = document.getElementById('question-number');
+        const questionText = document.getElementById('question-text');
+        const boxContainer = document.getElementById('box-container');
+        const optionsContainer = document.getElementById('options-container');
+        
+        // Feedback components
+        const feedbackPanel = document.getElementById('feedback-panel');
+        const feedbackIcon = document.getElementById('feedback-icon');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const toggleExplanationBtn = document.getElementById('toggle-explanation-btn');
+        const explanationBody = document.getElementById('explanation-body');
+        const explanationText = document.getElementById('explanation-text');
+        const explanationArrow = document.getElementById('explanation-arrow');
+
+        // Initial setup
+        function startQuiz() {
+            studentName = studentNameInput.value.trim() || "수험생";
+            introScreen.classList.add('hidden');
+            quizScreen.classList.remove('hidden');
+            currentQuestionIndex = 0;
+            score = 0;
+            correctCount = 0;
+            userAnswers = [];
+            loadQuestion(currentQuestionIndex);
+        }
+
+        // Load specific question to UI
+        function loadQuestion(index) {
+            if (index >= questions.length) {
+                showReport();
+                return;
+            }
+
+            const q = questions[index];
+            
+            // Set dynamic header & tips
+            progressText.innerText = `${q.id} / ${questions.length}`;
+            const percentage = (index / questions.length) * 100;
+            progressBar.style.width = `${percentage}%`;
+            currentScoreSpan.innerText = score;
+            questionNumber.innerText = q.id;
+            questionText.innerText = q.question;
+            
+            // Set Dynamic Instructor Voice
+            instructorTips.innerText = `"${instructorSpeeches[index]}"`;
+
+            // Setup box (table/lists) if present
+            if (q.box) {
+                boxContainer.innerHTML = q.box;
+                boxContainer.classList.remove('hidden');
+            } else {
+                boxContainer.innerHTML = '';
+                boxContainer.classList.add('hidden');
+            }
+
+            // Options list
+            optionsContainer.innerHTML = '';
+            q.options.forEach((opt, oIdx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left bg-slate-950 border border-slate-800 hover:border-slate-700 hover:bg-slate-900 px-5 py-4 rounded-xl transition-all duration-200 text-xs md:text-sm font-semibold flex items-center justify-between group active:scale-[0.99]";
+                btn.innerHTML = `
+                    <span>${opt}</span>
+                    <span class="w-5 h-5 rounded-full border border-slate-700 flex items-center justify-center text-xs group-hover:border-slate-500 transition-all"></span>
+                `;
+                btn.onclick = () => selectOption(oIdx);
+                optionsContainer.appendChild(btn);
+            });
+
+            // Reset feedback elements
+            feedbackPanel.classList.add('hidden');
+            explanationBody.classList.add('hidden');
+            explanationArrow.classList.remove('rotate-180');
+        }
+
+        // Handler for option click (Interactive response)
+        function selectOption(selectedIdx) {
+            // Prevent multiple submissions on same question
+            if (userAnswers[currentQuestionIndex] !== undefined) return;
+
+            userAnswers[currentQuestionIndex] = selectedIdx;
+            const q = questions[currentQuestionIndex];
+            const isCorrect = (selectedIdx === q.answer);
+
+            // Calculate points: each question worth ~2.85 points (100 / 35 = 2.857)
+            const questionWeight = 100 / questions.length;
+            
+            if (isCorrect) {
+                correctCount++;
+                score = Math.round(correctCount * questionWeight);
+                triggerDirectSuccessEffects();
+            }
+
+            // Visual feedback on options
+            const buttons = optionsContainer.querySelectorAll('button');
+            buttons.forEach((btn, bIdx) => {
+                btn.onclick = null; // Disable future clicks
+                btn.className = "w-full text-left px-5 py-4 rounded-xl text-xs md:text-sm font-semibold flex items-center justify-between border transition-all";
+                
+                const circle = btn.querySelector('span:last-child');
+                
+                if (bIdx === q.answer) {
+                    // Highlight correct answer in Green
+                    btn.classList.add('bg-emerald-950/40', 'border-emerald-500', 'text-emerald-100', 'glow-green');
+                    circle.className = "w-5 h-5 rounded-full bg-emerald-500 border border-emerald-500 flex items-center justify-center text-slate-950 text-[10px] font-black";
+                    circle.innerHTML = "✔";
+                } else if (bIdx === selectedIdx) {
+                    // Selected wrong answer in Red
+                    btn.classList.add('bg-rose-950/40', 'border-rose-500', 'text-rose-100', 'glow-red');
+                    circle.className = "w-5 h-5 rounded-full bg-rose-500 border border-rose-500 flex items-center justify-center text-slate-950 text-[10px] font-black";
+                    circle.innerHTML = "✘";
+                } else {
+                    // Unselected wrong choices
+                    btn.classList.add('bg-slate-950/20', 'border-slate-900', 'text-slate-500');
+                    circle.className = "w-5 h-5 rounded-full border border-slate-800 flex items-center justify-center text-xs opacity-50";
+                }
+            });
+
+            // Reveal detailed commentary panel
+            feedbackPanel.classList.remove('hidden');
+            if (isCorrect) {
+                feedbackPanel.className = "rounded-xl p-5 border border-emerald-800 bg-emerald-950/10 space-y-4";
+                feedbackIcon.className = "bg-emerald-500 text-slate-950 rounded-full p-2 shrink-0";
+                feedbackIcon.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>`;
+                feedbackTitle.innerText = "완벽한 분석, 정답입니다!";
+                feedbackTitle.className = "text-base md:text-lg font-black text-emerald-400";
+            } else {
+                feedbackPanel.className = "rounded-xl p-5 border border-rose-800 bg-rose-950/10 space-y-4";
+                feedbackIcon.className = "bg-rose-500 text-slate-950 rounded-full p-2 shrink-0";
+                feedbackIcon.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+                feedbackTitle.innerText = "아쉽습니다! 오답입니다.";
+                feedbackTitle.className = "text-base md:text-lg font-black text-rose-400";
+            }
+
+            // Populate explanation text
+            explanationText.innerHTML = q.explanation;
+            
+            // Auto open the explanation on mistake for easier understanding, let correct answer toggle
+            if (!isCorrect) {
+                explanationBody.classList.remove('hidden');
+                explanationArrow.classList.add('rotate-180');
+            }
+        }
+
+        function toggleExplanation() {
+            if (explanationBody.classList.contains('hidden')) {
+                explanationBody.classList.remove('hidden');
+                explanationArrow.classList.add('rotate-180');
+            } else {
+                explanationBody.classList.add('hidden');
+                explanationArrow.classList.remove('rotate-180');
+            }
+        }
+
+        function goToNextQuestion() {
+            currentQuestionIndex++;
+            loadQuestion(currentQuestionIndex);
+        }
+
+        // Direct success minor flash feedback
+        function triggerDirectSuccessEffects() {
+            const container = document.getElementById('quiz-screen');
+            container.classList.add('ring-2', 'ring-emerald-500/20');
+            setTimeout(() => {
+                container.classList.remove('ring-2', 'ring-emerald-500/20');
+            }, 500);
+        }
+
+        // Display results screen & Incorrect Answers Note
+        function showReport() {
+            quizScreen.classList.add('hidden');
+            reportScreen.classList.remove('hidden');
+            
+            document.getElementById('user-display-name').innerText = studentName;
+            document.getElementById('final-score').innerText = score;
+            document.getElementById('correct-count').innerText = correctCount;
+            
+            const percentage = Math.round((correctCount / questions.length) * 100);
+            document.getElementById('success-rate').innerText = `${percentage}%`;
+
+            // Select Rank & dynamic text feedback
+            let rank = "";
+            let rankFeedback = "";
+            let rankColor = "";
+
+            if (percentage >= 80) {
+                rank = "🥇 수석 합격 페이스";
+                rankColor = "text-emerald-400";
+                rankFeedback = `"${studentName}님, 진짜 대단하십니다! 복잡한 계산 구조와 개념 함정을 완벽히 파악하고 계시네요. 시험장에서의 고득점 수석합격의 주인공은 단연 당신입니다! 이 페이스 그대로 당당하게 시험장으로 걸어가십시오!"`;
+                triggerConfetti(); // Play confetti animation for outstanding performance
+            } else if (percentage >= 60) {
+                rank = "🥈 안정적인 합격권";
+                rankColor = "text-teal-400";
+                rankFeedback = `"${studentName}님, 합격 안전 자산에 안착하셨습니다! 회계원리 과목에서 60점 이상을 마크할 수 있다면 주택관리사 1차 시험 통과는 무조건 보장됩니다. 틀린 오답 짚어보고 실수만 줄여봅시다."`;
+            } else if (percentage >= 40) {
+                rank = "🥉 보충 필요 (면과락 페이스)";
+                rankColor = "text-amber-400";
+                rankFeedback = `"${studentName}님, 회계원리 과락(40점 미만)은 가뿐히 면할 수 있는 페이스이지만, 실전 변수와 타 과목과의 밸런스를 고려해 60점 합격선까지 전진해야 합니다. 아래 오답 노트 정리본을 꼭 복사해 재미나이에게 더 쉽게 풀이해달라고 요청해 보세요."`;
+            } else {
+                rank = "🚨 정밀 보충 학습 요망";
+                rankColor = "text-rose-500";
+                rankFeedback = `"${studentName}님, 회계원리는 절대 감이나 암기로 접근해서는 안 됩니다. 개념 이해와 분개 매커니즘 정리가 시급합니다. 실망하지 마세요, 지금 오답을 파악한 것이 다행입니다. 오답 리포트를 카피한 다음 저에게 자세히 과외를 신청하세요!"`;
+            }
+
+            const rankSpan = document.getElementById('instructor-rank');
+            rankSpan.innerText = rank;
+            rankSpan.className = `text-lg md:text-xl font-extrabold ${rankColor}`;
+            document.getElementById('rank-feedback-text').innerText = rankFeedback;
+
+            // Render incorrect answer note
+            const incorrectList = document.getElementById('incorrect-list');
+            incorrectList.innerHTML = '';
+
+            let hasIncorrect = false;
+            questions.forEach((q, idx) => {
+                const userAns = userAnswers[idx];
+                if (userAns !== q.answer) {
+                    hasIncorrect = true;
+                    const container = document.createElement('div');
+                    container.className = "bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3";
+                    
+                    const userText = userAns !== undefined ? q.options[userAns] : "미응답";
+                    const correctText = q.options[q.answer];
+
+                    // Extract simplified keyword or question title snippet
+                    const shortTitle = q.question.length > 50 ? q.question.substring(0, 50) + "..." : q.question;
+
+                    container.innerHTML = `
+                        <div class="flex items-start justify-between gap-2 border-b border-slate-900 pb-2">
+                            <span class="bg-rose-500/10 text-rose-400 text-xs font-bold px-2 py-0.5 rounded">문항 ${q.id}번</span>
+                            <span class="text-xs text-slate-500 font-medium">유형: 회계원리 핵심</span>
+                        </div>
+                        <p class="text-xs md:text-sm text-slate-300 font-semibold">${shortTitle}</p>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <div class="bg-slate-900 p-2 rounded text-rose-400">나의 선택: <strong class="text-white">${userText.substring(0, 15)}...</strong></div>
+                            <div class="bg-slate-900 p-2 rounded text-emerald-400">정답 보기: <strong class="text-white">${correctText.substring(0, 15)}...</strong></div>
+                        </div>
+                        <div class="bg-slate-900/40 p-3 rounded text-slate-400 text-[11px] md:text-xs leading-relaxed">
+                            💡 <strong>비법 메모:</strong> ${q.explanation.split('\n')[0]} ...
+                        </div>
+                    `;
+                    incorrectList.appendChild(container);
+                }
+            });
+
+            if (!hasIncorrect) {
+                incorrectList.innerHTML = `
+                    <div class="bg-emerald-950/20 p-8 rounded-xl border border-emerald-900/30 text-center">
+                        <span class="text-3xl">🎉</span>
+                        <h4 class="text-emerald-400 font-extrabold text-sm mt-2">퍼펙트 달성! 틀린 문제가 하나도 없습니다!</h4>
+                        <p class="text-slate-400 text-xs mt-1">회계원리에 대해서는 완벽하게 마스터하셨습니다.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Custom copy incorrect answers helper using fallback copy rule
+        function copyIncorrectReport() {
+            let reportText = `[주택관리사보 1차 회계원리 오답 트레이닝 보고서]\n`;
+            reportText += `수험생 성명: ${studentName}\n`;
+            reportText += `획득 점수: ${score}점 / 100점\n`;
+            reportText += `정답 수량: ${correctCount}개 / 35개\n\n`;
+            reportText += `■ 틀린 문항 목록 분석 요약:\n`;
+
+            let count = 0;
+            questions.forEach((q, idx) => {
+                if (userAnswers[idx] !== q.answer) {
+                    count++;
+                    const userText = userAnswers[idx] !== undefined ? q.options[userAnswers[idx]] : "미선택";
+                    const correctText = q.options[q.answer];
+                    reportText += `${count}. [문항 ${q.id}번] ${q.question}\n`;
+                    reportText += `   - 내가 선택한 답: ${userText}\n`;
+                    reportText += `   - 올바른 정답: ${correctText}\n`;
+                    reportText += `   - 일타강사 교정: ${q.explanation.split('\n')[0]}\n\n`;
+                }
+            });
+
+            if (count === 0) {
+                reportText += "완벽합니다! 오답이 발견되지 않았습니다. 실전 합격률 100% 예상!\n";
+            }
+
+            // Copy to clipboard fallback rule for iframes
+            const textarea = document.createElement('textarea');
+            textarea.value = reportText;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    // Show small success modal/text feedback instead of browser alert
+                    const copyBtn = event.target.closest('button');
+                    const origText = copyBtn.innerHTML;
+                    copyBtn.innerHTML = "✔ 복사 완료!";
+                    copyBtn.classList.add('bg-emerald-500', 'text-slate-950');
+                    setTimeout(() => {
+                        copyBtn.innerHTML = origText;
+                        copyBtn.classList.remove('bg-emerald-500', 'text-slate-950');
+                    }, 2000);
+                }
+            } catch (err) {
+                console.error('복사 중 에러가 발생했습니다.', err);
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        }
+
+        // Lightweight Confetti Particle Canvas Script
+        function triggerConfetti() {
+            const canvas = document.getElementById('confetti-canvas');
+            canvas.classList.remove('hidden');
+            const ctx = canvas.getContext('2d');
+            
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+            
+            const colors = ['#10b981', '#34d399', '#3b82f6', '#60a5fa', '#f59e0b', '#ec4899'];
+            const particles = [];
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * -height - 20;
+                    this.size = Math.random() * 6 + 4;
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
+                    this.speedY = Math.random() * 3 + 2;
+                    this.speedX = Math.random() * 2 - 1;
+                    this.rotation = Math.random() * 360;
+                    this.rotationSpeed = Math.random() * 4 - 2;
+                }
+                update() {
+                    this.y += this.speedY;
+                    this.x += this.speedX;
+                    this.rotation += this.rotationSpeed;
+                }
+                draw() {
+                    ctx.save();
+                    ctx.translate(this.x, this.y);
+                    ctx.rotate((this.rotation * Math.PI) / 180);
+                    ctx.fillStyle = this.color;
+                    ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+                    ctx.restore();
+                }
+            }
+
+            for (let i = 0; i < 120; i++) {
+                particles.push(new Particle());
+            }
+
+            let animationFrameId;
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach((p, index) => {
+                    p.update();
+                    p.draw();
+                    if (p.y > height) {
+                        particles[index] = new Particle();
+                    }
+                });
+                animationFrameId = requestAnimationFrame(animate);
+            }
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            animate();
+
+            // Stop confetti animation loop after 8 seconds
+            setTimeout(() => {
+                cancelAnimationFrame(animationFrameId);
+                canvas.classList.add('hidden');
+            }, 8000);
+        }
+    </script>
+</body>
+</html>
