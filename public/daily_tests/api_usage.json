@@ -1,7 +1,7 @@
 {
-  "total_cost_usd": 3.82631625,
-  "total_cost_krw": 5376,
-  "last_updated": "2026-06-21T21:31:31.899Z",
+  "total_cost_usd": 4.15096,
+  "total_cost_krw": 5832,
+  "last_updated": "2026-06-22T21:38:09.801Z",
   "history": [
     {
       "date": "2026-06-08",
@@ -335,6 +335,33 @@
       "output_tokens": 18172,
       "cost_usd": 0.1163775,
       "cost_krw": 163
+    },
+    {
+      "date": "2026-06-23",
+      "timestamp": "2026-06-22T21:15:08.493Z",
+      "subject": "회계원리",
+      "input_tokens": 23155,
+      "output_tokens": 20962,
+      "cost_usd": 0.13375375,
+      "cost_krw": 188
+    },
+    {
+      "date": "2026-06-23",
+      "timestamp": "2026-06-22T21:25:21.788Z",
+      "subject": "시설개론",
+      "input_tokens": 15307,
+      "output_tokens": 12948,
+      "cost_usd": 0.08387375000000001,
+      "cost_krw": 118
+    },
+    {
+      "date": "2026-06-23",
+      "timestamp": "2026-06-22T21:38:09.801Z",
+      "subject": "민법",
+      "input_tokens": 19073,
+      "output_tokens": 16635,
+      "cost_usd": 0.10701625000000001,
+      "cost_krw": 150
     }
   ]
 }
