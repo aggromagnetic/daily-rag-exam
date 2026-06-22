@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주택관리사보 1차 회계원리 극비 모의고사</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Noto Sans KR & Montserrat) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons for Beautiful UI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+        }
+        .font-montserrat {
+            font-family: 'Montserrat', sans-serif;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
+</head>
+<body class="text-slate-100 min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-slate-900">
+
+    <!-- Top Navigation Header -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-black px-2.5 py-1 rounded text-xs tracking-wider uppercase font-montserrat">PASS</span>
+                <h1 class="text-lg font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">주택관리사보 1차 회계원리</h1>
+            </div>
+            <div class="flex items-center space-x-4 text-xs sm:text-sm font-medium">
+                <div id="stats-badge" class="hidden sm:flex items-center space-x-2 bg-slate-800 px-3 py-1.5 rounded-full border border-slate-700/60">
+                    <span class="text-slate-400">진행도</span>
+                    <span id="nav-progress" class="text-emerald-400 font-bold font-montserrat">0/35</span>
+                </div>
+                <div class="flex items-center space-x-2 bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-full border border-emerald-500/20">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span class="font-bold">1타 강사 엄선 모의고사</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-8 flex flex-col justify-center">
+        
+        <!-- Screen 1: Splash / Welcome Screen -->
+        <section id="screen-welcome" class="space-y-8 py-6 text-center animate-fade-in">
+            <div class="max-w-2xl mx-auto space-y-6">
+                <div class="inline-flex p-3 bg-emerald-500/10 text-emerald-400 rounded-2xl border border-emerald-500/20 mb-2">
+                    <i class="fa-solid fa-graduation-cap text-4xl"></i>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-100 tracking-tight leading-snug">
+                    아직도 헤매고 계십니까?<br>
+                    <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">회계원리 고득점 전략,</span> 단 한 장으로 끝냅니다!
+                </h2>
+                <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+                    주택관리사보 1차 시험의 가장 거대한 장벽, 회계원리.<br>
+                    기계적 단순 암기가 아닌 원리를 이해하는 명쾌한 분석과 핵심 지문 해체쇼!<br>
+                    <strong>실전 35문항</strong>의 고품격 인터랙티브 훈련으로 완벽한 합격 라인을 잡으십시오.
+                </p>
+            </div>
+
+            <!-- Quiz Settings & Features Box -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto text-left mt-8">
+                <div class="bg-slate-800/50 p-5 rounded-xl border border-slate-700/40 hover:border-slate-600 transition duration-300">
+                    <h3 class="font-bold text-emerald-400 mb-2"><i class="fa-solid fa-bolt mr-2"></i>즉각 피드백 시스템</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">문제를 품과 동시에 정답 여부와 함께 상세한 수정분개, 계산 구조를 즉시 확인합니다.</p>
+                </div>
+                <div class="bg-slate-800/50 p-5 rounded-xl border border-slate-700/40 hover:border-slate-600 transition duration-300">
+                    <h3 class="font-bold text-teal-400 mb-2"><i class="fa-solid fa-clipboard-check mr-2"></i>오답 노트 원클릭 연동</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">틀린 문제만 따로 모아 복습하고, AI에게 심화 질문을 던질 수 있도록 특화 텍스트로 가공해 드립니다.</p>
+                </div>
+                <div class="bg-slate-800/50 p-5 rounded-xl border border-slate-700/40 hover:border-slate-600 transition duration-300">
+                    <h3 class="font-bold text-cyan-400 mb-2"><i class="fa-solid fa-star mr-2"></i>북마크 중요 문항 관리</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">공부하는 도중 까다롭거나 꼭 다시 봐야 할 문항은 즐겨찾기에 등록해 따로 관리하세요.</p>
+                </div>
+            </div>
+
+            <div class="pt-6">
+                <button id="btn-start-quiz" class="group relative px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold rounded-xl shadow-lg hover:shadow-emerald-500/20 transform hover:-translate-y-0.5 transition-all duration-200 text-lg tracking-wide w-full sm:w-auto">
+                    <span class="mr-2">합격 훈련 시작하기</span>
+                    <i class="fa-solid fa-circle-play transition-transform group-hover:translate-x-1"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Screen 2: Quiz Panel -->
+        <section id="screen-quiz" class="hidden space-y-6 animate-fade-in">
+            <!-- Progress Bar Tracker -->
+            <div class="space-y-2">
+                <div class="flex justify-between items-center text-xs text-slate-400 font-semibold uppercase tracking-wider">
+                    <span>PROGRESS BAR</span>
+                    <span id="quiz-progress-text">0% 완료 (0/35)</span>
+                </div>
+                <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden border border-slate-700/40">
+                    <div id="quiz-progress-bar" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full w-0 transition-all duration-300 ease-out"></div>
+                </div>
+            </div>
+
+            <!-- Quiz Card -->
+            <div class="bg-slate-800/80 border border-slate-700/50 rounded-2xl p-6 sm:p-8 shadow-xl relative overflow-hidden backdrop-blur">
+                <!-- Decorative background elements -->
+                <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <!-- Card Header -->
+                <div class="flex items-center justify-between border-b border-slate-700/60 pb-4 mb-6">
+                    <div class="flex items-center space-x-2">
+                        <span id="question-number-badge" class="bg-slate-700 text-slate-200 text-xs font-bold font-montserrat px-3 py-1 rounded-full uppercase tracking-wider">Q. 01</span>
+                        <span class="text-xs text-slate-400 font-medium">회계원리 과목</span>
+                    </div>
+                    <!-- Bookmark Switch -->
+                    <button id="btn-bookmark" class="text-slate-500 hover:text-amber-400 transition-colors py-1 px-2 rounded-lg hover:bg-slate-700/30 text-sm flex items-center space-x-1.5" title="이 문제 북마크">
+                        <i class="fa-regular fa-star text-lg"></i>
+                        <span class="hidden sm:inline">북마크</span>
+                    </button>
+                </div>
+
+                <!-- Question Main Container -->
+                <div class="space-y-6">
+                    <!-- Text of the Question -->
+                    <h3 id="question-text" class="text-lg sm:text-xl font-bold leading-relaxed text-slate-100">
+                        질문이 들어오는 공간입니다.
+                    </h3>
+
+                    <!-- Optional Boxed Information (RAG 박스 데이터 등) -->
+                    <div id="question-box" class="hidden bg-slate-900/60 rounded-xl p-5 border-l-4 border-emerald-500 font-mono text-sm leading-relaxed text-slate-300 space-y-1 overflow-x-auto whitespace-pre-line">
+                        박스형 정보가 출력되는 곳입니다.
+                    </div>
+
+                    <!-- Answer Options (Radio Buttons Style with Clean Layout) -->
+                    <div id="options-container" class="space-y-3 pt-2">
+                        <!-- Options dynamically loaded -->
+                    </div>
+                </div>
+
+                <!-- Action Bar & Instant Feedback Panel -->
+                <div class="mt-8 pt-6 border-t border-slate-700/60 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div class="flex items-center space-x-2">
+                        <button id="btn-prev" class="px-4 py-2.5 bg-slate-700 hover:bg-slate-600 active:bg-slate-800 text-slate-300 font-bold rounded-lg text-sm transition flex items-center space-x-2 disabled:opacity-30 disabled:pointer-events-none">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            <span>이전 문항</span>
+                        </button>
+                        <div id="hint-panel" class="hidden text-xs text-emerald-400 font-medium flex items-center space-x-1.5 bg-emerald-500/10 px-3 py-1.5 rounded-lg border border-emerald-500/20 animate-pulse">
+                            <i class="fa-solid fa-lightbulb"></i>
+                            <span>일타강사 팁: 보기 선택 시 상세 해설이 열립니다.</span>
+                        </div>
+                    </div>
+                    
+                    <button id="btn-next" class="px-6 py-2.5 bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-slate-950 font-black rounded-lg text-sm transition flex items-center justify-center space-x-2 shadow-lg shadow-emerald-500/10">
+                        <span>다음 문항</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Detailed Explanation Box (Slides-in dynamically upon submitting / choosing option) -->
+            <div id="explanation-container" class="hidden bg-slate-800/40 border border-emerald-500/20 rounded-2xl p-6 shadow-lg animate-fade-in space-y-4">
+                <div class="flex items-center space-x-2 text-emerald-400 font-bold">
+                    <div class="p-1.5 bg-emerald-500/10 rounded-lg">
+                        <i class="fa-solid fa-chalkboard-user"></i>
+                    </div>
+                    <span class="text-sm uppercase tracking-wider">일타 강사의 고품격 특급 해설</span>
+                </div>
+                <div class="text-slate-300 text-sm leading-relaxed whitespace-pre-line space-y-2 border-l-2 border-emerald-500/40 pl-4 py-1" id="explanation-text">
+                    해설 내용이 여기에 출력됩니다.
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 3: Result & Report Panel -->
+        <section id="screen-result" class="hidden space-y-8 py-4 animate-fade-in">
+            <!-- Score Card -->
+            <div class="bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700/50 rounded-2xl p-8 shadow-2xl relative overflow-hidden text-center space-y-6">
+                <!-- Decorative absolute glow -->
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 bg-gradient-to-b from-emerald-500/15 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+                
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-100">모의고사 성적 진단서</h2>
+                
+                <!-- Huge Score Display -->
+                <div class="relative inline-flex items-center justify-center">
+                    <!-- Progress circle placeholder or raw text design -->
+                    <div class="p-6 bg-slate-800 rounded-full border-4 border-emerald-500/40 shadow-inner">
+                        <div class="text-5xl sm:text-6xl font-montserrat font-black text-emerald-400" id="result-score">00</div>
+                        <div class="text-xs text-slate-400 mt-1 uppercase tracking-widest font-semibold">Score / 100</div>
+                    </div>
+                </div>
+
+                <!-- Custom motivational analysis based on score -->
+                <div class="max-w-xl mx-auto space-y-4">
+                    <div id="result-status-box" class="p-4 rounded-xl border font-bold text-sm sm:text-base">
+                        <!-- Dynamically generated Grade -->
+                    </div>
+                    <p id="result-motivational-quote" class="text-sm text-slate-400 leading-relaxed">
+                        불안해하지 마십시오. 오답노트를 정리하고 복습하는 과정에서 합격선은 자연스레 돌파됩니다.
+                    </p>
+                </div>
+
+                <!-- Statistics Grid -->
+                <div class="grid grid-cols-3 gap-3 max-w-lg mx-auto bg-slate-900/60 p-4 rounded-xl border border-slate-700/40">
+                    <div class="text-center">
+                        <div class="text-xs text-slate-400 font-semibold mb-1">총 문항</div>
+                        <div class="text-lg font-bold font-montserrat" id="stat-total">35</div>
+                    </div>
+                    <div class="text-center border-x border-slate-700/50">
+                        <div class="text-xs text-slate-400 font-semibold mb-1">정답수</div>
+                        <div class="text-lg font-bold font-montserrat text-emerald-400" id="stat-correct">0</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-xs text-slate-400 font-semibold mb-1">정답률</div>
+                        <div class="text-lg font-bold font-montserrat text-teal-400" id="stat-ratio">0%</div>
+                    </div>
+                </div>
+
+                <!-- Action Button Matrix -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                    <button id="btn-restart" class="w-full sm:w-auto px-6 py-3 bg-slate-800 hover:bg-slate-700 active:bg-slate-900 text-slate-300 font-bold rounded-lg text-sm transition flex items-center justify-center space-x-2 border border-slate-700/60">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        <span>다시 도전하기</span>
+                    </button>
+                    <button id="btn-copy-wrong-notes" class="w-full sm:w-auto px-6 py-3 bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-slate-950 font-black rounded-lg text-sm transition flex items-center justify-center space-x-2 shadow-lg shadow-emerald-500/10">
+                        <i class="fa-solid fa-copy"></i>
+                        <span>오답노트 복사하기</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wrong Answers Note Tab Component -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-bold flex items-center space-x-2 text-slate-100">
+                        <span class="p-1 bg-red-500/10 text-red-400 rounded-lg text-sm"><i class="fa-solid fa-circle-exclamation"></i></span>
+                        <span>실시간 오답 취약점 분석 노트</span>
+                    </h3>
+                    <span id="wrong-count-badge" class="bg-red-500/10 text-red-400 font-mono text-xs font-bold px-2.5 py-1 rounded-full border border-red-500/20">틀린 문제 0개</span>
+                </div>
+
+                <!-- Wrong Answers List -->
+                <div id="wrong-answers-list-container" class="space-y-4">
+                    <!-- Dynamic Wrong Answers Loaded Here -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Custom Notification Box (replaces browser alerts) -->
+    <div id="custom-alert" class="fixed bottom-6 right-6 z-50 transform translate-y-10 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-slate-800 border border-emerald-500/30 text-slate-100 px-5 py-3.5 rounded-xl shadow-2xl flex items-center space-x-3 max-w-sm">
+            <div id="alert-icon" class="text-emerald-400 text-lg">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+            <div class="flex-grow">
+                <p id="alert-message" class="text-sm font-semibold">알림 메시지 내용</p>
+            </div>
+            <button id="btn-alert-close" class="text-slate-400 hover:text-slate-200">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-slate-950/40 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-5xl mx-auto px-4 space-y-2">
+            <p>본 모의고사는 국토교통부 및 한국산업인력공단(Q-Net) 주관의 주택관리사보 자격시험 출제 기준을 완벽하게 준수하여 제작되었습니다.</p>
+            <p class="font-montserrat text-[10px] tracking-wider text-slate-600">© 2026 Housing Manager Prep Academy. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Core App Logic -->
+    <script>
+        // --- 1. RAG Question Database (Perfect 35 items) ---
+        const rawQuestions = [
+            {
+                id: 1,
+                question: "㈜한국은 20×1년 4월 1일 향후 1년간 ㈜서울에게 토지를 임대하고 1년분 ￦1,200(1개월 ￦100)을 현금으로 받아 부채로 회계처리하였다. 이 거래와 관련하여 ㈜한국이 20×1년 말에 수정분개를 하지 않았을 경우, 기말재무제표에 미치는 영향으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "① 부채가 ￦900 과대계상 된다.",
+                    "② 자산에 미치는 영향은 없다.",
+                    "③ 자본이 ￦900 과소계상 된다.",
+                    "④ 수익이 ￦900 과대계상 된다.",
+                    "⑤ 순이익이 ￦900 과소계상 된다."
+                ],
+                answer: 3, // index 3 corresponding to ④
+                explanation: "· 4/1 현금 수취 시: (차) 현금 1,200 / (대) 선수임대료 1,200\n· 기말수정분개 시: (차) 선수임대료 900 / (대) 임대료 900\n(※ 수정분개를 누락할 경우 선수임대료(부채)가 ￦900 과대계상되고, 임대료(수익)가 ￦900 과소계상되며, 이에 따라 순이익과 자본이 모두 ￦900 과소계상된다.)"
+            },
+            {
+                id: 2,
+                question: "총계정원장 마감 시 계정 기입에 관한 설명으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "① 자산계정은 잔액이 차변에 남으므로 대변에 차기이월을 기입하여 마감한다.",
+                    "② 부채계정은 잔액이 대변에 남으므로 차변에 차기이월을 기입하여 마감한다.",
+                    "③ 수익계정은 대변에 발생하며 차변에 집합손익을 기입하여 마감한다.",
+                    "④ 비용계정은 차변에 발생하며 대변에 차기이월을 기입하여 마감한다.",
+                    "⑤ 집합손익계정 원장의 차변과 대변의 차이는 이익잉여금으로 마감한다."
+                ],
+                answer: 3, // index 3 corresponding to ④
+                explanation: "비용계정은 차변에 발생하며 대변에 집합손익을 기입하여 마감합니다. 따라서 ④번 설명은 옳지 않습니다."
+            },
+            {
+                id: 3,
+                question: "20×1년 초에 설립한 ㈜한국의 20×1년 말 수정전시산표상 소모품비계정은 ₩100,000이었다. 기말실사 결과 미사용 소모품이 ₩30,000일 때, 소모품에 대한 수정분개의 영향으로 옳은 것은?",
+                box: null,
+                options: [
+                    "① 비용이 ₩30,000 증가한다.",
+                    "② 이익이 ₩30,000 증가한다.",
+                    "③ 자본이 ₩30,000 감소한다.",
+                    "④ 자산이 ₩70,000 증가한다.",
+                    "⑤ 부채가 ₩70,000 감소한다."
+                ],
+                answer: 1, // index 1 corresponding to ②
+                explanation: "· 기말수정분개: (차) 소모품(자산) 30,000 / (대) 소모품비(비용) 30,000\n· 소모품비(비용)가 ₩30,000 감소하므로, 당기순이익(및 자본)이 ₩30,000 증가하며, 소모품(자산)은 ₩30,000 증가하게 됩니다."
+            },
+            {
+                id: 4,
+                question: "재무제표 표시에 관한 설명으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "① 재무제표의 목적은 광범위한 정보이용자의 경제적 의사결정에 유용한 기업의 재무상태, 재무성과와 재무상태변동에 관한 정보를 제공하는 것이다.",
+                    "② 재무상태표에 유동자산과 비유동자산, 그리고 유동부채와 비유동부채로 구분하여 표시하는 경우, 이연법인세자산과 부채는 유동으로 분류한다.",
+                    "③ 한국채택국제회계기준의 요구에 따라 공시되는 정보가 중요하지 않다면 그 공시를 제공할 필요는 없다.",
+                    "④ 경제적자원의 이전가능성이 낮더라도 의무가 부채의 정의를 충족할 수 있다.",
+                    "⑤ 계속기업의 가정이 적절한지의 여부를 평가할 때 경영진은 적어도 보고기간 말로부터 향후 12개월 기간에 대하여 이용가능한 모든 정보를 고려한다."
+                ],
+                answer: 1, // index 1 corresponding to ②
+                explanation: "기업이 재무상태표에 유동자산과 비유동자산, 유동부채와 비유동부채로 구분하여 표시하는 경우, 이연법인세자산과 부채는 절대 유동으로 분류해서는 안 되며 '비유동자산'과 '비유동부채'로 분류해야 합니다."
+            },
+            {
+                id: 5,
+                question: "재무제표 표시에 관한 설명으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "① 전체 재무제표(비교정보를 포함)는 적어도 1년마다 작성한다.",
+                    "② 재무제표는 기업의 재무상태, 재무성과 및 현금흐름을 공정하게 표시해야 한다.",
+                    "③ 당기손익과 기타포괄손익은 단일의 포괄손익계산서에서 두 부분으로 나누어 표시할 수 없다.",
+                    "④ 한국채택국제회계기준에서 요구하거나 허용하지 않는 한 자산과 부채 그리고 수익과 비용은 상계하지 아니한다.",
+                    "⑤ 한국채택국제회계기준을 준수하여 작성된 재무제표는 국제회계기준을 준수하여 작성된 재무제표임을 주석으로 명시적이고 제한 없이 공시하여야 한다."
+                ],
+                answer: 2, // index 2 corresponding to ③
+                explanation: "당기손익과 기타포괄손익은 단일의 포괄손익계산서에서 두 부분으로 나누어 표시할 수 있으며, 또는 별개의 두 보고서(손익계산서와 포괄손익계산서)로 나누어 표시하는 것도 허용됩니다."
+            },
+            {
+                id: 6,
+                question: "다음 자료를 이용하여 계산한 기초자산은?",
+                box: "· 기초부채 ￦50,000\n· 기말부채 ￦60,000\n· 현금배당 ￦5,000\n· 기말자산 ￦100,000\n· 유상증자 ￦10,000\n· 총포괄이익 ￦20,000",
+                options: [
+                    "① ￦55,000",
+                    "② ￦65,000",
+                    "③ ￦70,000",
+                    "④ ￦75,000",
+                    "⑤ ￦85,000"
+                ],
+                answer: 1, // index 1 corresponding to ②
+                explanation: "1) 기말자본 = 기말자산(100,000) - 기말부채(60,000) = ￦40,000\n2) 기초자본 = 기말자본(40,000) - 유상증자(10,000) + 현금배당(5,000) - 총포괄이익(20,000) = ￦15,000\n3) 기초자산 = 기초부채(50,000) + 기초자본(15,000) = ￦65,000"
+            },
+            {
+                id: 7,
+                question: "다음 자료를 이용할 경우 재무상태표에 표시될 현금및현금성자산은? (단, 20×1년 말 환율은 €1=￦120이다.)",
+                box: "· 당좌예금 ￦1,000\n· 배당금지급통지표 ￦450\n· 선일자수표 ￦700\n· 당좌차월 ￦500\n· 외국환 €10\n· 당좌개설보증금 ￦380\n· 수입인지 ￦120\n· 우편환증서 ￦350\n· 본사전도금 ￦200",
+                options: [
+                    "① ￦3,000",
+                    "② ￦3,170",
+                    "③ ￦3,200",
+                    "④ ￦3,300",
+                    "⑤ ￦3,700"
+                ],
+                answer: 2, // index 2 corresponding to ③
+                explanation: "· 현금및현금성자산 구성항목:\n - 당좌예금 (￦1,000)\n - 배당금지급통지표 (￦450)\n - 외국환 (€10 × 120 = ￦1,200)\n - 우편환증서 (￦350)\n - 본사전도금 (￦200)\n⇒ 합계: ￦3,200\n\n(※ 선일자수표는 수취채권(받을어음), 당좌차월은 유동부채(단기차입금), 당좌개설보증금은 특정현금과예금(비유동자산), 수입인지는 소모품비로 처리합니다.)"
+            },
+            {
+                id: 8,
+                question: "㈜한국은 20×1년 중 증권시장에서 주식 A와 주식 B를 취득한 후 20×3년 중 모두 처분하였다. 주식 거래가액 및 보유기간 중 공정가치가 다음과 같을 때 두 주식을 모두 당기손익-공정가치측정금융자산으로 분류한 경우와 기타포괄손익-공정가치측정금융자산으로 분류한 경우, 각 분류방법에 따른 ㈜한국의 20×3년 당기손익의 차이는 얼마인가?",
+                box: "· 주식 A: 20×1년 중 취득원가 ￦100 / 20×1년 말 공정가치 ￦80 / 20×2년 말 공정가치 ￦120 / 20×3년 중 처분가액 ￦130\n· 주식 B: 20×1년 중 취득원가 ￦200 / 20×1년 말 공정가치 ￦300 / 20×2년 말 공정가치 ￦250 / 20×3년 중 처분가액 ￦180",
+                options: [
+                    "① ₩40",
+                    "② ₩50",
+                    "③ ₩60",
+                    "④ ₩70",
+                    "⑤ ₩80"
+                ],
+                answer: 2, // index 2 corresponding to ③
+                explanation: "1) 당기손익-공정가치측정금융자산(FVPL)으로 분류 시:\n - 20×3년 당기손익 영향 = 처분가액 - 직전기말 공정가치\n - 주식 A: 130 - 120 = +￦10 (이익)\n - 주식 B: 180 - 250 = -￦70 (손실)\n - 총 당기손익 영향 = -￦60\n\n2) 기타포괄손익-공정가치측정금융자산(FVOCI)으로 분류 시:\n - 지분상품의 경우 처분손익을 당기손익으로 재분류(Reclassification)하지 않음.\n - 따라서 20×3년 당기손익 영향 = ￦0\n\n3) 두 분류에 따른 20×3년 당기손익 차이 = |-60 - 0| = ￦60"
+            },
+            {
+                id: 9,
+                question: "단일상품만을 매매하는 ㈜한국의 기초재고자산은 ￦2,000이고, 당기순매입액은 ￦10,000이다. 기말재고자산 관련 자료가 다음과 같을 때, 매출원가는? (단, 감모손실 중 60%는 비정상감모손실(기타비용)로 처리하며, 정상감모손실과 평가손실은 매출원가에 포함한다.)",
+                box: "· 장부수량: 50개, 단위당 원가: ￦50\n· 실제수량: 45개, 단위당 순실현가능가치: ￦40",
+                options: [
+                    "① ￦9,750",
+                    "② ￦9,950",
+                    "③ ￦10,050",
+                    "④ ￦10,100",
+                    "⑤ ￦10,200"
+                ],
+                answer: 2, // index 2 corresponding to ③
+                explanation: "· 판매가능상품 = 기초(2,000) + 매입(10,000) = ￦12,000\n· 기말장부재고 = 50개 × ￦50 = ￦2,500\n· 기말실지재고 = 45개 × ￦50 = ￦2,250\n· 감모손실 = 2,500 - 2,250 = ￦250 (이 중 정상감모 40%인 ￦100은 매출원가 가산, 비정상감모 60%인 ￦150은 기타비용 처리)\n· 순실현가능가치에 의한 최종 기말재고 = 45개 × ￦40 = ￦1,800\n· 평가손실 = 2,250 - 1,800 = ￦450\n· 매출원가 = 판매가능상품(12,000) - 기말장부재고(2,500) + 정상감모손실(100) + 평가손실(450) = ￦10,050"
+            },
+            {
+                id: 10,
+                question: "㈜한국의 20×1년 재고자산과 관련된 자료는 다음과 같다. 20×1년도 기말재고자산을 실사한 결과 실지수량은 350단위로 확인되었다. ㈜한국은 재고자산감모손실 중 80%는 정상적으로 발생하였다고 본다. 재고자산의 평가를 선입선출법에 의할 경우 기말재고와 매출원가는 각각 얼마인가?",
+                box: "· 기초재고: 100단위 ￦50,000\n· 당기매입: 1,000단위 ￦500,000\n· 당기매출: 700단위 ￦420,000",
+                options: [
+                    "① 기말재고 ￦200,000 / 매출원가 ￦375,000",
+                    "② 기말재고 ￦200,000 / 매출원가 ￦370,000",
+                    "③ 기말재고 ￦175,000 / 매출원가 ￦350,000",
+                    "④ 기말재고 ￦175,000 / 매출원가 ￦375,000",
+                    "⑤ 기말재고 ￦175,000 / 매출원가 ￦370,000"
+                ],
+                answer: 4, // index 4 corresponding to ⑤
+                explanation: "· 단위당 원가 = 50,000 / 100 = @500원 (당기매입분도 동일하게 @500원)\n· 기말장부수량 = 1,100단위 - 700단위 = 400단위\n· 기말실지수량 = 350단위\n· 감모손실 = 50단위 × @500 = ￦25,000 (정상감모 80% = ￦20,000, 비정상감모 20% = ￦5,000)\n· 기말재고액(실사 기준) = 350단위 × @500 = ￦175,000\n· 매출원가 = 기초(50,000) + 매입(500,000) - 기말실지재고(175,000) - 비정상감모손실(5,000) = ￦370,000"
+            },
+            {
+                id: 11,
+                question: "다음은 ㈜한국의 20×1년 말 재고자산(상품) 관련 자료이다. ㈜한국의 재고자산평가손실은? (단, 기초재고는 없으며, 단위원가 결정은 총평균법을 따른다.)",
+                box: "· 장부상 자료: 수량 80개, 총 장부금액 ￦2,400\n· 실사 자료: 수량 75개, 순실현가능가치 ￦1,875",
+                options: [
+                    "① ￦400",
+                    "② ￦150",
+                    "③ ￦375",
+                    "④ ￦525",
+                    "⑤ ￦600"
+                ],
+                answer: 2, // index 2 corresponding to ③
+                explanation: "· 단위당 평균 장부원가 = ￦2,400 ÷ 80개 = @￦30\n· 실지재고 원가 = 75개 × ￦30 = ￦2,250\n· 순실현가치 = ￦1,875\n· 재고자산평가손실 = 2,250 - 1,875 = ￦375"
+            },
+            {
+                id: 12,
+                question: "㈜한국의 20×1년 재고자산 매입과 매출에 관한 자료는 다음과 같다. ㈜한국이 계속기록법을 적용하면서 선입선출법의 단위원가결정방법을 사용할 때, 20×1년 기말재고자산은? (단, 장부상 재고수량과 실지재고수량은 일치하며, 재고자산평가손실은 없다.)",
+                box: "· 1월 1일 기초재고 20개 (단위당 원가 ￦100)\n· 3월 1일 매입 50개 (단위당 원가 ￦110)\n· 6월 1일 매출 40개\n· 9월 1일 매입 80개 (단위당 원가 ￦120)\n· 12월 1일 매출 30개",
+                options: [
+                    "① ￦8,700",
+                    "② ￦9,120",
+                    "③ ￦9,320",
+                    "④ ￦9,600",
+                    "⑤ ￦9,700"
+                ],
+                answer: 3, // index 3 corresponding to ④
+                explanation: "· 총 공급 수량 = 기초 20 + 매입(50+80) = 150개\n· 총 판매 수량 = 매출(40+30) = 70개\n· 기말재고 수량 = 80개\n· 선입선출법 하에서는 최근 매입한 단가의 자산이 기말에 남게 됨.\n· 가장 최근인 9월 1일 매입한 80개(단위당 @120원)가 그대로 기말재고가 됨.\n· 기말재고자산 = 80개 × ￦120 = ￦9,600"
+            },
+            {
+                id: 13,
+                question: "A, B, C 세 가지 상품(각 상품별로 성격과 용도는 상이함)을 판매하는 ㈜한국의 20×1년 말 현재 상품의 장부재고액과 실지재고액 및 순실현가능가치 관련 자료는 다음과 같다. ㈜한국이 인식할 재고자산감모손실과 재고자산평가손실은 각각 얼마인가?",
+                box: "· 상품 A: 장부재고 750개 / 실지재고 700개 / 단위원가 ￦180 / 판매단가 ￦250 / 추정판매비 ￦30\n· 상품 B: 장부재고 600개 / 실지재고 560개 / 단위원가 ￦300 / 판매단가 ￦340 / 추정판매비 ￦70\n· 상품 C: 장부재고 850개 / 실지재고 820개 / 단위원가 ￦400 / 판매단가 ￦420 / 추정판매비 ￦60",
+                options: [
+                    "① 감모손실 ₩30,600 / 평가손실 ₩32,800",
+                    "② 감모손실 ₩30,600 / 평가손실 ₩49,600",
+                    "③ 감모손실 ₩33,000 / 평가손실 ₩22,400",
+                    "④ 감모손실 ₩33,000 / 평가손실 ₩49,600",
+                    "⑤ 감모손실 ₩33,000 / 평가손실 ₩32,800"
+                ],
+                answer: 3, // index 3 corresponding to ④
+                explanation: "1) 감모손실 계산 (장부수량 - 실지수량) × 원가\n - 상품 A: (750 - 700) × 180 = ￦9,000\n - 상품 B: (600 - 560) × 300 = ￦12,000\n - 상품 C: (850 - 820) × 400 = ￦12,000\n ⇒ 감모손실 합계 = ￦33,000\n\n2) 평가손실 계산 (실지수량 기준, 단위당 순실현가능가치(NRV)가 원가보다 낮은 경우만 계상)\n - 상품 A: NRV = 250 - 30 = 220 > 원가 180 (평가손실 없음)\n - 상품 B: NRV = 340 - 70 = 270 < 원가 300 (단위당 손실 30원 × 560개 = ￦16,800)\n - 상품 C: NRV = 420 - 60 = 360 < 원가 400 (단위당 손실 40원 × 820개 = ￦32,800)\n ⇒ 평가손실 합계 = 16,800 + 32,800 = ￦49,600"
+            },
+            {
+                id: 14,
+                question: "㈜한국은 20×1년 초 사무용 건물(내용연수 10년, 잔존가치 ￦0, 정액법 상각)을 ￦800,000에 취득하였다. 건물에 대해 재평가모형을 적용하고 매년 말 재평가한다. 20×1년 말 공정가치가 ￦750,000일 때, 건물과 관련하여 20×1년 말 인식할 재평가잉여금은?",
+                box: null,
+                options: [
+                    "① ￦30,000",
+                    "② ￦40,000",
+                    "③ ￦50,000",
+                    "④ ￦75,000",
+                    "⑤ ￦80,000"
+                ],
+                answer: 0, // index 0 corresponding to ①
+                explanation: "· 20×1년 감가상각비 = 800,000 ÷ 10 = ￦80,000\n· 재평가 직전 건물의 상각 후 장부금액 = 800,000 - 80,000 = ￦720,000\n· 재평가잉여금(기타포괄이익) = 20×1년 말 공정가치(750,000) - 장부금액(720,000) = ￦30,000"
+            },
+            {
+                id: 15,
+                question: "유형자산에 관한 설명으로 옳지 않은 것은?",
+                box: null,
+                options: [
+                    "① 새로운 시설을 개설하는 데 소요되는 원가는 유형자산의 취득원가에 포함되지 않는다.",
+                    "② 기업의 영업 전부를 재배치하는 과정에서 발생하는 원가는 유형자산의 장부금액에 포함하지 않는다.",
+                    "③ 유형자산의 감가상각액은 다른 자산의 장부금액에 포함될 수 있다.",
+                    "④ 사용 중인 유형자산의 정기적인 종합검사에서 발생하는 원가는 모두 당기비용으로 처리한다.",
+                    "⑤ 유형자산에 내재된 미래경제적효익의 예상 소비형태가 유의적으로 달라졌다면 감가상각방법을 변경한다."
+                ],
+                answer: 3, // index 3 corresponding to ④
+                explanation: "정기적인 종합검사 과정에서 발생하는 원가는 해당 자산의 '인식기준을 충족하는 경우', 유형자산의 일부로서 장부금액에 포함(자본화)하여야 하므로 전부 당기비용으로만 처리한다는 설명은 옳지 않습니다."
+            },
+            {
+                id: 16,
+                question: "㈜한국은 20×1년 1월 1일 액면금액 ￦1,000,000인 사채(만기 3년, 표시이자율 연 10%, 이자는 매년 말 후급)를 ￦1,106,900에 발행하고, 상각후원가로 측정하였다. 발행 당시 유효이자율은 연 6%이었다. 20×2년 1월 1일 동 사채 전부를 조기상환하였고, 이로 인해 사채상환이익이 ￦4,500 발생하였다. ㈜한국이 동 사채를 상환하기 위해 지급한 금액은?",
+                box: null,
+                options: [
+                    "① ￦1,068,814",
+                    "② ￦1,077,814",
+                    "③ ￦1,102,400",
+                    "④ ￦1,135,986",
+                    "⑤ ￦1,144,986"
+                ],
+                answer: 0, // index 0 corresponding to ①
+                explanation: "· 20×1년도 이자비용 = 기초 장부금액(1,106,900) × 유효이자율(6%) = ￦66,414\n· 20×1년 말 사채 장부금액 = 기초 장부금액(1,106,900) + 이자비용(66,414) - 현금표시이자(100,000) = ￦1,073,314\n· 사채상환이익(4,500) = 상환 직전 장부금액(1,073,314) - 상환금액\n· 상환지급액 = 1,073,314 - 4,500 = ￦1,068,814"
+            },
+            {
+                id: 17,
+                question: "유동부채로 분류되지 않는 것은?",
+                box: null,
+                options: [
+                    "① 당좌차월",
+                    "② 매입채무",
+                    "③ 미지급배당금",
+                    "④ 이연법인세부채",
+                    "⑤ 유동성장기차입금"
+                ],
+                answer: 4, // index 4 corresponding to ⑤ (Note: ⑤ is actually index 4 in raw text, corresponding to ④)
+                // Wait! Let's map accurately. The standard options list: ① 당좌차월, ② 매입채무, ③ 미지급배당금, ④ 이연법인세부채, ⑤ 유동성장기차입금.
+                // The correct answer is ④ 이연법인세부채, which is index 3. Let's fix index to 3.
+                answer: 3, 
+                explanation: "이연법인세부채는 재무상태표의 유동·비유동 구분표시 하에서 '항상 비유동부채'로 분류하도록 명시되어 있습니다."
+            },
+            {
+                id: 18,
+                question: "다음 중 현재의무를 발생시키는 과거사건을 의미하는 의무발생사건에 해당하는 것은?",
+                box: "ㄱ. 20×1년 근무결과로 20×2년에 연차를 사용할 수 있게 됨(해당 연차는 20×2년에 모두 사용될 것으로 예상되나, 사용되지 않은 연차에는 20×3년 초에 수당이 지급됨)\nㄴ. 20×1년 말 구매계약이 체결되고 20×2년에 컴퓨터 납품예정\nㄷ. 20×1년 재무제표 승인을 위해 20×2년 3월에 개최된 정기주주총회에서 현금배당 결의",
+                options: [
+                    "① ㄱ",
+                    "② ㄴ",
+                    "③ ㄷ",
+                    "④ ㄱ, ㄷ",
+                    "⑤ ㄱ, ㄴ, ㄷ"
+                ],
+                answer: 0, // index 0 corresponding to ① (ㄱ)
+                explanation: "· ㄱ은 이미 종업원이 20×1년에 용역을 제공(근무결과)함으로써 연차수당 및 권리가 생겨 과거사건으로 인한 의무가 성립합니다.\n· ㄴ은 '미이행계약' 상태로 보고기간말 현재 부채의 법적 요건을 충족하지 못합니다.\n· ㄷ은 보고기간말 이후(20×2년 3월 주총) 결의된 사항이므로 20×1년 말 현재 시점에는 의무가 존재하지 않습니다."
+            },
+            {
+                id: 19,
+                question: "금융부채로 분류되는 항목은?",
+                box: null,
+                options: [
+                    "① 미지급금",
+                    "② 선수금",
+                    "③ 미지급법인세",
+                    "④ 예수금",
+                    "⑤ 충당부채"
+                ],
+                answer: 0, // index 0 corresponding to ①
+                explanation: "미지급금은 거래상대방에게 계약상 현금 등 금융자산을 인도해야 할 의무를 나타내므로 대표적인 '금융부채'입니다. 반면 선수금, 미지급법인세, 예수금, 충당부채 등은 비금융부채에 해당합니다."
+            },
+            {
+                id: 20,
+                question: "다음 항목 중 금융상품만 고른 것은?",
+                box: "㉠ 정기예금\n㉡ 단기대여금\n㉢ 선수수익\n㉣ 미지급재산세\n㉤ 매입채무\n㉥ 투자사채\n㉦ 지분상품\n㉧ 충당부채",
+                options: [
+                    "① ㉠, ㉡, ㉢",
+                    "② ㉡, ㉣, ㉤",
+                    "③ ㉢, ㉣, ㉧",
+                    "④ ㉤, ㉥, ㉦",
+                    "⑤ ㉥, ㉦, ㉧"
+                ],
+                answer: 3, // index 3 corresponding to ④ (㉤, ㉥, ㉦)
+                explanation: "· 금융상품(자산 및 부채)에 해당하는 항목:\n - 정기예금, 단기대여금, 매입채무, 투자사채, 지분상품\n· 비금융자산/부채 항목:\n - 선수수익, 미지급재산세, 충당부채\n따라서 '매입채무(㉤), 투자사채(㉥), 지분상품(㉦)'으로만 이루어진 ④번이 정답입니다."
+            },
+            {
+                id: 21,
+                question: "20×1년 말 ㈜한국의 자료를 기초로 계산한 현금배당은?",
+                box: "· 기초자산 ￦80,000\n· 기말순자산 ￦50,000\n· 주식배당 ￦2,000\n· 총수익 ￦30,000\n· 기타포괄이익 ￦2,000\n· 기초부채 ￦50,000\n· 무상증자(10%) ￦3,000\n· 현금배당 (X)\n· 총비용 ￦12,000\n· 증자의 회계처리: (차) 현금 4,000 / (대) 자본금 3,500, 주식발행초과금 500",
+                options: [
+                    "① ￦2,500",
+                    "② ￦3,000",
+                    "③ ￦3,500",
+                    "④ ￦4,000",
+                    "⑤ ￦4,500"
+                ],
+                answer: 3, // index 3 corresponding to ④
+                explanation: "1) 기초자본 = 기초자산(80,000) - 기초부채(50,000) = ￦30,000\n2) 기말자본 = 기말순자산 = ￦50,000\n3) 자본변동 구조 적용:\n - 기말자본 = 기초자본 + 총포괄이익 + 유상증자 - 현금배당\n - 총포괄이익 = 당기순이익(총수익 30,000 - 총비용 12,000) + 기타포괄이익(2,000) = ￦20,000\n - 유상증자 유입액 = ￦4,000\n - (※ 무상증자와 주식배당은 총자본에 변화를 주지 않으므로 계산에서 제외)\n4) 식 대입: 50,000 = 30,000 + 20,000 + 4,000 - 현금배당(X)\n⇒ 현금배당(X) = ￦4,000"
+            },
+            {
+                id: 22,
+                question: "자본에 관한 설명으로 옳지 않은 것을 모두 고른 것은?",
+                box: "㉠ 자기주식을 취득하면 자본총액은 증가한다.\n㉡ 유상증자 시에 자본금은 증가하나 자본총액은 변동하지 않는다.\n㉢ 무상증자 시에 자본금은 증가하나 자본총액은 변동하지 않는다.\n㉣ 주식배당 시에 자산총액과 자본총액은 변동하지 않는다.\n㉤ 주식분할로 인해 발행주식수가 증가하여도 액면가액은 변동이 없다.\n㉥ 임의적립금은 주주총회의 의결을 통해 미처분이익잉여금으로 이입한 후 배당할 수 있다.",
+                options: [
+                    "① ㉠, ㉡, ㉢",
+                    "② ㉠, ㉡, ㉤",
+                    "③ ㉡, ㉢, ㉣",
+                    "④ ㉡, ㉣, ㉤",
+                    "⑤ ㉠, ㉣, ㉥"
+                ],
+                answer: 1, // index 1 corresponding to ② (㉠, ㉡, ㉤)
+                explanation: "· 틀린 지문 교정:\n - ㉠ 자기주식을 취득하면 자본의 차감 항목이 되므로 자본총액은 '감소'합니다.\n - ㉡ 유상증자를 하면 자본금도 늘고 기업 내부로 실제 현금이 유입되므로 자본총액은 '증가'합니다.\n - ㉤ 주식분할을 하면 발행주식수는 증가하지만 비례하여 '액면가액은 감소'하게 됩니다.\n따라서 옳지 않은 것은 ㉠, ㉡, ㉤ 입니다."
+            },
+            {
+                id: 23,
+                question: "다음과 같은 누락사항을 반영하기 전 당기순이익이 ￦300,000인 경우 수정 후 당기순이익은?",
+                box: "· 보험료 중 선급분 ￦10,000\n· 임차료 중 미지급분 ￦20,000\n· 이자비용 중 미지급분 ￦10,000\n· 임대료수익 중 선수분 ￦15,000 (임대료수익 전액을 수익으로 계상했었음)",
+                options: [
+                    "① ￦265,000",
+                    "② ￦270,000",
+                    "③ ￦275,000",
+                    "④ ￦280,000",
+                    "⑤ ￦290,000"
+                ],
+                answer: 0, // index 0 corresponding to ①
+                explanation: "· 당기순이익 가감 계산:\n - 수정 전 이익: 300,000\n - (+) 선급보험료: +10,000
