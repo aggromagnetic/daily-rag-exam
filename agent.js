@@ -989,7 +989,7 @@ async function main() {
           }
         } catch (htmlErr) {
           console.error(`🚨 [${sub.name}] HTML 수확 도중 에러 발생:`, htmlErr.message);
-          throw htmlErr; // 🚨 상위 catch로 에러를 전파하여 인덱스 갱신 및 Git Push 자동 배포를 강제 중단
+          console.warn(`⚠️ [${sub.name}] 수확 실패로 인해 해당 과목의 interactive HTML 생성을 건너뛰고 다음 과목으로 진행합니다.`);
         }
       }
     }

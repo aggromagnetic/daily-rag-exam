@@ -495,7 +495,7 @@ async function loadExamList() {
           card.querySelector('.exam-play-btn').addEventListener('click', () => {
             const baseUrl = import.meta.env.BASE_URL || '/';
             const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
-            const interactiveUrl = `${cleanBase}daily_tests/${test.htmlFilename}`;
+            const interactiveUrl = `${cleanBase}daily_tests/${test.htmlFilename}?t=${Date.now()}`;
             window.open(interactiveUrl, '_blank');
           });
         }

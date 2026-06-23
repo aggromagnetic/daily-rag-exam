@@ -10,7 +10,7 @@ export async function fetchExamsList() {
   try {
     const baseUrl = import.meta.env.BASE_URL || '/';
     const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
-    const res = await fetch(`${cleanBase}daily_tests/tests_index.json`);
+    const res = await fetch(`${cleanBase}daily_tests/tests_index.json?t=${Date.now()}`);
     if (!res.ok) {
       throw new Error(`시험지 인덱스 파일을 찾을 수 없습니다 (상태코드: ${res.status})`);
     }
@@ -29,7 +29,7 @@ export async function fetchExamsList() {
 export async function fetchExamContent(filename) {
   const baseUrl = import.meta.env.BASE_URL || '/';
   const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
-  const res = await fetch(`${cleanBase}daily_tests/${filename}`);
+  const res = await fetch(`${cleanBase}daily_tests/${filename}?t=${Date.now()}`);
   if (!res.ok) {
     throw new Error(`모의고사 파일을 불러오는 데 실패했습니다 (파일명: ${filename})`);
   }
