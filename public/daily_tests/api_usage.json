@@ -1,7 +1,7 @@
 {
-  "total_cost_usd": 4.478738750000001,
-  "total_cost_krw": 6292,
-  "last_updated": "2026-06-23T21:39:16.519Z",
+  "total_cost_usd": 4.565653750000001,
+  "total_cost_krw": 6414,
+  "last_updated": "2026-06-24T21:24:11.983Z",
   "history": [
     {
       "date": "2026-06-08",
@@ -389,6 +389,15 @@
       "output_tokens": 16737,
       "cost_usd": 0.107575,
       "cost_krw": 151
+    },
+    {
+      "date": "2026-06-25",
+      "timestamp": "2026-06-24T21:24:11.983Z",
+      "subject": "시설개론",
+      "input_tokens": 15048,
+      "output_tokens": 13621,
+      "cost_usd": 0.08691499999999999,
+      "cost_krw": 122
     }
   ]
 }
