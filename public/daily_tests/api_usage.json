@@ -1,7 +1,7 @@
 {
-  "total_cost_usd": 4.565653750000001,
-  "total_cost_krw": 6414,
-  "last_updated": "2026-06-24T21:24:11.983Z",
+  "total_cost_usd": 4.764702500000001,
+  "total_cost_krw": 6694,
+  "last_updated": "2026-06-25T21:34:53.705Z",
   "history": [
     {
       "date": "2026-06-08",
@@ -398,6 +398,24 @@
       "output_tokens": 13621,
       "cost_usd": 0.08691499999999999,
       "cost_krw": 122
+    },
+    {
+      "date": "2026-06-26",
+      "timestamp": "2026-06-25T21:26:06.853Z",
+      "subject": "시설개론",
+      "input_tokens": 15311,
+      "output_tokens": 13206,
+      "cost_usd": 0.08516875,
+      "cost_krw": 120
+    },
+    {
+      "date": "2026-06-26",
+      "timestamp": "2026-06-25T21:34:53.705Z",
+      "subject": "민법",
+      "input_tokens": 20032,
+      "output_tokens": 17768,
+      "cost_usd": 0.11388000000000001,
+      "cost_krw": 160
     }
   ]
 }
